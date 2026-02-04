@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>活動與限定推薦｜酉時喝酒 YOU-SI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="酉時喝酒期間限定與本週推薦：精選清酒、果實酒、茶酒與葡萄酒。可加入購物車一鍵送出訂單。">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/products.data.js"></script>
+<script src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/main.js"></script>
+<script type="module" src="/assets/js/promotions.bridge.js"></script>
+
+</head>
+<body onload="ageCheck()">
+  <div class="header-wrap">
+    <div class="header">
+      <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="/">首頁</a>
+        <a href="/about/">關於</a>
+        <a href="/products/">商品分類</a>
+        <a href="/offers/">活動分享</a>
+        <a href="/wineries/">酒莊・酒造品牌</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" data-line-link href="#">聯繫我們</a>
+        <a class="btn btn-primary" href="/order/">前往下單</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="section">
+    <section class="section" style="margin-top:60px;">
+      <div class="kicker">Events</div>
+      <h2>實體活動紀錄</h2>
+      <p>
+        我們不定期舉辦品飲會與主題酒會，
+        下方為近期與過往活動紀錄。
+      </p>
+      <div style="margin-top:18px;">
+        <a
+          class="btn"
+          href="https://www.accupass.com/organizer/detail/2312070635591522734919"
+          target="_blank"
+          rel="noopener"
+        >
+          前往 Accupass 查看全部活動
+        </a>
+      </div>
+    
+      <!-- Events Layout (Accupass-like) -->
+      <div class="events-page" style="margin-top:18px;">
+
+        <!-- 即將舉行 -->
+        <div class="events-block">
+          <div class="events-title">即將舉行</div>
+          <div id="eventUpcoming"></div>
+        </div>
+
+        <!-- 過往活動 -->
+        <div class="events-block" style="margin-top:34px;">
+          <div class="events-title">過往活動</div>
+          <div id="eventPast"></div>
+        </div>
+
+      </div>
+
+    
+
+    </section>
+    
+    <div id="offerGrid" class="grid" style="margin-top:18px;"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  
+      <!-- 左側：品牌資訊 -->
+      <div class="footer-info">
+        <div>📦  取貨地點：</div>
+        <div>🏠 台北｜大安郵局前（建國信義路口處）</div>
+        <div>🏠 新竹｜竹北市光明十街（深耕公園）</div>
+      </div>
+  
+      <!-- 右側：整組 QR（紅框就是這一塊） -->
+      <div class="footer-right">
+        <div class="footer-qr">
+          <img class="line-qr-img" alt="加入 LINE">
+          <div class="qr-label">
+            Line 
+            <span class="qr-sub">領取專屬優惠</span>
+          </div>
+        </div>
+  
+        <div class="footer-qr">
+          <img class="ig-qr-img" alt="Instagram">
+          <div class="qr-label">Instagram yousi1719_drink</div>
+        </div>
+      </div>
+  
+    </div>
+  </footer>
+
+
+<div id="lightbox" class="lightbox">
+  <img id="lightbox-img">
+  <div id="lightbox-note"></div>
+</div>
+
+</body>
+</html>

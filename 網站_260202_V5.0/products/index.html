@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>商品分類｜清酒・果實酒・茶酒・葡萄酒｜酉時喝酒</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="酉時喝酒商品一覽：清酒、果實酒、茶酒、葡萄酒。可搜尋酒名、篩選價格，加入購物車後一鍵送出訂單。">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/products.data.js"></script>
+<script src="/assets/js/wineries.data.js"></script>
+<script src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/main.js"></script>
+<script type="module" src="/assets/js/promotions.bridge.js"></script>
+
+</head>
+<body onload="ageCheck()">
+  <div class="header-wrap">
+    <div class="header">
+      <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="/">首頁</a>
+        <a href="/about/">關於</a>
+        <a href="/products/">商品分類</a>
+        <a href="/offers/">活動</a>
+        <a href="/wineries/">酒莊・酒造品牌</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" data-line-link href="#">聯繫我們</a>
+        <a class="btn btn-primary" href="/order/">前往下單</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="section">
+    <div class="kicker">探索分類</div>
+    <h1>商品分類</h1>
+
+    <div class="controls" style="margin-top:14px;">
+      <select id="cat" class="select">
+        <option value="all">全部</option>
+        <option value="sake">清酒</option>
+        <option value="fruittea">果實酒&茶酒</option>
+        <option value="wine">葡萄酒</option>
+        <option value="spirits">烈酒</option>
+      </select>
+      <input id="q" class="search search-input" placeholder="搜尋酒名 / 關鍵字（例如：梅酒、柚子、吟釀）">
+      <input id="minp" class="select" type="number" placeholder="最低價格">
+      <input id="maxp" class="select" type="number" placeholder="最高價格">
+      <a class="btn btn-primary" href="/order/">查看購物車 / 下單</a>
+    </div>
+
+    <div id="productGrid" class="grid" style="margin-top:18px;"></div>
+  </main>
+  <footer class="footer">
+    <div class="footer-inner">
+  
+      <!-- 左側：品牌資訊 -->
+      <div class="footer-info">
+        <div>📦  取貨地點：</div>
+        <div>🏠 台北｜大安郵局前（建國信義路口處）</div>
+        <div>🏠 新竹｜竹北市光明十街（深耕公園）</div>
+      </div>
+  
+      <!-- 右側：整組 QR（紅框就是這一塊） -->
+      <div class="footer-right">
+        <div class="footer-qr">
+          <img class="line-qr-img" alt="加入 LINE">
+          <div class="qr-label">
+            Line 
+            <span class="qr-sub">領取專屬優惠</span>
+          </div>
+        </div>
+  
+        <div class="footer-qr">
+          <img class="ig-qr-img" alt="Instagram">
+          <div class="qr-label">Instagram yousi1719_drink</div>
+        </div>
+      </div>
+  
+    </div>
+  </footer>
+
+<div id="lightbox" class="lightbox">
+  <img id="lightbox-img">
+
+  <div id="lightbox-note"></div>
+</div>
+
+</body>
+</html>
