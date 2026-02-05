@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>年齡確認｜酉時喝酒 YOU-SI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<style>
+  .age-wrap{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:18px; }
+  .age-box{
+    max-width:560px; width:100%;
+    background:#fff; border:1px solid rgba(0,0,0,.06);
+    border-radius:18px; box-shadow:0 18px 44px rgba(0,0,0,.08);
+    padding:22px;
+  }
+  .age-box h1{ margin:8px 0 10px; font-size:24px; }
+  .age-box p{ margin:0 0 14px; }
+  .age-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+</style>
+
+<script>
+  // 與 main.js 一致的設定（若 main.js 有載入會以 main.js 為主；此處作為 fallback）
+  const AGE_STORAGE_KEY = "age_ok_v2";
+  const AGE_TTL_DAYS = 1; // ✅ 你可以改成 7 / 1 等
+
+  function _fallbackSetAgeOk(days){
+    try{
+      const d = Number(days);
+      const expiresAt = Date.now() + (d * 24 * 60 * 60 * 1000);
+      const payload = { ok: true, expiresAt };
+      localStorage.setItem(AGE_STORAGE_KEY, JSON.stringify(payload));
+      localStorage.removeItem("age_ok"); // 清掉舊版永久 key
+    }catch(e){}
+  }
+
+  function _getReturnUrl(){
+    const params = new URLSearchParams(location.search);
+    const from = params.get("from");
+    if(!from) return "/";
+
+    // from 是 encodeURIComponent 過的 path+query+hash
+    try{
+      const decoded = decodeURIComponent(from);
+      // 安全起見：只允許站內路徑（避免被塞外部網址）
+      if(decoded.startsWith("/")) return decoded;
+      return "/";
+    }catch(e){
+      return "/";
+    }
+  }
+
+  function enter(){
+    // 若 main.js 已提供 _setAgeOk()，優先使用（確保邏輯一致）
+    if(typeof window._setAgeOk === "function"){
+      window._setAgeOk(); // 使用 main.js 內預設 AGE_TTL_DAYS
+    }else{
+      _fallbackSetAgeOk(AGE_TTL_DAYS);
+    }
+
+    window.location.href = _getReturnUrl();
+  }
+
+  function deny(){
+    alert("未滿法定飲酒年齡者請勿進入。");
+    // 可選：更明確的拒絕行為（不想要可刪掉）
+    // window.location.href = "about:blank";
+  }
+</script>
+</head>
+
+<body>
+  <div class="age-wrap">
+    <div class="age-box">
+      <div class="kicker">年齡確認</div>
+      <h1>請確認你已滿 18 歲</h1>
+      <p>依法律規定，未滿法定飲酒年齡者請勿瀏覽本網站。</p>
+      <div class="age-actions">
+        <button class="btn btn-primary" onclick="enter()">我已滿 18 歲，進入網站</button>
+        <button class="btn" onclick="deny()">我未滿 18 歲</button>
+      </div>
+      <p class="mono" style="margin-top:12px;">酉時喝酒 YOU-SI｜日系酒款選品：清酒・燒酎・果實酒・茶酒・葡萄酒</p>
+    </div>
+  </div>
+
+  <!-- ✅ 載入 main.js（年齡驗證 v2 的 _setAgeOk / _readAgeOk / ageCheck 在這裡） -->
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

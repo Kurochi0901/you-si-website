@@ -1,0 +1,234 @@
+# 酉時喝酒 YOU-SI｜網站交接與維護 README
+
+本文件提供給**接手維護本網站的工程師 / 合作夥伴**，目的在於：
+
+* 能快速理解系統結構
+* 安全地新增 / 修改商品、促銷與活動
+* 在不破壞既有流程的前提下進行維護
+
+---
+
+## 1. 專案性質與運作方式
+
+* 本站為 **純前端靜態網站（無後台、無資料庫）**
+* 所有內容皆由 JavaScript 資料檔維護
+* 下單流程為「**購物車 → 優惠計算 → 送出訂單 → LINE 人工確認**」
+
+> ⚠️ 沒有 CMS、沒有會員系統、沒有金流串接
+
+---
+
+## 2. 專案結構總覽
+
+```
+/
+├─ index.html                  首頁
+├─ /products/                  商品分類頁
+├─ /offers/                    活動與促銷頁
+├─ /order/                     下單頁
+├─ /about/                     關於頁
+├─ /wineries/                  酒造介紹頁
+├─ /age/                       年齡驗證頁
+│
+├─ /assets/
+│  ├─ /css/
+│  │  ├─ style.css             全站共用樣式（不建議修改）
+│  │  └─ wineries.css          酒造頁專用樣式
+│  │
+│  ├─ /js/
+│  │  ├─ main.js               ⭐ 核心邏輯（購物車 / 下單 / 顯示）
+│  │  ├─ products.data.js      ⭐ 商品資料
+│  │  ├─ promotions.data.js    ⭐ 促銷規則
+│  │  ├─ promotions.bridge.js  促銷橋接（通常不用改）
+│  │  ├─ events.data.js        活動資料
+│  │  └─ wineries.data.js      酒造資料
+│  │
+│  └─ /images/                 圖片素材
+```
+
+---
+
+## 3. 商品維護（最常修改）
+
+**檔案位置**
+
+```
+/assets/js/products.data.js
+```
+
+### 商品資料結構
+
+```js
+{
+  id: 19,                 // 不可重複
+  priority: 5,            // 1~5，數字越大排序越前
+  name: "萩之鶴 純米吟釀",
+  type: "清酒",           // 清酒 / 果實酒 / 茶酒 / 葡萄酒 / 烈酒
+  category: "sake",       // 系統用分類
+  price: 1500,
+  originPrice: 1800,      // 可省略（沒折扣就不顯示）
+  imgs: ["/assets/images/xxx.jpg"],
+  spec: "720ml",
+  note: {
+    oneLine: "酒款特色描述"
+  },
+  scale: { ... },         // 風味刻度（選填）
+  info: { ... },          // 產品資訊（選填）
+  wineryId: "nanbu"      // 對應 wineries.data.js
+}
+```
+
+### 常見操作
+
+* 新增商品：複製一筆 → 修改 `id` → 填寫內容
+* 下架商品：直接刪除該物件
+* 調整排序：修改 `priority`
+* 調整價格：修改 `price`
+
+⚠️ `id` 絕對不能重複
+
+---
+
+## 4. 促銷與優惠規則
+
+**檔案位置**
+
+```
+/assets/js/promotions.data.js
+```
+
+### 設計概念
+
+* 促銷是「規則」，不是寫死的金額
+* 系統支援：
+
+  * 可疊加優惠（stackable: true）
+  * 不可疊加優惠（自動取最優惠）
+
+### 範例：數量折扣
+
+```js
+{
+  id: "qty-3-80",
+  stackable: false,
+  label: "任選 3 件 8 折",
+  condition(ctx) {
+    return ctx.totalQty >= 3;
+  },
+  apply(total) {
+    return Math.round(total * 0.8);
+  }
+}
+```
+
+### 範例：固定金額折抵
+
+```js
+{
+  id: "new-user-100",
+  stackable: true,
+  label: "新戶折 NT$100",
+  condition() {
+    return !localStorage.getItem("hasOrdered");
+  },
+  apply(total) {
+    return Math.max(0, total - 100);
+  }
+}
+```
+
+⚠️ 請勿修改 `main.js` 內的促銷引擎
+
+---
+
+## 5. 活動頁維護（品飲會 / Accupass）
+
+**檔案位置**
+
+```
+/assets/js/events.data.js
+```
+
+### 結構範例
+
+```js
+{
+  title: "活動名稱",
+  date: "2026/01/30",
+  time: "18:50 - 20:45",
+  city: "台北市",
+  location: "活動地點",
+  status: "upcoming", // upcoming / ended
+  link: "https://www.accupass.com/...",
+  note: "活動說明",
+  cover: "/assets/images/events/xxx.jpg",
+  tags: ["#微醺", "#葡萄酒"]
+}
+```
+
+### 顯示規則
+
+* upcoming：僅顯示最近一場
+* ended：依年份自動分組顯示
+
+---
+
+## 6. 酒造 / 酒莊資料
+
+**檔案位置**
+
+```
+/assets/js/wineries.data.js
+```
+
+```js
+{
+  id: "nanbu",
+  name: "南部酒造",
+  location: "日本・岩手縣",
+  image: "/assets/images/wineries/nanbu.jpg",
+  description: "酒造介紹",
+  styles: ["清爽", "細緻"]
+}
+```
+
+⚠️ 若刪除酒造，請確認沒有商品仍使用該 `wineryId`
+
+---
+
+## 7. 下單與 LINE 流程（請勿隨意修改）
+
+* 所有下單邏輯集中在 `main.js`
+* 送單後：
+
+  1. 計算優惠
+  2. 傳送至 Google Apps Script
+  3. 複製訂單文字
+  4. 使用者貼上 LINE 官方帳號
+
+⚠️ 本站沒有金流、沒有自動付款
+
+---
+
+## 8. 開發與維護注意事項
+
+### 正確方式
+
+* 一律使用 **Live Server / HTTP Server**
+* 本地端不可用 `file://`
+
+### 不建議
+
+* 不要拆分 `main.js`
+* 不要導入 React / Vue
+* 不要在 HTML 直接寫商業邏輯
+
+---
+
+## 9. 給接手者的提醒
+
+> 本專案以「穩定營運」為優先。
+> 日常維護僅需修改 data 檔（商品 / 促銷 / 活動）。
+>
+> 若你覺得需要動到 main.js，
+> 請先確認是否真的有必要。

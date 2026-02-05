@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>酒莊・酒造品牌｜酉時喝酒 YOU-SI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon（請確保根目錄有 /favicon.ico） -->
+  <link rel="icon" href="/favicon.ico?v=20260123" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico?v=20260123" type="image/x-icon">
+
+  <!-- 共用樣式 -->
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/wineries.css" />
+</head>
+
+<body>
+  <!-- Header（保留你原本這套，避免依賴 main.js 注入） -->
+  <div class="header-wrap">
+    <div class="header">
+      <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="/">首頁</a>
+        <a href="/about/">關於</a>
+        <a href="/products/">商品分類</a>
+        <a href="/offers/">活動分享</a>
+        <a href="/wineries/">酒莊・酒造品牌</a>
+        <!-- <a href="/order/">下單聯繫</a> -->
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" data-line-link href="#">聯繫我們</a>
+        <a class="btn btn-primary" href="/order/">前往下單</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="page page-wineries">
+    <!-- Hero 橫幅（略高） -->
+    <section class="winery-hero">
+      <h1>酒莊・酒造品牌</h1>
+      <p>
+        每一款酒的背後，都是一段風土、工藝與時間的累積。
+        這裡介紹我們所選擇、並願意長期合作的酒莊與酒造。
+      </p>
+    </section>
+
+    <!-- 酒莊列表 -->
+    <section class="winery-list" id="wineryList"></section>
+  </main>
+
+  <!-- Footer（由 main.js 注入或你既有機制使用） -->
+  <footer id="siteFooter"></footer>
+
+  <!-- 1) 先載入酒造資料：此檔需提供 window.wineries -->
+  <script src="/assets/js/wineries.data.js"></script>
+
+  <!-- 2) 渲染酒造列表 -->
+  <script>
+    (function renderWineries(){
+      const list = document.getElementById("wineryList");
+      if(!list) return;
+
+      const wineries = window.wineries || [];
+
+      // 若你看到空白，代表此頁未成功載入 wineries.data.js 或該檔未提供 window.wineries
+      if(!Array.isArray(wineries) || wineries.length === 0){
+        list.innerHTML = `
+          <div style="padding:18px; color:#6b6258;">
+            目前尚未載入酒造資料。請確認：
+            <br>1) /assets/js/wineries.data.js 有被正確載入（Network 檢查 200）
+            <br>2) 該檔案有設定 window.wineries = [...]
+          </div>
+        `;
+        return;
+      }
+
+      wineries.forEach(w => {
+        const el = document.createElement("article");
+        el.className = "winery-card";
+        el.id = w.id || "";
+
+        const styles = Array.isArray(w.styles) ? w.styles : [];
+
+        el.innerHTML = `
+          <div class="winery-img">
+            <img src="${w.image || ""}" alt="${w.name || ""}">
+          </div>
+          <div class="winery-body">
+            <h2>${w.name || ""}</h2>
+            <span class="winery-loc">${w.location || ""}</span>
+            <p class="winery-desc">${w.description || ""}</p>
+            <div class="winery-tags">
+              ${styles.map(s => `<span>${s}</span>`).join("")}
+            </div>
+          </div>
+        `;
+
+        list.appendChild(el);
+      });
+    })();
+  </script>
+
+  <!-- 3) 共用 JS（含 toggleMenu / LINE link / footer 注入等） -->
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

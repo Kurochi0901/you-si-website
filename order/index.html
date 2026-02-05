@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>下單與聯繫｜酉時喝酒 YOU-SI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="酉時喝酒下單：購物車一鍵送出（LINE/表單接單）。取貨方式：店內取貨 / 郵寄；付款：轉帳。">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/products.data.js"></script>
+<script src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/main.js"></script>
+<script type="module" src="/assets/js/promotions.bridge.js"></script>
+
+</head>
+<body class="page-order" onload="ageCheck()">
+  <div class="header-wrap">
+    <div class="header">
+      <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="/">首頁</a>
+        <a href="/about/">關於</a>
+        <a href="/products/">商品分類</a>
+        <a href="/offers/">活動分享</a>
+        <a href="/wineries/">酒莊・酒造品牌</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" data-line-link href="#">聯繫我們</a>
+        <a class="btn btn-primary" href="/products/">繼續選購</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="section">
+    <div class="kicker">下單與聯繫</div>
+    <h1>送出訂單</h1>
+    <!-- ✅ 下單成功 Modal（酉時喝酒・日系） -->
+    <div
+    id="orderSuccessModal"
+    class="ys-modal-mask"
+    style="display:none;"
+    onclick="if(event.target===this) closeOrderSuccessModal()"
+    >
+    <div class="ys-modal" role="dialog" aria-modal="true" aria-labelledby="ysOrderModalTitle">
+      <div class="ys-modal-head">
+        <div>
+          <div class="ys-modal-title" id="ysOrderModalTitle">感謝您在酉時喝酒下單</div>
+          <div class="ys-modal-sub">
+            我們已收到您的訂單。<br>
+            請前往 LINE 官方帳號貼上以下內容，將由專人為您確認。
+          </div>
+        </div>
+        <button class="ys-modal-close" type="button" onclick="closeOrderSuccessModal()" aria-label="關閉">×</button>
+      </div>
+
+      <div class="ys-copy-row">
+        <div>
+          <div class="ys-copy-status is-ok" data-role="copyStatus">已複製訂單內容</div>
+          <div class="ys-copy-hint" data-role="copyHint">請點『前往 LINE』並直接貼上即可。</div>
+        </div>
+      </div>
+
+      <textarea id="orderSummaryText" class="ys-summary" readonly></textarea>
+
+      <div class="ys-modal-actions">
+        <button class="ys-btn" type="button" onclick="copyOrderSummaryFromModal()">再次複製</button>
+        <a id="goLineAfterOrder" class="ys-btn ys-btn-primary" href="#" target="_blank" rel="noopener">
+          前往 LINE
+        </a>
+        <button class="ys-btn ys-btn-ghost" type="button" onclick="closeOrderSuccessModal({goHome:true})">回首頁</button>
+      </div>
+    </div>
+    </div>
+
+
+    <div class="split">
+      <div class="panel">
+        <h3>購物車一鍵送出</h3>
+        <p>您在商品頁加入購物車後，可在此填寫聯絡資訊並送出。付款方式為「轉帳」，取貨方式可選「店內取貨 / 郵寄」。</p>
+
+        
+        <div style="margin-top:10px">
+          <label>姓名（必填）</label>
+          <input class="input" id="order-name" placeholder="例如：王小明">
+        </div>
+
+        <div style="margin-top:10px">
+          <label>電話（必填）</label>
+          <input
+            class="input"
+            id="order-phone"
+            placeholder="例如：0912345678"
+            inputmode="tel"
+          >
+          <div class="form-error" id="err-phone"></div>
+        </div>
+
+        <div style="margin-top:10px">
+          <label>Email（必填）</label>
+          <input
+          class="input"
+          id="order-email"
+          type="email"
+          required
+          placeholder="例如：you@example.com"
+        >        
+        </div>
+
+        <div style="margin-top:10px">
+          <label>取貨方式（必填）</label>
+          <select class="select" id="order-pickup">
+            <option value="店內取貨">自取</option>
+            <option value="郵寄">郵寄</option>
+          </select>
+        </div>
+
+        <div id="addrWrap" style="margin-top:10px; display:none;">
+          <label>郵寄地址（選擇郵寄必填）</label>
+          <input class="input" id="order-address" placeholder="請填寫完整收件地址">
+        </div>
+        <!-- 配送溫層（僅郵寄時顯示） -->
+        <div id="shipWrap" style="display:none;">
+          <label class="label">配送方式</label>
+
+          <div class="radio-row">
+            <label class="radio">
+              <input type="radio" name="shipTemp" value="常溫" checked>
+              <span>常溫（運費 NT$170）</span>
+            </label>
+
+            <label class="radio">
+              <input type="radio" name="shipTemp" value="冷藏">
+              <span>冷藏（運費 NT$230）</span>
+            </label>
+          </div>
+
+          <div class="hint">
+            滿 NT$3000 免運（以折扣後商品金額計算）
+          </div>
+        </div>
+
+
+        <div id="noteWrap" style="margin-top:10px">
+          <label>備註（選填）</label>
+          <textarea class="input" id="order-note" rows="4" placeholder="例如：希望週末收件、想要偏甜推薦..."></textarea>
+        </div>
+               
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="submitOrder()">送出訂單</button>
+          <!-- <a class="btn" data-line-link href="#">用 LINE 聯繫</a> -->
+        </div>
+
+        <p class="mono" style="margin-top:12px;">
+          付款方式：轉帳
+          自取：將由 LINE 與您確認取貨時間與地點 ,目前台北／新竹據點為辦公室，無開放參觀選購
+          郵寄：請務必填寫完整地址</p>
+        <div class="order-notice">
+          <strong>重要提醒</strong><br>
+          送出訂單後會將訂單內容複製到剪貼簿，
+          請務必加入官方帳號並貼上訂單內容，
+          方便人員聯繫確認訂單。
+        </div>
+
+      </div>
+
+      <div class="panel">
+        <h3>購物車內容</h3>
+
+        <div id="cartMini"></div>
+        <div id="promotionBlock" class="promotion-block"></div>
+
+
+        <!-- <div style="margin-top:18px">
+          <h3>加入 LINE 官方帳號下單</h3>
+          <p>送出訂單後會開啟 LINE 官方帳號，你只要貼上訂單內容即可完成下單。</p>
+          <a class="btn" data-line-link href="#" target="_blank">前往 LINE 官方帳號</a>
+        </div> -->
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  
+      <!-- 左側：品牌資訊 -->
+      <div class="footer-info">
+        <strong>酉時喝酒 YOU-SI</strong>
+        <div>📦  取貨地點：</div>
+        <div>🏠 台北｜大安郵局前（建國信義路口處）</div>
+        <div>🏠 新竹｜竹北市光明十街（深耕公園）</div>
+      </div>
+  
+      <!-- 右側：整組 QR（紅框就是這一塊） -->
+      <div class="footer-right">
+        <div class="footer-qr">
+          <img class="line-qr-img" alt="加入 LINE">
+          <div class="qr-label">
+            Line 
+            <span class="qr-sub">領取專屬優惠</span>
+          </div>
+        </div>
+  
+        <div class="footer-qr">
+          <img class="ig-qr-img" alt="Instagram">
+          <div class="qr-label">Instagram yousi1719_drink</div>
+        </div>
+      </div>
+  
+    </div>
+  </footer>
+
+<div id="lightbox" class="lightbox">
+  <img id="lightbox-img">
+
+  <div id="lightbox-note"></div>
+</div>
+
+</body>
+</html>

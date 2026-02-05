@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>葡萄酒｜酉時喝酒 YOU-SI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="酉時喝酒葡萄酒選品：白酒、紅酒、氣泡酒。點圖片可放大，點酒名可看風味說明。">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/products.data.js"></script>
+<script src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/main.js"></script>
+<script type="module" src="/assets/js/promotions.bridge.js"></script>
+
+</head>
+<body onload="ageCheck()">
+  <div class="header-wrap">
+    <div class="header">
+      <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="/">首頁</a>
+        <a href="/about/">關於</a>
+        <a href="/products/">商品分類</a>
+        <a href="/offers/">活動分享</a>
+        <a href="/wineries/">酒莊・酒造品牌</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" data-line-link href="#">聯繫我們</a>
+        <a class="btn btn-primary" href="/order/">前往下單</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="section">
+    <div class="kicker">分類：葡萄酒</div>
+    <h1>葡萄酒</h1>
+    <p>
+      這裡的葡萄酒，以「好搭餐、好分享」為出發點。
+      白酒、紅酒與氣泡酒，風格清爽、不複雜，
+      不需要研究產區或年份，也能安心選到一瓶適合餐桌的酒。
+    </p>
+    
+    <div id="productGrid" class="grid" style="margin-top:18px;"></div>
+  </main>
+
+<footer class="footer">
+  <div class="footer-inner">
+
+    <div>
+      <strong>酉時喝酒 YOU-SI</strong><br>
+      <small>
+        🏠 門市資訊：台北市士林區士商路169號<br>
+        🛍️ 辦公室取酒：新竹縣竹北市光明十街87號
+      </small>
+    </div>
+
+    <div class="footer-links">
+      <a class="btn" data-line-link href="#">加入 LINE（@008jcfgc）</a>
+      <a class="btn" data-ig-link href="#" target="_blank">Instagram</a>
+    </div>
+
+  </div>
+</footer>
+
+
+<div id="lightbox" class="lightbox">
+  <img id="lightbox-img">
+
+  <div id="lightbox-note"></div>
+</div>
+
+</body>
+</html>

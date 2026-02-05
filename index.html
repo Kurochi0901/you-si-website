@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>酉時喝酒 YOU-SI｜日系清酒・燒酎・果實酒・茶酒・葡萄酒選品</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="酉時喝酒 YOU-SI｜日系酒款選品：清酒、燒酎、果實酒、茶酒、葡萄酒。線上挑選加入購物車，一鍵送出訂單（表單/LINE 接單）。">
+<meta property="og:title" content="酉時喝酒 YOU-SI">
+<meta property="og:description" content="日系清酒・燒酎・果實酒・茶酒・葡萄酒選品，下單聯繫：LINE 官方帳號 @008jcfgc">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script src="/assets/js/products.data.js"></script>
+<script src="/assets/js/events.data.js"></script>
+<!-- ✅ 首頁「本月精選」手動指定：填 products.data.js 裡的商品 id -->
+<script>
+  window.HOME_FEATURED_IDS = [19, 7, 8, 2]; 
+  // 想顯示 6 支就填 6 個，例如：
+  // window.HOME_FEATURED_IDS = [19, 21, 31, 25, 11, 29];
+</script>
+<script defer src="/assets/js/main.js"></script>
+<script type="module" src="/assets/js/promotions.bridge.js"></script>
+
+</head>
+
+<body onload="ageCheck()">
+  <div class="header-wrap">
+    <div class="header">
+      <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="/">首頁</a>
+        <a href="/about/">關於</a>
+        <a href="/products/">商品分類</a>
+        <a href="/offers/">活動分享</a>
+        <a href="/wineries/">酒莊・酒造品牌</a>
+        <!-- <a href="/order/">下單聯繫</a> -->
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" data-line-link href="#">聯繫我們</a>
+        <a class="btn btn-primary" href="/order/">前往下單</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div>
+        
+        <div class="kicker">日系選品｜清酒・燒酎・果實酒・茶酒・葡萄酒</div>
+        <div class="hero-title">酉時喝酒</div>
+        <div class="hero-sub">
+          酉時，夕陽微涼之時。從日本選品起家，挑選適合台灣風土與口味的清酒、果實酒、茶酒與葡萄酒，
+          用留白與溫度呈現每一支酒的品飲情境。
+        </div>
+        <!-- <div class="hero-badges">
+          <span class="pill">日本酒・清酒</span>
+          <span class="pill">果實酒</span>
+          <span class="pill">茶酒</span>
+          <span class="pill">葡萄酒</span>
+        </div> -->
+
+        <div class="hero-actions">
+          <!-- <a class="btn btn-primary" href="/products/">瀏覽商品</a> -->
+          <!-- <a class="btn" href="/offers/">本月推薦</a> -->
+          <!-- <a class="btn" data-line-link href="#">LINE 詢問</a> -->
+        </div>
+      </div>
+
+      <!-- <div class="hero-card">
+        <h3>快速下單</h3>
+        <div class="mini">先把想要的酒加入購物車，最後在下單頁一次送出。付款方式為轉帳，店內取貨或郵寄皆可。</div>
+        <div style="margin-top:12px">
+          <a class="btn btn-primary" href="/order/">查看購物車 / 送出訂單</a>
+        </div>
+      </div> -->
+    </div>
+  </section>
+
+
+  <main class="section">
+    <div class="kicker">精選推薦</div>
+    <h1>本月精選</h1>
+    <div class="grid" id="homeGrid"></div>
+  </main>
+
+  <main class="section">
+    <div class="kicker">分類入口</div>
+    <h1>依酒類探索</h1>
+    <div class="grid">
+      <a class="panel" href="/products/sake/">
+        <h3>清酒</h3>
+        <p>純米吟釀到限定酒款 ，
+          從日常小酌到值得收藏的清酒選品。</p>
+        <span class="btn">查看清酒</span>
+      </a>
+      <a class="panel" href="/products/fruit-tea/">
+        <h3>果實酒&茶酒</h3>
+        <p>梅酒、柚子酒與各式茶酒，
+          香甜平衡、酒感溫和，輕鬆享受微醺時光。</p>
+        <span class="btn">查看果實酒&茶酒</span>
+      </a>
+      <a class="panel" href="/products/wine/">
+        <h3>葡萄酒</h3>
+        <p>白酒、紅酒與氣泡酒，
+          清爽易搭餐，適合聚會與日常分享。</p>
+        <span class="btn">查看葡萄酒</span>
+      </a>
+      <a class="panel" href="/products/spirits/">
+        <h3>烈酒</h3>
+        <p>燒酎與威士忌選品，
+          酒體紮實、風味純粹，適合慢慢品飲。</p>
+        <span class="btn">查看烈酒</span>
+      </a>
+    </div>
+  </main>
+
+  <main class="section">
+    <div class="kicker">你的購物車</div>
+    <h1>已選酒款</h1>
+    <div class="split">
+      <div class="panel">
+        <h3>購物車內容</h3>
+        <div id="cartMini"></div>
+        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn btn-primary" href="/order/">前往下單</a>
+          <a class="btn" href="/products/">繼續選購</a>
+        </div>
+      </div>
+          <!-- 保留：服務項目 + 追蹤 IG（你的截圖區塊） -->
+      <section class="about-block">
+        <div class="about-service card">
+          <div class="about-service-inner">
+            <div class="about-service-main">
+              <h2 style="margin:0 0 8px 0;">服務項目</h2>
+              <ul class="about-bullets">
+                <li>線上商品目錄與下單聯繫</li>
+                <li>限定活動、試飲合作</li>
+                <li>企業／活動酒水規劃</li>
+              </ul>
+            </div>          
+          </div>
+        </div>
+      </section>
+    </div>
+    
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  
+      <!-- 左側：品牌資訊 -->
+      <div class="footer-info">
+        <div>📦  取貨地點：</div>
+        <div>🏠 台北｜大安郵局前（建國信義路口處）</div>
+        <div>🏠 新竹｜竹北市光明十街（深耕公園）</div>
+      </div>
+  
+      <!-- 右側：整組 QR（紅框就是這一塊） -->
+      <div class="footer-right">
+        <div class="footer-qr">
+          <img class="line-qr-img" alt="加入 LINE">
+          <div class="qr-label">
+            Line 
+            <span class="qr-sub">領取專屬優惠</span>
+          </div>
+        </div>
+  
+        <div class="footer-qr">
+          <img class="ig-qr-img" alt="Instagram">
+          <div class="qr-label">Instagram yousi1719_drink</div>
+        </div>
+      </div>
+  
+    </div>
+  </footer>
+  
+
+<div id="lightbox" class="lightbox">
+  <img id="lightbox-img">
+
+  <div id="lightbox-note"></div>
+</div>
+
+</body>
+</html>
