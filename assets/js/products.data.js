@@ -2,7 +2,7 @@ const products = [
   /* ================= 果實酒・茶酒 ================= */
   {
     id:1,
-    priority: 1, // ✅ 新增：1~5，越大越優先
+    priority: 5, // ✅ 新增：1~5，越大越優先
     name:"上等梅酒 知覽茶",
     category:"fruit-tea",
     type:"果實酒",
