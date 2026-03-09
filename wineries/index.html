@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>酒莊・酒造品牌｜酉時喝酒 YOU-SI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico?v=20260123" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico?v=20260123" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/wineries.css" />
+
+  <!-- ✅ 資料檔優先載入，確保變數在 script 執行前就存在 -->
+  <script src="/assets/js/announcement_data.js"></script>
+  <script src="/assets/js/wineries.data.js"></script>
+</head>
+
+<body onload="ageCheck()">
+
+  <!-- ✅ 公告條 -->
+  <div class="announce-bar announce-hidden" id="announceBar" role="marquee" aria-live="polite">
+    <div class="announce-track" id="announceTrack"></div>
+  </div>
+
+  <!-- Header -->
+  <div class="header-wrap">
+    <div class="header">
+      <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="/">首頁</a>
+        <a href="/about/">關於</a>
+        <a href="/products/">商品分類</a>
+        <a href="/offers/">活動分享</a>
+        <a href="/wineries/">酒莊・酒造品牌</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" data-line-link href="#">聯繫我們</a>
+        <a class="btn btn-primary" href="/order/">前往下單</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="page page-wineries">
+    <section class="winery-hero">
+      <h1>酒莊・酒造品牌</h1>
+      <p>
+        每一款酒的背後，都是一段風土、工藝與時間的累積。
+        這裡介紹我們所選擇、並願意長期合作的酒莊與酒造。
+      </p>
+    </section>
+
+    <section class="winery-list" id="wineryList"></section>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <!-- ✅ lightbox（獨立，結構正確） -->
+  <div id="lightbox" class="lightbox">
+    <img id="lightbox-img">
+    <div id="lightbox-note"></div>
+  </div>
+
+  <!-- ✅ 飲酒警語固定底部 -->
+  <div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+    <span class="alcohol-bar-text">
+      🍶 未滿十八歲請勿飲酒
+      <span class="alcohol-bar-divider" aria-hidden="true"></span>
+      酒後不開車，安心享受微醺時刻
+    </span>
+  </div>
+
+  <!-- ✅ 共用 JS -->
+  <script src="/assets/js/main.js"></script>
+
+  <!-- ✅ 渲染酒造列表 -->
+  <script>
+    (function renderWineries() {
+      const list = document.getElementById("wineryList");
+      if (!list) return;
+
+      const wineries = window.wineries || [];
+
+      if (!Array.isArray(wineries) || wineries.length === 0) {
+        list.innerHTML = '<div style="padding:18px; color:#6b6258;">目前尚未載入酒造資料。</div>';
+        return;
+      }
+
+      wineries.forEach(function (w) {
+        const el = document.createElement("article");
+        el.className = "winery-card";
+        el.id = w.id || "";
+
+        const styles = Array.isArray(w.styles) ? w.styles : [];
+
+        el.innerHTML =
+          '<div class="winery-img">' +
+            '<img src="' + (w.image || "") + '" alt="' + (w.name || "") + '">' +
+          '</div>' +
+          '<div class="winery-body">' +
+            '<h2>' + (w.name || "") + '</h2>' +
+            '<span class="winery-loc">' + (w.location || "") + '</span>' +
+            '<p class="winery-desc">' + (w.description || "") + '</p>' +
+            '<div class="winery-tags">' +
+              styles.map(function (s) { return '<span>' + s + '</span>'; }).join("") +
+            '</div>' +
+          '</div>';
+
+        list.appendChild(el);
+      });
+    })();
+  </script>
+
+  <!-- ✅ 公告輪播邏輯 -->
+  <script>
+    (function () {
+      if (typeof announcements === "undefined" || !announcements.length) return;
+
+      const bar   = document.getElementById("announceBar");
+      const track = document.getElementById("announceTrack");
+      if (!bar || !track) return;
+
+      announcements.forEach(function (item, i) {
+        const el = document.createElement("div");
+        el.className = "announce-item" + (i === 0 ? " is-active" : "");
+        el.innerHTML = item.link
+          ? '<a href="' + item.link + '">' + item.text + "</a>"
+          : item.text;
+        track.appendChild(el);
+      });
+
+      bar.classList.remove("announce-hidden");
+      document.body.classList.add("has-announce");
+
+      if (announcements.length === 1) return;
+
+      let current = 0;
+      setInterval(function () {
+        const items = track.querySelectorAll(".announce-item");
+        items[current].classList.remove("is-active");
+        current = (current + 1) % items.length;
+        items[current].classList.add("is-active");
+      }, 5000);
+    })();
+  </script>
+
+</body>
+</html>

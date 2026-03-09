@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>關於｜酉時喝酒 YOU-SI</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="酉時喝酒｜品牌故事、選品理念、如何訂購。">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/assets/js/products.data.js"></script>
+  <script src="/assets/js/events.data.js"></script>
+  <script defer src="/assets/js/main.js"></script>
+<script src="/assets/js/announcement_data.js"></script>
+  <script type="module" src="/assets/js/promotions.bridge.js"></script>
+  <style>
+    /* ════════════════════════════════════════
+       關於我們 — 頁面專用樣式
+       沿用網站既有色系與字型
+    ════════════════════════════════════════ */
+
+    /* 標題區 */
+    .about-hero {
+      text-align: center;
+      padding: 56px 0 48px;
+    }
+    .about-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: #b89a6a;
+      margin-bottom: 14px;
+    }
+    .about-title {
+      font-size: 34px;
+      font-weight: 500;
+      color: #5c4a32;
+      letter-spacing: 0.16em;
+      margin-bottom: 20px;
+    }
+    .about-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .about-divider::before,
+    .about-divider::after {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 1px;
+      background: #d4c4a8;
+    }
+    .about-divider-icon {
+      color: #b89a6a;
+      font-size: 12px;
+      letter-spacing: 5px;
+    }
+
+    /* 段落區塊 */
+    .about-block {
+      max-width: 900px;
+      margin: 0 auto 52px;
+    }
+    .about-section-title {
+      font-size: 17px;
+      font-weight: 500;
+      color: #5c4a32;
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .about-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #d4c4a8;
+    }
+    .about-block p {
+      font-size: 15px;
+      line-height: 2.1;
+      color: #6b5740;
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+    }
+    .about-block p:last-of-type { margin-bottom: 0; }
+
+    /* 譬如 條列 */
+    .about-examples-label {
+      font-size: 14px;
+      color: #7a6245;
+      letter-spacing: 0.1em;
+      font-style: italic;
+      margin: 24px 0 14px;
+    }
+    .about-examples {
+      border-left: 2px solid #d4b896;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .about-example-item {
+      font-size: 14px;
+      line-height: 1.9;
+      color: #6b5740;
+      letter-spacing: 0.04em;
+    }
+    .about-example-item::before {
+      content: '◇ ';
+      color: #b89a6a;
+      font-size: 10px;
+    }
+
+    /* 訂購說明卡片 */
+    .about-order-note {
+      background: #fdfaf5;
+      border: 1px solid #d4c4a8;
+      border-radius: 3px;
+      padding: 24px 28px;
+      margin-top: 20px;
+    }
+    .about-pickup-heading {
+      font-size: 14px;
+      color: #5c4a32;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+    .about-pickup-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .about-pickup-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .about-pickup-tag {
+      flex-shrink: 0;
+      background: #b89a6a;
+      color: #fdfaf5;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      padding: 2px 9px;
+      border-radius: 1px;
+      margin-top: 3px;
+    }
+    .about-pickup-addr {
+      font-size: 14px;
+      color: #6b5740;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+    }
+    .about-order-footer {
+      font-size: 13px;
+      color: #7a6245;
+      line-height: 1.9;
+      border-top: 1px solid #d4c4a8;
+      padding-top: 16px;
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    /* 結語 */
+    .about-closing {
+      max-width: 680px;
+      margin: 56px auto 72px;
+      text-align: center;
+      padding: 40px 32px;
+      border-top: 1px solid #d4c4a8;
+      border-bottom: 1px solid #d4c4a8;
+      position: relative;
+    }
+    .about-closing::before {
+      content: '◆';
+      color: #d4b896;
+      font-size: 10px;
+      position: absolute;
+      top: -7px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg, #f5f0e8);
+      padding: 0 10px;
+    }
+    .about-closing::after {
+      content: '◆';
+      color: #d4b896;
+      font-size: 10px;
+      position: absolute;
+      bottom: -7px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg, #f5f0e8);
+      padding: 0 10px;
+    }
+    .about-closing-main {
+      font-size: 17px;
+      font-weight: 400;
+      color: #5c4a32;
+      letter-spacing: 0.15em;
+      line-height: 2.1;
+      margin-bottom: 16px;
+    }
+    .about-closing-sub {
+      font-size: 13px;
+      color: #9a7e52;
+      letter-spacing: 0.22em;
+    }
+
+    @media (max-width: 600px) {
+      .about-title { font-size: 26px; }
+      .about-closing { padding: 32px 16px; }
+      .about-closing-main { font-size: 15px; }
+      .about-order-note { padding: 18px 18px; }
+    }
+  </style>
+</head>
+<body onload="ageCheck()">
+<!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
+<div class="announce-bar announce-hidden" id="announceBar" role="marquee" aria-live="polite">
+  <div class="announce-track" id="announceTrack"></div>
+</div>
+
+  <div class="header-wrap">
+    <div class="header">
+      <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="/">首頁</a>
+        <a href="/about/">關於</a>
+        <a href="/products/">商品分類</a>
+        <a href="/offers/">活動分享</a>
+        <a href="/wineries/">酒莊・酒造品牌</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" data-line-link href="#">聯繫我們</a>
+        <a class="btn btn-primary" href="/order/">前往下單</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="section about">
+
+    <!-- 標題區 -->
+    <div class="about-hero">
+      <div class="about-eyebrow">YOU-SI &nbsp;·&nbsp; EST. IN JAPAN</div>
+      <h1 class="about-title">關於我們</h1>
+      <div class="about-divider">
+        <span class="about-divider-icon">◆ ◇ ◆</span>
+      </div>
+    </div>
+
+    <!-- 品牌理念 -->
+    <section class="about-block">
+      <h2 class="about-section-title">品牌理念</h2>
+      <p>「酉時喝酒」是一個專注於葡萄酒、日本酒與果實酒的選品品牌。</p>
+      <p>我們曾長期生活於日本，熟悉當地酒文化與市場脈絡。回台後，將這份生活經驗轉化為系統化的選酒標準，為喜歡喝酒的朋酉們挑選風味穩定、風格鮮明、適合日常飲用的酒款。</p>
+      <p>我們重視風味完整度、飲用平衡感與實際餐桌搭配性。每一支酒，都同時具備故事性與風土精神，也必須是我們願意長期飲用、真心推薦的選擇。</p>
+
+      <div class="about-examples-label">譬如——</div>
+      <div class="about-examples">
+        <div class="about-example-item">每年邀請城鎮居民一同參與採收、共享豐盛成果的保加利亞葡萄酒；</div>
+        <div class="about-example-item">為了守護環境，逐步買下森林與水源地的日本清酒酒造；</div>
+        <div class="about-example-item">又或是為了展現原味風韻，完全不添加食用酒精、以自然發酵釀製的台灣梅酒。</div>
+      </div>
+
+      <p style="margin-top:24px;">如果這些故事讓你產生共鳴，也許其中一瓶，正適合你此刻的餐桌。</p>
+    </section>
+
+    <!-- 如何訂購 -->
+    <section class="about-block">
+      <h2 class="about-section-title">如何訂購</h2>
+      <p>目前以網路販售為主。</p>
+      <p>若有追蹤我們的 Instagram，或許知道我們曾於台北士林設有實體門市。因租約期滿，場地無法續約，目前專注於線上販售，將更多心力放在選品與服務品質上。</p>
+
+      <div class="about-order-note">
+        <div class="about-pickup-heading">若住家不便收件，可預約自取：</div>
+        <div class="about-pickup-list">
+          <div class="about-pickup-item">
+            <span class="about-pickup-tag">台北</span>
+            <span class="about-pickup-addr">台北市大安區建國南路 大安郵局前</span>
+          </div>
+          <div class="about-pickup-item">
+            <span class="about-pickup-tag">新竹</span>
+            <span class="about-pickup-addr">新竹縣竹北市光明十街 深耕公園前</span>
+          </div>
+        </div>
+        <p class="about-order-footer">辦公室不提供現場選酒服務，請於 LINE 預約取貨時間與購買品項。</p>
+        <p class="about-order-footer" style="border-top:none; padding-top:0; margin-top:0;">我們亦不定期舉辦主題品飲活動與企業展售，持續推廣更清楚、安心的飲酒體驗。</p>
+      </div>
+    </section>
+
+    <!-- 結語 -->
+    <div class="about-closing">
+      <div class="about-closing-main">
+        酉時，是夜幕將臨、一天慢下來的時刻。<br>
+        願每一次舉杯，都恰如其分。
+      </div>
+      <div class="about-closing-sub">YOU-SI &nbsp;·&nbsp; 酉時喝酒</div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <!-- 左側：品牌資訊 -->
+      <div class="footer-info">
+        <div>📦  取貨地點：</div>
+        <div>🏠 台北｜大安郵局前（建國信義路口處）</div>
+        <div>🏠 新竹｜竹北市光明十街（深耕公園）</div>
+      </div>
+
+      <!-- 右側：QR -->
+      <div class="footer-right">
+        <div class="footer-qr">
+          <img class="line-qr-img" alt="加入 LINE">
+          <div class="qr-label">
+            Line
+            <span class="qr-sub">領取專屬優惠</span>
+          </div>
+        </div>
+        <div class="footer-qr">
+          <img class="ig-qr-img" alt="Instagram">
+          <div class="qr-label">Instagram yousi1719_drink</div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+<!-- ✅ 飲酒警語固定底部 -->
+<div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+  <span class="alcohol-bar-text">
+    🍶 未滿十八歲請勿飲酒
+    <span class="alcohol-bar-divider" aria-hidden="true"></span>
+    酒後不開車，安心享受微醺時刻
+  </span>
+</div>
+
+<!-- ✅ 公告輪播邏輯 -->
+<script>
+(function () {
+  if (typeof announcements === "undefined" || !announcements.length) return;
+
+  const bar   = document.getElementById("announceBar");
+  const track = document.getElementById("announceTrack");
+  if (!bar || !track) return;
+
+  // 建立各則公告 DOM
+  announcements.forEach(function (item, i) {
+    const el = document.createElement("div");
+    el.className = "announce-item" + (i === 0 ? " is-active" : "");
+    el.innerHTML = item.link
+      ? '<a href="' + item.link + '">' + item.text + "</a>"
+      : item.text;
+    track.appendChild(el);
+  });
+
+  // 顯示公告條，讓 header 下移
+  bar.classList.remove("announce-hidden");
+  document.body.classList.add("has-announce");
+
+  // 單則不需輪播
+  if (announcements.length === 1) return;
+
+  let current = 0;
+  setInterval(function () {
+    const items = track.querySelectorAll(".announce-item");
+    items[current].classList.remove("is-active");
+    current = (current + 1) % items.length;
+    items[current].classList.add("is-active");
+  }, 5000);
+})();
+</script>  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <img id="lightbox-img">
+    <div id="lightbox-note"></div>
+  </div>
+
+</body>
+</html>
