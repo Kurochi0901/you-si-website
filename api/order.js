@@ -7,7 +7,6 @@ export default async function handler(req, res) {
   try {
 
     const {
-      apiKey,
       name,
       phone,
       email,
@@ -18,11 +17,6 @@ export default async function handler(req, res) {
       discount,
       total
     } = req.body;
-
-    // API Key 驗證
-    if (apiKey !== process.env.ORDER_API_KEY) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
 
     // 基本驗證
     if (!name || !phone || !summary) {
