@@ -24,7 +24,7 @@
       time: "18:50 - 20:45",
       city: "台北市",
       location: "墾趣‧動門市",
-      status: "upcoming",
+      status: "ended",
       link: "https://www.accupass.com/event/2601070458271278316992",
       note: "品味一杯香醇熱紅酒，感受暖意融入全身，並透過瑜珈，感受身體的感覺。 課程以滾筒放鬆筋膜與肌肉，並現場示範熬煮熱紅酒，參與者可一邊伸展、一邊品飲氣泡酒，享受身心同步放鬆的週五夜晚時光。",
       cover: "/assets/images/events/klara-kulikova-CPMZguYURMw-unsplash.jpg",
