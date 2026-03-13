@@ -1115,7 +1115,6 @@ const products = [
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
     imgs: [`${CDN}/23八橋肉桂梅酒1.webp`,
       `${CDN}/23八橋肉桂梅酒2.webp`,
-      `${CDN}/23八橋肉桂梅酒3.webp`,
     ], //圖片檔名
 
     price: 1250, //優惠價
