@@ -1,3 +1,5 @@
+const CDN = "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto";
+
 const products = [
   {
     id: 1,
@@ -5,8 +7,8 @@ const products = [
     name: "梅侍純釀 紅玉紅茶梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "mini", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個	
-    imgs: ["/assets/images/products/1梅侍紅玉1.jpg",
-      "/assets/images/products/1梅侍紅玉2.jpg",
+    imgs: [`${CDN}/1梅侍紅玉1.webp`,
+      `${CDN}/1梅侍紅玉2.webp`,
     ], //圖片檔名
 
     price: 948, //優惠價
@@ -59,8 +61,8 @@ const products = [
     name: "梅侍純釀 碧螺春綠茶梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/2梅侍碧螺春1.jpg",
-      "/assets/images/products/2梅侍碧螺春2.jpg",
+    imgs: [`${CDN}/2梅侍碧螺春1.webp`,
+      `${CDN}/2梅侍碧螺春2.webp`,
     ], //圖片檔名
 
     price: 948, //優惠價
@@ -109,8 +111,8 @@ const products = [
     name: "梅侍純釀 凍頂烏龍茶梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/3梅侍凍頂1.jpg",
-      "/assets/images/products/3梅侍凍頂2.jpg",
+    imgs: [`${CDN}/3梅侍凍頂1.webp`,
+      `${CDN}/3梅侍凍頂2.webp`,
     ], //圖片檔名
 
     price: 1018, //優惠價
@@ -161,8 +163,8 @@ const products = [
     name: "梅侍純釀 東方美人茶梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/4梅侍東方1.jpg",
-      "/assets/images/products/4梅侍東方2.jpg",
+    imgs: [`${CDN}/4梅侍東方1.webp`,
+      `${CDN}/4梅侍東方2.webp`,
     ], //圖片檔名
 
     price: 1018, //優惠價
@@ -214,8 +216,8 @@ const products = [
     name: "天吹 抹茶梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/5抹茶梅酒1.jpg",
-      "/assets/images/products/5抹茶梅酒2.jpg",
+    imgs: [`${CDN}/5抹茶梅酒1.webp`,
+      `${CDN}/5抹茶梅酒2.webp`,
     ], //圖片檔名
 
     price: 950, //優惠價 // 已完售
@@ -262,8 +264,8 @@ const products = [
     name: "天吹 伯爵紅茶梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/6伯爵紅茶梅酒1.jpg",
-      "/assets/images/products/6伯爵紅茶梅酒2.jpg",
+    imgs: [`${CDN}/6伯爵紅茶梅酒1.webp`,
+      `${CDN}/6伯爵紅茶梅酒2.webp`,
     ], //圖片檔名
 
     price: 950, //優惠價
@@ -310,8 +312,8 @@ const products = [
     name: "天吹 京都千年抹茶酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/7千年抹茶酒1.jpg",
-      "/assets/images/products/7千年抹茶酒2.jpg",
+    imgs: [`${CDN}/7千年抹茶酒1.webp`,
+      `${CDN}/7千年抹茶酒2.webp`,
     ], //圖片檔名
 
     price: 1150, //優惠價 // 已完售
@@ -361,8 +363,8 @@ const products = [
     name: "梅侍純釀 果泥梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/8梅侍果泥1.jpg",
-      "/assets/images/products/8梅侍果泥2.jpg",
+    imgs: [`${CDN}/8梅侍果泥1.webp`,
+      `${CDN}/8梅侍果泥2.webp`,
     ], //圖片檔名
 
     price: 868, //優惠價
@@ -414,8 +416,8 @@ const products = [
     name: "梅侍純釀 香米梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/9梅侍香米1.jpg",
-      "/assets/images/products/9梅侍香米2.jpg",
+    imgs: [`${CDN}/9梅侍香米1.webp`,
+      `${CDN}/9梅侍香米2.webp`,
     ], //圖片檔名
 
     price: 948, //優惠價
@@ -468,8 +470,8 @@ const products = [
     name: "北海道十勝 白蘭地梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/10白蘭地梅酒1.jpg",
-      "/assets/images/products/10白蘭地梅酒2.jpg",
+    imgs: [`${CDN}/10白蘭地梅酒1.webp`,
+      `${CDN}/10白蘭地梅酒2.webp`,
     ], //圖片檔名
 
     price: 980, //優惠價
@@ -515,9 +517,9 @@ const products = [
     name: "山形正宗 濃郁梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個	
-    imgs: ["/assets/images/products/11濃郁梅酒1.jpg",
-      "/assets/images/products/11濃郁梅酒2.jpg",
-      "/assets/images/products/11濃郁梅酒3.jpg",
+    imgs: [`${CDN}/11濃郁梅酒1.webp`,
+      `${CDN}/11濃郁梅酒2.webp`,
+      `${CDN}/11濃郁梅酒3.webp`,
     ], //圖片檔名
 
     price: 1200, //優惠價
@@ -566,9 +568,9 @@ const products = [
     name: "若鶴 梅酒威士忌 UMESKY",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/12梅酒威士忌1.jpg",
-      "/assets/images/products/12梅酒威士忌2.jpg",
-      "/assets/images/products/12梅酒威士忌3.jpg",
+    imgs: [`${CDN}/12梅酒威士忌1.webp`,
+      `${CDN}/12梅酒威士忌2.webp`,
+      `${CDN}/12梅酒威士忌3.webp`,
     ], //圖片檔名
 
     price: 1350, //優惠價
@@ -616,9 +618,9 @@ const products = [
     name: "本坊 上等梅酒 知覽茶",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/13知覽茶1.jpg",
-      "/assets/images/products/13知覽茶2.jpg",
-      "/assets/images/products/13知覽茶3.jpg",
+    imgs: [`${CDN}/13知覽茶1.webp`,
+      `${CDN}/13知覽茶2.webp`,
+      `${CDN}/13知覽茶3.webp`,
     ], //圖片檔名
 
     price: 820, //優惠價
@@ -666,8 +668,8 @@ const products = [
     name: "西吉田 八女綠茶梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/14八女綠茶1.jpg",
-      "/assets/images/products/14八女綠茶2.jpg",
+    imgs: [`${CDN}/14八女綠茶1.webp`,
+      `${CDN}/14八女綠茶2.webp`,
     ], //圖片檔名
 
     price: 1250, //優惠價
@@ -713,8 +715,8 @@ const products = [
     name: "上喜元 柚子酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/15上喜元柚子1.jpg",
-      "/assets/images/products/15上喜元柚子2.jpg",
+    imgs: [`${CDN}/15上喜元柚子1.webp`,
+      `${CDN}/15上喜元柚子2.webp`,
     ], //圖片檔名
 
     price: 950, //優惠價
@@ -760,10 +762,10 @@ const products = [
     name: "河武釀造 鉾杉柚子酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/16鉾杉柚子1.jpg",
-      "/assets/images/products/16鉾杉柚子2.jpg",
-      "/assets/images/products/16鉾杉柚子3.jpg",
-      "/assets/images/products/16鉾杉柚子4.jpg",
+    imgs: [`${CDN}/16鉾杉柚子1.webp`,
+      `${CDN}/16鉾杉柚子2.webp`,
+      `${CDN}/16鉾杉柚子3.webp`,
+      `${CDN}/16鉾杉柚子4.webp`,
     ], //圖片檔名
 
     price: 990, //優惠價
@@ -811,10 +813,10 @@ const products = [
     name: "堤酒造 晚白柚酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/17晚白柚1.jpg",
-      "/assets/images/products/17晚白柚2.jpg",
-      "/assets/images/products/17晚白柚3.jpg",
-      "/assets/images/products/17晚白柚4.jpg",
+    imgs: [`${CDN}/17晚白柚1.webp`,
+      `${CDN}/17晚白柚2.webp`,
+      `${CDN}/17晚白柚3.webp`,
+      `${CDN}/17晚白柚4.webp`,
     ], //圖片檔名
 
     price: 990, //優惠價
@@ -863,9 +865,9 @@ const products = [
     name: "愛知國盛 水蜜桃風味酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/18蜜桃風味1.jpg",
-      "/assets/images/products/18蜜桃風味2.jpg",
-      "/assets/images/products/18蜜桃風味3.jpg",
+    imgs: [`${CDN}/18蜜桃風味1.webp`,
+      `${CDN}/18蜜桃風味2.webp`,
+      `${CDN}/18蜜桃風味3.webp`,
     ], //圖片檔名
 
     price: 800, //優惠價
@@ -913,8 +915,8 @@ const products = [
     name: "愛知國盛 水梨風味酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/19水梨風味1.jpg",
-      "/assets/images/products/19水梨風味2.jpg",
+    imgs: [`${CDN}/19水梨風味1.webp`,
+      `${CDN}/19水梨風味2.webp`,
     ], //圖片檔名
 
     price: 800, //優惠價
@@ -962,8 +964,8 @@ const products = [
     name: "愛知國盛 蜜柑風味酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/20蜜柑風味1.jpg",
-      "/assets/images/products/20蜜柑風味2.jpg",
+    imgs: [`${CDN}/20蜜柑風味1.webp`,
+      `${CDN}/20蜜柑風味2.webp`,
     ], //圖片檔名
 
     price: 800, //優惠價
@@ -1011,10 +1013,10 @@ const products = [
     name: "愛知國盛 芒果風味酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個	
-    imgs: ["/assets/images/products/21芒果風味酒1.jpg",
-      "/assets/images/products/21芒果風味酒2.jpg",
-      "/assets/images/products/21芒果風味酒3.jpg",
-      "/assets/images/products/21芒果風味酒4.jpg",
+    imgs: [`${CDN}/21芒果風味酒1.webp`,
+      `${CDN}/21芒果風味酒2.webp`,
+      `${CDN}/21芒果風味酒3.webp`,
+      `${CDN}/21芒果風味酒4.webp`,
     ], //圖片檔名
 
     price: 800, //優惠價
@@ -1062,9 +1064,9 @@ const products = [
     name: "愛知國盛 白葡萄風味酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/22白葡萄風味酒1.jpg",
-      "/assets/images/products/22白葡萄風味酒2.jpg",
-      "/assets/images/products/22白葡萄風味酒3.jpg",
+    imgs: [`${CDN}/22白葡萄風味酒1.webp`,
+      `${CDN}/22白葡萄風味酒2.webp`,
+      `${CDN}/22白葡萄風味酒3.webp`,
     ], //圖片檔名
 
     price: 800, //優惠價
@@ -1111,9 +1113,9 @@ const products = [
     name: "北川本家 八橋肉桂梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/23八橋肉桂梅酒1.jpg",
-      "/assets/images/products/23八橋肉桂梅酒2.jpg",
-      "/assets/images/products/23八橋肉桂梅酒3.jpg",
+    imgs: [`${CDN}/23八橋肉桂梅酒1.webp`,
+      `${CDN}/23八橋肉桂梅酒2.webp`,
+      `${CDN}/23八橋肉桂梅酒3.webp`,
     ], //圖片檔名
 
     price: 1250, //優惠價
@@ -1161,9 +1163,9 @@ const products = [
     name: "精釀菊花袖珍奇異果酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/24菊花奇異果酒1.jpg",
-      "/assets/images/products/24菊花奇異果酒2.jpg",
-      "/assets/images/products/24菊花奇異果酒3.jpg",
+    imgs: [`${CDN}/24菊花奇異果酒1.webp`,
+      `${CDN}/24菊花奇異果酒2.webp`,
+      `${CDN}/24菊花奇異果酒3.webp`,
     ], //圖片檔名
 
     price: 930, //優惠價
@@ -1209,9 +1211,9 @@ const products = [
     name: "精釀生薑青紫蘇酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/25生薑青紫蘇酒1.jpg",
-      "/assets/images/products/25生薑青紫蘇酒2.jpg",
-      "/assets/images/products/25生薑青紫蘇酒3.jpg",
+    imgs: [`${CDN}/25生薑青紫蘇酒1.webp`,
+      `${CDN}/25生薑青紫蘇酒2.webp`,
+      `${CDN}/25生薑青紫蘇酒3.webp`,
     ], //圖片檔名
 
     price: 930, //優惠價
@@ -1257,9 +1259,9 @@ const products = [
     name: "金ケ崎 鳥海梅花酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/26鳥海梅花酒1.jpg",
-      "/assets/images/products/26鳥海梅花酒2.jpg",
-      "/assets/images/products/26鳥海梅花酒3.jpg",
+    imgs: [`${CDN}/26鳥海梅花酒1.webp`,
+      `${CDN}/26鳥海梅花酒2.webp`,
+      `${CDN}/26鳥海梅花酒3.webp`,
     ], //圖片檔名
 
     price: 990, //優惠價
@@ -1305,8 +1307,8 @@ const products = [
     name: "池亀 浮露鳳梨果實酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/27浮露鳳梨果實酒1.jpg",
-      "/assets/images/products/27浮露鳳梨果實酒2.jpg",
+    imgs: [`${CDN}/27浮露鳳梨果實酒1.webp`,
+      `${CDN}/27浮露鳳梨果實酒2.webp`,
     ], //圖片檔名
 
     price: 930, //優惠價
@@ -1354,8 +1356,8 @@ const products = [
     name: "金ケ崎 蘋果餐前酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/28蘋果餐前酒1.jpg",
-      "/assets/images/products/28蘋果餐前酒2.jpg",
+    imgs: [`${CDN}/28蘋果餐前酒1.webp`,
+      `${CDN}/28蘋果餐前酒2.webp`,
     ], //圖片檔名
 
     price: 990, //優惠價
@@ -1404,10 +1406,10 @@ const products = [
     name: "池亀 果凍梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/29果凍梅酒1.jpg",
-      "/assets/images/products/29果凍梅酒2.jpg",
-      "/assets/images/products/29果凍梅酒3.jpg",
-      "/assets/images/products/29果凍梅酒4.jpg",
+    imgs: [`${CDN}/29果凍梅酒1.webp`,
+      `${CDN}/29果凍梅酒2.webp`,
+      `${CDN}/29果凍梅酒3.webp`,
+      `${CDN}/29果凍梅酒4.webp`,
     ], //圖片檔名
 
     price: 1080, //優惠價
@@ -1455,8 +1457,8 @@ const products = [
     name: "萩之鶴 純米吟釀 辛口",
     type: "清酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "sake", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
-    imgs: ["/assets/images/products/30萩之鶴 純米吟釀 辛口1.jpg",
-      "/assets/images/products/30萩之鶴 純米吟釀 辛口2.jpg",
+    imgs: ["https://res.cloudinary.com/dcrn2oyxk/image/upload/v1773388720/30%E8%90%A9%E4%B9%8B%E9%B6%B4_%E7%B4%94%E7%B1%B3%E5%90%9F%E9%87%80_%E8%BE%9B%E5%8F%A31.webp",
+      "https://res.cloudinary.com/dcrn2oyxk/image/upload/v1773388720/30%E8%90%A9%E4%B9%8B%E9%B6%B4_%E7%B4%94%E7%B1%B3%E5%90%9F%E9%87%80_%E8%BE%9B%E5%8F%A32.webp",
     ], //圖片檔名
 
     price: 1350, //優惠價

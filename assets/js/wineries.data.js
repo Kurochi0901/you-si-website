@@ -3,7 +3,7 @@ window.wineries = [
       id: "nanbu",
       name: "南部酒造",
       location: "日本・岩手縣",
-      image: "/assets/images/wineries/nanbu.jpg",
+      image: "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/nanbu.webp",
       description:
         "創業百餘年，以低溫長期發酵著稱。酒體乾淨、線條俐落，擅長表現米的純粹與細緻層次。",
       styles: ["清爽", "細緻", "食中酒"]
@@ -12,7 +12,7 @@ window.wineries = [
       id: "kikusui",
       name: "菊水酒造",
       location: "日本・新潟縣",
-      image: "/assets/images/wineries/kikusui.jpg",
+      image: "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/kikusui.webp",
       description:
         "取自新潟雪融水系，風格柔和順口。廣受餐飲搭配喜愛，是穩定且耐喝的代表酒造。",
       styles: ["柔和", "平衡", "日常飲用"]
@@ -21,7 +21,7 @@ window.wineries = [
       id: "shinkame",
       name: "新亀酒造",
       location: "日本・埼玉縣",
-      image: "/assets/images/wineries/shinkame.jpg",
+      image: "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/shinkame.webp",
       description:
         "堅持傳統山廢釀造，低溫熟成時間長，香氣層次深厚，餘韻悠長。",
       styles: ["熟成", "旨味", "層次感"]

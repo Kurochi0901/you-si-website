@@ -78,7 +78,7 @@ function toggleMenu(){
 function initHeroBackground(){
   const el = document.querySelector(".hero-bg");
   if(!el) return;
-  el.style.backgroundImage = `url('/assets/images/home/LINE_ALBUM_果實酒茶酒_251205_1.jpg')`;
+  el.style.backgroundImage = `url('https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/LINE_ALBUM_果實酒茶酒_251205_1.webp')`;
 }
 
 /** Fisher-Yates 隨機打亂陣列，回傳新陣列（不修改原陣列） */
@@ -1190,7 +1190,7 @@ function renderEvents(){
   const pastBox = document.getElementById("eventPast");
   if(!upBox || !pastBox) return;
 
-  const fallbackCover = "/assets/images/home/LINE_ALBUM_果實酒茶酒_251205_1.jpg";
+  const fallbackCover = "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/LINE_ALBUM_果實酒茶酒_251205_1.webp";
 
   function parseDate(s){
     const m = (s || "").match(/^(\d{4})\/(\d{2})\/(\d{2})/);

@@ -1,0 +1,22 @@
+# 套件
+node_modules/
+package.json
+package-lock.json
+
+# 腳本工具（不需上版控）
+convert.js
+replace-cdn.js
+upload-new-products.js
+refactor-imgs.js
+
+# 備份檔
+*.backup
+uploaded-images.txt
+
+# 暫存圖片
+assets/images/new/
+assets/images/webp/
+
+# 系統檔
+.DS_Store
+Thumbs.db
