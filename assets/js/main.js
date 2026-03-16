@@ -17,7 +17,7 @@ const BRAND = {
 };
 
 // 運費規則常數
-const SHIPPING_FREE_THRESHOLD = 3000; // 滿額免運門檻（NT$）
+const SHIPPING_FREE_THRESHOLD = 2800; // 滿額免運門檻（NT$）
 const SHIPPING_FEE_ROOM       = 170;  // 常溫運費
 const SHIPPING_FEE_COLD       = 230;  // 冷藏運費
 
@@ -540,7 +540,8 @@ function getCartContext(){
     totalQty:   cart.reduce((s, p) => s + p.qty, 0),
     subtotal:   cart.reduce((s, p) => s + p.price * p.qty, 0),
     categories: new Set(cart.map(p => p.category).filter(Boolean)),
-    breweries:  new Set(cart.map(p => p.brewery).filter(Boolean))
+    breweries:  new Set(cart.map(p => p.brewery).filter(Boolean)),
+    ids:        new Set(cart.map(p => p.id))  // 供 combo-ids 促銷使用
   };
 }
 
@@ -808,25 +809,25 @@ function applyPromotions(ctx){
   let total = ctx.subtotal, discountTotal = 0;
   const applied = [];
 
-  // 不可疊加：取最優惠
-  let bestExclusive = null, bestTotal = total;
+  // 不可疊加：取折抵金額最大的那個
+  // apply(ctx) 回傳「折抵金額」（正整數），不再是折後總價
+  let bestExclusive = null, bestDiscount = 0;
   PROMOTIONS.filter(p => !p.stackable).forEach(p => {
     if(p.condition(ctx)){
-      const after = p.apply(total);
-      if(after < bestTotal){ bestTotal = after; bestExclusive = p; }
+      const discount = p.apply(ctx);
+      if(discount > bestDiscount){ bestDiscount = discount; bestExclusive = p; }
     }
   });
   if(bestExclusive){
-    const amount = total - bestTotal;
-    total = bestTotal; discountTotal += amount;
-    applied.push({ id: bestExclusive.id, label: bestExclusive.label, amount });
+    total -= bestDiscount; discountTotal += bestDiscount;
+    applied.push({ id: bestExclusive.id, label: bestExclusive.label, amount: bestDiscount });
   }
 
   // 可疊加：全部套用
   PROMOTIONS.filter(p => p.stackable).forEach(p => {
     if(p.condition(ctx)){
-      const before = total, after = p.apply(total), amount = before - after;
-      if(amount > 0){ total = after; discountTotal += amount; applied.push({ id: p.id, label: p.label, amount }); }
+      const discount = p.apply(ctx);
+      if(discount > 0){ total -= discount; discountTotal += discount; applied.push({ id: p.id, label: p.label, amount: discount }); }
     }
   });
 
@@ -872,11 +873,26 @@ function renderHomePromotion(){
  */
 function getNextPromotionHint(cartQty){
   if(!window.PROMOTIONS || !Array.isArray(PROMOTIONS)) return null;
-  const qtyPromos = PROMOTIONS
-    .filter(p => p.type === "quantity" && p.hint && typeof p.hint.minQty === "number")
+
+  // 支援 combo-ids 型促銷：計算指定商品的購物車數量
+  const cart = readCart();
+
+  const hintPromos = PROMOTIONS
+    .filter(p => p.hint && typeof p.hint.minQty === "number")
     .sort((a, b) => a.hint.minQty - b.hint.minQty);
-  for(const p of qtyPromos){
-    const need = p.hint.minQty - cartQty;
+
+  for(const p of hintPromos){
+    let currentQty;
+    if(p.type === "combo-ids" && Array.isArray(p.targetIds)){
+      // 只計算此促銷白名單內的商品數量
+      currentQty = cart
+        .filter(item => p.targetIds.includes(item.id))
+        .reduce((s, item) => s + item.qty, 0);
+    } else {
+      // 舊版 quantity 型：計算全購物車件數
+      currentQty = cartQty;
+    }
+    const need = p.hint.minQty - currentQty;
     if(need > 0) return { need, text: p.label };
   }
   return null;
