@@ -495,8 +495,9 @@ function addToCart(id){
   showCartToast(p.name, cart.find(x => x.id === id)?.qty || 1);
 
   // 促銷引導提示：距離下一個折扣還差幾件
+  // 傳入剛加入的商品 id，只對「該商品屬於促銷白名單」的促銷顯示 toast
   const totalQty  = cart.reduce((s, x) => s + (x.qty || 0), 0);
-  const nextPromo = getNextPromotionHint(totalQty);
+  const nextPromo = getNextPromotionHint(totalQty, id);
   if(nextPromo) showPromoToast(`再買 ${nextPromo.need} 件可享 ${nextPromo.text}`);
 }
 
@@ -847,7 +848,7 @@ function renderPromotionBlock(){
     <ul class="promo-list">
       ${window.PROMOTIONS.map(p => {
         const ok = res.applied.some(a => a.id === p.id);
-        return `<li class="${ok ? 'achieved' : ''}"><span class="check">${ok ? '✔' : '◻'}</span> ${p.label}</li>`;
+        return `<li class="promo-item${ok ? ' achieved' : ''}"><span class="promo-check-box"></span>${p.label}</li>`;
       }).join("")}
     </ul>
     ${res.discount > 0 ? `<div class="promo-discount">已折抵 NT$${res.discount}</div>` : `<div class="promo-hint"></div>`}
@@ -871,7 +872,7 @@ function renderHomePromotion(){
  * 供加入購物車時的引導 toast 使用
  * @returns {{ need: number, text: string } | null}
  */
-function getNextPromotionHint(cartQty){
+function getNextPromotionHint(cartQty, addedId){
   if(!window.PROMOTIONS || !Array.isArray(PROMOTIONS)) return null;
 
   // 支援 combo-ids 型促銷：計算指定商品的購物車數量
@@ -884,6 +885,8 @@ function getNextPromotionHint(cartQty){
   for(const p of hintPromos){
     let currentQty;
     if(p.type === "combo-ids" && Array.isArray(p.targetIds)){
+      // combo-ids 型：加入的商品不在白名單內，不顯示此促銷的 toast
+      if(addedId !== undefined && !p.targetIds.includes(addedId)) continue;
       // 只計算此促銷白名單內的商品數量
       currentQty = cart
         .filter(item => p.targetIds.includes(item.id))

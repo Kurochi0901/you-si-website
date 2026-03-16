@@ -10,16 +10,18 @@
  */
 
 const announcements = [
+
   {
-    text: "🎉 本月精選！任選 3 件享 85 折優惠，數量有限",
-    link: "/products/"
+    text: "🎁 現在下單不限金額，即贈送日本開運御守｜數量有限，送完為止",
   },
+
   {
-    text: "📦 新品到貨｜萩之鶴 純米吟釀 辛口 現正熱賣中",
-    link: "/products/"
+    text: "🍶 梅侍系列 任選 3 件享 95 折優惠",
+    link: "/products/fruit-tea/"
   },
+
   {
-    text: "歡慶官網上線!! 滿千送百",
-    link: "/offers/"
-  }
+    text: "🚚 訂單滿 NT$2,800 免運費",
+  },
+
 ];

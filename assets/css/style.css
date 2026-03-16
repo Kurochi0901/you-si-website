@@ -1049,11 +1049,60 @@ nav a.active{
   font-weight: 700;
 }
 
-.promo-check {
+/* ── 促銷清單 ── */
+.promo-list {
+  list-style: none;
+  margin: 6px 0 4px;
+  padding: 0;
+}
+
+.promo-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 13px;
+  color: #6b5030;
+  opacity: 0.55;
+  transition: opacity .2s;
+}
+
+.promo-item.achieved {
+  opacity: 1;
+  font-weight: 600;
+  color: #3d2b1a;
+}
+
+/* 未達成：空心圓角方框 */
+.promo-check-box {
+  flex-shrink: 0;
   display: inline-block;
-  width: 1.2em;
-  text-align: center;
-  margin-right: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid #b09070;
+  background: transparent;
+  position: relative;
+  transition: background .2s, border-color .2s;
+}
+
+/* 達成：填色 + 純 CSS 打勾 */
+.promo-item.achieved .promo-check-box {
+  background: #8a6b3f;
+  border-color: #8a6b3f;
+}
+
+.promo-item.achieved .promo-check-box::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1.5px;
+  width: 5px;
+  height: 9px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
 }
 
 .promo-toast {
