@@ -6,7 +6,7 @@ const products = [
     priority: 4, // ✅ 新增：1~5，越大越優先
     name: "梅侍純釀 紅玉紅茶梅酒",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
-    category: "mini", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個	
+    category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個	
     imgs: [`${CDN}/1梅侍紅玉1.webp`,
       `${CDN}/1梅侍紅玉2.webp`,
     ], //圖片檔名
