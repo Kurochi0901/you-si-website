@@ -240,8 +240,8 @@ function applyFilters(){
  */
 function renderPriorityBadge(p){
   const pr = getPriority(p);
-  if(pr === 5) return `<span class="priority-badge priority-badge--5">店長精選</span>`;
-  if(pr === 4) return `<span class="priority-badge priority-badge--4">推薦</span>`;
+  if(pr === 5) return `<span class="name-tag name-tag--5">店長精選</span>`;
+  if(pr === 4) return `<span class="name-tag name-tag--4">推薦</span>`;
   return "";
 }
 
@@ -255,9 +255,9 @@ function renderGrid(list, id){
         <div class="card-media">
           <img src="${cover}" alt="${p.name}" loading="lazy" decoding="async"
             onclick="openProduct(${p.id})" style="cursor:pointer">
-          ${renderPriorityBadge(p)}
         </div>
         <div class="card-body">
+          <div class="card-tag-row">${renderPriorityBadge(p)}</div>
           <div class="name" onclick="openProduct(${p.id})" style="cursor:pointer">${p.name}</div>
           <div class="spec">${p.spec || ""}</div>
           <div class="card-meta">

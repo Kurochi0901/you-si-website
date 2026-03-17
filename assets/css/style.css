@@ -2449,32 +2449,37 @@ body {
   }
 }
 
-/* ===== Priority Badge（推薦 / 店長精選）===== */
+/* ===== Priority Badge 風格 B（商品名稱上方標籤）===== */
 
-.priority-badge {
-  position: absolute;
-  top: 25px;
-  right: 10px;
-  z-index: 2;
+/* 固定高度容器，有無 badge 都佔同樣空間，確保商品名稱對齊 */
+.card-tag-row {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.name-tag {
   display: inline-block;
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 4px;
   line-height: 1.6;
   white-space: nowrap;
-  pointer-events: none;
 }
 
-.priority-badge--4 {
-  background: #fdf3e3;
-  color: #8a5e16;
-  border: 1px solid #e8c97a;
-}
-
-.priority-badge--5 {
+/* Priority 5 — 深棕：店長精選 */
+.name-tag--5 {
   background: #2d1f0e;
   color: #f5e0c0;
   border: 1px solid #5a3d1a;
+}
+
+/* Priority 4 — 暖金：推薦 */
+.name-tag--4 {
+  background: #fdf3e3;
+  color: #8a5e16;
+  border: 1px solid #e8c97a;
 }
