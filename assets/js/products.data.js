@@ -564,7 +564,7 @@ const products = [
   },
 {
     id: 12,
-    priority: 3, // ✅ 新增：1~5，越大越優先
+    priority: 4, // ✅ 新增：1~5，越大越優先
     name: "若鶴 梅酒威士忌 UMESKY",
     type: "果實酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
     category: "fruit-tea", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
