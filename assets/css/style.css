@@ -2456,8 +2456,8 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 8px 10px 4px;
-  min-height: 36px;
+  padding: 6px 10px 2px;
+  min-height: 30px;
 }
 
 .priority-badge {
