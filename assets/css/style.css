@@ -2457,7 +2457,7 @@ body {
  */
 .priority-badge {
   position: absolute;
-  top: 10px;
+  top: -18px;
   right: 10px;
   z-index: 2;
   padding: 4px 10px;
@@ -2491,7 +2491,7 @@ body {
 /* 手機版：badge 稍微縮小，避免遮擋太多圖片 */
 @media (max-width: 860px) {
   .priority-badge {
-    top: 8px;
+    top: -16px;
     right: 8px;
     font-size: 10px;
     padding: 3px 8px;
