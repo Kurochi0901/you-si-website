@@ -2451,18 +2451,20 @@ body {
 
 /* ===== Priority Badge（推薦 / 店長精選）===== */
 
-/* badge 容器：圖片下方、card-body 上方，右對齊 */
+/* badge 容器：圖片上方的白色留白列，右對齊 */
 .card-badge-row {
   display: flex;
   justify-content: flex-end;
-  padding: 6px 10px 0;
+  align-items: center;
+  padding: 8px 10px 4px;
+  min-height: 36px;
 }
 
 .priority-badge {
   display: inline-block;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.05em;
   line-height: 1.5;
@@ -2485,18 +2487,9 @@ body {
   box-shadow: 0 1px 6px rgba(0,0,0,.22);
 }
 
-/* 手機版（列表模式）：隱藏 row，改用圖片上疊加 */
+/* 手機版（列表模式）：badge 列隱藏，不影響左圖右文佈局 */
 @media (max-width: 860px) {
   .card-badge-row {
     display: none;
-  }
-  .card-media .priority-badge {
-    display: inline-block;
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    font-size: 10px;
-    padding: 3px 8px;
-    z-index: 2;
   }
 }

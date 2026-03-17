@@ -252,11 +252,11 @@ function renderGrid(list, id){
     const cover = Array.isArray(p.imgs) ? p.imgs[0] : "";
     return `
       <div class="card">
+        ${renderPriorityBadge(p) ? `<div class="card-badge-row">${renderPriorityBadge(p)}</div>` : ""}
         <div class="card-media">
           <img src="${cover}" alt="${p.name}" loading="lazy" decoding="async"
             onclick="openProduct(${p.id})" style="cursor:pointer">
         </div>
-        ${renderPriorityBadge(p) ? `<div class="card-badge-row">${renderPriorityBadge(p)}</div>` : ""}
         <div class="card-body">
           <div class="name" onclick="openProduct(${p.id})" style="cursor:pointer">${p.name}</div>
           <div class="spec">${p.spec || ""}</div>
