@@ -21,6 +21,11 @@ const announcements = [
   },
 
   {
+    text: "📦 新品到貨｜萩之鶴 純米吟釀 辛口 現正熱賣中",
+    link: "/products/"
+  },
+  
+  {
     text: "🚚 訂單滿 NT$2,800 免運費",
   },
 

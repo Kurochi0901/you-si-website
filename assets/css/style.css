@@ -2448,3 +2448,52 @@ body {
     max-width: 100%;
   }
 }
+
+/* ===== Priority Badge（推薦 / 店長精選）===== */
+
+/*
+ * 疊加在 .card-media 圖片右上角
+ * .card-media 已有 position:relative，badge 使用 absolute 定位
+ */
+.priority-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+  pointer-events: none;
+  white-space: nowrap;
+  /* 防止圖片 loading 時 badge 被蓋住 */
+  isolation: isolate;
+}
+
+/* Priority 4 — 暖金色：推薦 */
+.priority-badge--4 {
+  background: #fdf3e3;
+  color: #8a5e16;
+  border: 1px solid #e8c97a;
+  box-shadow: 0 1px 4px rgba(0,0,0,.10);
+}
+
+/* Priority 5 — 深棕色：店長精選 */
+.priority-badge--5 {
+  background: #2d1f0e;
+  color: #f5e0c0;
+  border: 1px solid #5a3d1a;
+  box-shadow: 0 1px 6px rgba(0,0,0,.22);
+}
+
+/* 手機版：badge 稍微縮小，避免遮擋太多圖片 */
+@media (max-width: 860px) {
+  .priority-badge {
+    top: 8px;
+    right: 8px;
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+}

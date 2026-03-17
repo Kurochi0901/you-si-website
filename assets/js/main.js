@@ -232,6 +232,19 @@ function applyFilters(){
  * @param {Array}  list - 商品陣列
  * @param {string} id   - 目標容器的 element id
  */
+/**
+ * 依商品 priority 產生推薦 badge HTML
+ * priority 5 → 「店長精選」深棕 badge
+ * priority 4 → 「推薦」暖金 badge
+ * 其餘 → 空字串
+ */
+function renderPriorityBadge(p){
+  const pr = getPriority(p);
+  if(pr === 5) return `<span class="priority-badge priority-badge--5">店長精選</span>`;
+  if(pr === 4) return `<span class="priority-badge priority-badge--4">推薦</span>`;
+  return "";
+}
+
 function renderGrid(list, id){
   const box = document.getElementById(id);
   if(!box) return;
@@ -242,6 +255,7 @@ function renderGrid(list, id){
         <div class="card-media">
           <img src="${cover}" alt="${p.name}" loading="lazy" decoding="async"
             onclick="openProduct(${p.id})" style="cursor:pointer">
+          ${renderPriorityBadge(p)}
         </div>
         <div class="card-body">
           <div class="name" onclick="openProduct(${p.id})" style="cursor:pointer">${p.name}</div>
