@@ -2470,16 +2470,20 @@ body {
   white-space: nowrap;
 }
 
-/* Priority 5 — 深棕：店長精選 */
+/* Priority 5 — 深棕底圓框：店長精選 */
 .name-tag--5 {
   background: #2d1f0e;
   color: #f5e0c0;
-  border: 1px solid #5a3d1a;
+  border: 1.5px solid #c9a87a;
+  border-radius: 999px;
+  padding: 3px 12px;
 }
 
-/* Priority 4 — 暖金：推薦 */
+/* Priority 4 — 透明底圓框：推薦 */
 .name-tag--4 {
-  background: #fdf3e3;
+  background: transparent;
   color: #8a5e16;
-  border: 1px solid #e8c97a;
+  border: 1.5px solid #c9a87a;
+  border-radius: 999px;
+  padding: 3px 12px;
 }

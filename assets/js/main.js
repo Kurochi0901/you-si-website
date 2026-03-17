@@ -240,8 +240,8 @@ function applyFilters(){
  */
 function renderPriorityBadge(p){
   const pr = getPriority(p);
-  if(pr === 5) return `<span class="name-tag name-tag--5">店長精選</span>`;
-  if(pr === 4) return `<span class="name-tag name-tag--4">推薦</span>`;
+  if(pr === 5) return `<span class="name-tag name-tag--5">✦ 店長精選</span>`;
+  if(pr === 4) return `<span class="name-tag name-tag--4">✦ 推薦</span>`;
   return "";
 }
 
