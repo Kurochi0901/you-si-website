@@ -2451,44 +2451,30 @@ body {
 
 /* ===== Priority Badge（推薦 / 店長精選）===== */
 
-/* 每張卡片頂端都有這一列，有 badge 就顯示，沒有就空白佔位 */
-.card-badge-row {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 6px 10px;
-}
-
 .priority-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
   display: inline-block;
-  padding: 3px 12px;
+  padding: 4px 12px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1.6;
   white-space: nowrap;
+  pointer-events: none;
 }
 
-/* Priority 4 — 暖金色：推薦 */
 .priority-badge--4 {
   background: #fdf3e3;
   color: #8a5e16;
   border: 1px solid #e8c97a;
 }
 
-/* Priority 5 — 深棕色：店長精選 */
 .priority-badge--5 {
   background: #2d1f0e;
   color: #f5e0c0;
   border: 1px solid #5a3d1a;
-}
-
-/* 手機版列表模式：badge row 高度壓小 */
-@media (max-width: 860px) {
-  .card-badge-row {
-    height: 0;
-    padding: 0;
-    overflow: hidden;
-  }
 }
