@@ -2453,7 +2453,7 @@ body {
 
 .priority-badge {
   position: absolute;
-  top: 10px;
+  top: 20px;
   right: 10px;
   z-index: 2;
   display: inline-block;
