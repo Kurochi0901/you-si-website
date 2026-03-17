@@ -192,9 +192,10 @@ p{ color:var(--muted); line-height:1.9; margin:10px 0; }
   background:var(--card);
   border:1px solid rgba(0,0,0,.05);
   border-radius:var(--radius);
-  overflow:hidden;
+  overflow:visible;
   box-shadow:var(--shadow2);
   transition:.28s ease;
+  position:relative;
 }
 .card:hover{
   transform:translateY(-6px);
@@ -2451,16 +2452,11 @@ body {
 
 /* ===== Priority Badge（推薦 / 店長精選）===== */
 
-/* badge 容器：圖片上方的白色留白列，右對齊 */
-.card-badge-row {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 6px 10px 2px;
-  min-height: 30px;
-}
-
 .priority-badge {
+  position: absolute;
+  top: -14px;
+  right: 12px;
+  z-index: 3;
   display: inline-block;
   padding: 4px 12px;
   border-radius: 999px;
@@ -2469,6 +2465,7 @@ body {
   letter-spacing: 0.05em;
   line-height: 1.5;
   white-space: nowrap;
+  pointer-events: none;
 }
 
 /* Priority 4 — 暖金色：推薦 */
@@ -2487,9 +2484,12 @@ body {
   box-shadow: 0 1px 6px rgba(0,0,0,.22);
 }
 
-/* 手機版（列表模式）：badge 列隱藏，不影響左圖右文佈局 */
+/* 手機版：縮小 badge */
 @media (max-width: 860px) {
-  .card-badge-row {
-    display: none;
+  .priority-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+    top: -12px;
+    right: 8px;
   }
 }
