@@ -683,7 +683,7 @@ function ensureStickyUI(){
         <span class="cart-float-badge" id="cartBadge" aria-label="購物車品項數">0</span>
       `;
       const navCta = header.querySelector(".nav-cta");
-      if(navCta) header.insertBefore(wrap, navCta);
+      if(navCta) navCta.appendChild(wrap);
       else header.appendChild(wrap);
 
       const open = () => openMiniCart();
@@ -728,7 +728,7 @@ function ensureStickyUI(){
         <div class="mini-cart-body" id="miniCartList"></div>
         <div class="mini-cart-footer">
           <div class="mini-cart-total">總金額 <span id="miniCartTotal">0</span></div>
-          <a class="btn btn-primary mini-cart-checkout" href="/order/">前往下單</a>
+          <a class="btn btn-primary mini-cart-checkout" href="/order/">送出詢問單</a>
         </div>
       </div>
     `;
@@ -1025,7 +1025,7 @@ async function submitOrder(){
 
   // 組訂單摘要（複製到剪貼簿後貼至 LINE）
   const summary =
-`【酉時喝酒 訂單】
+`【酉時喝酒 詢問單】
 姓名：${name}
 電話：${phone}
 Email：${email}
@@ -1078,8 +1078,8 @@ function openOrderSuccessModal({ lineUrl, copiedOK, summary }){
   if(!modal){
     // fallback：Modal HTML 不存在時用 alert
     alert(copiedOK
-      ? "訂單已送出，訂單內容已複製。請手動前往 LINE 官方帳號貼上訊息完成下單。"
-      : "訂單已送出，但瀏覽器阻擋複製。請回到頁面手動複製訂單內容後前往 LINE。");
+      ? "詢問單已送出，訂單內容已複製。請手動前往 LINE 官方帳號貼上訊息完成下單。"
+      : "詢問單已送出，但瀏覽器阻擋複製。請回到頁面手動複製訂單內容後前往 LINE。");
     return;
   }
   const status     = modal.querySelector("[data-role='copyStatus']");
