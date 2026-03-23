@@ -20,6 +20,18 @@
   const events = [
     {
       title: "【熱紅酒瑜珈】微醺伸展・熱紅酒時光｜酉時喝酒×墾趣動健身房．瑜珈",
+      date: "2026/04/25",
+      time: "13:30 - 15:30",
+      city: "台北市",
+      location: "中山區復興北路150號 9樓",
+      status: "upcoming",
+      link: "https://www.accupass.com/event/2601070458271278316992",
+      note: "品味一杯香醇熱紅酒，感受暖意融入全身，並透過瑜珈，感受身體的感覺。 課程以滾筒放鬆筋膜與肌肉，並現場示範熬煮熱紅酒，參與者可一邊伸展、一邊品飲氣泡酒，享受身心同步放鬆的週五夜晚時光。",
+      cover: "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/klara-kulikova-CPMZguYURMw-unsplash.webp",
+      tags: ["#品酒會", "#貓咪", "#清酒"]
+    },
+    {
+      title: "【熱紅酒瑜珈】微醺伸展・熱紅酒時光｜酉時喝酒×墾趣動健身房．瑜珈",
       date: "2026/01/30",
       time: "18:50 - 20:45",
       city: "台北市",
