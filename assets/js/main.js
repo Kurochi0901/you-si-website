@@ -1256,13 +1256,16 @@ function renderEvents(){
           <div class="event-up-meta">${e.date}${e.time ? ` ${e.time}` : ""}${e.city ? `｜${e.city}` : ""}</div>
           <div class="event-up-name">${e.title}</div>
           <div class="event-up-loc">📍 ${e.location || ""}</div>
-          ${e.note ? `<p class="mono" style="margin:10px 0 0;">${e.note}</p>` : ""}
+          ${e.note ? `<div class="event-note-wrap"><p class="mono event-note-text" style="margin:10px 0 0;">${e.note}</p><button class="event-note-toggle" onclick="toggleEventNote(this)" type="button">展開 ▾</button></div>` : ""}
           ${Array.isArray(e.tags) && e.tags.length
             ? `<div class="event-up-tags">${e.tags.map(t => `<span class="tag-pill">${t}</span>`).join("")}</div>`
             : ""}
-          <div class="event-up-actions">
-            <a class="btn" href="${e.link}" target="_blank" rel="noopener">查看活動</a>
-          </div>
+        <div class="event-up-actions">
+          <a class="btn-signup" href="${e.link}" target="_blank" rel="noopener">
+            <span class="btn-signup-text">點我報名</span>
+            <span class="btn-signup-arrow">→</span>
+          </a>
+        </div>
         </div>
       </div>
     `;
@@ -1401,3 +1404,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+/* ===== 活動描述展開/收起（手機版） ===== */
+function toggleEventNote(btn){
+  const wrap = btn.closest(".event-note-wrap");
+  const text = wrap.querySelector(".event-note-text");
+  const isOpen = wrap.classList.contains("is-open");
+  if(isOpen){
+    wrap.classList.remove("is-open");
+    btn.textContent = "展開 ▾";
+  } else {
+    wrap.classList.add("is-open");
+    btn.textContent = "收起 ▴";
+  }
+}
