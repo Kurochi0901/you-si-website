@@ -27,6 +27,182 @@ const CATEGORY_ORDER = ["sake", "fruit-tea", "wine", "spirits", "mini"];
 // 風味刻度格數（1~5）
 const SCALE_MAX = 5;
 
+/* ===== 1.5 SEO 管理器 ===== */
+const SEOMonitor = (function() {
+  const originalMeta = {
+    title: document.title,
+    description: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
+    ogTitle: document.querySelector('meta[property="og:title"]')?.getAttribute('content') || '',
+    ogDescription: document.querySelector('meta[property="og:description"]')?.getAttribute('content') || '',
+    canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') || window.location.href,
+    url: window.location.href
+  };
+
+  function setMetaTag(selector, attribute, value) {
+    let element = document.querySelector(selector);
+    if (!element && attribute === 'content') {
+      element = document.createElement('meta');
+      if (selector.includes('name=')) {
+        element.setAttribute('name', selector.match(/name="([^"]+)"/)[1]);
+      } else if (selector.includes('property=')) {
+        element.setAttribute('property', selector.match(/property="([^"]+)"/)[1]);
+      }
+      document.head.appendChild(element);
+    }
+    if (element) element.setAttribute(attribute, value);
+  }
+
+  function getCategoryPathSegment(catKey) {
+    if (!catKey || catKey === 'all') return '';
+    if (catKey === 'fruittea') return 'fruit-tea/';
+    return `${catKey}/`;
+  }
+
+  function getNormalizedProductUrl(productId, category) {
+    return `${window.location.origin}/products/${getCategoryPathSegment(category)}?item=${productId}`;
+  }
+
+  function getProductSEOTemplates(product, category) {
+    const name = product.name || '精選商品';
+    let title = `${name} | 酉時喝酒 YOU-SI`;
+    let description = product.note?.oneLine || `${name}，酉時喝酒提供您精選酒款，立即選購！`;
+
+    switch(category) {
+      case 'sake':
+        title = `${name} – 嚴選日本清酒推薦 | 酉時喝酒 YOU-SI`;
+        description = `探索「${name}」，特選優質日本清酒，香氣細緻、口感層次豐富。無論是佐餐或獨飲，酉時喝酒提供您最棒的品飲體驗。`;
+        break;
+      case 'fruittea':
+      case 'fruit-tea':
+        title = `${name} – 人氣果實酒與茶酒 | 酉時喝酒 YOU-SI`;
+        description = `想找好喝的果實酒與茶酒？推薦您「${name}」，融合鮮甜果香與優雅茶韻，酸甜順口超百搭。來酉時喝酒 YOU-SI，享受微醺滋味。`;
+        break;
+      case 'wine':
+        title = `${name} – 經典質感葡萄酒推薦 | 酉時喝酒 YOU-SI`;
+        description = `品味「${name}」，嚴選來自知名產區的優質葡萄酒，單寧獨特、風味醇厚。酉時喝酒 YOU-SI 為您精選餐酒搭配佳釀。`;
+        break;
+      case 'spirits':
+        title = `${name} – 頂級烈酒、威士忌與琴酒選品 | 酉時喝酒 YOU-SI`;
+        description = `尋找層次豐富的烈酒？「${name}」帶給您純粹的品飲享受。酉時喝酒 YOU-SI 嚴選各國佳釀，滿足烈酒愛好者的挑剔味蕾。`;
+        break;
+      case 'mini':
+      case 'small-can':
+        title = `${name} – 輕巧小罐酒，隨時享受微醺 | 酉時喝酒 YOU-SI`;
+        description = `「${name}」小容量包裝設計，讓您隨時隨地輕鬆開罐！酉時喝酒小罐專區，提供多款風味酒類，適合露營、野餐或獨自小酌。`;
+        break;
+    }
+    return { title, description };
+  }
+
+  return {
+    openProduct: function(product, category) {
+      if (!product || !product.id) return;
+      const catKey = category || groupOf(product);
+      const seoData = getProductSEOTemplates(product, catKey);
+      const standardUrl = getNormalizedProductUrl(product.id, catKey);
+      
+      document.title = seoData.title;
+      setMetaTag('meta[name="description"]', 'content', seoData.description);
+      setMetaTag('meta[property="og:title"]', 'content', seoData.title);
+      setMetaTag('meta[property="og:description"]', 'content', seoData.description);
+      
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute('href', standardUrl);
+
+      history.pushState({ productId: product.id }, '', standardUrl);
+    },
+    closeProduct: function() {
+      document.title = originalMeta.title;
+      setMetaTag('meta[name="description"]', 'content', originalMeta.description);
+      setMetaTag('meta[property="og:title"]', 'content', originalMeta.ogTitle);
+      setMetaTag('meta[property="og:description"]', 'content', originalMeta.ogDescription);
+      
+      const canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical) canonical.setAttribute('href', originalMeta.canonical);
+      
+      history.pushState(null, '', originalMeta.url);
+    },
+    sanitizeLandingUrl: function(productId, category, delayMs = 2000) {
+      if (!productId) return;
+      const catKey = category || 'all';
+      const standardUrl = getNormalizedProductUrl(productId, catKey);
+      const currentUrl = window.location.href;
+
+      if (currentUrl !== standardUrl) {
+        setTimeout(() => {
+          history.replaceState({ productId: productId }, '', standardUrl);
+          console.log('[SEO] URL sanitized');
+        }, delayMs);
+      }
+    },
+    injectSchema: function(products, category = 'all') {
+      const schemaId = 'product-schema-jsonld';
+      const existingSchema = document.getElementById(schemaId);
+      if (existingSchema) existingSchema.remove();
+      if (!products || !Array.isArray(products) || products.length === 0) return;
+
+      const baseUrl = window.location.origin;
+      const path = `/products/${getCategoryPathSegment(category)}`;
+
+      const productSchemas = products.map((product) => {
+        const productUrl = `${baseUrl}${path}?item=${product.id}`;
+        const imageUrl = (product.imgs && product.imgs[0]) ? new URL(product.imgs[0], baseUrl).href : "";
+        
+        const schema = {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": product.name,
+          "image": imageUrl ? [imageUrl] : [],
+          "description": product.note?.oneLine || product.name,
+          "sku": product.id,
+          "brand": { "@type": "Brand", "name": product.brand || "酉時喝酒 YOU-SI" },
+          "offers": {
+            "@type": "Offer",
+            "url": productUrl,
+            "priceCurrency": "TWD",
+            "price": product.price,
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition"
+          }
+        };
+        if (product.rating && product.rating.value) {
+          schema.aggregateRating = {
+            "@type": "AggregateRating",
+            "ratingValue": product.rating.value,
+            "reviewCount": product.rating.count || 1
+          };
+        }
+        return schema;
+      });
+
+      const itemListSchema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": products.map((product, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "url": `${baseUrl}${path}?item=${product.id}`
+        }))
+      };
+
+      const finalSchema = {
+        "@context": "https://schema.org",
+        "@graph": [itemListSchema, ...productSchemas]
+      };
+
+      const script = document.createElement('script');
+      script.id = schemaId;
+      script.type = 'application/ld+json';
+      script.text = JSON.stringify(finalSchema);
+      document.head.appendChild(script);
+    }
+  };
+})();
 
 /* ===== 2. 路由與頁面工具 ===== */
 
@@ -280,23 +456,8 @@ function renderPrice(p){
 
 /** 產生 Schema.org JSON-LD 商品結構化資料，注入 <head>（SEO 用） */
 function injectProductSchema(list, title){
-  if(!Array.isArray(list) || list.length === 0) return;
-  const script = document.createElement("script");
-  script.type = "application/ld+json";
-  script.textContent = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": title,
-    "itemListElement": list.slice(0, 10).map((p, i) => ({
-      "@type": "Product",
-      "position": i + 1,
-      "name": p.name,
-      "brand": BRAND.name,
-      "offers": { "@type": "Offer", "priceCurrency": "TWD", "price": p.price,
-        "availability": "https://schema.org/InStock" }
-    }))
-  });
-  document.head.appendChild(script);
+  // 改由 SEOMonitor 統一處裡
+  SEOMonitor.injectSchema(list, document.body.dataset.category || 'all');
 }
 
 
@@ -367,6 +528,9 @@ function openProduct(id){
 
   box.style.display = "flex";
   document.body.classList.add("modal-open");
+  
+  // 觸發動態 SEO 與 URL 更新
+  SEOMonitor.openProduct(p, groupOf(p));
 }
 
 /** 關閉 lightbox / 商品 Modal，解除 body 捲動鎖定 */
@@ -374,6 +538,9 @@ function closeLightbox(){
   const box = document.getElementById("lightbox");
   if(box) box.style.display = "none";
   document.body.classList.remove("modal-open");
+  
+  // 還原頁面 SEO 與 URL 狀態
+  SEOMonitor.closeProduct();
 }
 
 /** 渲染酒造介紹區塊（需商品有 wineryId 且 wineries 資料已載入） */
@@ -1430,6 +1597,19 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }, { threshold: 0.15 });
     reveals.forEach(el => io.observe(el));
+  }
+
+  /* URL SEO 參數解析：自動開啟分享的商品 Modal */
+  const urlParams = new URLSearchParams(window.location.search);
+  const itemId = parseInt(urlParams.get('item'), 10);
+  if (itemId && !Number.isNaN(itemId)) {
+    const productData = products.find(p => p.id === itemId);
+    if(productData) {
+      // 延遲執行 URL 淨化以確保行銷追蹤不遺失
+      SEOMonitor.sanitizeLandingUrl(itemId, groupOf(productData), 2000);
+      // 自動開啟指定商品 Modal
+      openProduct(itemId);
+    }
   }
 
 });
