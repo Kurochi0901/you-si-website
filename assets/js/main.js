@@ -394,25 +394,46 @@ function renderWinery(id){
 
 let _currentImgIndex = 0; // 目前顯示的圖片索引（對應 window._currentProductImgs）
 
-/** 渲染商品圖片區域（含左右切換按鈕） */
+/** 渲染商品圖片區域（含左右切換按鈕與指示點） */
 function renderProductImages(imgs = [], name = ""){
   if(!imgs.length){
     return `<div class="product-gallery empty"><div class="product-img-empty">（尚未提供圖片）</div></div>`;
   }
+  
+  // 若只有一張圖，不顯示左右按鈕與點點
+  if(imgs.length === 1){
+    return `
+      <div class="product-gallery">
+        <img id="productImg" src="${imgs[0]}" alt="${name}">
+      </div>
+    `;
+  }
+
+  // 多張圖時正常顯示按鈕與下方點點指示器
   return `
     <div class="product-gallery">
-      <button class="img-btn left" onclick="prevProductImg()">‹</button>
+      <button class="img-btn left" aria-label="上一張" onclick="prevProductImg()">‹</button>
       <img id="productImg" src="${imgs[0]}" alt="${name}">
-      <button class="img-btn right" onclick="nextProductImg()">›</button>
+      <button class="img-btn right" aria-label="下一張" onclick="nextProductImg()">›</button>
+      <div class="gallery-dots">
+        ${imgs.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}" id="gallery-dot-${i}"></span>`).join("")}
+      </div>
     </div>
   `;
 }
 
-/** 將 #productImg 切換為 _currentImgIndex 對應的圖片 */
+/** 將 #productImg 切換為 _currentImgIndex 對應的圖片，並同步更新點點狀態 */
 function updateProductImg(){
   const img = document.getElementById("productImg");
   if(!img || !window._currentProductImgs.length) return;
   img.src = window._currentProductImgs[_currentImgIndex];
+  
+  const dots = document.querySelectorAll(".gallery-dots .dot");
+  if(dots.length > 0){
+    dots.forEach(d => d.classList.remove("active"));
+    const activeDot = document.getElementById(`gallery-dot-${_currentImgIndex}`);
+    if(activeDot) activeDot.classList.add("active");
+  }
 }
 
 function prevProductImg(){
@@ -506,7 +527,7 @@ function addToCart(id){
   const p = products.find(p => p.id === id);
   if(!p) return;
 
-  showCartToast(p.name, cart.find(x => x.id === id)?.qty || 1);
+  showCartToast(p, cart.find(x => x.id === id)?.qty || 1);
 
   // 促銷引導提示：距離下一個折扣還差幾件
   // 傳入剛加入的商品 id，只對「該商品屬於促銷白名單」的促銷顯示 toast
@@ -949,10 +970,9 @@ let toastTimer = null;
 
 /**
  * 加入購物車成功 Toast
- * 格式：「已加入購物車 / 數量: 商品名稱 × n」
- * 2 秒後自動消失
+ * 顯示圖片、名稱及目前購物車該品項總件數，2 秒後自動淡出
  */
-function showCartToast(productName, qty = 1){
+function showCartToast(product, currentQty){
   let toast = document.getElementById("cartToast");
   if(!toast){
     toast = document.createElement("div");
@@ -960,15 +980,24 @@ function showCartToast(productName, qty = 1){
     toast.className = "cart-toast";
     document.body.appendChild(toast);
   }
+  
+  // 萃取第一張圖做縮圖
+  const cover = (Array.isArray(product.imgs) && product.imgs.length > 0) ? product.imgs[0] : "";
+  
   toast.innerHTML = `
-    <div class="cart-toast-inner">
+    <div class="cart-toast-inner" style="display:flex; align-items:center; gap:12px;">
+      ${cover ? `<div class="cart-toast-img" style="width:40px; height:40px; flex-shrink:0; background:#fff; border-radius:8px; overflow:hidden;"><img src="${cover}" alt="${product.name}" style="width:100%; height:100%; object-fit:contain;"></div>` : ""}
       <div class="cart-toast-text">
-        <div class="title">已加入購物車</div>
-        <div class="desc">數量: ${productName} × ${qty}</div>
+        <div class="title" style="font-size:14px; font-weight:600;">已加入購物車</div>
+        <div class="desc" style="font-size:12px; opacity:0.85; margin-top:2px;">
+          ${product.name} (共 ${currentQty} 件)
+        </div>
       </div>
     </div>
   `;
+  
   toast.classList.add("show");
+  
   if(toastTimer) clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 2000);
 }
