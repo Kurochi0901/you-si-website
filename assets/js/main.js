@@ -29,13 +29,16 @@ const SCALE_MAX = 5;
 
 /* ===== 1.5 SEO 管理器 ===== */
 const SEOMonitor = (function() {
+  // 1. 先取得不包含參數 (?item=...) 的純淨網址，避免使用者直接帶參數落地時，關閉 Modal 無法退回列表
+  const baseUrlWithoutQuery = window.location.origin + window.location.pathname;
+
   const originalMeta = {
     title: document.title,
     description: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
     ogTitle: document.querySelector('meta[property="og:title"]')?.getAttribute('content') || '',
     ogDescription: document.querySelector('meta[property="og:description"]')?.getAttribute('content') || '',
-    canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') || window.location.href,
-    url: window.location.href
+    canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') || baseUrlWithoutQuery,
+    url: baseUrlWithoutQuery
   };
 
   function setMetaTag(selector, attribute, value) {
@@ -426,15 +429,23 @@ function renderGrid(list, id){
   if(!box) return;
   box.innerHTML = list.map(p => {
     const cover = Array.isArray(p.imgs) ? p.imgs[0] : "";
+    
+    // 產生真實 SEO URL，供爬蟲抓取
+    const internalCat = groupOf(p);
+    const pathSegment = internalCat === "fruittea" ? "fruit-tea" : internalCat;
+    const catPath = pathSegment === "all" ? "" : `${pathSegment}/`;
+    const productUrl = `/products/${catPath}?item=${p.id}`;
+
     return `
       <div class="card">
         <div class="card-media">
-          <img src="${cover}" alt="${p.name}" loading="lazy" decoding="async"
-            onclick="openProduct(${p.id})" style="cursor:pointer">
+          <a href="${productUrl}" onclick="event.preventDefault(); openProduct(${p.id})">
+            <img src="${cover}" alt="${p.name}" loading="lazy" decoding="async">
+          </a>
         </div>
         <div class="card-body">
           <div class="card-tag-row">${renderPriorityBadge(p)}</div>
-          <div class="name" onclick="openProduct(${p.id})" style="cursor:pointer">${p.name}</div>
+          <a href="${productUrl}" class="name" onclick="event.preventDefault(); openProduct(${p.id})" style="display:block; text-decoration:none;">${p.name}</a>
           <div class="spec">${p.spec || ""}</div>
           <div class="card-meta">
             <div class="price-wrap">${renderPrice(p)}</div>

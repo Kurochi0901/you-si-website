@@ -8,6 +8,7 @@ convert.js
 replace-cdn.js
 upload-new-products.js
 refactor-imgs.js
+update-seo.js
 
 # 備份檔
 *.backup
