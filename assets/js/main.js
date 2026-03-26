@@ -417,6 +417,19 @@ function applyFilters(){
  * priority 4 → 「推薦」暖金 badge
  * 其餘 → 空字串
  */
+/**
+ * 智慧縮圖輔助函式：針對 Cloudinary URL 注入轉型參數
+ * @param {string} url - 原始 URL
+ * @param {string} params - Cloudinary 參數 (例如 'w_400,h_500,c_fill')
+ */
+function optimizeImgUrl(url, params) {
+  if (!url || !url.includes("cloudinary.com")) return url;
+  if (url.includes("/upload/")) {
+    return url.replace("/upload/", `/upload/${params}/`);
+  }
+  return url;
+}
+
 function renderPriorityBadge(p){
   const pr = getPriority(p);
   if(pr === 5) return `<span class="name-tag name-tag--5">✦ 店長精選</span>`;
@@ -428,9 +441,12 @@ function renderGrid(list, id){
   const box = document.getElementById(id);
   if(!box) return;
   box.innerHTML = list.map((p, index) => {
-    const cover = Array.isArray(p.imgs) ? p.imgs[0] : "";
+    let cover = Array.isArray(p.imgs) ? p.imgs[0] : "";
     const isAboveFold = index < 5;
     
+    // 列表頁使用縮圖 (c_limit 避免被裁切)
+    cover = optimizeImgUrl(cover, "w_500,h_600,c_limit");
+
     // 產生真實 SEO URL，供爬蟲抓取
     const internalCat = groupOf(p);
     const pathSegment = internalCat === "fruittea" ? "fruit-tea" : internalCat;

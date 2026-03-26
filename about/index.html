@@ -5,12 +5,17 @@
   <title>關於｜酉時喝酒 YOU-SI</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="酉時喝酒｜品牌故事、選品理念、如何訂購。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/assets/css/style.css">
-  <script src="/assets/js/products.data.js"></script>
-  <script src="/assets/js/events.data.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <script defer src="/assets/js/products.data.js"></script>
+  <script defer src="/assets/js/events.data.js"></script>
   <script defer src="/assets/js/main.js"></script>
-<script src="/assets/js/announcement_data.js"></script>
+  <script defer src="/assets/js/announcement_data.js"></script>
   <script type="module" src="/assets/js/promotions.bridge.js"></script>
   <style>
     /* ════════════════════════════════════════
@@ -375,6 +380,7 @@
 
 <!-- ✅ 公告輪播邏輯 -->
 <script>
+document.addEventListener("DOMContentLoaded", function () {
 (function () {
   if (typeof announcements === "undefined" || !announcements.length) return;
 
@@ -407,6 +413,7 @@
     items[current].classList.add("is-active");
   }, 5000);
 })();
+});
 </script>  <!-- Lightbox -->
   <div id="lightbox" class="lightbox">
     <img id="lightbox-img">

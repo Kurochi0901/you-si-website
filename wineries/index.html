@@ -4,14 +4,19 @@
   <meta charset="UTF-8" />
   <title>酒莊・酒造品牌｜酉時喝酒 YOU-SI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
   <link rel="icon" href="/favicon.ico?v=20260123" type="image/x-icon">
   <link rel="shortcut icon" href="/favicon.ico?v=20260123" type="image/x-icon">
   <link rel="stylesheet" href="/assets/css/style.css" />
   <link rel="stylesheet" href="/assets/css/wineries.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 
   <!-- ✅ 資料檔優先載入，確保變數在 script 執行前就存在 -->
-  <script src="/assets/js/announcement_data.js"></script>
-  <script src="/assets/js/wineries.data.js"></script>
+  <script defer src="/assets/js/announcement_data.js"></script>
+  <script defer src="/assets/js/wineries.data.js"></script>
 </head>
 
 <body onload="ageCheck()">
@@ -70,10 +75,11 @@
   </div>
 
   <!-- ✅ 共用 JS -->
-  <script src="/assets/js/main.js"></script>
+  <script defer src="/assets/js/main.js"></script>
 
   <!-- ✅ 渲染酒造列表 -->
   <script>
+    document.addEventListener("DOMContentLoaded", function () {
     (function renderWineries() {
       const list = document.getElementById("wineryList");
       if (!list) return;
@@ -108,10 +114,12 @@
         list.appendChild(el);
       });
     })();
+    });
   </script>
 
   <!-- ✅ 公告輪播邏輯 -->
   <script>
+    document.addEventListener("DOMContentLoaded", function () {
     (function () {
       if (typeof announcements === "undefined" || !announcements.length) return;
 
@@ -141,6 +149,7 @@
         items[current].classList.add("is-active");
       }, 5000);
     })();
+    });
   </script>
 
 </body>
