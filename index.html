@@ -17,10 +17,15 @@
 <meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_1200,h_630,c_fill,f_jpg,q_auto/%E9%85%89%E6%99%82%E5%B0%81%E9%9D%A2.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="preload" as="image" href="https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/LINE_ALBUM_果實酒茶酒_251205_1.webp" fetchpriority="high">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/assets/css/style.css">
-<script src="/assets/js/products.data.js"></script>
-<script src="/assets/js/events.data.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script defer src="/assets/js/products.data.js"></script>
+<script defer src="/assets/js/events.data.js"></script>
 
 <!-- ✅ 首頁「本月精選」手動指定：填 products.data.js 裡的商品 id -->
 <script>
@@ -29,7 +34,7 @@
   // window.HOME_FEATURED_IDS = [19, 21, 31, 25, 11, 29];
 </script>
 <script defer src="/assets/js/main.js"></script>
-<script src="/assets/js/announcement_data.js"></script>
+<script defer src="/assets/js/announcement_data.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
 
 <!-- ✅ 品牌 Organization Schema -->
@@ -236,7 +241,7 @@
 
 <!-- ✅ 公告輪播邏輯 -->
 <script>
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
   if (typeof announcements === "undefined" || !announcements.length) return;
 
   const bar   = document.getElementById("announceBar");
@@ -267,7 +272,7 @@
     current = (current + 1) % items.length;
     items[current].classList.add("is-active");
   }, 5000);
-})();
+});
 </script>
 
 </body>

@@ -22,7 +22,7 @@ const SHIPPING_FEE_ROOM       = 170;  // 常溫運費
 const SHIPPING_FEE_COLD       = 230;  // 冷藏運費
 
 // 商品分類顯示順序（總覽頁排序用）
-const CATEGORY_ORDER = ["sake", "fruit-tea", "wine", "spirits", "mini"];
+const CATEGORY_ORDER = ["fruit-tea", "sake",  "wine", "spirits", "mini"];
 
 // 風味刻度格數（1~5）
 const SCALE_MAX = 5;
@@ -427,8 +427,9 @@ function renderPriorityBadge(p){
 function renderGrid(list, id){
   const box = document.getElementById(id);
   if(!box) return;
-  box.innerHTML = list.map(p => {
+  box.innerHTML = list.map((p, index) => {
     const cover = Array.isArray(p.imgs) ? p.imgs[0] : "";
+    const isAboveFold = index < 5;
     
     // 產生真實 SEO URL，供爬蟲抓取
     const internalCat = groupOf(p);
@@ -440,7 +441,7 @@ function renderGrid(list, id){
       <div class="card">
         <div class="card-media">
           <a href="${productUrl}" onclick="event.preventDefault(); openProduct(${p.id})">
-            <img src="${cover}" alt="${p.name}" loading="lazy" decoding="async">
+            <img src="${cover}" alt="${p.name}" width="400" height="500" loading="${isAboveFold ? 'eager' : 'lazy'}" decoding="${isAboveFold ? 'sync' : 'async'}" ${isAboveFold ? 'fetchpriority="high"' : ''}>
           </a>
         </div>
         <div class="card-body">
