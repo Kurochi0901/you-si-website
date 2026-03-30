@@ -1459,19 +1459,18 @@ function renderEvents(){
   const upcoming = events
     .filter(e => e.status === "upcoming")
     .map(e => ({ ...e, _dt: parseDate(e.date) }))
-    .sort((a, b) => (a._dt?.getTime()||0) - (b._dt?.getTime()||0));
+    .sort((a, b) => (b._dt?.getTime()||0) - (a._dt?.getTime()||0));
 
   const ended = events
     .filter(e => e.status === "ended")
     .map(e => ({ ...e, _dt: parseDate(e.date) }))
     .sort((a, b) => (b._dt?.getTime()||0) - (a._dt?.getTime()||0)); // 最近的在上
 
-  // 即將舉行：只顯示最近一場
+  // 即將舉行：顯示所有活動
   if(upcoming.length === 0){
     upBox.innerHTML = `<div class="mono">目前沒有即將舉行的活動。</div>`;
   }else{
-    const e = upcoming[0];
-    upBox.innerHTML = `
+    upBox.innerHTML = upcoming.map(e => `
       <div class="event-up-card">
         <div class="event-up-media">
           <img src="${e.cover || fallbackCover}" alt="${e.title}" loading="lazy" decoding="async">
@@ -1492,7 +1491,7 @@ function renderEvents(){
         </div>
         </div>
       </div>
-    `;
+    `).join("");
   }
 
   // 過往活動：依年份分組

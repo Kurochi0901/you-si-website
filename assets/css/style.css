@@ -1809,6 +1809,10 @@ a.panel .btn{
   box-shadow: var(--shadow2);
 }
 
+.event-up-card + .event-up-card {
+  margin-top: 24px;
+}
+
 /* 左側圖片 */
 .event-up-media{
   flex:0 0 auto;
