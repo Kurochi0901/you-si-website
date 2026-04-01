@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>商品分類｜清酒・果實酒・茶酒・葡萄酒｜酉時喝酒</title>
+<link rel="canonical" href="https://you-si-website.vercel.app/products/">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="酉時喝酒商品一覽：清酒、果實酒、茶酒、葡萄酒。可搜尋酒名、篩選價格，加入購物車後一鍵送出訂單。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +19,24 @@
 <script defer src="/assets/js/main.js"></script>
 <script defer src="/assets/js/announcement_data.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
+<!-- ✅ 階層導覽 Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "首頁",
+    "item": "https://you-si-website.vercel.app/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "商品分類",
+    "item": "https://you-si-website.vercel.app/products/"
+  }]
+}
+</script>
 
 </head>
 <body onload="ageCheck()">

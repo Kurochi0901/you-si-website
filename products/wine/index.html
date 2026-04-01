@@ -2,9 +2,10 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<title>葡萄酒｜酉時喝酒 YOU-SI</title>
+<title>葡萄酒選購：清爽易飲的白酒、紅酒與氣泡酒推薦｜酉時喝酒 YOU-SI</title>
+<link rel="canonical" href="https://you-si-website.vercel.app/products/wine/">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="酉時喝酒葡萄酒選品：白酒、紅酒、氣泡酒。點圖片可放大，點酒名可看風味說明。">
+<meta name="description" content="探索酉時喝酒 YOU-SI 精選葡萄酒：涵蓋白酒、紅酒與氣泡酒，風格清爽、適合搭餐分享。線上瀏覽詳細風味說明，簡單加入購物車並預約台北或新竹自取，讓日常品飲變得更輕鬆美好。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
@@ -14,10 +15,34 @@
 
 
 <script defer src="/assets/js/products.data.js"></script>
+<script defer src="/assets/js/wineries.data.js"></script>
 <script defer src="/assets/js/events.data.js"></script>
 <script defer src="/assets/js/main.js"></script>
 <script defer src="/assets/js/announcement_data.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
+<!-- ✅ 階層導覽 Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "首頁",
+    "item": "https://you-si-website.vercel.app/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "商品分類",
+    "item": "https://you-si-website.vercel.app/products/"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "葡萄酒",
+    "item": "https://you-si-website.vercel.app/products/wine/"
+  }]
+}
+</script>
 
 </head>
 <body onload="ageCheck()">
@@ -50,6 +75,7 @@
       這裡的葡萄酒，以「好搭餐、好分享」為出發點。
       白酒、紅酒與氣泡酒，風格清爽、不複雜，
       不需要研究產區或年份，也能安心選到一瓶適合餐桌的酒。
+      瞭解更多我們的<a href="/about/">選品理念</a>。
     </p>
     
     <div id="productGrid" class="grid" style="margin-top:18px;"></div>
@@ -58,21 +84,76 @@
 <footer class="footer">
   <div class="footer-inner">
 
-    <div>
-      <strong>酉時喝酒 YOU-SI</strong><br>
-      <small>
-        🏠 門市資訊：台北市士林區士商路169號<br>
-        🛍️ 辦公室取酒：新竹縣竹北市光明十街87號
-      </small>
+    <!-- 左側：品牌資訊 -->
+    <div class="footer-info">
+      <div>📦  取貨地點：</div>
+      <div>🏠 台北｜大安郵局前（建國信義路口處）</div>
+      <div>🏠 新竹｜竹北市光明十街（深耕公園）</div>
     </div>
 
-    <div class="footer-links">
-      <a class="btn" data-line-link href="#">加入 LINE（@008jcfgc）</a>
-      <a class="btn" data-ig-link href="#" target="_blank">Instagram</a>
+    <!-- 右側：整組 QR -->
+    <div class="footer-right">
+      <div class="footer-qr">
+        <img class="line-qr-img" alt="加入 LINE">
+        <div class="qr-label">
+          Line 
+          <span class="qr-sub">領取專屬優惠</span>
+        </div>
+      </div>
+
+      <div class="footer-qr">
+        <img class="ig-qr-img" alt="Instagram">
+        <div class="qr-label">Instagram yousi1719_drink</div>
+      </div>
     </div>
 
   </div>
 </footer>
+
+<!-- ✅ 飲酒警語固定底部 -->
+<div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+  <span class="alcohol-bar-text">
+    🍶 未滿十八歲請勿飲酒
+    <span class="alcohol-bar-divider" aria-hidden="true"></span>
+    酒後不開車，安心享受微醺時刻
+  </span>
+</div>
+
+<!-- ✅ 公告輪播邏輯 -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (typeof announcements === "undefined" || !announcements.length) return;
+
+  const bar   = document.getElementById("announceBar");
+  const track = document.getElementById("announceTrack");
+  if (!bar || !track) return;
+
+  // 建立各則公告 DOM
+  announcements.forEach(function (item, i) {
+    const el = document.createElement("div");
+    el.className = "announce-item" + (i === 0 ? " is-active" : "");
+    el.innerHTML = item.link
+      ? '<a href="' + item.link + '">' + item.text + "</a>"
+      : item.text;
+    track.appendChild(el);
+  });
+
+  // 顯示公告條，讓 header 下移
+  bar.classList.remove("announce-hidden");
+  document.body.classList.add("has-announce");
+
+  // 單則不需輪播
+  if (announcements.length === 1) return;
+
+  let current = 0;
+  setInterval(function () {
+    const items = track.querySelectorAll(".announce-item");
+    items[current].classList.remove("is-active");
+    current = (current + 1) % items.length;
+    items[current].classList.add("is-active");
+  }, 5000);
+});
+</script>
 
 
 <div id="lightbox" class="lightbox">

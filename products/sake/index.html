@@ -2,9 +2,10 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<title>清酒｜酉時喝酒 YOU-SI</title>
+<title>日本清酒選購：純米大吟釀、吟釀與限定酒款推薦｜酉時喝酒 YOU-SI</title>
+<link rel="canonical" href="https://you-si-website.vercel.app/products/sake/">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="酉時喝酒清酒選品：純米、吟釀、限定款。點圖片可放大，點酒名可看風味說明與甜辛刻度。">
+<meta name="description" content="探索酉時喝酒 YOU-SI 專業清酒選品：從日常小酌到精選名柄，包含純米大吟釀、吟釀與季節限定款。提供詳細風味筆記與甜辛度參考。台北與新竹預約自取服務，讓您輕鬆選購最合心意的日本清酒。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
@@ -18,6 +19,29 @@
 <script defer src="/assets/js/main.js"></script>
 <script defer src="/assets/js/announcement_data.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
+<!-- ✅ 階層導覽 Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "首頁",
+    "item": "https://you-si-website.vercel.app/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "商品分類",
+    "item": "https://you-si-website.vercel.app/products/"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "清酒",
+    "item": "https://you-si-website.vercel.app/products/sake/"
+  }]
+}
+</script>
 
 </head>
 <body onload="ageCheck()">
@@ -49,7 +73,7 @@
     <p>
       我們挑選的清酒，重視的是「好喝」與「耐喝」。
       從日常可以輕鬆開瓶的小酌款，到值得細細品味的限定酒，
-      不需要懂太多術語，也能找到適合自己的一支清酒。
+      不需要懂太多術語，也能在我們的<a href="/about/">清酒選品</a>中找到適合自己的一支。
     </p>
     <div id="productGrid" class="grid" style="margin-top:18px;"></div>
   </main>
@@ -123,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const items = track.querySelectorAll(".announce-item");
     items[current].classList.remove("is-active");
     current = (current + 1) % items.length;
-    items[current].add("is-active");
+    items[current].classList.add("is-active");
   }, 5000);
 })();
 });
