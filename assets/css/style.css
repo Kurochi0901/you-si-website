@@ -2293,6 +2293,7 @@ body.modal-open{ overflow:hidden; }
   /* 2) 卡片改成「左圖右文」水平排列 */
   .card{
     display: flex;
+    flex-direction: row;               /* 👈 關鍵：由垂直改為水平 */
     align-items: stretch;
     gap: 12px;
 
@@ -2310,11 +2311,11 @@ body.modal-open{ overflow:hidden; }
 
   /* 3) 圖片區固定寬度（就算沒圖也不會撐爆高度） */
   .card-media{
-    flex: 0 0 112px;                  /* 左圖寬度 */
-    width: 112px;
+    flex: 0 0 120px;                  /* 略微加大寬度以符合截圖比例 */
+    width: 120px;
     aspect-ratio: 1 / 1;              /* momo 常見：方形縮圖 */
     border-radius: 14px;
-    margin: 10px 0 10px 10px;         /* 讓卡片內縮有呼吸感 */
+    margin: 10px;                     /* 簡化 margin，保持四周間距 */
     background: #fff;
     border: 1px solid rgba(0,0,0,.06);
   }
@@ -2401,8 +2402,8 @@ body.modal-open{ overflow:hidden; }
 /* 超小螢幕再緊湊一點 */
 @media (max-width: 360px){
   .card-media{
-    flex-basis: 96px;
-    width: 96px;
+    flex-basis: 100px;
+    width: 100px;
   }
   .btn-add{
     padding: 8px 10px;
