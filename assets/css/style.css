@@ -194,6 +194,8 @@ p{ color:var(--muted); line-height:1.9; margin:10px 0; }
   overflow:hidden;
   box-shadow:var(--shadow2);
   transition:.28s ease;
+  display: flex;
+  flex-direction: column;
 }
 .card:hover{
   transform:translateY(-6px);
@@ -229,11 +231,17 @@ p{ color:var(--muted); line-height:1.9; margin:10px 0; }
   color:#5e412a;
 }
 
-.card-body{ padding:14px 14px 16px; }
+.card-body{ 
+  padding:14px 14px 16px; 
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 .name{ font-weight:700; letter-spacing:.02em; font-size:16px; }
 .spec{ margin-top:6px; font-size:13px; color:var(--muted); line-height:1.6; }
 .card-meta{
-  margin-top:12px;
+  margin-top: auto;
+  padding-top: 12px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -1870,6 +1878,7 @@ a.panel .btn{
 
   display:-webkit-box;
   -webkit-line-clamp:3;
+  line-clamp:3;
   -webkit-box-orient:vertical;
   overflow:hidden;
 }
@@ -2334,6 +2343,7 @@ body.modal-open{ overflow:hidden; }
 
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -2759,6 +2769,7 @@ body {
   .event-note-text{
     display:-webkit-box;
     -webkit-line-clamp:3;
+    line-clamp:3;
     -webkit-box-orient:vertical;
     overflow:hidden;
     transition:none;
