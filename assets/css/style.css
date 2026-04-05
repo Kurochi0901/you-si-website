@@ -1902,7 +1902,7 @@ a.panel .btn{
 
 /* CTA */
 .event-up-actions{
-  margin-top:auto;
+  margin-top: 18px;                    /* 👈 增加桌機版與標籤間的距離 */
 }
 
 /* ======================================================
@@ -2021,40 +2021,113 @@ a.panel .btn{
    ====================================================== */
 
 @media (max-width: 860px){
+  /* 1. 即將舉行卡片 */
   .event-up-card{
     flex-direction:column;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.04);
   }
 
   .event-up-media{
     width:100%;
     max-width:none;
     min-width:unset;
-    height:200px;
+    height:auto;
+    aspect-ratio: 16 / 9;
+    padding: 10px;
+    background: #faf7f4;
   }
 
   .event-up-media img{
-    width:100%;
-    height:100%;
-    max-width:none;
-    object-fit:cover;
+    object-fit: contain;
+    border-radius: 8px;
   }
 
   .event-up-body{
-    padding:16px;
+    padding: 18px 16px;
   }
 
+  .event-up-name{
+    font-size: 19px;
+    margin: 4px 0 10px;
+    line-height: 1.4;
+  }
+
+  /* 2. 過往活動 - 行動端 V4 精緻微縮圖佈局 */
   .event-timeline{
-    margin-left:18px;
-    padding-left:14px;
+    border-left: none;
+    margin-left: 0;
+    padding-left: 0;
   }
 
   .event-row{
-    grid-template-columns:56px 1fr;
+    display: block;                    /* 👈 清除 grid，由內部 flex 控制 */
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(0,0,0,.03);
+  }
+
+  .event-row::before{
+    display: none;
   }
 
   .event-date-pill{
-    width:56px;
-    height:56px;
+    display: none;
+  }
+
+  .event-item{
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 8px;                   /* 👈 與上方手機版日期拉開距離 */
+  }
+
+  .event-mobile-meta{
+    display: flex !important;          /* 👈 強制解鎖顯示 */
+    gap: 12px;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: .08em;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,.04);
+    margin-bottom: 12px;
+  }
+
+  .event-mobile-meta .m-time{
+    opacity: 0.7;
+    font-weight: 400;
+  }
+
+  .event-thumb{
+    display: block !important;         /* 👈 強制顯示縮圖 */
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.05);
+  }
+
+  /* 移除殘餘設定 */
+  .event-mobile-date{
+     display: none;
+  }
+
+  .event-title-line{
+    font-size: 16.5px;
+    margin-bottom: 6px;
+    line-height: 1.45;
+  }
+
+  .event-sub{
+    font-size: 13px;
+    opacity: 0.8;
+  }
+
+  /* 增加近期活動的細節間距 */
+  .event-up-tags{
+    margin-bottom: 14px;               /* 👈 增加標籤與按鈕間的空隙 */
   }
 }
 
@@ -2321,7 +2394,7 @@ body.modal-open{ overflow:hidden; }
   }
 
   .card-media img{
-    object-fit: cover;                /* 有圖時更像電商縮圖 */
+    object-fit: contain;               /* 👈 改為 contain 以避免所有比例的圖片被裁切 */
     cursor: pointer;
   }
 
@@ -2692,13 +2765,13 @@ body {
   display:inline-flex;
   align-items:center;
   gap:10px;
-  background:transparent;
-  color:#3d2910;
-  border:1px solid #b08a5a;
-  border-radius:5px;
-  padding:11px 22px;
-  font-size:13px;
-  font-weight:700;
+  background:linear-gradient(90deg, var(--accent), var(--accent2));
+  color:#fff;
+  border:none;
+  border-radius:999px;
+  padding:8px 20px;                    /* 👈 V3：極微型膠囊，更精緻 */
+  font-size:12.5px;
+  font-weight:600;                     /* 👈 輕量化字重 */
   letter-spacing:.1em;
   text-decoration:none;
   cursor:pointer;
@@ -2752,19 +2825,16 @@ body {
   border-color:#8a6a3a;
   color:#7a5a30;
 }
-/* ===== 活動描述展開/收起 ===== */
-.event-note-wrap{
-  position:relative;
-  margin:10px 0 0;
-}
-
-.event-note-text{
-  margin:0;
+/* 預設隱藏 */
+.event-mobile-meta{
+  display:none;
 }
 
 .event-note-toggle{
   display:none;
 }
+
+/* ===== 活動描述展開/收起 ===== */
 
 @media (max-width:860px){
   .event-note-text{
@@ -2777,17 +2847,19 @@ body {
   }
 
   .event-note-wrap.is-open .event-note-text{
-    display:block;
-    overflow:visible;
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: none !important; /* 👈 強制解鎖限制 */
+    line-clamp: none !important;
   }
 
   .event-note-toggle{
     display:inline-flex;
     align-items:center;
-    margin-top:6px;
+    margin-top:8px;
     background:none;
     border:none;
-    padding:0;
+    padding:4px 0;                    /* 增大點擊範圍 */
     font-size:12px;
     color:var(--accent);
     font-weight:700;

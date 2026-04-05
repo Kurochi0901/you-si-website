@@ -1519,6 +1519,10 @@ function renderEvents(){
                 <div class="m">${e._dt ? fmtMonth(e._dt) : ""}</div>
                 <div class="d">${e._dt ? String(e._dt.getDate()).padStart(2,"0") : ""}</div>
               </div>
+              <div class="event-mobile-meta">
+                <span class="m-date">${e.date}</span>
+                <span class="m-time">${e.time || ""}</span>
+              </div>
               <div class="event-item">
                 <div class="event-thumb">
                   <img src="${e.cover || fallbackCover}" alt="${e.title}" loading="lazy" decoding="async">
