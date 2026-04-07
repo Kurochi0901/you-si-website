@@ -17,40 +17,89 @@
 export const PROMOTIONS = [
 
   /* =============================
-     梅侍系列 任選 3 件 95 折
-     ✏️  要調整哪幾瓶參與，改 targetIds 即可
+     慶祝官網上架：滿 3 瓶全面 9 折
   ============================= */
   {
-    id: "plumate-3-95",
-    type: "combo-ids",
-    stackable: false,
+    id: "grand-opening-3-90",
+    type: "quantity",
+    stackable: false, // 與其他不可疊加優惠擇優
 
-    label: "梅侍系列 任選 3 件 95 折",
-    description: "指定梅侍商品任選 3 件（含）以上，該商品小計享 95 折",
+    label: "慶祝官網上架：滿 3 瓶全面 9 折",
+    description: "全站商品任選 3 件（含）以上，總金額享 9 折優惠",
 
-    // ✏️ 在這裡填入要參與折扣的商品 id
-    targetIds: [1, 2, 3, 4, 8, 9],
-
-    // ✏️ 幾件以上觸發
     hint: {
-      kind: "combo-ids",
+      kind: "quantity",
       minQty: 3
     },
 
     condition(ctx) {
-      const qty = ctx.items
-        .filter(p => this.targetIds.includes(p.id))
-        .reduce((s, p) => s + p.qty, 0);
-      return qty >= 3;
+      return ctx.totalQty >= 3;
     },
 
     apply(ctx) {
-      const sub = ctx.items
-        .filter(p => this.targetIds.includes(p.id))
-        .reduce((s, p) => s + p.price * p.qty, 0);
-      return Math.round(sub * 0.05); // 95折 = 折抵 5%
+      // 全面 9 折 = 折抵 10%
+      return Math.round(ctx.subtotal * 0.1);
     }
   },
+
+  /* =============================
+     滿 2800 送日本開運御守
+  ============================= */
+  {
+    id: "lucky-charm-2800",
+    type: "flag",
+    stackable: true, // 可與其他優惠疊加（因為是送贈品）
+
+    label: "滿 NT$2,800 送日本開運御守（數量有限，送完為止）",
+    description: "下單滿 NT$2,800 即贈送「日本開運御守」乙個（數量有限，送完為止）",
+
+    condition(ctx) {
+
+      return ctx.subtotal >= 2800;
+    },
+
+    apply(ctx) {
+      // 贈品不影響金額，回傳 0
+      return 0;
+    }
+  },
+
+
+  /* =============================
+     梅侍系列 任選 3 件 95 折
+     ✏️  要調整哪幾瓶參與，改 targetIds 即可
+  ============================= */
+  // {
+  //   id: "plumate-3-95",
+  //   type: "combo-ids",
+  //   stackable: false,
+
+  //   label: "梅侍系列 任選 3 件 95 折",
+  //   description: "指定梅侍商品任選 3 件（含）以上，該商品小計享 95 折",
+
+  //   // ✏️ 在這裡填入要參與折扣的商品 id
+  //   targetIds: [1, 2, 3, 4, 8, 9],
+
+  //   // ✏️ 幾件以上觸發
+  //   hint: {
+  //     kind: "combo-ids",
+  //     minQty: 3
+  //   },
+
+  //   condition(ctx) {
+  //     const qty = ctx.items
+  //       .filter(p => this.targetIds.includes(p.id))
+  //       .reduce((s, p) => s + p.qty, 0);
+  //     return qty >= 3;
+  //   },
+
+  //   apply(ctx) {
+  //     const sub = ctx.items
+  //       .filter(p => this.targetIds.includes(p.id))
+  //       .reduce((s, p) => s + p.price * p.qty, 0);
+  //     return Math.round(sub * 0.05); // 95折 = 折抵 5%
+  //   }
+  // },
 
   /* =============================
      ✏️ 範例：天吹系列 任選 2 件 95 折（目前關閉）

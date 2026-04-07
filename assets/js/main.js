@@ -1058,7 +1058,8 @@ function applyPromotions(ctx){
   PROMOTIONS.filter(p => p.stackable).forEach(p => {
     if(p.condition(ctx)){
       const discount = p.apply(ctx);
-      if(discount > 0){ total -= discount; discountTotal += discount; applied.push({ id: p.id, label: p.label, amount: discount }); }
+      total -= discount; discountTotal += discount; 
+      applied.push({ id: p.id, label: p.label, amount: discount }); 
     }
   });
 
