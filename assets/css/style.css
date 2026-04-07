@@ -206,7 +206,7 @@ p{ color:var(--muted); line-height:1.9; margin:10px 0; }
   width:100%;
   aspect-ratio:4/5;
   overflow:hidden;
-  background:#fff;
+  background:#f6f3ee; /* 淺米色背景：作為圖片載入前的佔位符，減少視覺跳動 */
 }
 .card-media img{
   width:100%;
@@ -246,6 +246,23 @@ p{ color:var(--muted); line-height:1.9; margin:10px 0; }
   align-items:center;
   justify-content:space-between;
   gap:10px;
+}
+
+/* ===== Skeleton Loading (提高 FCP 評分) ===== */
+.skeleton{ pointer-events: none; }
+.skeleton .card-media{ background:#eee; position:relative; overflow:hidden; }
+.skeleton .card-media::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation:skeleton-shimmer 1.5s infinite;
+}
+.skeleton .name, .skeleton .spec{ 
+  background:#eee; height:16px; margin:8px 0; border-radius:4px; width:80%;
+}
+.skeleton .spec{ width:60%; }
+@keyframes skeleton-shimmer{
+  0%{ transform:translateX(-100%); }
+  100%{ transform:translateX(100%); }
 }
 .price{ font-weight:800; }
 .btn-add{

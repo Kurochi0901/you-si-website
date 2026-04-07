@@ -445,14 +445,19 @@ function renderPriorityBadge(p){
 function renderGrid(list, id){
   const box = document.getElementById(id);
   if(!box) return;
+
   box.innerHTML = list.map((p, index) => {
     let cover = Array.isArray(p.imgs) ? p.imgs[0] : "";
-    const isAboveFold = index < 5;
     
-    // 列表頁使用縮圖 (c_limit 避免被裁切)
-    cover = optimizeImgUrl(cover, "w_500,h_600,c_limit");
+    // 效能優化核心：首屏 (前 5 名) 搶先下載，非首屏則延遲載入
+    const isAboveFold = index < 5;
+    const loading = isAboveFold ? "eager" : "lazy";
+    const decoding = isAboveFold ? "sync" : "async";
+    const priority = isAboveFold ? 'fetchpriority="high"' : '';
+    
+    // 列表頁使用縮圖 (手機端 400 寬度已足夠清晰，減少流量消耗)
+    cover = optimizeImgUrl(cover, "w_400,h_500,c_limit");
 
-    // 產生真實 SEO URL，供爬蟲抓取
     const internalCat = groupOf(p);
     const pathSegment = internalCat === "fruittea" ? "fruit-tea" : internalCat;
     const catPath = pathSegment === "all" ? "" : `${pathSegment}/`;
@@ -461,13 +466,13 @@ function renderGrid(list, id){
     return `
       <div class="card">
         <div class="card-media">
-          <a href="${productUrl}" onclick="event.preventDefault(); openProduct(${p.id})">
-            <img src="${cover}" alt="${p.name}" width="400" height="500" loading="${isAboveFold ? 'eager' : 'lazy'}" decoding="${isAboveFold ? 'sync' : 'async'}" ${isAboveFold ? 'fetchpriority="high"' : ''}>
+          <a href="${productUrl}" aria-label="查看 ${p.name}" onclick="event.preventDefault(); openProduct(${p.id})">
+            <img src="${cover}" alt="${p.name}" width="400" height="500" loading="${loading}" decoding="${decoding}" ${priority}>
           </a>
         </div>
         <div class="card-body">
           <div class="card-tag-row">${renderPriorityBadge(p)}</div>
-          <a href="${productUrl}" class="name" onclick="event.preventDefault(); openProduct(${p.id})" style="display:block; text-decoration:none;">${p.name}</a>
+          <a href="${productUrl}" class="name" onclick="event.preventDefault(); openProduct(${p.id})">${p.name}</a>
           <div class="spec">${p.spec || ""}</div>
           <div class="card-meta">
             <div class="price-wrap">${renderPrice(p)}</div>
