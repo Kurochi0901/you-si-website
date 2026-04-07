@@ -9,6 +9,7 @@ replace-cdn.js
 upload-new-products.js
 refactor-imgs.js
 update-seo.js
+fix-cls.js
 
 # 備份檔
 *.backup

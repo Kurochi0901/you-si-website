@@ -16,7 +16,8 @@
   <script defer src="/assets/js/products.data.js"></script>
   <script defer src="/assets/js/events.data.js"></script>
   <script defer src="/assets/js/main.js"></script>
-  <script defer src="/assets/js/announcement_data.js"></script>
+  <script src="/assets/js/announcement_data.js"></script>
+<script>if(typeof announcements!=="undefined"&&announcements.length>0)document.documentElement.classList.add("show-announce");</script>
   <script type="module" src="/assets/js/promotions.bridge.js"></script>
 
 <!-- ✅ 階層導覽 Breadcrumb Schema -->
@@ -300,7 +301,7 @@
 </head>
 <body onload="ageCheck()">
 <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
-<div class="announce-bar announce-hidden" id="announceBar" role="marquee" aria-live="polite">
+<div class="announce-bar" id="announceBar" role="marquee" aria-live="polite">
   <div class="announce-track" id="announceTrack"></div>
 </div>
 
@@ -449,8 +450,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // 顯示公告條，讓 header 下移
-  bar.classList.remove("announce-hidden");
-  document.body.classList.add("has-announce");
+  // bar.classList.remove("announce-hidden");
+  // document.body.classList.add("has-announce");
 
   // 單則不需輪播
   if (announcements.length === 1) return;

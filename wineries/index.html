@@ -15,14 +15,15 @@
 
 
   <!-- ✅ 資料檔優先載入，確保變數在 script 執行前就存在 -->
-  <script defer src="/assets/js/announcement_data.js"></script>
+  <script src="/assets/js/announcement_data.js"></script>
+<script>if(typeof announcements!=="undefined"&&announcements.length>0)document.documentElement.classList.add("show-announce");</script>
   <script defer src="/assets/js/wineries.data.js"></script>
 </head>
 
 <body onload="ageCheck()">
 
   <!-- ✅ 公告條 -->
-  <div class="announce-bar announce-hidden" id="announceBar" role="marquee" aria-live="polite">
+  <div class="announce-bar" id="announceBar" role="marquee" aria-live="polite">
     <div class="announce-track" id="announceTrack"></div>
   </div>
 
@@ -136,8 +137,8 @@
         track.appendChild(el);
       });
 
-      bar.classList.remove("announce-hidden");
-      document.body.classList.add("has-announce");
+      // bar.classList.remove("announce-hidden");
+      // document.body.classList.add("has-announce");
 
       if (announcements.length === 1) return;
 

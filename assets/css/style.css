@@ -938,6 +938,11 @@ nav a.active{
   backdrop-filter: blur(6px);
 }
 
+.cart-toast-text {
+  flex: 1;
+  min-width: 0;
+}
+
 .cart-toast-text .title {
   font-size: 14px;
   font-weight: 600;
@@ -946,6 +951,9 @@ nav a.active{
 .cart-toast-text .desc {
   font-size: 12px;
   opacity: 0.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 手機位置微調 */
@@ -955,6 +963,12 @@ nav a.active{
     right: auto;
     bottom: 106px; /* sticky-bar(~64px) + alcohol-bar(38px) */
     transform: translate(-50%, 10px);
+    width: max-content;
+    max-width: 90vw;
+  }
+  
+  .cart-toast-inner {
+    width: 100%;
   }
 
   .cart-toast.show {
@@ -1131,6 +1145,22 @@ nav a.active{
 .promo-toast.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .promo-toast {
+    left: 50%;
+    right: auto;
+    bottom: 178px; /* 避開 cart-toast */
+    transform: translate(-50%, 10px);
+    width: max-content;
+    max-width: 90vw;
+    text-align: center;
+  }
+
+  .promo-toast.show {
+    transform: translate(-50%, 0);
+  }
 }
 
 .gallery-btn{
@@ -2586,8 +2616,12 @@ body.modal-open{ overflow:hidden; }
 }
 
 /* 公告條隱藏時（無資料）不佔空間 */
-.announce-bar.announce-hidden {
-  display: none;
+.announce-bar {
+  display: none !important;
+}
+
+html.show-announce .announce-bar {
+  display: flex !important;
 }
 
 .announce-track {
@@ -2630,7 +2664,7 @@ body.modal-open{ overflow:hidden; }
 }
 
 /* header 有公告條時往下推 */
-body.has-announce .header-wrap {
+html.show-announce body .header-wrap {
   top: 36px;
 }
 
@@ -2687,7 +2721,7 @@ body {
     letter-spacing: .1em;
   }
 
-  body.has-announce .header-wrap {
+  html.show-announce body .header-wrap {
     top: 32px;
   }
 

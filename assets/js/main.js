@@ -604,7 +604,7 @@ function renderProductImages(imgs = [], name = ""){
   if(imgs.length === 1){
     return `
       <div class="product-gallery">
-        <img id="productImg" src="${imgs[0]}" alt="${name}">
+        <img id="productImg" src="${imgs[0]}" alt="${name}" width="500" height="600">
       </div>
     `;
   }
@@ -613,7 +613,7 @@ function renderProductImages(imgs = [], name = ""){
   return `
     <div class="product-gallery">
       <button class="img-btn left" aria-label="上一張" onclick="prevProductImg()">‹</button>
-      <img id="productImg" src="${imgs[0]}" alt="${name}">
+      <img id="productImg" src="${imgs[0]}" alt="${name}" width="500" height="600">
       <button class="img-btn right" aria-label="下一張" onclick="nextProductImg()">›</button>
       <div class="gallery-dots">
         ${imgs.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}" id="gallery-dot-${i}"></span>`).join("")}
