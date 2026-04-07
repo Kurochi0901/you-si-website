@@ -324,6 +324,11 @@ function _readAgeOk(){
 /** 頁面載入時檢查年齡驗證，未通過則跳轉至 /age/ */
 function ageCheck(){
   if(location.pathname.startsWith("/age")) return; // 驗證頁本身不攔截
+
+  // 允許爬蟲直接讀取內容，不觸發強迫跳轉（否則 Google 會以為每一頁都是年齡確認頁）
+  const isBot = /bot|googlebot|crawler|spider|robot|crawling|bingbot/i.test(navigator.userAgent);
+  if(isBot) return;
+
   if(!_readAgeOk()){
     const from = encodeURIComponent(location.pathname + location.search + location.hash);
     location.href = "/age/?from=" + from;
