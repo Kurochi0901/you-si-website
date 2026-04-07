@@ -38,8 +38,21 @@ const SEOMonitor = (function() {
     ogTitle: document.querySelector('meta[property="og:title"]')?.getAttribute('content') || '',
     ogDescription: document.querySelector('meta[property="og:description"]')?.getAttribute('content') || '',
     canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') || baseUrlWithoutQuery,
+    ogUrl: document.querySelector('meta[property="og:url"]')?.getAttribute('content') || baseUrlWithoutQuery,
     url: baseUrlWithoutQuery
   };
+
+  // 初始化時，如果 HTML 沒寫 canonical，主動補上（對 SEO 較好）
+  function _ensureInitialCanonical() {
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      canonical.setAttribute('href', originalMeta.canonical);
+      document.head.appendChild(canonical);
+    }
+  }
+  _ensureInitialCanonical();
 
   function setMetaTag(selector, attribute, value) {
     let element = document.querySelector(selector);
@@ -115,7 +128,10 @@ const SEOMonitor = (function() {
         canonical.setAttribute('rel', 'canonical');
         document.head.appendChild(canonical);
       }
-      canonical.setAttribute('href', standardUrl);
+      if (canonical) canonical.setAttribute('href', standardUrl);
+
+      // 同步更新 OG URL
+      setMetaTag('meta[property="og:url"]', 'content', standardUrl);
 
       history.pushState({ productId: product.id }, '', standardUrl);
     },
@@ -127,6 +143,8 @@ const SEOMonitor = (function() {
       
       const canonical = document.querySelector('link[rel="canonical"]');
       if (canonical) canonical.setAttribute('href', originalMeta.canonical);
+
+      setMetaTag('meta[property="og:url"]', 'content', originalMeta.ogUrl);
       
       history.pushState(null, '', originalMeta.url);
     },
@@ -326,7 +344,7 @@ function ageCheck(){
   if(location.pathname.startsWith("/age")) return; // 驗證頁本身不攔截
 
   // 允許爬蟲直接讀取內容，不觸發強迫跳轉（否則 Google 會以為每一頁都是年齡確認頁）
-  const isBot = /bot|googlebot|crawler|spider|robot|crawling|bingbot/i.test(navigator.userAgent);
+  const isBot = /bot|googlebot|crawler|spider|robot|crawling|bingbot|facebookexternalhit|baiduspider|yandexbot|slurp|applebot/i.test(navigator.userAgent);
   if(isBot) return;
 
   if(!_readAgeOk()){
