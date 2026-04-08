@@ -271,11 +271,22 @@ function toggleMenu(){
   document.querySelector("nav")?.classList.toggle("open");
 }
 
+// 點擊選單外部時自動關閉選單
+document.addEventListener("click", (e) => {
+  const nav = document.querySelector("nav");
+  const toggle = document.querySelector(".menu-toggle");
+  if(nav && nav.classList.contains("open")){
+    if(!nav.contains(e.target) && (!toggle || !toggle.contains(e.target))){
+      nav.classList.remove("open");
+    }
+  }
+});
+
 /** Hero 區域固定背景圖（單張，不輪播） */
 function initHeroBackground(){
   const el = document.querySelector(".hero-bg");
   if(!el) return;
-  el.style.backgroundImage = `url('https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/LINE_ALBUM_果實酒茶酒_251205_1.webp')`;
+  el.style.backgroundImage = `url('https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/banner.webp')`;
 }
 
 /** Fisher-Yates 隨機打亂陣列，回傳新陣列（不修改原陣列） */
