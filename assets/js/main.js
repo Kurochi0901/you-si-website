@@ -241,8 +241,6 @@ function pathKey(){
   if(p === "/products/" || p === "/products/index.html") return "products";
   if(p.startsWith("/products/sake"))                   return "products-sake";
   if(p.startsWith("/products/fruit-tea"))              return "products-fruittea";
-  if(p.startsWith("/products/fruit"))                  return "products-fruittea"; // 舊路徑相容
-  if(p.startsWith("/products/tea"))                    return "products-fruittea"; // 舊路徑相容
   if(p.startsWith("/products/wine"))                   return "products-wine";
   if(p.startsWith("/products/spirits"))                return "products-spirits";
   if(p.startsWith("/products/mini"))                   return "products-mini";
@@ -350,18 +348,53 @@ function _readAgeOk(){
   }
 }
 
-/** 頁面載入時檢查年齡驗證，未通過則跳轉至 /age/ */
+/** 頁面載入時檢查年齡驗證，未通過則顯示覆蓋層（不跳轉，避免 Google 判定為重新導向） */
 function ageCheck(){
   if(location.pathname.startsWith("/age")) return; // 驗證頁本身不攔截
 
-  // 允許爬蟲直接讀取內容，不觸發強迫跳轉（否則 Google 會以為每一頁都是年齡確認頁）
-  const isBot = /bot|googlebot|crawler|spider|robot|crawling|bingbot|facebookexternalhit|baiduspider|yandexbot|slurp|applebot/i.test(navigator.userAgent);
+  // 允許爬蟲直接讀取內容（含 Google WRS 的 HeadlessChrome）
+  const isBot = /bot|googlebot|crawler|spider|robot|crawling|bingbot|facebookexternalhit|baiduspider|yandexbot|slurp|applebot|HeadlessChrome/i.test(navigator.userAgent);
   if(isBot) return;
 
   if(!_readAgeOk()){
-    const from = encodeURIComponent(location.pathname + location.search + location.hash);
-    location.href = "/age/?from=" + from;
+    _showAgeOverlay();
   }
+}
+
+/** 以覆蓋層方式顯示年齡驗證（不跳轉，解決 Google 重新導向問題） */
+function _showAgeOverlay(){
+  if(document.getElementById('age-overlay')) return; // 防止重複呼叫
+
+  const overlay = document.createElement('div');
+  overlay.id = 'age-overlay';
+  overlay.innerHTML = `
+    <div class="age-overlay-box">
+      <div class="kicker">年齡確認</div>
+      <h1 style="margin:8px 0 10px; font-size:24px;">請確認你已滿 18 歲</h1>
+      <p>依法律規定，未滿法定飲酒年齡者請勿瀏覽本網站。</p>
+      <p style="color:#b43c3c; font-weight:600; font-size:0.95em; margin-bottom:18px;">✨ 慶祝酉時喝酒官網上架！消費滿 3 瓶全面 9 折，立即挑選心儀酒款</p>
+      <div class="age-overlay-actions">
+        <button class="btn btn-primary" onclick="_confirmAge()">我已滿 18 歲，進入網站</button>
+        <button class="btn" onclick="_denyAge()">我未滿 18 歲</button>
+      </div>
+      <p class="mono" style="margin-top:12px;">酉時喝酒 YOU-SI｜日系酒款選品：清酒・燒酎・果實酒・茶酒・葡萄酒</p>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  document.body.classList.add('age-overlay-active');
+}
+
+/** 年齡驗證通過：移除覆蓋層 */
+function _confirmAge(){
+  _setAgeOk();
+  const overlay = document.getElementById('age-overlay');
+  if(overlay) overlay.remove();
+  document.body.classList.remove('age-overlay-active');
+}
+
+/** 年齡驗證拒絕 */
+function _denyAge(){
+  alert("未滿法定飲酒年齡者請勿進入。");
 }
 
 
