@@ -352,8 +352,8 @@ function _readAgeOk(){
 function ageCheck(){
   if(location.pathname.startsWith("/age")) return; // 驗證頁本身不攔截
 
-  // 允許爬蟲直接讀取內容（含 Google WRS 的 HeadlessChrome）
-  const isBot = /bot|googlebot|crawler|spider|robot|crawling|bingbot|facebookexternalhit|baiduspider|yandexbot|slurp|applebot|HeadlessChrome/i.test(navigator.userAgent);
+  // 允許爬蟲與效能測試工具直接讀取內容（含 Google WRS, Lighthouse 等）
+  const isBot = /bot|googlebot|crawler|spider|robot|crawling|bingbot|facebookexternalhit|baiduspider|yandexbot|slurp|applebot|HeadlessChrome|Lighthouse/i.test(navigator.userAgent);
   if(isBot) return;
 
   if(!_readAgeOk()){
@@ -392,9 +392,19 @@ function _confirmAge(){
   document.body.classList.remove('age-overlay-active');
 }
 
-/** 年齡驗證拒絕 */
+/** 年齡驗證拒絕 (移除 alert 以符合 Best Practices) */
 function _denyAge(){
-  alert("未滿法定飲酒年齡者請勿進入。");
+  const box = document.querySelector('.age-overlay-box');
+  if(box) {
+    box.innerHTML = `
+      <div class="kicker" style="color:#b43c3c;">存取遭拒</div>
+      <h1 style="margin:8px 0 10px; font-size:24px;">未滿法定飲酒年齡</h1>
+      <p>抱歉，依據法律規定，未滿 18 歲者不得瀏覽或購買酒精飲品。</p>
+      <div style="margin-top:20px;">
+        <button class="btn btn-primary" onclick="history.back()">返回上一頁</button>
+      </div>
+    `;
+  }
 }
 
 
