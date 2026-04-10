@@ -245,6 +245,7 @@ function pathKey(){
   if(p.startsWith("/products/spirits"))                return "products-spirits";
   if(p.startsWith("/products/mini"))                   return "products-mini";
   if(p.startsWith("/wineries"))                        return "wineries";
+  if(p.startsWith("/blog"))                            return "blog";
   return "home";
 }
 
@@ -260,6 +261,7 @@ function setNavActive(){
     if(key === "offers"             && href.startsWith("/offers"))    active = true;
     if(key === "order"              && href.startsWith("/order"))     active = true;
     if(key === "wineries"           && href.startsWith("/wineries")) active = true;
+    if(key === "blog"               && href.startsWith("/blog"))     active = true;
     if(active) a.classList.add("active");
   });
 }
@@ -268,6 +270,136 @@ function setNavActive(){
 function toggleMenu(){
   document.querySelector("nav")?.classList.toggle("open");
 }
+
+/** 全站公告條初始化與輪播邏輯 (全站統一版) */
+function renderAnnouncements() {
+  // 如果資料夾不存在或為空，則隱藏公告（不添加 show-announce class）
+  if (typeof announcements === "undefined" || !announcements.length) return;
+
+  const bar = document.getElementById("announceBar");
+  const track = document.getElementById("announceTrack");
+  if (!bar || !track) return;
+
+  // 1. 強制讓頁面知道有公告，以便下移內容
+  document.documentElement.classList.add("show-announce");
+
+  // 2. 清空現有內容並填充新公告
+  track.innerHTML = "";
+  announcements.forEach(function (item, i) {
+    const el = document.createElement("div");
+    el.className = "announce-item" + (i === 0 ? " is-active" : "");
+    el.innerHTML = item.link 
+      ? `<a href="${item.link}">${item.text}</a>` 
+      : item.text;
+    track.appendChild(el);
+  });
+
+  // 3. 啟動多則輪播
+  if (announcements.length === 1) return;
+  let current = 0;
+  // 記錄間隔 ID 以防重複執行
+  if (window.announceTimer) clearInterval(window.announceTimer);
+  window.announceTimer = setInterval(function () {
+    const items = track.querySelectorAll(".announce-item");
+    if (!items.length) return;
+    items[current].classList.remove("is-active");
+    current = (current + 1) % items.length;
+    items[current].classList.add("is-active");
+  }, 5000);
+}
+
+/** 渲染部落格文章卡片列表 (全站統一邏輯) */
+function renderBlogGrid(tagMain = "All", tagSub = "All") {
+  const grid = document.getElementById("blogGrid");
+  if (!grid || typeof articles === "undefined") return;
+
+  // 無文章時顯示敬請期待，隱藏篩選列
+  const comingSoon = document.getElementById("blogComingSoon");
+  const filters    = document.querySelector(".blog-filters");
+  if (!articles.length) {
+    grid.innerHTML = "";
+    if (comingSoon) comingSoon.style.display = "";
+    if (filters)    filters.style.display = "none";
+    return;
+  }
+  if (comingSoon) comingSoon.style.display = "none";
+  if (filters)    filters.style.display = "";
+
+  const filtered = articles.filter(a => {
+    const matchMain = tagMain === "All" || (a.mainTags && a.mainTags.includes(tagMain));
+    const matchSub  = tagSub  === "All" || (a.subTags && a.subTags.includes(tagSub));
+    return matchMain && matchSub;
+  }).sort((a, b) => new Date(b.date.replace(/\//g,"-")) - new Date(a.date.replace(/\//g,"-")));
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding: 60px 0; color: #999;">目前沒有符合條件的文章。</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map((a, i) => {
+    // 第一篇設為特選大卡 (Featured)
+    const isFeatured = i === 0 && tagMain === "All" && tagSub === "All";
+    const badgeMap = {
+      "酉時圖書館": "badge-library",
+      "酒界新聞": "badge-news",
+      "搭餐推薦": "badge-pairing",
+      "酉時快訊": "badge-flash"
+    };
+    const bClass = badgeMap[a.mainTags?.[0]] || "badge-library";
+
+    return `
+      <div class="card blog-card-link ${isFeatured ? 'featured-card' : ''}" onclick="location.href='/blog/${a.slug}/'">
+        <div class="blog-cover card-media">
+          <div class="blog-badge ${bClass}">${a.mainTags?.[0] || '酉時圖書館'}</div>
+          <img src="${a.cover}" alt="${a.title}" loading="lazy" decoding="async">
+        </div>
+        <div class="blog-card-body">
+          <h2 class="blog-card-title">${a.title}</h2>
+          <p class="blog-card-excerpt">${a.excerpt}</p>
+          <div class="blog-card-meta-bottom">
+            <span>by ${a.author}</span>
+            <span>${a.date}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+/** 初始化部落格列表與篩選事件 */
+function initBlogList() {
+  const pills = document.querySelectorAll(".filter-pill");
+  if (!pills.length) {
+    // 如果沒有篩選按鈕（某些嵌入頁面），直接渲染全部
+    renderBlogGrid();
+    return;
+  }
+
+  let currentMain = "All";
+  let currentSub  = "All";
+
+  pills.forEach(pill => {
+    pill.addEventListener("click", function() {
+      const tag = this.getAttribute("data-tag");
+      const isMain = this.classList.contains("filter-main");
+
+      if (isMain) {
+        currentMain = tag;
+        document.querySelectorAll(".filter-main").forEach(p => p.classList.remove("active"));
+      } else {
+        currentSub = tag;
+        document.querySelectorAll(".filter-sub").forEach(p => p.classList.remove("active"));
+      }
+      
+      this.classList.add("active");
+      renderBlogGrid(currentMain, currentSub);
+    });
+  });
+
+  // 初始渲染
+  renderBlogGrid();
+}
+
 
 // 點擊選單外部時自動關閉選單
 document.addEventListener("click", (e) => {
@@ -640,7 +772,9 @@ function openProduct(id){
   document.body.classList.add("modal-open");
   
   // 觸發動態 SEO 與 URL 更新
-  SEOMonitor.openProduct(p, groupOf(p));
+  if (typeof SEOMonitor !== 'undefined') {
+    SEOMonitor.openProduct(p, groupOf(p));
+  }
 }
 
 /** 關閉 lightbox / 商品 Modal，解除 body 捲動鎖定 */
@@ -664,6 +798,59 @@ function renderWinery(id){
     <p><strong>${w.name}</strong>｜${w.location}</p>
     <p>${w.description}</p>
   `;
+}
+
+
+/* ===== 6.5. 部落格關聯商品渲染 ===== */
+function renderBlogRelatedProducts() {
+  const currentPath = window.location.pathname;
+  
+  // 1. 使用正規表達式提取 /blog/ 之後的第一層目錄名作為 slug
+  // 支援格式: /blog/slug/, /blog/slug/index.html, /you-si-website/blog/slug/
+  const blogMatch = currentPath.match(/\/blog\/([^\/]+)/i);
+  if (!blogMatch) return;
+  
+  const slug = blogMatch[1].replace('index.html', '').toLowerCase();
+  if (!slug || slug === 'index.html') return;
+
+  // 2. 存取全域資料 (優先嘗試 window 物件)
+  const allArticles = window.articles || (typeof articles !== 'undefined' ? articles : null);
+  const allProducts = window.products || (typeof products !== 'undefined' ? products : null);
+  
+  if (!allArticles || !allProducts) {
+    console.warn('[Blog] RelatedProducts aborted: Data variables not found.');
+    return;
+  }
+
+  // 3. 尋找對應文章
+  const article = allArticles.find(a => a.slug === slug);
+  const ctaContainer = document.querySelector('.article-cta');
+  
+  if (!ctaContainer) return;
+
+  // 4. 渲染邏輯
+  if (article && Array.isArray(article.relatedProductIds) && article.relatedProductIds.length > 0) {
+      const list = allProducts.filter(p => article.relatedProductIds.includes(p.id));
+      
+      if (list.length > 0) {
+          console.log(`[Blog] Matches found for "${slug}":`, list.length);
+          
+          // 改用語意化 Class 並交由 style.css 統一控制樣式
+          ctaContainer.innerHTML = `
+              <section class="blog-related-section">
+                  <h3>與此文章相關的推薦酒款</h3>
+                  <div id="blog-related-grid" class="grid"></div>
+              </section>
+          `;
+          ctaContainer.style.display = "block";
+          
+          renderGrid(list, 'blog-related-grid');
+          return;
+      }
+  }
+  
+  // 5. 若無資料則隱藏該區塊防止顯示無效按鈕
+  ctaContainer.style.display = 'none';
 }
 
 
@@ -1119,11 +1306,15 @@ function renderMiniCart(){
  * @returns {{ finalTotal, discount, applied[] }}
  */
 function applyPromotions(ctx){
+  // 防錯：若頁面未載入 promotions 腳本則直接返回原始狀態
+  if (typeof PROMOTIONS === 'undefined' || !Array.isArray(PROMOTIONS)) {
+    return { finalTotal: ctx.subtotal, discount: 0, applied: [] };
+  }
+
   let total = ctx.subtotal, discountTotal = 0;
   const applied = [];
 
   // 不可疊加：取折抵金額最大的那個
-  // apply(ctx) 回傳「折抵金額」（正整數），不再是折後總價
   let bestExclusive = null, bestDiscount = 0;
   PROMOTIONS.filter(p => !p.stackable).forEach(p => {
     if(p.condition(ctx)){
@@ -1631,7 +1822,8 @@ function renderEvents(){
 document.addEventListener("DOMContentLoaded", () => {
 
   /* 全站通用 */
-  setNavActive();        // nav active 狀態（直接呼叫，不輪詢）
+  renderAnnouncements(); // 全站統一公告邏輯 (置於最前以確保佈局計算正確)
+  setNavActive();        // nav active 狀態
   ageCheck();            // 年齡驗證
 
   // 填入所有 data-line-link / data-ig-link 元素的連結
@@ -1699,6 +1891,9 @@ document.addEventListener("DOMContentLoaded", () => {
   /* 活動頁 */
   if(key === "offers") renderEvents();
 
+  /* 部落格文章列表 */
+  if(key === "blog") initBlogList();
+
   /* 下單頁 */
   if(key === "order") bindOrderPickup();
 
@@ -1726,6 +1921,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // 渲染部落格關聯商品
+  if(typeof renderBlogRelatedProducts === "function"){
+    renderBlogRelatedProducts();
+  }
 });
 /* ===== 活動描述展開/收起（手機版） ===== */
 function toggleEventNote(btn){

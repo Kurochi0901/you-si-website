@@ -16,7 +16,7 @@
 
   <!-- ✅ 資料檔優先載入，確保變數在 script 執行前就存在 -->
   <script src="/assets/js/announcement_data.js"></script>
-<script>if(typeof announcements!=="undefined"&&announcements.length>0)document.documentElement.classList.add("show-announce");</script>
+
   <script defer src="/assets/js/wineries.data.js"></script>
 </head>
 
@@ -37,6 +37,7 @@
         <a href="/about/">關於</a>
         <a href="/products/">商品分類</a>
         <a href="/offers/">活動分享</a>
+        <a href="/blog/">酉時圖書館</a>
         <!-- <a href="/wineries/">酒莊・酒造品牌</a> -->
       </nav>
       <div class="nav-cta">
@@ -79,79 +80,7 @@
   <script defer src="/assets/js/main.js"></script>
 
   <!-- ✅ 渲染酒造列表 -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    (function renderWineries() {
-      const list = document.getElementById("wineryList");
-      if (!list) return;
-
-      const wineries = window.wineries || [];
-
-      if (!Array.isArray(wineries) || wineries.length === 0) {
-        list.innerHTML = '<div style="padding:18px; color:#6b6258;">目前尚未載入酒造資料。</div>';
-        return;
-      }
-
-      wineries.forEach(function (w) {
-        const el = document.createElement("article");
-        el.className = "winery-card";
-        el.id = w.id || "";
-
-        const styles = Array.isArray(w.styles) ? w.styles : [];
-
-        el.innerHTML =
-          '<div class="winery-img">' +
-            '<img src="' + (w.image || "") + '" alt="' + (w.name || "") + '">' +
-          '</div>' +
-          '<div class="winery-body">' +
-            '<h2>' + (w.name || "") + '</h2>' +
-            '<span class="winery-loc">' + (w.location || "") + '</span>' +
-            '<p class="winery-desc">' + (w.description || "") + '</p>' +
-            '<div class="winery-tags">' +
-              styles.map(function (s) { return '<span>' + s + '</span>'; }).join("") +
-            '</div>' +
-          '</div>';
-
-        list.appendChild(el);
-      });
-    })();
-    });
-  </script>
-
-  <!-- ✅ 公告輪播邏輯 -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    (function () {
-      if (typeof announcements === "undefined" || !announcements.length) return;
-
-      const bar   = document.getElementById("announceBar");
-      const track = document.getElementById("announceTrack");
-      if (!bar || !track) return;
-
-      announcements.forEach(function (item, i) {
-        const el = document.createElement("div");
-        el.className = "announce-item" + (i === 0 ? " is-active" : "");
-        el.innerHTML = item.link
-          ? '<a href="' + item.link + '">' + item.text + "</a>"
-          : item.text;
-        track.appendChild(el);
-      });
-
-      // bar.classList.remove("announce-hidden");
-      // document.body.classList.add("has-announce");
-
-      if (announcements.length === 1) return;
-
-      let current = 0;
-      setInterval(function () {
-        const items = track.querySelectorAll(".announce-item");
-        items[current].classList.remove("is-active");
-        current = (current + 1) % items.length;
-        items[current].classList.add("is-active");
-      }, 5000);
-    })();
-    });
-  </script>
+  
 
 </body>
 </html>

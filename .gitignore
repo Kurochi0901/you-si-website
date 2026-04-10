@@ -10,6 +10,7 @@ upload-new-products.js
 refactor-imgs.js
 update-seo.js
 fix-cls.js
+sync-posts.js
 
 # 備份檔
 *.backup
@@ -23,3 +24,4 @@ assets/images/webp/
 .DS_Store
 Thumbs.db
 .cursorrules
+ARCHITECTURE.md

@@ -18,7 +18,7 @@
 <script defer src="/assets/js/events.data.js"></script>
 <script defer src="/assets/js/main.js"></script>
 <script src="/assets/js/announcement_data.js"></script>
-<script>if(typeof announcements!=="undefined"&&announcements.length>0)document.documentElement.classList.add("show-announce");</script>
+
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
 <!-- ✅ 階層導覽 Breadcrumb Schema -->
 <script type="application/ld+json">
@@ -245,6 +245,7 @@
         <a href="/about/">關於</a>
         <a href="/products/">商品分類</a>
         <a href="/offers/">活動分享</a>
+        <a href="/blog/">酉時圖書館</a>
         <!-- <a href="/wineries/">酒莊・酒造品牌</a> -->
       </nav>
       <div class="nav-cta">
@@ -341,42 +342,7 @@
 </div>
 
 <!-- ✅ 公告輪播邏輯 -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-(function () {
-  if (typeof announcements === "undefined" || !announcements.length) return;
 
-  const bar   = document.getElementById("announceBar");
-  const track = document.getElementById("announceTrack");
-  if (!bar || !track) return;
-
-  // 建立各則公告 DOM
-  announcements.forEach(function (item, i) {
-    const el = document.createElement("div");
-    el.className = "announce-item" + (i === 0 ? " is-active" : "");
-    el.innerHTML = item.link
-      ? '<a href="' + item.link + '">' + item.text + "</a>"
-      : item.text;
-    track.appendChild(el);
-  });
-
-  // 顯示公告條，讓 header 下移
-  // bar.classList.remove("announce-hidden");
-  // document.body.classList.add("has-announce");
-
-  // 單則不需輪播
-  if (announcements.length === 1) return;
-
-  let current = 0;
-  setInterval(function () {
-    const items = track.querySelectorAll(".announce-item");
-    items[current].classList.remove("is-active");
-    current = (current + 1) % items.length;
-    items[current].classList.add("is-active");
-  }, 5000);
-})();
-});
-</script>
 <div id="lightbox" class="lightbox">
   <img id="lightbox-img">
 

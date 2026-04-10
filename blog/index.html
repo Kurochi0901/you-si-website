@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>酉時圖書館｜酉時喝酒 YOU-SI</title>
+<link rel="canonical" href="https://www.yousi-drink.com/blog/">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="酉時喝酒, you-si, 酉時圖書館, 清酒知識, 葡萄酒品鑑, 搭餐推薦, 果實酒">
+<meta name="description" content="關於酒的一切，慢慢說。酉時圖書館提供清酒、葡萄酒、果實酒與烈酒的品飲知識、搭餐推薦與最新消息。">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script defer src="/assets/js/articles.data.js"></script>
+<script defer src="/assets/js/products.data.js"></script>
+<script defer src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/main.js"></script>
+<script src="/assets/js/announcement_data.js"></script>
+
+<style>
+/* 由於樣式已抽離至 style.css，此區塊保留空殼或移除 */
+</style>
+</head>
+<body>
+  <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
+  <div class="announce-bar" id="announceBar" role="marquee" aria-live="polite">
+    <div class="announce-track" id="announceTrack"></div>
+  </div>
+
+  <div class="header-wrap">
+    <div class="header">
+      <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="/">首頁</a>
+        <a href="/about/">關於</a>
+        <a href="/products/">商品分類</a>
+        <a href="/offers/">活動分享</a>
+        <a href="/blog/">酉時圖書館</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" data-line-link href="#">聯繫我們</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="blog-hero">
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="kicker">酉時圖書館</div>
+      <h1 class="hero-title">閱讀與品味</h1>
+      <p class="blog-hero-desc">關於酒的一切，慢慢說。<br>從基礎品鑑到搭餐推薦，與您一起探索風味的無限可能。</p>
+    </div>
+  </section>
+
+  <main class="section">
+    <!-- 篩選列：有文章後取消隱藏 -->
+    <div class="blog-filters" style="display:none;">
+        <div class="tag-filter-wrap">
+            <div class="filter-row" aria-label="文章類型篩選">
+                <span class="filter-label">主題</span>
+                <div class="filter-scroll">
+                    <span class="filter-pill filter-main active" data-tag="All">All</span>
+                    <span class="filter-pill filter-main" data-tag="酉時圖書館">#酉時圖書館</span>
+                    <span class="filter-pill filter-main" data-tag="酒界新聞">#酒界新聞</span>
+                    <span class="filter-pill filter-main" data-tag="搭餐推薦">#搭餐推薦</span>
+                    <span class="filter-pill filter-main" data-tag="酉時快訊">#酉時快訊</span>
+                </div>
+            </div>
+            <div class="filter-row" aria-label="酒類主題篩選">
+                <span class="filter-label">酒類</span>
+                <div class="filter-scroll">
+                    <span class="filter-pill filter-sub active" data-tag="All">All</span>
+                    <span class="filter-pill filter-sub" data-tag="日本酒">#日本酒</span>
+                    <span class="filter-pill filter-sub" data-tag="葡萄酒">#葡萄酒</span>
+                    <span class="filter-pill filter-sub" data-tag="果實酒">#果實酒</span>
+                    <span class="filter-pill filter-sub" data-tag="烈酒">#烈酒</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="blog-grid" id="blogGrid">
+        <!-- JS 動態生成內容 -->
+    </div>
+
+    <!-- 敬請期待區塊：有文章後移除 -->
+    <div class="blog-coming-soon" id="blogComingSoon" style="text-align:center; padding:80px 20px 100px; color:#7c6a5b;">
+        <div style="font-size:28px; margin-bottom:16px;">🍶</div>
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:12px; color:#4a3c31;">文章準備中，敬請期待</h2>
+        <p style="font-size:15px; line-height:1.8; color:#9a8d82; max-width:400px; margin:0 auto;">
+          我們正在用心撰寫關於品酒、搭餐與酒造故事的內容，<br>期待與您一起慢慢品味。
+        </p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-info">
+        <div>📦  取貨地點：</div>
+        <div>🏠 台北｜大安郵局前（建國信義路口處）</div>
+        <div>🏠 新竹｜竹北市光明十街（深耕公園）</div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-qr">
+          <img class="line-qr-img" alt="加入 LINE">
+          <div class="qr-label">
+            Line 
+            <span class="qr-sub">領取專屬優惠</span>
+          </div>
+        </div>
+        <div class="footer-qr">
+          <img class="ig-qr-img" alt="Instagram">
+          <div class="qr-label">Instagram yousi1719_drink</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+    <span class="alcohol-bar-text">
+      🍶 未滿十八歲請勿飲酒
+      <span class="alcohol-bar-divider" aria-hidden="true"></span>
+      酒後不開車，安心享受微醺時刻
+    </span>
+  </div>
+
+
+  <!-- 商品詳情彈窗容器 -->
+  <div id="lightbox" class="lightbox">
+    <div id="lightbox-note"></div>
+  </div>
+</body>
+</html>

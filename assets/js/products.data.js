@@ -1558,7 +1558,6 @@ const products = [
     category: "sake", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個 
     imgs: [`${CDN}/32萩之鶴_純米吟釀_櫻花貓1.webp`,
       `${CDN}/32萩之鶴_純米吟釀_櫻花貓2.webp`,
-      `${CDN}/32萩之鶴_純米吟釀_櫻花貓3.webp`,
     ], //圖片檔名
 
     price: 1350, //優惠價
@@ -3278,3 +3277,4 @@ const products = [
     wineryId: "bayernwald" //酒造名稱  如果未來想要有相關酒造資訊顯示的話可以填入，不知道可以先填null
     }
 ]
+if (typeof window !== 'undefined') { window.products = products; }
