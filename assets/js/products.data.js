@@ -1759,7 +1759,7 @@ const products = [
 {
       id: 36,
       priority: 4, // ✅ 新增：1~5，越大越優先
-      name: "鳳凰美田 Assemblage-White & Bronze",
+      name: "鳳凰美田 Assemblage-White Bronze",
       type: "清酒", //"清酒" "果實酒" "茶酒" "葡萄酒" "烈酒" "小罐專區"   只能填這6種其中一個
       category: "sake", // ["sake", "fruit-tea", "spirits", "wine", "mini"] 只能填這5種其中一個
     imgs: [`${CDN}/36鳳凰美田1.webp`,
