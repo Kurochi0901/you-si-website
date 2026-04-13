@@ -77,7 +77,7 @@ const SEOMonitor = (function() {
   function getNormalizedProductUrl(productId, category) {
     const p = (typeof products !== 'undefined') ? products.find(x => x.id === productId) : null;
     if (p) {
-      const slug = p.name.replace(/\s+/g, '-');
+      const slug = p.name.replace(/[&]+/g, '').replace(/\s+/g, '-');
       const cat = p.category || category || 'all';
       return `${window.location.origin}/products/${cat}/${slug}/`;
     }
@@ -177,7 +177,7 @@ const SEOMonitor = (function() {
       const path = `/products/${getCategoryPathSegment(category)}`;
 
       const productSchemas = products.map((product) => {
-        const pSlug = product.name.replace(/\s+/g, '-');
+        const pSlug = product.name.replace(/[&]+/g, '').replace(/\s+/g, '-');
         const pCat = product.category || category;
         const productUrl = `${baseUrl}/products/${pCat}/${pSlug}/`;
         const imageUrl = (product.imgs && product.imgs[0]) ? new URL(product.imgs[0], baseUrl).href : "";
@@ -215,7 +215,7 @@ const SEOMonitor = (function() {
         "itemListElement": products.map((product, index) => ({
           "@type": "ListItem",
           "position": index + 1,
-          "url": `${baseUrl}/products/${product.category || category}/${product.name.replace(/\s+/g, '-')}/`
+          "url": `${baseUrl}/products/${product.category || category}/${product.name.replace(/[&]+/g, '').replace(/\s+/g, '-')}/`
         }))
       };
 
@@ -356,7 +356,7 @@ function renderBlogGrid(tagMain = "All", tagSub = "All") {
     const bClass = badgeMap[a.mainTags?.[0]] || "badge-library";
 
     return `
-      <div class="card blog-card-link ${isFeatured ? 'featured-card' : ''}" onclick="location.href='/blog/${a.slug}/'">
+      <a class="card blog-card-link ${isFeatured ? 'featured-card' : ''}" href="/blog/${a.slug}/">
         <div class="blog-cover card-media">
           <div class="blog-badge ${bClass}">${a.mainTags?.[0] || '酉時圖書館'}</div>
           <img src="${a.cover}" alt="${a.title}" loading="lazy" decoding="async">
@@ -369,7 +369,7 @@ function renderBlogGrid(tagMain = "All", tagSub = "All") {
             <span>${a.date}</span>
           </div>
         </div>
-      </div>
+      </a>
     `;
   }).join("");
 }
@@ -673,7 +673,7 @@ function renderGrid(list, id){
     const internalCat = groupOf(p);
     const pathSegment = internalCat === "fruittea" ? "fruit-tea" : internalCat;
     const catPath = pathSegment === "all" ? "" : `${pathSegment}/`;
-    const slug = p.name.replace(/\s+/g, '-');
+    const slug = p.name.replace(/[&]+/g, '').replace(/\s+/g, '-');
     const productUrl = `/products/${catPath}${slug}/`;
 
     return `
@@ -1924,7 +1924,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const productData = products.find(p => p.id === itemId);
     if(productData) {
       const cat = productData.category || 'fruit-tea';
-      const slug = productData.name.replace(/\s+/g, '-');
+      const slug = productData.name.replace(/[&]+/g, '').replace(/\s+/g, '-');
       window.location.replace(`/products/${cat}/${slug}/`);
       return; // 停止後續初始化
     }

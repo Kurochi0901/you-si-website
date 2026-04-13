@@ -192,6 +192,7 @@ p{ color:var(--muted); line-height:1.9; margin:10px 0; }
   background: transparent;
   border: none;
   padding: 0;
+  -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
 .zen .vertical-content {
@@ -540,6 +541,7 @@ textarea.input{ resize:vertical; }
   gap:10px;
   padding:10px 12px;
   background:rgba(255,255,255,.92);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-top:1px solid rgba(0,0,0,.06);
 }
@@ -1002,6 +1004,7 @@ nav a.active{
   padding: 14px 18px;
   border-radius: 14px;
   box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 
@@ -1441,6 +1444,7 @@ nav a.active{
   box-shadow: 0 4px 12px rgba(0,0,0,.08);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 10;
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 
@@ -2243,6 +2247,7 @@ body.modal-open{ overflow:hidden; }
   justify-content:center;
   padding:18px;
   background:rgba(20, 18, 15, .38);
+  -webkit-backdrop-filter:saturate(1.1) blur(2px);
   backdrop-filter:saturate(1.1) blur(2px);
   z-index:9999;
 }
@@ -2629,6 +2634,7 @@ body.modal-open{ overflow:hidden; }
   border-radius: 999px;
   border: 1px solid rgba(0,0,0,.08);
   background: rgba(255,255,255,.92);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 
   display: inline-flex;
