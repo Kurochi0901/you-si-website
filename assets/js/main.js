@@ -75,6 +75,12 @@ const SEOMonitor = (function() {
   }
 
   function getNormalizedProductUrl(productId, category) {
+    const p = (typeof products !== 'undefined') ? products.find(x => x.id === productId) : null;
+    if (p) {
+      const slug = p.name.replace(/\s+/g, '-');
+      const cat = p.category || category || 'all';
+      return `${window.location.origin}/products/${cat}/${slug}/`;
+    }
     return `${window.location.origin}/products/${getCategoryPathSegment(category)}?item=${productId}`;
   }
 
@@ -171,7 +177,9 @@ const SEOMonitor = (function() {
       const path = `/products/${getCategoryPathSegment(category)}`;
 
       const productSchemas = products.map((product) => {
-        const productUrl = `${baseUrl}${path}?item=${product.id}`;
+        const pSlug = product.name.replace(/\s+/g, '-');
+        const pCat = product.category || category;
+        const productUrl = `${baseUrl}/products/${pCat}/${pSlug}/`;
         const imageUrl = (product.imgs && product.imgs[0]) ? new URL(product.imgs[0], baseUrl).href : "";
         
         const schema = {
@@ -207,7 +215,7 @@ const SEOMonitor = (function() {
         "itemListElement": products.map((product, index) => ({
           "@type": "ListItem",
           "position": index + 1,
-          "url": `${baseUrl}${path}?item=${product.id}`
+          "url": `${baseUrl}/products/${product.category || category}/${product.name.replace(/\s+/g, '-')}/`
         }))
       };
 
@@ -665,18 +673,19 @@ function renderGrid(list, id){
     const internalCat = groupOf(p);
     const pathSegment = internalCat === "fruittea" ? "fruit-tea" : internalCat;
     const catPath = pathSegment === "all" ? "" : `${pathSegment}/`;
-    const productUrl = `/products/${catPath}?item=${p.id}`;
+    const slug = p.name.replace(/\s+/g, '-');
+    const productUrl = `/products/${catPath}${slug}/`;
 
     return `
       <div class="card">
         <div class="card-media">
-          <a href="${productUrl}" aria-label="查看 ${p.name}" onclick="event.preventDefault(); openProduct(${p.id})">
+          <a href="${productUrl}" aria-label="查看 ${p.name}">
             <img src="${cover}" alt="${p.name}" width="400" height="500" loading="${loading}" decoding="${decoding}" ${priority}>
           </a>
         </div>
         <div class="card-body">
           <div class="card-tag-row">${renderPriorityBadge(p)}</div>
-          <a href="${productUrl}" class="name" onclick="event.preventDefault(); openProduct(${p.id})">${p.name}</a>
+          <a href="${productUrl}" class="name">${p.name}</a>
           <div class="spec">${p.spec || ""}</div>
           <div class="card-meta">
             <div class="price-wrap">${renderPrice(p)}</div>
@@ -1908,16 +1917,16 @@ document.addEventListener("DOMContentLoaded", () => {
     reveals.forEach(el => io.observe(el));
   }
 
-  /* URL SEO 參數解析：自動開啟分享的商品 Modal */
+  /* 舊 URL 相容：?item=N → 自動跳轉到新的靜態產品頁 */
   const urlParams = new URLSearchParams(window.location.search);
   const itemId = parseInt(urlParams.get('item'), 10);
   if (itemId && !Number.isNaN(itemId)) {
     const productData = products.find(p => p.id === itemId);
     if(productData) {
-      // 延遲執行 URL 淨化以確保行銷追蹤不遺失
-      SEOMonitor.sanitizeLandingUrl(itemId, groupOf(productData), 2000);
-      // 自動開啟指定商品 Modal
-      openProduct(itemId);
+      const cat = productData.category || 'fruit-tea';
+      const slug = productData.name.replace(/\s+/g, '-');
+      window.location.replace(`/products/${cat}/${slug}/`);
+      return; // 停止後續初始化
     }
   }
 

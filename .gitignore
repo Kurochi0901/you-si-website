@@ -11,6 +11,8 @@ refactor-imgs.js
 update-seo.js
 fix-cls.js
 sync-posts.js
+build.js
+generate-product-pages.js
 
 # 備份檔
 *.backup
