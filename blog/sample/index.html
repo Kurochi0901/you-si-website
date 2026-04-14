@@ -7,6 +7,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index, follow">
 <meta name="description" content="從刺身到燉煮，找到適合每道菜的清酒風味，讓餐桌上的搭配變得簡單又有趣。帶你輕鬆入門清酒搭餐原則。">
+
+<!-- Open Graph / Facebook / LINE -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="清酒與料理的搭配指南">
+<meta property="og:description" content="從刺身到燉煮，找到適合每道菜的清酒風味，讓餐桌上的搭配變得簡單又有趣。帶你輕鬆入門清酒搭餐原則。">
+<meta property="og:image" content="https://www.yousi-drink.com/assets/images/blog/sake-pairing.jpg">
+<meta property="og:url" content="https://www.yousi-drink.com/blog/SLUG/">
+<meta property="og:site_name" content="酉時喝酒 YOU-SI">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2025-08-01">
+<meta property="article:author" content="酉時喝酒">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="清酒與料理的搭配指南">
+<meta name="twitter:description" content="從刺身到燉煮，找到適合每道菜的清酒風味，讓餐桌上的搭配變得簡單又有趣。帶你輕鬆入門清酒搭餐原則。">
+<meta name="twitter:image" content="https://www.yousi-drink.com/assets/images/blog/sake-pairing.jpg">
+
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/assets/css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -17,34 +35,49 @@
 <script defer src="/assets/js/main.js"></script>
 <script src="/assets/js/announcement_data.js"></script>
 
-
 <!-- Article Schema Markup -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.yousi-drink.com/blog/SLUG/"
+  },
   "headline": "清酒與料理的搭配指南",
   "image": "https://www.yousi-drink.com/assets/images/blog/sake-pairing.jpg",
   "author": {
-    "@type": "Person",
-    "name": "酉時喝酒"
+    "@type": "Organization",
+    "name": "酉時喝酒 YOU-SI",
+    "url": "https://www.yousi-drink.com"
   },
   "publisher": {
     "@type": "Organization",
     "name": "酉時喝酒 YOU-SI",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://yousi1719.com/assets/images/logo.png"
+      "url": "https://www.yousi-drink.com/favicon.ico"
     }
   },
   "datePublished": "2025-08-01",
-  "description": "從刺身到燉煮，找到適合每道菜的清酒風味，讓餐桌上的搭配變得簡單又有趣。"
+  "dateModified": "2025-08-01",
+  "description": "從刺身到燉煮，找到適合每道菜的清酒風味，讓餐桌上的搭配變得簡單又有趣。",
+  "inLanguage": "zh-Hant"
 }
 </script>
 
-<style>
-/* 由於樣式已抽離至 style.css，此區塊保留空殼或移除 */
-</style>
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://www.yousi-drink.com/" },
+    { "@type": "ListItem", "position": 2, "name": "酉時圖書館", "item": "https://www.yousi-drink.com/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "清酒與料理的搭配指南" }
+  ]
+}
+</script>
 </head>
 <body>
   <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
@@ -56,7 +89,7 @@
     <div class="header">
       <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
       <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-      <nav>
+      <nav aria-label="主選單">
         <a href="/">首頁</a>
         <a href="/about/">關於</a>
         <a href="/products/">商品分類</a>
@@ -71,18 +104,18 @@
 
   <div class="article-hero">
     <!-- fallback background will show if image fails to load -->
-    <img src="/assets/images/blog/sake-pairing.jpg" alt="清酒與料理的搭配指南" class="article-hero-bg" loading="lazy" decoding="async" onerror="this.style.display='none'">
+    <img src="/assets/images/blog/sake-pairing.jpg" alt="清酒與料理的搭配指南" class="article-hero-bg" fetchpriority="high" decoding="async" onerror="this.style.display='none'">
     <div class="article-hero-content">
         <h1 class="article-hero-title">清酒與料理的搭配指南</h1>
     </div>
   </div>
 
-  <div class="article-container">
-    <div class="breadcrumbs">
+  <article class="article-container">
+    <nav class="breadcrumbs" aria-label="麵包屑導航">
         <a href="/">首頁</a> <span>&gt;</span>
         <a href="/blog/">酉時圖書館</a> <span>&gt;</span>
         <span class="current">清酒與料理的搭配指南</span>
-    </div>
+    </nav>
 
     <div class="article-meta">
         <span class="meta-tag">酉時圖書館</span>
@@ -91,30 +124,14 @@
     </div>
 
     <div class="article-content">
-        <p>清酒與料理的搭配，其實就像是一場風味的雙人舞。與葡萄酒以「洗去口中油脂」為主的解膩邏輯不同，清酒的特性在於「包容與融合」。由於清酒本身含有豐富的氨基酸，能與食物中的鮮味（旨味，Umami）產生共鳴，達到「1 + 1 > 2」的美味加乘效果。</p>
-        
-        <h2>清酒搭餐的基礎邏輯</h2>
-        <h3>尋找風味的共同點</h3>
-        <p>最簡單的搭餐原則，就是尋找酒款與料理之間的共同風味。例如：帶有華麗果香的純米吟釀，適合搭配同樣清爽帶有些微酸度的前菜或是白肉魚刺身。而經過長時間熟成的古酒，其散發出的焦糖與堅果香氣，則與紅燒肉或烤鰻魚等重口味料理是天作之合。</p>
-
-        <h2>常見料理的搭配建議</h2>
-        
-        <h3>刺身與壽司</h3>
-        <p>生食海鮮最怕的就是被過度強烈的酒味蓋過鮮甜。這時候推薦選擇「薰酒」類別（如果香豐沛的大吟釀），或是乾淨俐落的「爽酒」（如辛口本釀造）。它們能輕柔地托起海鮮的甜味，同時維持口腔的清爽。</p>
-
-        <h3>燉煮與醬油調味</h3>
-        <p>若是面對馬鈴薯燉肉這類帶有醬油與砂糖甜味的日式燉煮，或是台灣常見的滷味，推薦搭配「醇酒」（如生酛或山廢釀造的純米酒）。這類酒款在常溫甚至溫熱（熱燗）後，米香與旨味會被徹底釋放，能與醬汁的醇厚感完美契合。</p>
-
-        <h3>炸物與燒烤</h3>
-        <p>炸雞（唐揚雞）或是濃厚醬汁的烤串，需要能與油脂抗衡的酒款。除了選擇酸度較高的清酒來解膩外，帶有些微碳酸感的氣泡清酒也是非常棒的選擇。氣泡能清洗味蕾，讓每一口料理都像第一口一樣美味。</p>
-
-        <p>不論是日常的晚餐，還是講究的聚會，只要掌握了基本的搭餐邏輯，就能在餐桌上創造出屬於自己的風味宇宙。不妨從今晚的晚餐開始，挑選一瓶合適的清酒，享受探索的樂趣吧！</p>
+        <p>此處請輸入您的正文內容。</p>
+        <h2>段落標題</h2>
+        <p>使用一般文字包覆。</p>
     </div>
-    
     <div class="article-cta">
         <a href="/products/sake/" class="btn btn-primary" style="font-size: 15px; padding: 14px 28px; width: auto; display: inline-flex;">查看相關酒款</a>
     </div>
-  </div>
+  </article>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -127,7 +144,7 @@
         <div class="footer-qr">
           <img class="line-qr-img" alt="加入 LINE">
           <div class="qr-label">
-            Line 
+            Line
             <span class="qr-sub">會員集點累贈</span>
           </div>
         </div>
@@ -147,7 +164,7 @@
     </span>
   </div>
 
-  
+
   <!-- 商品詳情彈窗容器 -->
   <div id="lightbox" class="lightbox">
     <div id="lightbox-note"></div>

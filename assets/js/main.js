@@ -832,7 +832,7 @@ function renderBlogRelatedProducts() {
   }
 
   // 3. 尋找對應文章
-  const article = allArticles.find(a => a.slug === slug);
+  const article = allArticles.find(a => a.slug.toLowerCase() === slug);
   const ctaContainer = document.querySelector('.article-cta');
   
   if (!ctaContainer) return;
