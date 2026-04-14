@@ -811,23 +811,29 @@ function renderWinery(id){
 
 
 /* ===== 6.5. 部落格關聯商品渲染 ===== */
-function renderBlogRelatedProducts() {
+function renderBlogRelatedProducts(retryCount = 0) {
   const currentPath = window.location.pathname;
   
-  // 1. 使用正規表達式提取 /blog/ 之後的第一層目錄名作為 slug
-  // 支援格式: /blog/slug/, /blog/slug/index.html, /you-si-website/blog/slug/
-  const blogMatch = currentPath.match(/\/blog\/([^\/]+)/i);
-  if (!blogMatch) return;
+  // 1. 提取 slug：支援各種網址格式 (含 /blog/slug/ 與 /blog/slug/index.html)
+  // 移除結尾的 index.html 並確保格式正確
+  const cleanPath = currentPath.replace(/\/index\.html$/i, '/').replace(/\/$/, '');
+  const pathSegments = cleanPath.split('/');
+  const blogIdx = pathSegments.indexOf('blog');
   
-  const slug = blogMatch[1].replace('index.html', '').toLowerCase();
-  if (!slug || slug === 'index.html') return;
+  if (blogIdx === -1 || blogIdx === pathSegments.length - 1) return;
+  const slug = pathSegments[blogIdx + 1].toLowerCase();
 
-  // 2. 存取全域資料 (優先嘗試 window 物件)
+  // 2. 存取全域資料并增加重試機制 (解決大型資料檔在 Safari 上的掛載延遲)
   const allArticles = window.articles || (typeof articles !== 'undefined' ? articles : null);
   const allProducts = window.products || (typeof products !== 'undefined' ? products : null);
   
   if (!allArticles || !allProducts) {
-    console.warn('[Blog] RelatedProducts aborted: Data variables not found.');
+    if (retryCount < 3) {
+      console.log(`[Blog] Data not ready, retrying... (${retryCount + 1})`);
+      setTimeout(() => renderBlogRelatedProducts(retryCount + 1), 150);
+      return;
+    }
+    console.warn('[Blog] RelatedProducts aborted: Data variables not found after retries.');
     return;
   }
 

@@ -3255,3 +3255,38 @@ body.age-overlay-active{ overflow:hidden; }
   #blog-related-grid .card-meta { flex-wrap: wrap; }
   #blog-related-grid .btn-add { width: 100%; text-align: center; }
 }
+
+/* ===== Inline CTA Link Style ===== */
+.btn-inline-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: #fff !important; /* Ensure it stays white in lists */
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 4px 12px rgba(180, 138, 99, 0.2);
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-inline-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(180, 138, 99, 0.3);
+  background: var(--accent);
+}
+
+.btn-inline-cta::after {
+  content: "→";
+  font-size: 1.1em;
+  transition: transform 0.3s ease;
+}
+
+.btn-inline-cta:hover::after {
+  transform: translateX(3px);
+}
