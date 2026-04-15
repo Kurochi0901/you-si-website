@@ -81,7 +81,7 @@ const SEOMonitor = (function() {
       const cat = p.category || category || 'all';
       return `${window.location.origin}/products/${cat}/${slug}/`;
     }
-    return `${window.location.origin}/products/${getCategoryPathSegment(category)}?item=${productId}`;
+    return `${window.location.origin}/products/${getCategoryPathSegment(category)}/`;
   }
 
   function getProductSEOTemplates(product, category) {
