@@ -1706,20 +1706,18 @@ function bindOnlyNumberInputs(){
 
 /* ===== 15. QR Code ===== */
 
-/** 產生 IG QR Code 圖片並填入所有 .ig-qr-img 元素 */
+/** 填入本地 IG QR Code 圖片到所有 .ig-qr-img 元素 */
 function setIgQr(){
   const imgs = document.querySelectorAll(".ig-qr-img");
   if(!imgs.length) return;
-  const src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(BRAND.igUrl)}`;
-  imgs.forEach(img => { img.src = src; });
+  imgs.forEach(img => { img.src = "/assets/images/https_www_instagram_com_yousi1719_drink_.webp"; });
 }
 
-/** 產生 LINE QR Code 圖片並填入所有 .line-qr-img 元素 */
+/** 填入本地 LINE QR Code 圖片到所有 .line-qr-img 元素 */
 function setLineQr(){
   const imgs = document.querySelectorAll(".line-qr-img");
   if(!imgs.length) return;
-  const src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(BRAND.lineUrl)}`;
-  imgs.forEach(img => { img.src = src; });
+  imgs.forEach(img => { img.src = "/assets/images/https_line_me_ti_p_008jcfgc.webp"; });
 }
 
 
