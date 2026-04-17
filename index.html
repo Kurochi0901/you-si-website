@@ -40,52 +40,148 @@
 
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
 
-<!-- ✅ 在地商家 LocalBusiness Schema (取代 Organization 以強化在地 SEO) -->
+<!-- ✅ 品牌主體 + 線上商店 + 網站（搭配 SearchAction 觸發 Google 品牌搜尋框） -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "酉時喝酒 YOU-SI",
-  "url": "https://www.yousi-drink.com/",
-  "logo": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/酉時封面.webp",
-  "image": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/酉時封面.webp",
-  "description": "日系酒款選品：清酒、燒酎、果實酒、茶酒、葡萄酒。提供台北、新竹自取預約與 LINE 線上選購。",
-  "telephone": "+886-900-000-000",
-  "priceRange": "$$",
-  "address": [
+  "@graph": [
     {
-      "@type": "PostalAddress",
-      "streetAddress": "建國南路・大安郵局前",
-      "addressLocality": "台北市大安區",
-      "addressRegion": "台北市",
-      "postalCode": "106",
-      "addressCountry": "TW"
+      "@type": "Organization",
+      "@id": "https://www.yousi-drink.com/#organization",
+      "name": "酉時喝酒 YOU-SI",
+      "legalName": "珍探吉國際股份有限公司",
+      "url": "https://www.yousi-drink.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/酉時封面.webp"
+      },
+      "image": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/酉時封面.webp",
+      "description": "酉時喝酒 YOU-SI 是珍探吉國際股份有限公司旗下的日系酒款選品品牌，專營清酒、燒酎、果實酒、茶酒與葡萄酒。",
+      "telephone": "+886-976-815-017",
+      "sameAs": [
+        "https://line.me/ti/p/@008jcfgc",
+        "https://www.instagram.com/yousi1719_drink/"
+      ]
     },
     {
-      "@type": "PostalAddress",
-      "streetAddress": "光明十街・深耕公園旁",
-      "addressLocality": "新竹縣竹北市",
-      "addressRegion": "新竹縣",
-      "postalCode": "302",
-      "addressCountry": "TW"
-    }
-  ],
-  "openingHoursSpecification": [
+      "@type": "OnlineStore",
+      "@id": "https://www.yousi-drink.com/#onlinestore",
+      "name": "酉時喝酒 YOU-SI 線上選酒",
+      "url": "https://www.yousi-drink.com/",
+      "image": "https://res.cloudinary.com/dcrn2oyxk/image/upload/w_1200,h_630,c_fill,f_jpg,q_auto/%E9%85%89%E6%99%82%E5%B0%81%E9%9D%A2.jpg",
+      "logo": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/酉時封面.webp",
+      "description": "日系酒款選品線上商店：清酒、燒酎、果實酒、茶酒、葡萄酒。全台灣宅配到府，台北大安、新竹竹北可預約自取，透過 LINE 線上選購。",
+      "parentOrganization": { "@id": "https://www.yousi-drink.com/#organization" },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Taiwan"
+      },
+      "currenciesAccepted": "TWD",
+      "paymentAccepted": "Bank Transfer",
+      "priceRange": "$$",
+      "telephone": "+886-976-815-017",
+      "sameAs": [
+        "https://line.me/ti/p/@008jcfgc",
+        "https://www.instagram.com/yousi1719_drink/"
+      ],
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "TW",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+      }
+    },
     {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      "opens": "00:00",
-      "closes": "23:59",
-      "description": "線上預約制，自取時間請私訊 LINE"
+      "@type": "WebSite",
+      "@id": "https://www.yousi-drink.com/#website",
+      "url": "https://www.yousi-drink.com/",
+      "name": "酉時喝酒 YOU-SI",
+      "description": "日系酒款選品：清酒、燒酎、果實酒、茶酒、葡萄酒。",
+      "inLanguage": "zh-Hant",
+      "publisher": { "@id": "https://www.yousi-drink.com/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.yousi-drink.com/products/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
-  ],
-  "sameAs": [
-    "https://line.me/ti/p/@008jcfgc",
-    "https://www.instagram.com/yousi1719_drink/"
   ]
 }
 </script>
-<!-- ✅ 首頁精選商品 ItemList Schema（對應 HOME_FEATURED_IDS） -->
+
+<!-- ✅ 首頁精選商品 ItemList Schema（priority 5 全部收錄） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "酉時喝酒 YOU-SI 精選推薦酒款",
+  "url": "https://www.yousi-drink.com/",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "北川本家 八橋肉桂梅酒",
+      "url": "https://www.yousi-drink.com/products/fruit-tea/北川本家-八橋肉桂梅酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "池亀 果凍梅酒",
+      "url": "https://www.yousi-drink.com/products/fruit-tea/池亀-果凍梅酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "萩之鶴 貓咪組合 純米吟釀 生原酒",
+      "url": "https://www.yousi-drink.com/products/sake/萩之鶴-貓咪組合-純米吟釀-生原酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "萩之鶴 純米吟釀 生原酒 櫻花貓",
+      "url": "https://www.yousi-drink.com/products/sake/萩之鶴-純米吟釀-生原酒-櫻花貓/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "鳳凰美田 純米吟釀 冷卸 山田錦",
+      "url": "https://www.yousi-drink.com/products/sake/鳳凰美田-純米吟釀-冷卸-山田錦/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "蓬萊泉 一念不動 特別純米 無濾過 しぼりたて",
+      "url": "https://www.yousi-drink.com/products/sake/蓬萊泉-一念不動-特別純米-無濾過-しぼりたて/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "name": "純米大吟釀 初花 金魚台輪",
+      "url": "https://www.yousi-drink.com/products/sake/純米大吟釀-初花-金魚台輪/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "name": "奧野田 La Florette 粉紅酒",
+      "url": "https://www.yousi-drink.com/products/wine/奧野田-La-Florette-粉紅酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "name": "我們的經典熱紅酒",
+      "url": "https://www.yousi-drink.com/products/wine/我們的經典熱紅酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "name": "我們的德國烤蘋果熱酒",
+      "url": "https://www.yousi-drink.com/products/wine/我們的德國烤蘋果熱酒/"
+    }
+  ]
+}
+</script>
 </head>
 
 <body>

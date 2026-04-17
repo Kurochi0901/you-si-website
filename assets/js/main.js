@@ -1872,6 +1872,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* 商品總覽頁 */
   if(key === "products"){
+    // ✅ 支援 ?q= URL 參數（讓 Google SearchAction 實際運作）
+    const urlQ = new URLSearchParams(window.location.search).get("q");
+    if(urlQ){
+      const qInput = document.getElementById("q");
+      if(qInput) qInput.value = urlQ;
+    }
     document.getElementById("q")?.addEventListener("input", applyFilters);
     document.getElementById("cat")?.addEventListener("change", applyFilters);
     document.getElementById("minp")?.addEventListener("input", applyFilters);
