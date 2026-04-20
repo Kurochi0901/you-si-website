@@ -27,6 +27,19 @@ const CATEGORY_ORDER = ["fruit-tea", "sake",  "wine", "spirits", "mini"];
 // 風味刻度格數（1~5）
 const SCALE_MAX = 5;
 
+/* ===== 1.2 GA4 事件追蹤 (Event Tracking) ===== */
+function trackEvent(eventName, params = {}) {
+  try {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, params);
+    } else {
+      console.log(`[GA4 Tracking Mock] ${eventName}`, params);
+    }
+  } catch (error) {
+    console.warn('[GA4 Tracking Error]', error);
+  }
+}
+
 /* ===== 1.5 SEO 管理器 ===== */
 const SEOMonitor = (function() {
   // 1. 先取得不包含參數 (?item=...) 的純淨網址，避免使用者直接帶參數落地時，關閉 Modal 無法退回列表
@@ -780,6 +793,18 @@ function openProduct(id){
   box.style.display = "flex";
   document.body.classList.add("modal-open");
   
+  trackEvent('view_item', {
+    currency: 'TWD',
+    value: p.price,
+    items: [{
+      item_id: String(p.id),
+      item_name: p.name,
+      item_category: p.category,
+      price: p.price,
+      quantity: 1
+    }]
+  });
+
   // 觸發動態 SEO 與 URL 更新
   if (typeof SEOMonitor !== 'undefined') {
     SEOMonitor.openProduct(p, groupOf(p));
@@ -1006,6 +1031,18 @@ function addToCart(id){
   const p = products.find(p => p.id === id);
   if(!p) return;
 
+  trackEvent('add_to_cart', {
+    currency: 'TWD',
+    value: p.price,
+    items: [{
+      item_id: String(p.id),
+      item_name: p.name,
+      item_category: p.category,
+      price: p.price,
+      quantity: 1
+    }]
+  });
+
   showCartToast(p, cart.find(x => x.id === id)?.qty || 1);
 
   // 促銷引導提示：距離下一個折扣還差幾件
@@ -1208,6 +1245,7 @@ function ensureStickyUI(){
     bar.querySelector("#stickyCartBtn")?.addEventListener("click", openMiniCart);
     // LINE 按鈕直接綁定（動態注入後無法靠 data-line-link 統一處理）
     bar.querySelector("#stickyLineBtn")?.addEventListener("click", () => {
+      trackEvent('click_line', { method: 'LINE', source: 'sticky_bar' });
       window.open(BRAND.lineUrl, "_blank", "noopener");
     });
     document.body.classList.add("has-sticky-bar");
@@ -1253,6 +1291,21 @@ function openMiniCart(){
   renderMiniCart();
   overlay.style.display = "flex";
   overlay.setAttribute("aria-hidden", "false");
+
+  const cart = readCart();
+  if (cart.length > 0) {
+    trackEvent('view_cart', {
+      currency: 'TWD',
+      value: cartTotal(),
+      items: cart.map(p => ({
+        item_id: String(p.id),
+        item_name: p.name,
+        item_category: p.category,
+        price: p.price,
+        quantity: p.qty
+      }))
+    });
+  }
 }
 
 /** 關閉 mini cart overlay */
@@ -1570,6 +1623,20 @@ ${pricing.discounts.length ? pricing.discounts.map(d => `- ${d.label}：-NT$${d.
   try{ await navigator.clipboard.writeText(summary); copiedOK = true; }
   catch(e){ console.warn("Clipboard copy failed", e); }
 
+  trackEvent('purchase', {
+    transaction_id: 'T' + Date.now() + Math.random().toString(36).slice(2, 7),
+    currency: 'TWD',
+    value: pricing.total,
+    shipping: pricing.shippingFee,
+    items: cart.map(p => ({
+      item_id: String(p.id),
+      item_name: p.name,
+      item_category: p.category,
+      price: p.price,
+      quantity: p.qty
+    }))
+  });
+
   // 清空購物車
   localStorage.removeItem("cart");
   renderCartMini();
@@ -1601,7 +1668,10 @@ function openOrderSuccessModal({ lineUrl, copiedOK, summary }){
   const goLine     = document.getElementById("goLineAfterOrder");
 
   if(txt)    txt.value  = summary || "";
-  if(goLine) goLine.href = lineUrl || "#";
+  if(goLine) {
+    goLine.href = lineUrl || "#";
+    goLine.onclick = () => trackEvent('click_line', { method: 'LINE', source: 'order_success_modal' });
+  }
   if(status){
     status.classList.remove("is-ok", "is-fail");
     status.classList.add(copiedOK ? "is-ok" : "is-fail");
@@ -1840,7 +1910,12 @@ document.addEventListener("DOMContentLoaded", () => {
   ageCheck();            // 年齡驗證
 
   // 填入所有 data-line-link / data-ig-link 元素的連結
-  document.querySelectorAll("[data-line-link]").forEach(a => { a.href = BRAND.lineUrl; a.target = "_blank"; a.rel = "noopener"; });
+  document.querySelectorAll("[data-line-link]").forEach(a => { 
+    a.href = BRAND.lineUrl; 
+    a.target = "_blank"; 
+    a.rel = "noopener"; 
+    a.addEventListener("click", () => trackEvent('click_line', { method: 'LINE', source: 'global_link' }));
+  });
   document.querySelectorAll("[data-ig-link]").forEach(a => { a.href = BRAND.igUrl; a.target = "_blank"; a.rel = "noopener"; });
 
   setIgQr();              // 產生 IG QR Code
@@ -1914,7 +1989,23 @@ document.addEventListener("DOMContentLoaded", () => {
   if(key === "blog") initBlogList();
 
   /* 下單頁 */
-  if(key === "order") bindOrderPickup();
+  if(key === "order") {
+    bindOrderPickup();
+    const cart = readCart();
+    if(cart.length > 0) {
+      trackEvent('begin_checkout', {
+        currency: 'TWD',
+        value: cartTotal(),
+        items: cart.map(p => ({
+          item_id: String(p.id),
+          item_name: p.name,
+          item_category: p.category,
+          price: p.price,
+          quantity: p.qty
+        }))
+      });
+    }
+  }
 
   /* About 頁：Scroll Reveal */
   const reveals = document.querySelectorAll(".reveal");
