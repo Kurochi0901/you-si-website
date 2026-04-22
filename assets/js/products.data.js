@@ -1940,6 +1940,666 @@ const products = [
     wineryId: "sekiya"
     },
     {
+      id: 51,
+      priority: 3, 
+      name: "蓬萊泉 黑 純米酒",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/51蓬萊泉_黑_純米酒1.webp`,
+      `${CDN}/51蓬萊泉_黑_純米酒2.webp`,
+    ], 
+
+    price: 1180, 
+    originPrice: 1440,
+
+    spec: "水嫩俐落的口感，日常餐桌的最佳首選", 
+
+    note: {
+      oneLine: `🏆2023 名古屋國稅局酒類鑑評會 燗酒部門 金賞
+	🏆2024 名古屋國稅局酒類鑑評會 燗酒部門 優等賞
+
+	產自愛知縣「關谷釀造」的蓬萊泉，憑藉對米與水質的極致講究，在國內外酒評中屢獲殊榮，不僅是日本頂級清酒的代表，更展現了傳統職人的堅持。
+
+	此款「黑」純米酒，追求極致的「端麗辛口」。開瓶即能感受清新的米香，入口後質地純淨、線條俐落，擁有俐落乾脆的銳利感，卻絲毫不顯突兀。其酒體結構均衡，隨著溫度變化，從常溫的輕盈到上燗的圓潤，皆能呈現多元的迷人表情，是一款久喝不膩、極具親和力的日常佳釀。
+
+	最適合搭配風味鮮明的日式料理、鹽烤海鮮或質樸的家常菜餚，能有效提升餐點的旨味層次，是熱愛餐酒搭配的您，家中必備的品飲好物。
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "関谷・蓬萊泉", 
+      origin: "日本", 
+      rice: "夢山水", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"65%",
+      alcohol: "14%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 2, 
+        sakeUmamiFruity: 2,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "sekiya" 
+    },
+{
+      id: 52,
+      priority: 4, 
+      name: "安藝虎 light 純米吟釀",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/52安藝虎_light_純米吟釀1.webp`,
+      `${CDN}/52安藝虎_light_純米吟釀2.webp`,
+    ], 
+
+    price: 1380, 
+    originPrice: 1450, 
+
+    spec: "清新澄澈，感受輕盈的果香魅力",
+
+    note: {
+      oneLine: `來自高知縣的百年酒造「有光酒造」，一年僅產300石的小型地酒酒造，除了釀酒的季節外，整間酒造就僅剩有光社長夫妻倆人在運作。其卓越釀造工藝在「全國新酒鑑評會」中屢獲金賞肯定，是高品質的職人保證。
+
+	此款「安藝虎 Light 純米吟釀」，承襲了酒造嚴謹的金賞級釀造技術，將發酵中的酵母抑制在13.5度並且不加水調整、直接以原酒方式出廠，十分考驗杜氏的釀造功力。追求極致的「輕盈感」，呈現鳳梨等南國水果般的爽朗香氣，入口質地滑順清爽，口感乾淨俐落，極易入口。
+
+	這是一款優秀的食中酒，其細膩的風味結構，能與各種料理和諧共存。建議冰透後飲用，並搭配輕盈的開胃菜、鮮甜生魚片或清蒸白肉魚、紅肉等，皆可完美襯托食材原味，是您輕鬆享受微醺時光的絕佳選擇。
+
+	日本酒度：-4（微甘口）；酸度：1.9
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "有光・安藝虎", 
+      origin: "日本", 
+      rice: "阿波山田錦", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"50%",
+      alcohol: "13.5%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 4, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "arimitsu" 
+    },
+{
+      id: 53,
+      priority: 5, 
+      name: "安藝虎 純米大吟釀 CEL-24",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/53安藝虎_純米大吟釀_CEL1.webp`,
+      `${CDN}/53安藝虎_純米大吟釀_CEL2.webp`,
+      `${CDN}/53安藝虎_純米大吟釀_CEL3.webp`,
+    ], 
+
+    price: 1800, 
+    originPrice: 2100,
+
+    spec: "華麗果香，CEL-24酵母的夢幻綻放",
+
+    note: {
+      oneLine: `來自高知縣「有光酒造」的安藝虎，其精湛工藝在「全國新酒鑑評會」屢獲金賞。此款純米大吟釀，選用高知縣傳奇酵母「CEL-24」進行低溫釀造，呈現出極其華麗的迷人個性。
+
+	一開瓶，濃郁的熟果香氣如鳳梨、哈蜜瓜般撲鼻而來，入口後呈現如蜂蜜般的甘甜與細緻的酸度，口感層次豐富，餘韻優雅悠長。這是一款極具辨識度的精品，打破傳統清酒的刻板印象，以芬芳的果韻征服無數味蕾。
+
+	適合單獨細細品味，亦適合搭配紅肉料理、奶油起司風味料理或微甜的蕃茄果物沙拉。不僅是安藝虎的看板之作，更是喜愛華麗香氣與細膩口感的您，絕對不能錯過的夢幻酒款。
+
+	日本酒度：-10（甘口）；酸度：2
+	
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "有光・安藝虎", 
+      origin: "日本", 
+      rice: "阿波山田錦", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"50%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 5, 
+        sakeUmamiFruity: 5,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "arimitsu" 
+    },
+{
+      id: 54,
+      priority: 4, 
+      name: "安藝虎 純米吟釀 土佐麗 初榨無濾過生酒",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/54安藝虎_純米吟釀_土佐麗1.webp`,
+      `${CDN}/54安藝虎_純米吟釀_土佐麗2.webp`,
+      `${CDN}/54安藝虎_純米吟釀_土佐麗3.webp`,
+    ], //圖片檔名
+
+    price: 1500, 
+    originPrice: 1500, 
+
+    spec: "鮮活初榨，無濾過的純粹米旨",
+
+    note: {
+      oneLine: `來自高知縣有光酒造的「安藝虎」，以金賞級的釀造實力，致力於展現土地的靈魂。此款使用高知縣產酒米「土佐麗」釀造的「初榨無濾過生酒」，是季節限定的鮮活之作。
+
+未經濾過、殺菌處理的「生酒」特性，完美保留了發酵後的原始生命力。開瓶即有輕微的碳酸感，入口後，豐盈的果香伴隨著土佐麗酒米獨有的甘甜與米旨味，口感層次鮮明且充滿動感。這是僅有在釀造季節才能品嚐到的「旬之味」，新鮮、清脆且充滿能量，能直接感受酒造最真實的釀造水平。建議搭配簡單的鹽烤肉類或海鮮，讓餐點在清酒的鮮活襯托下，迸發出最純粹的美味。
+
+	日本酒度：0（中口）；酸度：2.1
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "有光・安藝虎", 
+      origin: "日本", 
+      rice: "土佐麗", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"55%",
+      alcohol: "16%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 2,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "arimitsu" 
+    },
+{
+      id: 55,
+      priority: 4, 
+      name: "安藝虎 藏內限定 純米大吟釀 生原酒",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/55安藝虎_藏內限定_生原酒1.webp`,
+      `${CDN}/55安藝虎_藏內限定_生原酒2.webp`,
+    ], 
+
+    price: 1980, 
+    originPrice: 1950, 
+
+    spec: "限定流通・濃郁帶層次的夢幻逸品", 
+
+    note: {
+      oneLine: `這是一瓶珍貴的「生原酒」，未經稀釋與低溫殺菌，完整封存了釀造完成瞬間的強勁生命力。
+
+	雄町酒米獨特的厚實旨味，在這瓶純米大吟釀中被展現得淋漓盡致。口感濃郁豐厚，帶有複雜的層次感，並伴隨著飽滿且迷人的果實（麝香葡萄、哈蜜瓜）香氣。
+	生原酒特有的高酒精感與鮮度，讓每一口都充滿力度，展現出與一般清酒截然不同的強大氣場。非常適合搭配口味較重、具油脂感的料理，如熟成生魚片、和牛燒肉或烤鴨，能與豐富的油脂交織出絕佳的平衡感，是酒藏內最值得收藏的珍稀之作。
+
+	日本酒度：8（辛口）；酸度：1.9
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "有光・安藝虎", 
+      origin: "日本", 
+      rice: "土佐麗", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"55%",
+      alcohol: "16%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 2, 
+        sakeUmamiFruity: 1,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "arimitsu" 
+    },
+{
+      id: 56,
+      priority: 3, 
+      name: "山形正宗 稻造 純米吟釀",
+      type: "清酒",
+      category: "sake", 
+    imgs: [`${CDN}/56山形正宗_稻造_純米吟釀1.webp`,
+      `${CDN}/56山形正宗_稻造_純米吟釀2.webp`,
+      `${CDN}/56山形正宗_稻造_純米吟釀3.webp`,
+    ],
+
+    price: 1450, 
+    originPrice: 1600,
+
+    spec: "地方酒米釀造，打造極致的地酒風味",
+
+    note: {
+      oneLine: `🏆2025 世界競賽IWC 日本酒部門 銀賞
+
+	來自山形縣百年名門「水戶部酒造」，「山形正宗」始終堅持以山形縣在地酒米為核心，追求清酒最原始的純淨面貌。「稻造」系列更進一步將此精神發揮至極，以山形縣獨有酒米「出羽燦燦」釀製。
+
+	香氣似未熟香蕉、覆盆子、芒果，洋溢青春活潑氣息，展現出羽燦燦米種的特色香氣。酒體帶新鮮的礦石感且富含米旨味，尾韻如山形正宗一貫風格，簡潔俐落，酸度均衡。入口柔和，尾韻乾淨，充分體現了水戶部酒造對於酒體架構的精準掌握。
+	它是一款極具辨識度的食中酒，能完美對應日式鮮魚料理、時蔬，甚至是義大利料理，讓您的餐桌品飲體驗更加精緻且無負擔。
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "水戶部・山形正宗", 
+      origin: "日本", 
+      rice: "出羽燦燦", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"60%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "mitobe" 
+    },
+{
+      id: 57,
+      priority: 3, 
+      name: "山形正宗 燗 純米",
+      type: "清酒",
+      category: "sake",
+    imgs: [`${CDN}/57山形正宗_燗_純米1.webp`,
+      `${CDN}/57山形正宗_燗_純米2.webp`,
+    ], 
+
+    price: 1680,
+    originPrice: 1880, 
+
+    spec: "職人溫暖之作，燗酒愛好者首選",
+
+    note: {
+      oneLine: `來自山形縣百年名門「水戶部酒造」，山形正宗始終堅持追求清酒最純粹的旨味。這款專為「燗酒（熱飲）」所設計的純米酒，在不同溫度都有十分良好的表現，加熱後味道會變的沉穩、圓潤、飽滿，為十分難得一見的日本酒。
+
+	這款酒並不追求喧賓奪主的香氣，而是將重點放在溫熱後的風味表現。入口後，溫暖的米旨味在口腔中溫潤散開，伴隨柔和的酸度與紮實的口感，隨著溫度的提升，風味層次更加厚實且細緻，不會因高溫而產生雜味。它是一款能與各種暖心料理完美共融的食中酒，無論是搭配烤物、燉煮料理或日式關東煮，都能在熱度中相互襯托，展現出極致的醇厚與療癒感。
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "水戶部・山形正宗", 
+      origin: "日本", 
+      rice: "出羽燦燦", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"60%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 1,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "mitobe" 
+    },
+{
+      id: 58,
+      priority: 3, 
+      name: "山形正宗 純米吟釀 生霞酒 木槽式",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/58山形正宗_純米吟釀_生霞酒_木槽式1.webp`,
+      `${CDN}/58山形正宗_純米吟釀_生霞酒_木槽式2.webp`,
+    ], 
+
+    price: 1650,
+    originPrice: 1800,
+
+    spec: "古法木槽壓榨，散發澄淨果香", 
+
+    note: {
+      oneLine: `此款酒採極度耗時的「木槽式壓榨（木槽しぼり）」，捨棄工業化的高壓過濾，讓酒液在木槽中緩慢自然滴落，保留了乾淨無雜味及較為圓潤的口感。
+
+	「霞（かすみ）」之名，源於其保留了酒醪中極微細的沈澱成分，使酒液呈現如晨霧般的柔美質感。鮮榨麝香葡萄和葡萄柚汁的氣息，散發澄淨果香。入口時能感受到豐盈的果香與微細碳酸帶來的輕快律動，中段展現出水戶部酒造標誌性的俐落旨味，餘韻綿長而細緻。
+	這不僅是品飲清酒，更是一場體驗傳統釀造工藝的感官饗宴，極適合於冷飲下搭配刺身或清爽的海鮮料理。
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "水戶部・山形正宗", 
+      origin: "日本", 
+      rice: "出羽燦燦", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"50%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "mitobe" 
+    },
+{
+      id: 59,
+      priority: 3, 
+      name: "山形正宗 純米吟釀 生霞酒 橫山式",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/59.山形正宗_純米吟釀_生霞酒_橫山式1.webp`,
+      `${CDN}/59.山形正宗_純米吟釀_生霞酒_橫山式2.webp`,
+    ], 
+
+    price: 1650, 
+    originPrice: 1800,
+
+    spec: "橫山式經典之作，", 
+
+    note: {
+      oneLine: `嘗試新型的藪田式小型壓榨機，能夠快速完成壓榨，因此保有微微氣泡感的新鮮風味，擁有水潤口感。（橫山式）
+
+	酒液如薄霧般帶有純淨的霞色（かすみ），這是生酒保留醪中微細成分的證明。入口時能感受到鮮榨麝香葡萄和葡萄柚汁的氣息，口感輕盈靈動，帶有生酒專屬的清新跳躍感。隨著舌尖擴散，細緻的旨味逐漸堆疊，尾韻乾淨俐落。
+	橫山式的嚴謹工藝，賦予了這款生霞酒絕佳的結構平衡，是一款在清爽與深度之間取得完美和諧的季節逸品，非常適合搭配新鮮刺身、白身魚料理，或風味淡雅的日式家常菜。
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "水戶部・山形正宗", 
+      origin: "日本", 
+      rice: "出羽燦燦", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"50%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "mitobe" 
+    },
+{
+      id: 60,
+      priority: 4, 
+      name: "山形正宗 純米吟釀 酒未來 生酒",
+      type: "清酒",
+      category: "sake", 
+    imgs: [`${CDN}/60山形正宗_純米吟釀_酒未來_生酒1.webp`,
+      `${CDN}/60山形正宗_純米吟釀_酒未來_生酒2.webp`,
+      `${CDN}/60山形正宗_純米吟釀_酒未來_生酒3.webp`,
+      `${CDN}/60山形正宗_純米吟釀_酒未來_生酒4.webp`,
+    ], 
+
+    price: 1850, 
+    originPrice: 2100, 
+
+    spec: "酒未來全新風味，打造與傳統不同的傳奇", 
+
+    note: {
+      oneLine: `這款作品選用「十四代」高木酒造開發的夢幻酒米「酒未來」，由水戶部酒造以14號酵母悉心釀製。罕見地在強勁米質中，賦予了葡萄柚與麝香葡萄般豐沛的果香，展現出酒造卓越的創新精神。
+
+「酒未來」歷經18年研發，象徵山形縣的釀酒靈魂。水戶部社長以競賽般的嚴謹態度面對此頂級米種，如今已能精準掌握其特性，釀出品質穩定且風味鮮明的作品。此款生酒酒體飽滿、酸度亮麗，不過於纖瘦的特質，與春季當令食材、生魚片、懷石等日式料理搭配 堪稱一絕！
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "水戶部・山形正宗", 
+      origin: "日本", 
+      rice: "酒未來", 
+      yeast: "14號酵母", 
+      variety: null,
+      polish:"50%",
+      alcohol: "16%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 4, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "mitobe" 
+    },
+{
+      id: 61,
+      priority: 4, 
+      name: "初龜 大吟釀 愛",
+      type: "清酒",
+      category: "sake", 
+    imgs: [`${CDN}/61初龜_大吟釀_愛1.webp`,
+      `${CDN}/61初龜_大吟釀_愛2.webp`,
+    ], 
+
+    price: 3580, 
+    originPrice: 3800, 
+
+    spec: "復刻歷史，靜岡流派的頂級獻禮",
+
+    note: {
+      oneLine: `回到初龜大吟釀酒的原點，酒造在昭和42年時獲得3座鑑評會的金賞，為了紀念這份榮耀發售了「大吟釀 愛」，可謂見證初龜歷史的一支酒。初龜素有「靜岡之冠」的美譽，精準展現了靜岡酵母特有的香氣純淨感，以及低溫長期發酵的細緻技術。
+
+	這款大吟釀使用精米步合極低的酒米，釀造過程極致講究。香氣優雅含蓄，展現出水梨般清冽的果韻；口感則如同絲綢般滑順，帶著通透的清澈感，尾韻帶有細膩的甘甜與餘香。它不以濃烈搶戲，而是以細膩的平衡感征服味蕾，是一款極具藝術品味的頂級佳釀，非常適合在重要聚會或靜謐時光，搭配清雅的日式懷石料理細細品嚐。
+
+	酒標設計理念像祝賀用的水引絲線，左右如伸出五指般相互纏繞，中間為太陽，形成一個愛的意象，從過去到未來不斷地持續著對日本酒的「熱愛」。
+
+	原料：米、米麴`,
+    },
+
+    info: {
+      brand: "初龜・初龜", 
+      origin: "日本", 
+      rice: "兵庫縣特A地區東条山田錦", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"麴米40、掛米45％",
+      alcohol: "16%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hatsukame" 
+    },
+{
+      id: 62,
+      priority: 4, 
+      name: "初亀 純米大吟釀 瓢月",
+      type: "清酒",
+      category: "sake", 
+    imgs: [`${CDN}/62初亀_純米大吟釀_瓢月1.webp`,
+      `${CDN}/62初亀_純米大吟釀_瓢月2.webp`,
+      `${CDN}/62初亀_純米大吟釀_瓢月3.webp`,
+    ], 
+
+    price: 2650, 
+    originPrice: 3050,
+
+    spec: "初龜夢幻名品，展現極致純淨",
+
+    note: {
+      oneLine: `🎁日本航空JAL 國內線 頭等艙用酒
+
+	來自靜岡縣的「初龜釀造」，不僅是該縣歷史最悠久的酒造，更以追求極致的「靜岡清酒風味」聞名。純米大吟釀「瓢月」是酒造旗下極具代表性的高端作品，體現了職人對米、水與酵母的完美調和。
+
+	「瓢月」擁有極其細膩的香氣，宛如在清澈的水面泛起一抹幽雅果香。口感純淨且通透，酒質輕柔如絲，入口後能感受到酒米精華轉化的旨味，層次豐富卻不過於沉重，展現出初龜獨有的冷冽美學與平衡感。
+	這是一款展現「清、雅、淨」三位一體的頂級純米大吟釀，適合單獨品飲或搭配口味纖細的精緻料理，感受每一口在舌尖綻放的透明感。
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "初龜・初龜", 
+      origin: "日本", 
+      rice: "兵庫特A地區東条產山田錦", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"40%",
+      alcohol: "16%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hatsukame" 
+    },
+{
+      id: 63,
+      priority: 4, 
+      name: "初龜 特別純米 生霞酒",
+      type: "清酒",
+      category: "sake", 
+    imgs: [`${CDN}/63初龜_特別純米_生霞酒1.webp`,
+      `${CDN}/63初龜_特別純米_生霞酒2.webp`,
+      `${CDN}/63初龜_特別純米_生霞酒3.webp`,
+    ], 
+
+    price: 1250, 
+    originPrice: 1400,
+
+    spec: "初龜夢幻名品，展現極致純淨",
+
+    note: {
+      oneLine: `往年掛米皆採用靜岡縣產的令和譽富士，但今年因優質米量難以充足採購，改以東条山田錦搭配岩手縣產的吟銀河。此銘柄為初龜經典的特別純米酒，以季節限定的生霞酒方式華麗登場。
+
+令人心曠神怡的香蕉般甜美香氣，清澈而優雅。入口薄醪由來的柔和、舒適口感，隨後是飽滿、溫和的旨味優美地擴散。優雅的酸度點綴得恰到好處，尾韻是一抹溫柔的甘甜輕盈繚繞，隨後俐落地入喉。
+	這是一款溫柔清爽的酒，可以搭配新鮮刺身、涼拌白身魚或季節時蔬，讓料理的鮮甜在酒體的襯托下，層次感倍增。
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "初龜・初龜", 
+      origin: "日本", 
+      rice: "東条山田錦21%、吟銀河79%", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"麴米55%、掛米60%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hatsukame" 
+    },
+    {
       id: 64,
       priority: 5,
       name: "奧野田 La Florette 粉紅酒",

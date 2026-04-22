@@ -3290,3 +3290,171 @@ body.age-overlay-active{ overflow:hidden; }
 .btn-inline-cta:hover::after {
   transform: translateX(3px);
 }
+
+/* ============================================================
+   分類頁 Hero + 介紹段 + FAQ
+   ============================================================ */
+
+.cat-hero{
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+  padding:32px 36px 40px;
+  margin:12px 0 32px;
+  background:
+    radial-gradient(900px 380px at 0% 0%, rgba(214,183,155,.38), transparent 60%),
+    radial-gradient(700px 320px at 100% 100%, rgba(180,138,99,.18), transparent 55%),
+    linear-gradient(180deg, #fbf7f1 0%, #f4ece1 100%);
+  box-shadow: var(--shadow2);
+  border:1px solid rgba(180,138,99,.18);
+}
+.cat-hero::before{
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:6px; height:100%;
+  background:linear-gradient(180deg, var(--accent), var(--accent2));
+}
+.cat-hero-title{
+  margin:0 0 16px;
+  font-size:30px;
+  line-height:0.4;
+  font-weight:700;
+  color:#3a2b1d;
+  letter-spacing:.01em;
+  max-width:960px;
+}
+.cat-hero-title::after{
+  content:"";
+  display:block;
+  width:54px;
+  height:3px;
+  margin-top:18px;
+  border-radius:2px;
+  background:linear-gradient(90deg, var(--accent), var(--accent2));
+}
+.cat-hero-lead{
+  max-width:1000px;
+  margin:18px 0 0;
+  font-size:15.5px;
+  line-height:1.95;
+  color:#6b5740;
+}
+.cat-hero-lead strong{
+  color:#4a3423;
+  font-weight:600;
+}
+.cat-hero-lead a{
+  color:var(--accent);
+  text-decoration:none;
+  border-bottom:1px dashed rgba(180,138,99,.5);
+  padding-bottom:1px;
+  transition:color .2s, border-color .2s;
+}
+.cat-hero-lead a:hover{
+  color:#8a6541;
+  border-bottom-color:var(--accent);
+}
+
+/* ===== 分類 FAQ 區塊 ===== */
+
+.cat-faq{
+  margin:48px 0 8px;
+  max-width:1300px;
+}
+.cat-faq-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 20px;
+  font-size:22px;
+  font-weight:700;
+  color:#3a2b1d;
+}
+.cat-faq-title::before{
+  content:"";
+  display:inline-block;
+  width:4px;
+  height:22px;
+  border-radius:2px;
+  background:linear-gradient(180deg, var(--accent), var(--accent2));
+}
+.cat-faq-item{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+  margin-top:12px;
+  overflow:hidden;
+  transition:border-color .2s, box-shadow .2s;
+}
+.cat-faq-item:hover{
+  border-color:rgba(180,138,99,.35);
+  box-shadow:0 4px 14px rgba(17,12,8,.04);
+}
+.cat-faq-item[open]{
+  border-color:rgba(180,138,99,.45);
+  box-shadow:var(--shadow2);
+}
+.cat-faq-item summary{
+  list-style:none;
+  cursor:pointer;
+  padding:16px 52px 16px 20px;
+  position:relative;
+  font-weight:600;
+  font-size:15.5px;
+  color:#3a2b1d;
+  transition:background .2s;
+}
+.cat-faq-item summary::-webkit-details-marker{ display:none; }
+.cat-faq-item summary:hover{ background:#fbf7f1; }
+.cat-faq-item summary::after{
+  content:"+";
+  position:absolute;
+  right:22px;
+  top:50%;
+  transform:translateY(-50%);
+  width:24px;
+  height:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:rgba(180,138,99,.12);
+  color:var(--accent);
+  font-size:18px;
+  font-weight:500;
+  line-height:1;
+  transition:transform .25s, background .25s;
+}
+.cat-faq-item[open] summary::after{
+  content:"−";
+  transform:translateY(-50%) rotate(180deg);
+  background:var(--accent);
+  color:#fff;
+}
+.cat-faq-item > p{
+  margin:0;
+  padding:0 20px 18px;
+  color:#6b5740;
+  line-height:1.9;
+  font-size:14.5px;
+}
+
+/* ===== 響應式 ===== */
+
+@media (max-width: 720px){
+  .cat-hero{
+    padding:20px 22px 24px;
+    border-radius:18px;
+    margin:8px 0 24px;
+  }
+  .cat-hero-title{ font-size:20px; line-height:1; }
+  .cat-hero-title::after{ margin-top:12px; width:44px; height:2px; }
+  .cat-hero-lead{ font-size:12px; line-height:1.6; }
+
+  .cat-faq{ margin:36px 0 4px; }
+  .cat-faq-title{ font-size:19px; }
+  .cat-faq-item summary{ font-size:14.5px; padding:14px 44px 14px 16px; }
+  .cat-faq-item summary::after{ right:14px; width:22px; height:22px; font-size:16px; }
+  .cat-faq-item > p{ padding:0 16px 16px; font-size:14px; }
+}
