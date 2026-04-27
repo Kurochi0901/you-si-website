@@ -3209,6 +3209,205 @@ const products = [
         wineFreshFull: 5 
     },
     wineryId: "bayernwald"
-    }
+    },
+    {
+      id: 80,
+      priority: 5, 
+      name: "浪乃音 Te To Te手牽手 母の日",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/80浪乃音_母の日1.webp`,
+      `${CDN}/80浪乃音_母の日2.webp`,
+      `${CDN}/80浪乃音_母の日3.webp`,
+    ], 
+
+    price: 1700, 
+    originPrice: 1700,
+
+    spec: "手牽手，獻給媽媽的溫柔", 
+
+    note: {
+      oneLine: `🌹2026 母親節限定酒款
+
+	在這個特別的節日，讓「浪乃音 Te To Te」成為您傳遞心意的橋樑。如同其名「手牽手」，這款清酒承載著手作的溫度與祝福，象徵著與母親之間緊密的情感連結。
+
+	帶有清新的果香印象與水潤口感，入口圓潤甘甜，如同春日暖陽般的細膩甘甜。隨後收束出俐落、清爽的線條。整體酒體輕盈明快，尾韻乾淨，將溫柔感與辛口輪廓拿捏得相當平衡。對平常少接觸日本酒的人來說，這是一款容易親近、風味乾淨、又保有清酒質感的母親節限定作品。讓我們以這份醇厚心意，向媽媽說聲「謝謝，我愛您」。在這個充滿愛的季節，與她共享這份微醺時光。
+
+	原料：米、米麴`, 
+    },
+
+    info: {
+      brand: "浪乃音", 
+      origin: "日本", 
+      rice: "玉榮", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"60%",
+      alcohol: "10%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "naminooto" 
+    },
+{
+      id: 81,
+      priority: 5, 
+      name: "梅侍 紅烏龍梅酒",
+      type: "果實酒", 
+      category: "fruit-tea", 
+    imgs: [`${CDN}/81梅侍 紅烏龍梅酒1.webp`,
+      `${CDN}/81梅侍 紅烏龍梅酒2.webp`,
+    ], 
+
+    price: 1018, 
+    originPrice: 1198, 
+
+    spec: "鮮明的蜜香與茶澀風味，交織梅果酸甜",
+
+    note: {
+      oneLine: `與龍芳茶園製茶三代廖柏榮師傅合作。
+
+	紅烏龍茶的特色在於結合烏龍茶與紅茶工藝，呈現「茶湯橙紅」如紅茶般的外觀，但帶有鳥龍茶的茶質厚重具熟果香，滋味醇厚圓滑、富有活性的特色，
+
+	紅烏龍茶的熟果香和焙火蜜甜香， 融合青梅的酸甜果韻，口感圓潤甘甜、滋味醇厚。入口瞬間，紅烏龍特有的的圓潤蜜香與青梅的清爽酸甜在舌尖交織，形成豐富且富有層次的口感。尾韻不僅帶有茶湯的回甘，更伴隨著迷人的熟果香氣。這是一瓶無論獨酌或搭餐，都能為您帶來深邃且悠長回味的美好之作。
+
+	原料：台灣產精選梅、紅烏龍茶、糖`, 
+    },
+
+    info: {
+      brand: "梅侍", 
+      origin: "台灣・南投縣青梅・台東鹿谷紅烏龍茶", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "10%", 
+      volume: "700ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 3,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "plumate" 
+    },
+{
+      id: 82,
+      priority: 5, 
+      name: "蓬萊泉 徐耀良 東方美人茶梅酒",
+      type: "果實酒", 
+      category: "fruit-tea", 
+    imgs: [`${CDN}/82蓬萊泉_東方美人1.webp`,
+      `${CDN}/82蓬萊泉_東方美人2.webp`,
+    ], 
+
+    price: 1500, 
+    originPrice: 1500, 
+
+    spec: "台日職人結晶，蜜香茶韻梅酒",
+
+    note: {
+      oneLine: `這是一場橫跨台日的工藝盛宴。選用新竹峨眉「徐耀良茶園」珍貴的一心二葉東方美人茶，送往日本愛知縣百年「關谷釀造」，與當地設樂山下嚴選的三噸新鮮「鳳來」青梅，結合酒造自製燒酎，以完美比例的三樣原物料經過低溫慢釀一年，才推出「蓬萊泉 東方美人茶梅酒」。
+
+	酒體呈現細緻的琥珀色澤，入口後東方美人茶特有的天然花果蜜香，與鳳來青梅的清爽酸韻完美交織。口感圓潤醇厚，常溫即可感受香氣層次，餘韻悠長。這款限量佳作不僅是台日物產的結晶，更將梅酒品飲昇華至藝術層次。
+
+	原料：新竹產東方美人茶、愛知產鳳來青梅、燒酎、糖`, 
+    },
+
+    info: {
+      brand: "關谷・蓬萊泉", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 3,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "sekiya" 
+    },
+{
+      id: 83,
+      priority: 5, 
+      name: "蓬萊泉 烹雪韻 生普洱茶梅酒",
+      type: "果實酒", 
+      category: "fruit-tea", 
+    imgs: [`${CDN}/83蓬萊泉_生普洱茶1.webp`,
+      `${CDN}/83蓬萊泉_生普洱茶2.webp`,
+    ], 
+
+    price: 1500, 
+    originPrice: 1500, 
+
+    spec: "生普洱醇厚，映襯梅果餘韻",
+
+    note: {
+      oneLine: `這款普洱茶梅酒是由日本百年酒藏「蓬萊泉」與台灣茶品牌「烹雪韻」攜手打造，以巴達古茶山的普洱茶和精選青梅完美融合。
+
+	採用三噸的愛知「鳳來」青梅，經由蓬萊泉自家釀造的燒酎浸漬熟成一年，果香自然清雅、甜度適中。生普洱獨特的清新茶韻與鮮爽氣息，巧妙地降低了傳統梅酒的甜膩感，轉化為層次分明的回甘。入口時，先是鮮果般的梅香輕盈綻放，接著是普洱茶湯特有的醇厚氣韻緩緩鋪陳，餘韻細膩且深邃，耐人尋味。
+
+	這是一款為追求成熟風味的品飲者所設計，適合在靜謐時刻，細細感受茶香與果實交織出的靜好韻味。
+
+	原料：烹雪韻生普洱茶、愛知產鳳來青梅、燒酎、糖`, 
+    },
+
+    info: {
+      brand: "關谷・蓬萊泉", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 3,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "sekiya" 
+    },
 ]
 if (typeof window !== 'undefined') { window.products = products; }
