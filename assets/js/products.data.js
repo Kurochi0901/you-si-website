@@ -867,7 +867,7 @@ const products = [
   },
 {
     id: 23,
-    priority: 5,
+    priority: 4,
     name: "北川本家 八橋肉桂梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -1096,7 +1096,7 @@ const products = [
   },
 {
     id: 29,
-    priority: 5,
+    priority: 4,
     name: "池亀 果凍梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -1486,7 +1486,7 @@ const products = [
     },
 {
       id: 39,
-      priority: 5,
+      priority: 4,
       name: "鳳凰美田 純米吟釀 冷卸 山田錦",
       type: "清酒",
       category: "sake",
@@ -1712,7 +1712,7 @@ const products = [
     },
 {
       id: 45,
-      priority: 5,
+      priority: 4,
       name: "純米大吟釀 初花 金魚台輪",
       type: "清酒",
       category: "sake",
@@ -2046,7 +2046,7 @@ const products = [
     },
 {
       id: 53,
-      priority: 5, 
+      priority: 4, 
       name: "安藝虎 純米大吟釀 CEL-24",
       type: "清酒", 
       category: "sake", 
@@ -3137,7 +3137,7 @@ const products = [
     },
 {
       id: 78,
-      priority: 5,
+      priority: 3,
       name: "我們的經典熱紅酒",
       type: "葡萄酒",
       category: "wine",
@@ -3174,7 +3174,7 @@ const products = [
     },
 {
       id: 79,
-      priority: 5,
+      priority: 3,
       name: "我們的德國烤蘋果熱酒",
       type: "葡萄酒",
       category: "wine",
