@@ -260,11 +260,14 @@ function pathKey(){
   if(p.startsWith("/offers"))                          return "offers";
   if(p.startsWith("/order"))                           return "order";
   if(p === "/products/" || p === "/products/index.html") return "products";
-  if(p.startsWith("/products/sake"))                   return "products-sake";
-  if(p.startsWith("/products/fruit-tea"))              return "products-fruittea";
-  if(p.startsWith("/products/wine"))                   return "products-wine";
-  if(p.startsWith("/products/spirits"))                return "products-spirits";
-  if(p.startsWith("/products/mini"))                   return "products-mini";
+  // 分類頁：路徑剛好結束在 /<cat>/ 或 /<cat>/index.html，不可吃到底下個別商品頁
+  if(/^\/products\/sake\/(?:index\.html)?$/.test(p))      return "products-sake";
+  if(/^\/products\/fruit-tea\/(?:index\.html)?$/.test(p)) return "products-fruittea";
+  if(/^\/products\/wine\/(?:index\.html)?$/.test(p))      return "products-wine";
+  if(/^\/products\/spirits\/(?:index\.html)?$/.test(p))   return "products-spirits";
+  if(/^\/products\/mini\/(?:index\.html)?$/.test(p))      return "products-mini";
+  // 個別商品頁：/products/<cat>/<slug>/，回傳專屬 key 避免落入任何分類頁分支
+  if(/^\/products\/[^/]+\/[^/]+\/?$/.test(p))             return "product-detail";
   if(p.startsWith("/wineries"))                        return "wineries";
   if(p.startsWith("/blog"))                            return "blog";
   return "home";
@@ -1960,24 +1963,24 @@ document.addEventListener("DOMContentLoaded", () => {
     applyFilters();
   }
 
-  /* 商品分類頁（各自渲染 + 注入 Schema.org）*/
-  if(key === "products-sake"){
+  /* 商品分類頁（各自渲染 + 注入 Schema.org）— 必須有 #productGrid 才視為分類頁，雙重保險 */
+  if(key === "products-sake" && document.getElementById("productGrid")){
     const s = sortByPriorityDesc(products.filter(p => groupOf(p) === "sake"));
     renderGrid(s, "productGrid"); injectProductSchema(s, "清酒商品列表｜酉時喝酒");
   }
-  if(key === "products-fruittea"){
+  if(key === "products-fruittea" && document.getElementById("productGrid")){
     const s = sortByPriorityDesc(products.filter(p => groupOf(p) === "fruittea"));
     renderGrid(s, "productGrid"); injectProductSchema(s, "果實酒・茶酒商品列表｜酉時喝酒");
   }
-  if(key === "products-spirits"){
+  if(key === "products-spirits" && document.getElementById("productGrid")){
     const s = sortByPriorityDesc(products.filter(p => groupOf(p) === "spirits"));
     renderGrid(s, "productGrid"); injectProductSchema(s, "烈酒商品列表｜酉時喝酒");
   }
-  if(key === "products-wine"){
+  if(key === "products-wine" && document.getElementById("productGrid")){
     const s = sortByPriorityDesc(products.filter(p => groupOf(p) === "wine"));
     renderGrid(s, "productGrid"); injectProductSchema(s, "葡萄酒商品列表｜酉時喝酒");
   }
-  if(key === "products-mini"){
+  if(key === "products-mini" && document.getElementById("productGrid")){
     const s = sortByPriorityDesc(products.filter(p => groupOf(p) === "mini"));
     renderGrid(s, "productGrid"); injectProductSchema(s, "小罐專區商品列表｜酉時喝酒");
   }
