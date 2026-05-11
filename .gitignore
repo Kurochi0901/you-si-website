@@ -3,6 +3,8 @@ node_modules/
 package.json
 package-lock.json
 launch.json
+google_merchant_center.xml
+settings.local.json
 
 # 腳本工具（不需上版控）
 convert.js

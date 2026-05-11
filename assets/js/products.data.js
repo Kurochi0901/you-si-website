@@ -3409,5 +3409,511 @@ const products = [
 
     wineryId: "sekiya" 
     },
+    {
+      id: 84,
+      priority: 5, 
+      name: "蝴蝶加濃 龍舌蘭 藍鑽",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/84蝴蝶加濃_藍鑽1.webp`,
+      `${CDN}/84蝴蝶加濃_藍鑽2.webp`,
+      `${CDN}/84蝴蝶加濃_藍鑽3.webp`,
+      `${CDN}/84蝴蝶加濃_藍鑽4.webp`,
+    ], 
+
+    price: 1050, 
+    originPrice: 1200, 
+
+    spec: "超現實幻幻藍調，遇酸即變色的感官魔術", 
+
+    note: {
+      oneLine: `這是一款顛覆傳統的超高端龍舌蘭，不僅在風味上追求卓越，更在視覺上創造了奇蹟。選用墨西哥哈利斯科州（Jalisco）生長超過 7 年的 100% 藍色龍舌蘭，經過傳統磚爐烘烤與蒸餾後，浸泡天然蝶豆花瓣萃取。以其引人注目的天然紫羅蘭色澤和獨特香氣成為烈酒愛好者的新寵。
+	這款龍舌蘭酒散發出新鮮橙橘的香氣，口味濃郁清爽，結合了柑橘和仙人掌的香氣，並融合了各種熱帶水果的風味，如草莓、西瓜。`, 
+    },
+
+    info: {
+      brand: "蝴蝶加濃", 
+      origin: "墨西哥", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "35%", 
+      volume: "750ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "butterfly-cannon" 
+    },
+{
+      id: 85,
+      priority: 5, 
+      name: "蝴蝶加濃 龍舌蘭 粉鑽",
+      type: "烈酒",
+      category: "spirits", 
+    imgs: [`${CDN}/85蝴蝶加濃_粉鑽1.webp`,
+      `${CDN}/85蝴蝶加濃_粉鑽2.webp`,
+      `${CDN}/85蝴蝶加濃_粉鑽3.webp`,
+      `${CDN}/85蝴蝶加濃_粉鑽4.webp`,
+    ], 
+
+    price: 1050, 
+    originPrice: 1200, 
+
+    spec: "粉紅浪漫微醺，柚香與龍舌蘭的優雅共舞", 
+
+    note: {
+      oneLine: `粉鑽龍舌蘭專為追求精緻生活與時尚口感的品味者設計。選用100%藍色龍舌蘭，在蒸餾後特別加入粉紅葡萄柚皮進行短時間浸漬，賦予酒液如春日暖陽般的天然粉紅亮澤。
+	開瓶即可聞到濃郁的葡萄柚清香與熱帶水果的微甜，隨後迎來龍舌蘭標誌性的木質地與淡淡的辛香料氣息。其口感輕盈圓潤，非常適合加入氣泡水或通寧水簡單調製，打造一杯色澤誘人、清爽解膩的夏日特調，是時尚派對或好友相聚時最亮眼的質感選擇。`, 
+    },
+
+    info: {
+      brand: "蝴蝶加濃", 
+      origin: "墨西哥", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "35%", 
+      volume: "750ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "butterfly-cannon" 
+    },
+{
+      id: 86,
+      priority: 5, 
+      name: "黑木本店 百年孤獨 麥燒酎",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/86百年孤獨1.webp`,
+      `${CDN}/86百年孤獨2.webp`,
+      `${CDN}/86百年孤獨3.webp`,
+    ], 
+
+    price: 3800, 
+    originPrice: 4500, 
+
+    spec: "如威士忌般深邃，麥燒酎界的藝術巔峰", 
+
+    note: {
+      oneLine: `🏆2023 TWSC燒酎部門 金賞
+
+	「百年孤獨」由宮崎縣傳奇名廠黑木本店打造，是將大麥之魂與時間完美融合的傑作。
+	選用九州產大麥為原料，遵循傳統「常壓蒸餾」工藝，保留了原料最純粹的醇厚厚實度。不同於一般燒酎，它將原酒置入橡木桶中經歷長時間的漫長歲月，賦予酒液深邃的琥珀色澤，以及迷人的香草、椰子與淡雅木質氣息。
+	其名取自馬奎斯的文學巨作，內在則擁有不輸給頂級威士忌的酒體結構。根據不同的飲用方式能品嚐到多種風格：兌水可凸顯出穀物的甘甜，並釋放香氣分子、感受本作品的豐富層次；加入熱水飲用則能強調厚實立體的份量感。`, 
+    },
+
+    info: {
+      brand: "黑木本店", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "40%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "kurokihonten" 
+    },
+{
+      id: 87,
+      priority: 4, 
+      name: "黑木本店 中中 麥燒酎",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/87中中_麥燒酎1.webp`,
+      `${CDN}/87中中_麥燒酎2.webp`,
+      `${CDN}/87中中_麥燒酎3.webp`,
+    ], 
+
+    price: 1180, 
+    originPrice: 1300, 
+
+    spec: "輕盈與麥香醇厚的完美平衡，經典日常之作", 
+
+    note: {
+      oneLine: `「中中」作為黑木本店的代表作，完美體現了職人對大麥風味的極致追求。選用九州契作大麥，堅持採用傳統的「古甕仕入（甕缸發酵）」工藝，讓酒體在天然陶甕中孕育出柔和而紮實的底蘊。
+	不同於厚重的桶陳風格，中中採用「減壓蒸餾」技術，精準過濾掉多餘的油脂與雜味，只留下大麥最清雅的甜味與輕盈感。入口滑順、尾韻乾淨，無論是加冰塊、蘇打水或是兌入熱水，都能展現其百搭的性格，是日本燒酎迷心中不可撼動的經典日常之作。`, 
+    },
+
+    info: {
+      brand: "黑木本店", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "25%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+    wineryId: "kurokihonten" 
+    },
+{
+      id: 88,
+      priority: 4, 
+      name: "黑木本店 陶眠中中 麥燒酎",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/88陶眠中中_麥燒酎1.webp`,
+      `${CDN}/88陶眠中中_麥燒酎2.webp`,
+      `${CDN}/88陶眠中中_麥燒酎3.webp`,
+    ], 
+
+    price: 2500, 
+    originPrice: 2600, 
+
+    spec: "陶甕兩年歲月淬鍊，絲綢般柔順的焦糖麥香", 
+
+    note: {
+      oneLine: `「陶眠中中」是將經典的中中原酒，封存於特製陶甕中歷經兩年時光淬鍊後的成熟之作。
+	嚴選九州大麥與手工製麴，在陶甕的呼吸作用下，酒體蛻變得如絲綢般細膩柔順，展現出紮實且具力量感的穀物層次。
+	初聞是迷人的焦香與麥芽甜感，入口後，濃烈的麥香在舌尖化開，隨後浮現如咖啡與可可般的微苦回甘，風味深遠且餘韻悠長。無論是加冰感受其醇厚重感，或以熱水兌飲激發麥芽溫潤的深度，皆能體驗到這份與時光共舞的極致層次。`, 
+    },
+
+    info: {
+      brand: "黑木本店", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "28%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+    wineryId: "kurokihonten" 
+    },
+{
+      id: 89,
+      priority: 4, 
+      name: "黑木本店 陶醉中中 麥燒酎",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/89陶醉中中_麥燒酎1.webp`,
+      `${CDN}/89陶醉中中_麥燒酎2.webp`,
+      `${CDN}/89陶醉中中_麥燒酎3.webp`,
+    ],
+
+    price: 2050, 
+    originPrice: 2100, 
+
+    spec: "35度高比例熟成原酒，如威士忌般強韌深邃", 
+
+    note: {
+      oneLine: `名門黑木本店全新力作「陶醉中中」，將酒精濃度提升至35度，並大幅增加「常壓蒸餾」熟成原酒的比例，旨在打造如威士忌般的飽滿結構。
+	開瓶即能感受大麥特有的甘甜與迷人焦香，入口後，濃郁醇厚的酒體伴隨熟成帶來的圓潤餘韻在舌尖綻放，個性鮮明且層次極其深邃。高酒精感卻不刺喉，完美兼具了強勁力量感與「中中」標誌性的輕盈尾韻。
+	無論是純飲、加冰，或是調製氣泡水與雞尾酒，即便經稀釋仍能保有絕不動搖的獨特風味，讓您沉溺於愉悅的感官享受中。`, 
+    },
+
+    info: {
+      brand: "黑木本店",
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "35%", 
+      volume: "700ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+    wineryId: "kurokihonten" 
+    },
+{
+      id: 90,
+      priority: 3, 
+      name: "北海道 清里 樽 馬鈴薯燒酎",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/90清里_樽_馬鈴薯1.webp`,
+      `${CDN}/90清里_樽_馬鈴薯2.webp`,
+      `${CDN}/90清里_樽_馬鈴薯3.webp`,
+    ], 
+
+    price: 990, 
+    originPrice: 1080, 
+
+    spec: "琥珀色的優雅慢時，馬鈴薯甜感與橡木香氣的醇厚交織", 
+
+    note: {
+      oneLine: `這款極具工藝美學的馬鈴薯燒酎，於威士忌規格的白橡木桶中陳釀一年，賦予酒液澄澈優雅的琥珀色澤。馬鈴薯天然的質樸甘甜與橡木桶釋出的木質香氣渾然天成，勾勒出極其細緻且清爽的洗練風味。每一口都能感受橡木風味與穀物甜感的深度平衡，展現出超越傳統燒酎的精緻質感。其獨具巧思的瓶身設計，在品飲結束後亦可作為時尚花瓶使用，是兼具品味深度與生活美學的贈禮首選，讓感官與居家氛圍同步升級。`, 
+    },
+
+    info: {
+      brand: "清里焼酎醸造所", 
+      origin: "日本", 
+      rice: null,
+      yeast: null,
+      variety: null,
+      polish: null,
+      alcohol: "25%", 
+      volume: "700ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+    wineryId: "kiyosato"
+    },
+{
+      id: 91,
+      priority: 3, 
+      name: "北海道 清里 原酒 馬鈴薯燒酎",
+      type: "烈酒", 
+      category: "spirits",
+    imgs: [`${CDN}/91清里_原酒_馬鈴薯1.webp`,
+      `${CDN}/91清里_原酒_馬鈴薯2.webp`,
+      `${CDN}/91清里_原酒_馬鈴薯3.webp`,
+    ], 
+
+    price: 1750, 
+    originPrice: 1880, 
+
+    spec: "44度極限原酒，封存大麥與馬鈴薯最純粹的濃郁芳香", 
+
+    note: {
+      oneLine: `追求極致純淨的頂級傑作!
+	本款原酒堅持在雜味最少的關鍵時刻停止蒸餾，將酒精濃度鎖定在燒酎法規上限的44度，保留了最精華的初餾風味。
+	唯有原酒才能展現如此深邃的厚實口感與天然甜韻，香氣芳醇且層次飽滿，入口後那股強勁卻圓潤的穀物張力，令人聯想到高級威士忌的純粹。
+	無論是純飲、加冰，或是稀釋後依然鮮明的鮮爽感，都是獻給品味者最無與倫比的感官饗宴。`, 
+    },
+
+    info: {
+      brand: "清里焼酎醸造所", 
+      origin: "日本",
+      rice: null,
+      yeast: null,
+      variety: null,
+      polish: null,
+      alcohol: "44%", 
+      volume: "700ml"
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+    wineryId: "kiyosato" 
+    },
+{
+      id: 92,
+      priority: 4, 
+      name: "宮泉 玄武 米燒酎",
+      type: "烈酒",
+      category: "spirits", 
+    imgs: [`${CDN}/92玄武_米燒酎1.webp`,
+      `${CDN}/92玄武_米燒酎2.webp`,
+    ], 
+
+    price: 1080, 
+    originPrice: 1200, 
+
+    spec: "守護北方的水神之作，吟釀級黃麴釀出的米旨清甜", 
+
+    note: {
+      oneLine: `出自會津名門「宮泉銘釀」，這款僅在福島縣內限定流通的「玄武」米燒酎，蘊含著守護北方的深厚家國情懷。承襲日本酒釀造工藝，特別選用與清酒相同的「黃麴」製法，完美昇華了稻米的細膩旨味，並在末梢留下淡淡的甘甜餘韻，風味優雅且平易近人。
+	酒名致敬鎮守北方的水神，象徵著清澈如水的純淨酒質。無論是加冰純飲展現其清甜，或是兌入熱水激發醇厚米香，每一口都能品味到名門酒造對於「米」之靈魂的極致詮釋。`, 
+    },
+
+    info: {
+      brand: "宮泉銘釀",
+      origin: "日本", 
+      rice: null,
+      yeast: null,
+      variety: null,
+      polish: null,
+      alcohol: "25%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+    wineryId: "miyaizumi" 
+    },
+{
+      id: 93,
+      priority: 4, 
+      name: "宮泉 玄武 麥燒酎",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/93玄武_麥燒酎1.webp`,
+      `${CDN}/93玄武_麥燒酎2.webp`,
+    ], 
+
+    price: 1080, 
+    originPrice: 1200, 
+
+    spec: "麥香甘醇與米旨圓潤的完美揉合",
+
+    note: {
+      oneLine: `作為會津地區極具人氣的限定珍釀，這款「玄武」麥燒酎巧妙融合了職人工藝。在麥麴製作上採用白麴奠定清爽基調，並大膽混入以「日本酒黃麴製法」釀成的米燒酎，讓大麥的紮實甘甜中，多了一份米旨特有的圓潤厚實感。
+	口感初覺乾爽辛冽，隨後細緻的甜味在喉間慢節奏擴散，結構平衡且耐品不膩。
+	其名承襲鎮守北方的水神之意，承載著會津名門守護傳統的靈魂，無論冰飲或熱兌，都能感受這份跨越麥與米的層次美學。`, 
+    },
+
+    info: {
+      brand: "宮泉銘釀", 
+      origin: "日本", 
+      rice: null,
+      yeast: null,
+      variety: null,
+      polish: null,
+      alcohol: "25%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "miyaizumi" 
+    },
+{
+      id: 94,
+      priority: 4, 
+      name: "宮泉 皇貴玄武 清酒燒酎",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/94皇貴玄武1.webp`,
+      `${CDN}/94皇貴玄武2.webp`,
+    ], 
+
+    price: 2250, 
+    originPrice: 2550, 
+
+    spec: "40度極致醇厚，清酒工法與長期貯藏交織的高雅韻味。", 
+
+    note: {
+      oneLine: `這款頂級本格燒酎凝鍊了會津酒造的製麴與低溫貯藏精髓。嚴選精米步合70%的酒造好適米，採用獨特「仕次」手法將新酒逐年遞補入陳年槽中，歷經漫長時光熟成。透過單式減壓蒸餾，完美封存源自清酒的高雅香氣與深邃米旨。
+	40度的高酒精濃度不僅不刺喉，反而展現出絲綢般的沉穩圓潤感與細緻餘韻。建議以加冰或兌水飲用，在冰塊融化間，感受層層釋放的濃郁芳醇，是獻給燒酎鑑賞家的深度傑作。`, 
+    },
+
+    info: {
+      brand: "宮泉銘釀", 
+      origin: "日本", 
+      rice: null,
+      yeast: null,
+      variety: null,
+      polish: null,
+      alcohol: "40%", 
+      volume: "720ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "miyaizumi" 
+    }
 ]
 if (typeof window !== 'undefined') { window.products = products; }
