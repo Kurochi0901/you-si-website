@@ -3458,3 +3458,97 @@ body.age-overlay-active{ overflow:hidden; }
   .cat-faq-item summary::after{ right:14px; width:22px; height:22px; font-size:16px; }
   .cat-faq-item > p{ padding:0 16px 16px; font-size:14px; }
 }
+
+/* ============ 折扣碼區塊（結帳頁） ============ */
+.coupon-block{
+  margin-top:14px;
+  padding:14px;
+  border:1px solid rgba(92,74,50,0.18);
+  border-radius:10px;
+  background:rgba(255,253,248,0.6);
+}
+.coupon-title{
+  font-size:14px;
+  font-weight:700;
+  color:#5c4a32;
+  margin-bottom:10px;
+}
+.coupon-form{
+  display:flex;
+  gap:8px;
+}
+.coupon-input{
+  flex:1;
+  min-width:0;
+  padding:9px 12px;
+  border:1px solid rgba(92,74,50,0.3);
+  border-radius:8px;
+  font-size:14px;
+  background:#fff;
+  color:#3a2e1f;
+  letter-spacing:0.5px;
+  font-family:inherit;
+}
+.coupon-input:focus{
+  outline:none;
+  border-color:#5c4a32;
+  box-shadow:0 0 0 2px rgba(92,74,50,0.15);
+}
+.coupon-apply-btn{
+  padding:9px 18px;
+  background:#5c4a32;
+  color:#fff;
+  border:0;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:background 0.2s;
+  white-space:nowrap;
+}
+.coupon-apply-btn:hover{ background:#3a2e1f; }
+.coupon-apply-btn:disabled{ opacity:0.5; cursor:not-allowed; }
+.coupon-msg{
+  margin-top:8px;
+  font-size:13px;
+  min-height:18px;
+  line-height:1.4;
+}
+.coupon-msg.is-ok{ color:#2f7d3a; }
+.coupon-msg.is-err{ color:#b43c3c; }
+.coupon-applied{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:8px 12px;
+  background:rgba(47,125,58,0.08);
+  border:1px solid rgba(47,125,58,0.25);
+  border-radius:8px;
+}
+.coupon-applied-tag{
+  font-size:13px;
+  font-weight:700;
+  color:#2f7d3a;
+  white-space:nowrap;
+}
+.coupon-applied-name{
+  flex:1;
+  min-width:0;
+  font-size:13px;
+  color:#3a2e1f;
+}
+.coupon-remove-btn{
+  padding:5px 12px;
+  background:transparent;
+  color:#b43c3c;
+  border:1px solid rgba(180,60,60,0.4);
+  border-radius:6px;
+  font-size:12px;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.coupon-remove-btn:hover{
+  background:#b43c3c;
+  color:#fff;
+}

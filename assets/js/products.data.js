@@ -3914,6 +3914,567 @@ const products = [
     
 
     wineryId: "miyaizumi" 
-    }
+    },
+    {
+      id: 104,
+      priority: 4, 
+      name: "梅侍純釀 紅烏龍梅酒",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/104小梅侍紅烏龍1.webp`,
+      `${CDN}/104小梅侍通用1.webp`,
+      `${CDN}/104小梅侍通用2.webp`,
+    ], 
+
+    price: 405, 
+    originPrice: 480, 
+
+    spec: "鮮明的蜜香與茶澀風味，交織梅果酸甜",
+
+    note: {
+      oneLine: `與龍芳茶園製茶三代廖柏榮師傅合作。
+
+	紅烏龍茶的特色在於結合烏龍茶與紅茶工藝，呈現「茶湯橙紅」如紅茶般的外觀，但帶有鳥龍茶的茶質厚重具熟果香，滋味醇厚圓滑、富有活性的特色，
+
+	紅烏龍茶的熟果香和焙火蜜甜香， 融合青梅的酸甜果韻，口感圓潤甘甜、滋味醇厚。入口瞬間，紅烏龍特有的的圓潤蜜香與青梅的清爽酸甜在舌尖交織，形成豐富且富有層次的口感。尾韻不僅帶有茶湯的回甘，更伴隨著迷人的熟果香氣。這是一瓶無論獨酌或搭餐，都能為您帶來深邃且悠長回味的美好之作。
+
+	原料：台灣產精選梅、紅烏龍茶、糖`, 
+    },
+
+    info: {
+      brand: "梅侍", 
+      origin: "台灣・南投縣青梅・台東鹿谷紅烏龍茶", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "10%", 
+      volume: "250ml" 
+    },
+
+    scale: {  
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 4,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "plumate" 
+    },
+{
+      id: 105,
+      priority: 3,
+      name: "梅侍純釀 東方美人茶梅酒",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/105小東方美人1.webp`,
+      `${CDN}/104小梅侍通用1.webp`,
+      `${CDN}/104小梅侍通用2.webp`,
+      ], 
+
+      price: 405, 
+      originPrice: 480, 
+
+      spec: "蜜香美人茶韻遇上甘潤梅果", 
+
+      note: {
+        oneLine: `🏆2024年 ISC國際烈酒大賽 金牌
+	🏆選用世界19冠金牌製茶師 張家齊師傅 的茶葉
+
+	全程不額外添加酒精，以自然發酵將糖分轉化為酒精，風味純淨自然。
+
+	嚴選東方美人茶入釀，天然蜜香與熟成果韻交織，襯托清甜梅果酸香。
+	入口圓潤柔順，花果茶韻層層綻放，
+	尾韻甘潤悠長，展現優雅細緻的茶梅酒風味。
+
+	原料：台灣產精選梅、東方美人茶、糖`, 
+      },
+
+      info: {
+        brand: "梅侍",
+        origin: "台灣・南投縣青梅・竹苗東方美人茶",
+        rice: null,
+        yeast: null, 
+        variety: null,
+        polish: null,
+        alcohol: "10%", 
+        volume: "250ml" 
+      },
+
+      scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,
+      
+        ftAcidSweet: 3,
+        ftFreshRich: 3,
+      
+        wineTannin: null,
+        wineFreshFull: null
+      },
+      
+
+      wineryId: "plumate"
+    },
+{
+      id: 106,
+      priority: 3, 
+      name: "梅侍純釀 凍頂烏龍茶梅酒",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/106小凍頂烏龍1.webp`,
+      `${CDN}/104小梅侍通用1.webp`,
+      `${CDN}/104小梅侍通用2.webp`,
+      ], 
+
+      price: 405, 
+      originPrice: 480, 
+
+      spec: "焙香烏龍尾韻醇厚", 
+
+      note: {
+        oneLine: `🏆2024年 ISC國際烈酒大賽 銀牌
+
+	全程不額外添加酒精，以自然發酵將糖分轉化為酒精，風味純淨自然。
+
+	嚴選凍頂烏龍入酒，焙火茶香沉穩迷人，揉合熟成梅果的圓潤酸甜。
+	入口厚實滑順，茶韻與梅韻層層交織，
+	尾韻帶微焙甘香，溫潤悠長、風味深邃耐飲。
+
+	原料：台灣產精選梅、凍頂烏龍茶、糖`, 
+      },
+
+      info: {
+        brand: "梅侍", 
+        origin: "台灣・南投縣青梅・南投縣凍頂烏龍茶", 
+        rice: null,
+        yeast: null, 
+        variety: null,
+        polish: null,
+        alcohol: "10%", 
+        volume: "250ml" 
+      },
+
+      scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 4,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+      },
+      
+
+      wineryId: "plumate"
+    },
+{
+      id: 107,
+      priority: 3,
+      name: "梅侍純釀 紅玉紅茶梅酒",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/107小紅玉紅茶1.webp`,
+      `${CDN}/104小梅侍通用1.webp`,
+      `${CDN}/104小梅侍通用2.webp`,
+      ], 
+
+      price: 375, 
+      originPrice: 435,
+
+      spec: "紅玉茶香與梅韻圓潤酸甜", 
+
+      note: {
+        oneLine: `🏆2024年 IWSC國際烈酒競賽 銀獎
+	🏆2024年 ISC國際烈酒競賽 銅牌
+	
+	全程不額外添加酒精，自然發酵將糖分轉化為酒精，風味純淨自然。
+
+	開瓶即散發濃郁紅玉紅茶香，帶有如肉桂果茶般的溫潤辛香，
+	隨後浮現清雅梅韻，香氣層次分明。
+	入口圓潤滑順，酸甜柔和，茶韻與梅香交織，
+	尾韻乾淨悠長，溫暖而耐人回味。
+
+	原料：台灣產精選梅、紅玉紅茶、糖`,
+      },
+
+      info: {
+        brand: "梅侍",
+        origin: "台灣・南投縣青梅・南投縣紅玉紅茶", 
+        rice: null, 
+        yeast: null, 
+        variety: null,
+        polish: null,
+        alcohol: "10%", 
+        volume: "250ml" 
+      },
+
+      scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null, 
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 3, 
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+      },
+      
+
+      wineryId: "plumate" 
+    },
+{
+      id: 108,
+      priority: 3, 
+      name: "梅侍純釀 碧螺春綠茶梅酒",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/108小碧螺春綠1.webp`,
+      `${CDN}/104小梅侍通用1.webp`,
+      `${CDN}/104小梅侍通用2.webp`,
+      ], 
+
+      price: 375, 
+      originPrice: 435, 
+
+      spec: "碧螺春與梅韻交錯清爽甘甜",
+
+      note: {
+        oneLine: `全程不額外添加酒精，以自然發酵將糖分轉化為酒精，風味純淨自然。
+
+	碧螺春鮮雅茶香，交織清新的酸甜梅果氣息。
+	入口清爽滑順，綠茶的鮮活與梅酒的圓潤果韻相互襯托，
+	層次細緻展開，尾韻帶出柔和甘甜與淡雅茶香，清新而耐人回味。
+
+	原料：台灣產精選梅、碧螺春綠茶、糖`,
+      },
+
+      info: {
+        brand: "梅侍",
+        origin: "台灣・南投縣青梅・新北市碧螺春綠茶", 
+        rice: null, 
+        yeast: null, 
+        variety: null,
+        polish: null,
+        alcohol: "10%", 
+        volume: "250ml" 
+      },
+
+      scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 2,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+      },
+      
+
+      wineryId: "plumate" 
+    },
+{
+      id: 109,
+      priority: 3, 
+      name: "梅侍純釀 香米梅酒",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/109小香米1.webp`,
+      `${CDN}/104小梅侍通用1.webp`,
+      `${CDN}/104小梅侍通用2.webp`,
+      ], 
+
+      price: 375, 
+      originPrice: 435, 
+
+      spec: "台稉米香與梅果交融", 
+
+      note: {
+        oneLine: `🏆2025年 IWSC國際大賽 金牌
+	🏆2025年 SFWSC 舊金山烈酒大賽 銀牌
+	🏆2025年 ISC國際烈酒競賽 銅牌
+
+	全程不額外添加酒精，以自然發酵將糖分轉化為酒精，風味純淨自然。
+
+	以花蓮玉里台稉4號香米純釀，融合台灣梅果自然酸甜。
+	酒液清澈，米香清雅先引，隨即轉為明亮梅果風味，
+	清爽順口，尾韻帶出鮮米甜韻，層次細緻且宜人。
+
+	原料：香米、台灣產精選梅、糖`, 
+      },
+
+      info: {
+        brand: "梅侍",
+        origin: "台灣・南投縣精選梅・花蓮梗米",
+        rice: null, 
+        yeast: null, 
+        variety: null,
+        polish: null,
+        alcohol: "10%", 
+        volume: "250ml" 
+      },
+
+      scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 3,  
+      
+        wineTannin: null, 
+        wineFreshFull: null 
+      },
+      
+
+      wineryId: "plumate" 
+    },
+{
+      id: 110,
+      priority: 3,
+      name: "梅侍純釀 果泥梅酒",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/110小果泥1.webp`,
+      `${CDN}/104小梅侍通用1.webp`,
+      `${CDN}/104小梅侍通用2.webp`,
+      ], 
+
+      price: 360,
+      originPrice: 420,
+
+      spec: "果泥濃郁，梅香層次豐富", 
+
+      note: {
+        oneLine: `🏆2025年 ISC國際烈酒競賽 金牌
+	🏆2024年 IWSC國際烈酒競賽 銀獎
+
+	全程不額外添加酒精，以自然發酵將糖分轉化為酒精，風味純淨自然。
+
+	在梅酒基底加入去核梅果泥，使梅香更鮮明且層次豐富。
+	入口果香酸甜交織，質地厚實微濁，梅子原始風味完整保留，
+	尾韻果香悠揚回甘，是一款富果感與風味深度的台灣純釀梅酒。
+
+	原料：台灣產精選梅、台灣梅果泥、砂糖`, 
+      },
+
+      info: {
+        brand: "梅侍", 
+        origin: "台灣・南投縣精選梅", 
+        rice: null, 
+        yeast: null,
+        variety: null,
+        polish: null,
+        alcohol: "10%", 
+        volume: "250ml" 
+      },
+
+      scale: {   
+        sakeDrySweet: null,
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 4,  
+      
+        wineTannin: null,  
+        wineFreshFull: null 
+      },
+      
+
+      wineryId: "plumate" 
+    },
+{
+      id: 111,
+      priority: 4, 
+      name: "末廣 微發泡清酒",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/111末廣微發泡300_1.webp`,
+      `${CDN}/111末廣微發泡300_2.webp`,
+      ], 
+
+      price: 430,
+      originPrice: 480,
+
+      spec: "天然微氣泡與清爽酸甜，解膩首選",
+
+      note: {
+        oneLine: `採瓶內二次發酵封存自然氣泡，風味甘口。
+	鮮活微氣泡與清爽甜味相輔相成，低酒精且酸甜平衡，深受女性喜愛。搭配濃郁料理能解膩增鮮，也可以搭配清爽沙拉、蒸雞肉前菜等清爽料理。是款入喉柔順、能為味蕾增添清新層次的輕盈餐酒。
+
+	日本酒度：-19～-21（甘口）`,
+      },
+
+    info: {
+      brand: "末廣",
+      origin: "日本", 
+      rice: "國產米", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"73%",
+      alcohol: "8.5%",
+      volume: "300ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 5, 
+        sakeUmamiFruity: 3, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "suehiro" 
+    },
+{
+      id: 112,
+      priority: 4, 
+      name: "小左衛門 純米 壽司標",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/112小左衛門壽司標300_1.webp`,
+      `${CDN}/112小左衛門壽司標300_2.webp`,
+      ], 
+
+      price: 500,
+      originPrice: 600,
+
+      spec: "山田錦細緻米香，壽司餐酒不二之選",
+
+      note: {
+        oneLine: `選用頂級山田錦，展現純米酒飽滿旨味與俐落酸度，與壽司風味完美契合。
+	香氣帶有淡雅香蕉果韻，入口溫潤順暢。無論冷飲或溫酒皆適宜，酸度平衡讓口感如流水般清爽，是提升餐桌風味、聚會共享的理想食中酒。`,
+      },
+
+    info: {
+      brand: "中島・小左衛門",
+      origin: "日本", 
+      rice: "山田錦", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"65%",
+      alcohol: "15%", 
+      volume: "300ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 2, 
+        sakeUmamiFruity: 2, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "nakajima" 
+    },
+{
+      id: 113,
+      priority: 3, 
+      name: "安藝虎 純米吟釀 素 發泡生酒",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/113安藝虎_素330_1.webp`,
+      `${CDN}/113安藝虎_素330_2.webp`,
+      ], 
+
+      price: 620,
+      originPrice: 780,
+
+      spec: "蜜蘋果香與綿密氣泡，如白酒般甘甜",
+
+      note: {
+        oneLine: `初聞花果香氣奔放，中後段米的香甜味湧出，搭配氣泡感十分引人入勝；建議配置為取代原本洋食搭配的香檳類，將有意想不到的效果！
+	包裝上刻意用啤酒瓶，主要是生酒希望客人開瓶後一次飲用完畢，具有蜜蘋果、香瓜的及淡淡的乳酸香氣，氣泡感綿密，甜度十分明顯，初嚐有如氣泡白酒般地甘甜，但其尾韻仍舊具有日本酒由米釀製出來特有的旨味，引人入勝。
+
+	日本酒度：-10（甘口）；酸度：1.7`,
+      },
+
+    info: {
+      brand: "有光・安藝虎",
+      origin: "日本", 
+      rice: "岡山產朝日", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"50%",
+      alcohol: "14%", 
+      volume: "330ml"
+    },
+
+    scale: {   
+        sakeDrySweet: 4, 
+        sakeUmamiFruity: 4, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "arimitsu" 
+    },
+{
+      id: 114,
+      priority: 3, 
+      name: "安藝虎 純米大吟釀",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/114安藝虎_純米大300_1.webp`,
+      `${CDN}/114安藝虎_純米大300_2.webp`,
+      ], 
+
+      price: 830,
+      originPrice: 950,
+
+      spec: "蜜蘋果香與綿密氣泡，如白酒般甘甜",
+
+      note: {
+        oneLine: `🏆2022 全美日本酒歡評會 吟釀部門 金賞
+
+	專為台灣打造的限定「純米大吟釀」，是安藝虎系列最長銷的經典傑作。
+	香氣奔放多變，交織著草莓、香蕉貽與紫羅蘭的花果韻味，並帶有些許乳酸與稻桿的自然層次。在 15-20°C 飲用最能體現其細緻飽滿的酒體，風味優雅迷人。
+
+	日本酒度：3（稍微辛口）`,
+      },
+
+    info: {
+      brand: "有光・安藝虎",
+      origin: "日本", 
+      rice: "松山三井", 
+      yeast: "未公開", 
+      variety: null,
+      polish:"50%",
+      alcohol: "15%",
+      volume: "300ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 4, 
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "arimitsu" 
+    },
 ]
 if (typeof window !== 'undefined') { window.products = products; }

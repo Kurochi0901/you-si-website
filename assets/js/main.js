@@ -1385,9 +1385,12 @@ function applyPromotions(ctx){
   let total = ctx.subtotal, discountTotal = 0;
   const applied = [];
 
+  // 折扣碼包裝成條件式 promotion 後一併參與評選
+  const activePromos = PROMOTIONS.concat(getActiveCouponPromotions());
+
   // 不可疊加：取折抵金額最大的那個
   let bestExclusive = null, bestDiscount = 0;
-  PROMOTIONS.filter(p => !p.stackable).forEach(p => {
+  activePromos.filter(p => !p.stackable).forEach(p => {
     if(p.condition(ctx)){
       const discount = p.apply(ctx);
       if(discount > bestDiscount){ bestDiscount = discount; bestExclusive = p; }
@@ -1399,7 +1402,7 @@ function applyPromotions(ctx){
   }
 
   // 可疊加：全部套用
-  PROMOTIONS.filter(p => p.stackable).forEach(p => {
+  activePromos.filter(p => p.stackable).forEach(p => {
     if(p.condition(ctx)){
       const discount = p.apply(ctx);
       total -= discount; discountTotal += discount; 
@@ -1409,6 +1412,130 @@ function applyPromotions(ctx){
 
   return { finalTotal: total, discount: discountTotal, applied };
 }
+
+/* ===== 11-b. 折扣碼引擎 ===== */
+
+const COUPON_STORAGE_KEY  = "activeCouponHash";
+
+/** SHA-256 → 16 進位字串 */
+async function sha256Hex(str){
+  const buf  = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest("SHA-256", buf);
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+/** 取得當前已啟用的折扣碼定義（用 sessionStorage 的 hash 反查） */
+function getActiveCoupon(){
+  if (!window.COUPONS) return null;
+  const hash = sessionStorage.getItem(COUPON_STORAGE_KEY);
+  if (!hash) return null;
+  return window.COUPONS.find(c => c.hash === hash) || null;
+}
+
+/** 將已啟用折扣碼包裝成 promotion 陣列，供 applyPromotions 統一評選 */
+function getActiveCouponPromotions(){
+  const coupon = getActiveCoupon();
+  if (!coupon) return [];
+  return [{
+    id:        coupon.id,
+    label:     coupon.label,
+    stackable: coupon.stackable === true,  // 預設不可疊加
+    condition: () => true,
+    apply(ctx){
+      const targetIds = coupon.targetIds || [];
+      const targetSub = ctx.items
+        .filter(i => targetIds.includes(i.id))
+        .reduce((s, p) => s + p.price * p.qty, 0);
+      const otherSub  = ctx.subtotal - targetSub;
+      return Math.round(targetSub * coupon.rateTarget + otherSub * coupon.rateDefault);
+    }
+  }];
+}
+
+/** 嘗試套用折扣碼；回傳 { ok, message } */
+async function applyCouponCode(rawInput){
+  const input = (rawInput || "").trim();
+  if (!input) return { ok: false, message: "請輸入折扣碼" };
+
+  if (!window.COUPONS) return { ok: false, message: "折扣碼系統未載入，請重整頁面" };
+
+  const hash    = await sha256Hex(input);
+  const matched = window.COUPONS.find(c => c.hash === hash);
+
+  if (!matched) {
+    return { ok: false, message: "折扣碼無效" };
+  }
+
+  sessionStorage.setItem(COUPON_STORAGE_KEY, hash);
+  return { ok: true, message: "折扣碼已套用", coupon: matched };
+}
+
+/** 移除已套用的折扣碼 */
+function removeCoupon(){
+  sessionStorage.removeItem(COUPON_STORAGE_KEY);
+}
+
+/** 渲染折扣碼 UI（#couponBlock） */
+function renderCouponBlock(){
+  const box = document.getElementById("couponBlock");
+  if (!box) return;
+
+  const coupon = getActiveCoupon();
+  if (coupon) {
+    box.innerHTML = `
+      <div class="coupon-title">🎟️ 折扣碼</div>
+      <div class="coupon-applied">
+        <span class="coupon-applied-tag">✓ 已套用</span>
+        <span class="coupon-applied-name">${coupon.label}</span>
+        <button type="button" class="coupon-remove-btn" onclick="handleRemoveCoupon()">移除</button>
+      </div>
+    `;
+  } else {
+    box.innerHTML = `
+      <div class="coupon-title">🎟️ 折扣碼</div>
+      <div class="coupon-form">
+        <input type="text" class="coupon-input" id="couponInput" placeholder="請輸入折扣碼" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();handleApplyCoupon();}">
+        <button type="button" class="coupon-apply-btn" onclick="handleApplyCoupon()">套用</button>
+      </div>
+      <div class="coupon-msg" id="couponMsg"></div>
+    `;
+  }
+}
+
+/** 套用按鈕 handler */
+async function handleApplyCoupon(){
+  const input = document.getElementById("couponInput");
+  const msg   = document.getElementById("couponMsg");
+  if (!input) return;
+  const res = await applyCouponCode(input.value);
+  if (msg) {
+    msg.textContent = res.message;
+    msg.className   = "coupon-msg " + (res.ok ? "is-ok" : "is-err");
+  }
+  if (res.ok) {
+    renderCouponBlock();
+    refreshAllCartUI();
+  }
+}
+
+/** 移除按鈕 handler */
+function handleRemoveCoupon(){
+  removeCoupon();
+  renderCouponBlock();
+  refreshAllCartUI();
+}
+
+/** 折扣碼套用後刷新所有相關 UI */
+function refreshAllCartUI(){
+  if (typeof updateCartUI === "function") updateCartUI();
+  if (document.getElementById("cartMini")) renderCartMini();
+  renderPromotionBlock();
+}
+
+// 暴露給 inline onclick 使用
+window.handleApplyCoupon  = handleApplyCoupon;
+window.handleRemoveCoupon = handleRemoveCoupon;
 
 /**
  * 渲染促銷區塊（#promotionBlock）

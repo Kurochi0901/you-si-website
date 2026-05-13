@@ -273,7 +273,15 @@
         <h3>購物車內容</h3>
 
         <div id="cartMini"></div>
+        <div id="couponBlock" class="coupon-block"></div>
         <div id="promotionBlock" class="promotion-block"></div>
+
+        <script>
+          // 等 promotions.bridge.js (module) 載入 COUPONS 後再渲染
+          window.addEventListener("load", () => {
+            if (typeof renderCouponBlock === "function") renderCouponBlock();
+          });
+        </script>
 
 
         <!-- <div style="margin-top:18px">
