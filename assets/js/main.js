@@ -1495,7 +1495,7 @@ function renderCouponBlock(){
     box.innerHTML = `
       <div class="coupon-title">🎟️ 折扣碼</div>
       <div class="coupon-form">
-        <input type="text" class="coupon-input" id="couponInput" placeholder="請輸入折扣碼" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();handleApplyCoupon();}">
+        <input type="text" class="coupon-input" id="couponInput" size="1" placeholder="請輸入折扣碼" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();handleApplyCoupon();}">
         <button type="button" class="coupon-apply-btn" onclick="handleApplyCoupon()">套用</button>
       </div>
       <div class="coupon-msg" id="couponMsg"></div>
