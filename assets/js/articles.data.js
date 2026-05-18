@@ -22,7 +22,19 @@ const articles = [
     mainTags: ["酉時圖書館"],
     subTags: ["日本酒"],
     relatedProductIds: [80, 32, 44, 63, 58]
-  }
+  },
+  {
+    id: 3,
+    slug: "invited-to-share-by-tcyd",
+    title: "受邀臺北市青年局分享：回首創業起點，用真實故事啟發更多追夢青年",
+    excerpt: "從酒與茶的知識起點出發，酉時喝酒如何將專業轉化為禁得起市場檢驗的商業實踐",
+    cover: "/assets/images/blog/id3封面.webp",
+    date: "2026/05/18",
+    author: "酉時喝酒",
+    mainTags: ["酉時快訊"],
+    subTags: [],
+    relatedProductIds: []
+  },
 
 ];
 // 強制掛載到全域 window 物件以確保跨腳本讀取
