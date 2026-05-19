@@ -160,16 +160,24 @@
       <div class="ys-copy-row">
         <div>
           <div class="ys-copy-status is-ok" data-role="copyStatus">已複製訂單內容</div>
-          <div class="ys-copy-hint" data-role="copyHint">請點『前往 LINE』並直接貼上即可。</div>
+          <div class="ys-copy-hint" data-role="copyHint">訂單內容已複製，請依下方步驟完成下單。</div>
         </div>
       </div>
 
       <textarea id="orderSummaryText" class="ys-summary" readonly></textarea>
 
-      <div class="ys-modal-actions">
-        <!-- <button class="ys-btn" type="button" onclick="copyOrderSummaryFromModal()">再次複製</button> -->
-        <a id="goLineAfterOrder" class="ys-btn ys-btn-primary" href="#" target="_blank" rel="noopener">
-          前往 LINE
+      <div style="margin-top:14px; padding:14px 16px; background:rgba(184,154,106,0.10); border:1px solid rgba(184,154,106,0.35); border-radius:4px; font-size:13.5px; line-height:1.85; color:#5c4a32;">
+        依台灣法規，酒類訂單需確認購買者為<strong>年滿 18 歲本人</strong>。<br>
+        ・<strong>首次於酉時喝酒下單：</strong>請先完成身分驗證，僅需一次。<br>
+        ・<strong>已完成驗證的老顧客：</strong>可直接前往 LINE 貼上訂單。
+      </div>
+
+      <div class="ys-modal-actions" style="flex-direction:column; gap:10px; align-items:stretch;">
+        <a id="goVerifyAfterOrder" class="ys-btn ys-btn-primary" href="#" target="_blank" rel="noopener" style="text-align:center;">
+          🪪 前往身分驗證（首次下單）
+        </a>
+        <a id="goLineAfterOrder" class="ys-btn" href="#" target="_blank" rel="noopener" style="text-align:center;">
+          💬 已完成驗證・前往 LINE 貼上訂單
         </a>
         <button class="ys-btn ys-btn-ghost" type="button" onclick="closeOrderSuccessModal({goHome:true})">回首頁</button>
       </div>

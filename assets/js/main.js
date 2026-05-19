@@ -1796,11 +1796,25 @@ function openOrderSuccessModal({ lineUrl, copiedOK, summary }){
   const statusHint = modal.querySelector("[data-role='copyHint']");
   const txt        = document.getElementById("orderSummaryText");
   const goLine     = document.getElementById("goLineAfterOrder");
+  const goVerify   = document.getElementById("goVerifyAfterOrder");
 
   if(txt)    txt.value  = summary || "";
   if(goLine) {
     goLine.href = lineUrl || "#";
-    goLine.onclick = () => trackEvent('click_line', { method: 'LINE', source: 'order_success_modal' });
+    goLine.onclick = () => trackEvent('click_line', { method: 'LINE', source: 'order_success_modal', verified: 'existing_customer' });
+  }
+  if(goVerify) {
+    // 身分驗證頁網址
+    const VERIFY_URL = "https://yousi-kyc-form.vercel.app/";
+    const orderNo = "YS" + new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 14);
+    const name  = (document.getElementById("order-name")?.value  || "").trim();
+    const phone = (document.getElementById("order-phone")?.value || "").trim();
+    const params = new URLSearchParams();
+    params.set("order", orderNo);
+    if(name)  params.set("name", name);
+    if(phone) params.set("phone", phone);
+    goVerify.href = VERIFY_URL + (VERIFY_URL.includes("?") ? "&" : "?") + params.toString();
+    goVerify.onclick = () => trackEvent('click_verify', { source: 'order_success_modal', order_no: orderNo });
   }
   if(status){
     status.classList.remove("is-ok", "is-fail");
