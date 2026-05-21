@@ -19,28 +19,28 @@ export const PROMOTIONS = [
   /* =============================
      慶祝官網上架：滿 3 瓶全面 9 折
   ============================= */
-  {
-    id: "grand-opening-3-90",
-    type: "quantity",
-    stackable: false, // 與其他不可疊加優惠擇優
+  // {
+  //   id: "grand-opening-3-90",
+  //   type: "quantity",
+  //   stackable: false, // 與其他不可疊加優惠擇優
 
-    label: "慶祝官網上架：滿 3 瓶全面 9 折",
-    description: "全站商品任選 3 件（含）以上，總金額享 9 折優惠",
+  //   label: "慶祝官網上架：滿 3 瓶全面 9 折",
+  //   description: "全站商品任選 3 件（含）以上，總金額享 9 折優惠",
 
-    hint: {
-      kind: "quantity",
-      minQty: 3
-    },
+  //   hint: {
+  //     kind: "quantity",
+  //     minQty: 3
+  //   },
 
-    condition(ctx) {
-      return ctx.totalQty >= 3;
-    },
+  //   condition(ctx) {
+  //     return ctx.totalQty >= 3;
+  //   },
 
-    apply(ctx) {
-      // 全面 9 折 = 折抵 10%
-      return Math.round(ctx.subtotal * 0.1);
-    }
-  },
+  //   apply(ctx) {
+  //     // 全面 9 折 = 折抵 10%
+  //     return Math.round(ctx.subtotal * 0.1);
+  //   }
+  // },
 
   /* =============================
      滿 2800 送開運御守

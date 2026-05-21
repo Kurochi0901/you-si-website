@@ -528,7 +528,6 @@ function _showAgeOverlay(){
       <div class="kicker">年齡確認</div>
       <h1 style="margin:8px 0 10px; font-size:24px;">請確認你已滿 18 歲</h1>
       <p>依法律規定，未滿法定飲酒年齡者請勿瀏覽本網站。</p>
-      <p style="color:#b43c3c; font-weight:600; font-size:0.95em; margin-bottom:18px;">✨ 慶祝酉時喝酒官網上架！消費滿 3 瓶全面 9 折，立即挑選心儀酒款</p>
       <div class="age-overlay-actions">
         <button class="btn btn-primary" onclick="_confirmAge()">我已滿 18 歲，進入網站</button>
         <button class="btn" onclick="_denyAge()">我未滿 18 歲</button>
