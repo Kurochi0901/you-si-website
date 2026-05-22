@@ -361,6 +361,7 @@ p{ color:var(--muted); line-height:1.9; margin:10px 0; }
   cursor:pointer;
   background:linear-gradient(90deg, var(--accent), var(--accent2));
   color:#fff;
+  white-space:nowrap;
 }
 
 /* ===== Controls ===== */
@@ -2507,14 +2508,23 @@ body.modal-open{ overflow:hidden; }
 
   /* 3) 圖片區固定寬度（就算沒圖也不會撐爆高度） */
   .card-media{
-    flex: 0 0 120px;                  /* 略微加大寬度以符合截圖比例 */
-    width: 120px;
+    flex: 0 0 125px;                  /* 略微加大寬度以符合截圖比例 */
+    width: 125px;
     aspect-ratio: 1 / 1;              /* momo 常見：方形縮圖 */
     border-radius: 14px;
-    margin: 10px;                     /* 簡化 margin，保持四周間距 */
+    margin: 10px 0 10px 10px;         /* 右側 margin 取消，讓 body 多空間 */
     background: #fff;
     border: 1px solid rgba(0,0,0,.06);
   }
+
+  /* 加入購物車按鈕：固定切齊卡片右邊 */
+  .card-meta{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: 10px;
+  }
+  .card-meta .price-wrap{ min-width: 0; }
 
   .card-media img{
     object-fit: contain;               /* 👈 改為 contain 以避免所有比例的圖片被裁切 */
@@ -2525,7 +2535,7 @@ body.modal-open{ overflow:hidden; }
   .card-body{
     flex: 1 1 auto;
     min-width: 0;                     /* 重要：允許文字省略 */
-    padding: 10px 12px 10px 0;        /* 右側留白，左側靠圖 */
+    padding: 10px 4px 10px 0;         /* 右側留白縮小，按鈕更靠右 */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -3578,4 +3588,312 @@ body.age-overlay-active{ overflow:hidden; }
 .coupon-remove-btn:hover{
   background:#b43c3c;
   color:#fff;
+}
+
+/* =========================================================
+   ✅ SEO 用：視覺隱藏但保留給搜尋引擎讀取
+========================================================= */
+.visually-hidden{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+/* =========================================================
+   ✅ Hero Carousel（首頁主視覺輪播）
+   策略：容器寬度封頂 + slide 用圖片自身比例 → 圖片永遠完美填滿
+========================================================= */
+.hero-carousel{
+  position:relative;
+  width:100%;
+  max-width:1200px;        /* ⬅️ 桌機封頂寬度，可調 */
+  margin:0 auto;           /* ⬅️ 置中 */
+  overflow:hidden;
+  background:#f3ede4;
+  border-bottom:1px solid rgba(0,0,0,.04);
+}
+.hero-carousel-track{
+  display:flex;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+.hero-slide{
+  flex:0 0 100%;
+  width:100%;
+  position:relative;
+  /* 桌機：1920×550 寬版圖；背景圖由 --bg-desktop CSS 變數注入 */
+  aspect-ratio: 1920 / 550;
+  background-image: var(--bg-desktop);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-color:#f3ede4;
+}
+/* 手機（≤640px）：改用 750×600 直版圖；若沒給手機圖則退回桌機版 */
+@media (max-width:640px){
+  .hero-slide{
+    aspect-ratio: 750 / 550;
+    background-image: var(--bg-mobile, var(--bg-desktop));
+  }
+}
+.hero-slide a.hero-slide-link{
+  position:absolute;
+  inset:0;
+  display:block;
+  text-indent:-9999px;
+  z-index:2;
+}
+.hero-carousel-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:rgba(255,255,255,.7);
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:5;
+  font-size:20px;
+  color:#5c4a32;
+  transition:background .2s;
+  line-height:1;
+  padding:0;
+}
+.hero-carousel-arrow:hover{ background:rgba(255,255,255,.95); }
+.hero-carousel-arrow.prev{ left:16px; }
+.hero-carousel-arrow.next{ right:16px; }
+
+.hero-carousel-dots{
+  position:absolute;
+  bottom:14px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+  z-index:5;
+}
+.hero-carousel-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:rgba(255,255,255,.55);
+  border:none;
+  cursor:pointer;
+  padding:0;
+  transition:background .2s, width .2s;
+}
+.hero-carousel-dot.active{
+  background:#fff;
+  width:24px;
+  border-radius:5px;
+}
+@media (max-width:640px){
+  .hero-carousel-arrow{ width:36px; height:36px; font-size:16px; }
+  .hero-carousel-arrow.prev{ left:8px; }
+  .hero-carousel-arrow.next{ right:8px; }
+  .hero-carousel-dots{ bottom:8px; }
+}
+
+/* 促銷活動卡片 */
+.promo-card{
+  background:linear-gradient(135deg,#fff8ee,#fdf1de);
+  border:1px solid #e8d4a9;
+  border-radius:12px;
+  padding:24px;
+  margin-bottom:24px;
+}
+.promo-card h3{ margin:0; color:#8b6a3a; font-size:20px; }
+.promo-card .promo-meta{
+  font-size:13px;
+  color:#888;
+  margin:8px 0 12px 0;
+}
+.promo-card p{ margin:0 0 16px 0; line-height:1.8; color:#5c4a32; }
+
+/* 卡片標題列（標題 + 狀態徽章） */
+.promo-card-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:4px;
+}
+
+/* 狀態徽章 */
+.promo-badge{
+  font-size:12px;
+  font-weight:600;
+  padding:3px 10px;
+  border-radius:999px;
+  letter-spacing:.03em;
+  line-height:1.4;
+  white-space:nowrap;
+}
+.badge-active{   background:#d4edda; color:#28733a; border:1px solid #b6dcc1; }
+.badge-upcoming{ background:#fff3cd; color:#856404; border:1px solid #f0dfa1; }
+.badge-ended{    background:#e9ecef; color:#6c757d; border:1px solid #ced4da; }
+
+/* 活動 banner 圖（卡片內） */
+.promo-banner{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+  border-radius:8px;
+  margin-top:8px;
+}
+
+/* 結束狀態的卡片：整體褪色 */
+.promo-card.is-ended{
+  background:#f6f6f6;
+  border-color:#e0e0e0;
+  opacity:.85;
+}
+.promo-card.is-ended h3{ color:#888; }
+.promo-card.is-ended .promo-banner{ filter:grayscale(.6); opacity:.7; }
+
+/* 促銷卡片內的酒款網格：僅桌機覆蓋（避免超出卡片寬度）
+   手機板（<=860px）完全沿用全站預設「左圖右文」水平卡，不覆蓋 */
+@media (min-width:861px){
+  .promo-card .grid{
+    grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+    gap:16px;
+  }
+}
+
+/* 活動酒款摺疊（<details><summary>） */
+.promo-products-toggle{
+  margin-top:16px;
+  border-top:1px dashed rgba(180,138,99,.35);
+  padding-top:14px;
+}
+.promo-products-toggle > summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 14px;
+  background:rgba(255,255,255,.6);
+  border:1px solid rgba(180,138,99,.3);
+  border-radius:8px;
+  color:#8b6a3a;
+  font-weight:600;
+  font-size:15px;
+  transition:background .2s, border-color .2s;
+}
+.promo-products-toggle > summary::-webkit-details-marker{ display:none; }
+.promo-products-toggle > summary:hover{
+  background:rgba(255,255,255,.9);
+  border-color:#b48a63;
+}
+.promo-products-summary-icon{
+  font-size:18px;
+  transition:transform .25s ease;
+  line-height:1;
+}
+.promo-products-toggle[open] > summary{
+  background:#fff;
+  border-color:#b48a63;
+  border-bottom-left-radius:0;
+  border-bottom-right-radius:0;
+}
+.promo-products-toggle[open] > summary .promo-products-summary-icon{
+  transform:rotate(180deg);
+}
+
+/* =========================================================
+   ✅ B2B 企業合作卡片（福委 / 廠商叫貨）
+========================================================= */
+.b2b-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:24px;
+}
+.b2b-card{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:14px;
+  padding:28px;
+  box-shadow:0 2px 14px rgba(92,74,50,.06);
+  display:flex;
+  flex-direction:column;
+  transition:transform .25s, box-shadow .25s;
+}
+.b2b-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(92,74,50,.12);
+}
+.b2b-icon{
+  font-size:34px;
+  line-height:1;
+  margin-bottom:12px;
+}
+.b2b-card h3{
+  margin:0 0 8px 0;
+  font-size:22px;
+  color:#5c4a32;
+  line-height:1.4;
+}
+.b2b-tagline{
+  margin:0 0 16px 0;
+  color:#8b6a3a;
+  font-weight:600;
+  line-height:1.6;
+  font-size:15px;
+}
+.b2b-bullets{
+  list-style:none;
+  padding:0;
+  margin:0 0 20px 0;
+  flex:1;
+}
+.b2b-bullets li{
+  position:relative;
+  padding:8px 0 8px 24px;
+  line-height:1.7;
+  color:#5c4a32;
+  border-bottom:1px dashed rgba(180,138,99,.2);
+}
+.b2b-bullets li:last-child{ border-bottom:none; }
+.b2b-bullets li::before{
+  content:'✓';
+  position:absolute;
+  left:0;
+  top:8px;
+  color:#b48a63;
+  font-weight:700;
+}
+.b2b-cta{
+  margin-top:auto;
+  padding-top:8px;
+}
+.b2b-cta .btn{
+  width:100%;
+  text-align:center;
+}
+
+/* 手機板：兩張卡片改為單欄堆疊 */
+@media (max-width:860px){
+  .b2b-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  .b2b-card{ padding:22px; }
+  .b2b-card h3{ font-size:19px; }
+}
+
+@media (max-width:640px){
+  .promo-card{ padding:18px; }
+  .promo-card h3{ font-size:17px; }
 }

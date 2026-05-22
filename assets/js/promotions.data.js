@@ -8,13 +8,106 @@
    - targetIds   → 參與此促銷的商品 id 白名單（陣列）
    - minQty      → 白名單商品加總需達到幾件才觸發
    - discount    → 折扣率，例如 0.05 = 95折（折抵 5%）
-   
+   - startAt     → 活動開始日 "YYYY-MM-DD"（留空 = 無起始限制）
+   - endAt       → 活動結束日 "YYYY-MM-DD"（留空 = 不會結束）
+   - display     → 是否要在 /offers/ 頁面顯示為活動卡片
+
    apply(ctx) 計算邏輯：
    只計算「在白名單內的商品」的小計，再乘以折扣率
    回傳「折抵金額」（正整數）
+
+   ⏰ 日期自動結束：
+   只要 condition(ctx) 開頭呼叫 isPromoActive(this)，
+   超過 endAt 當日 23:59:59 之後，購物車折扣自動失效。
+   /offers/ 頁面也會自動顯示「活動已結束」徽章。
 ====================================================== */
 
+/** 判斷某個 promo 目前是否在活動期間內（無起訖日期 = 永遠有效） */
+export function isPromoActive(promo){
+  const now = Date.now();
+  if (promo.startAt) {
+    const start = new Date(promo.startAt + "T00:00:00").getTime();
+    if (isNaN(start) === false && now < start) return false;
+  }
+  if (promo.endAt) {
+    const end = new Date(promo.endAt + "T23:59:59").getTime();
+    if (isNaN(end) === false && now > end) return false;
+  }
+  return true;
+}
+
+/** 回傳活動狀態：'upcoming' | 'active' | 'ended' | 'always' */
+export function getPromoStatus(promo){
+  const now = Date.now();
+  const hasStart = !!promo.startAt;
+  const hasEnd   = !!promo.endAt;
+  if (!hasStart && !hasEnd) return 'always';
+  if (hasStart) {
+    const start = new Date(promo.startAt + "T00:00:00").getTime();
+    if (now < start) return 'upcoming';
+  }
+  if (hasEnd) {
+    const end = new Date(promo.endAt + "T23:59:59").getTime();
+    if (now > end) return 'ended';
+  }
+  return 'active';
+}
+
 export const PROMOTIONS = [
+
+  /* =============================
+     酉時之約：夏日祭典前哨站
+     指定 款酒任選 2 入 92 折
+     ✏️  要調整哪幾瓶參與，改 targetIds 即可
+     ✏️  要設定活動期間，改 startAt / endAt（到期會自動失效）
+     ✏️  要關閉活動，把整個 block 註解掉即可
+  ============================= */
+  {
+    id: "summer-festival-2026-92",
+    type: "combo-ids",
+    stackable: false, // 與其他不可疊加優惠擇優
+
+    label: "酉時之約：夏日祭典前哨站 — 指定酒款任選 2 入 92 折",
+    description: "指定 11 款酒任選 2 件（含）以上，該活動商品小計享 92 折",
+
+  
+    targetIds: [
+      5, 6, 7, 13, 14, 15, 19, 22, 35, 36, 45, 52, 64, 68, 70, 71, 84, 85, 116, 118, 119, 120, 121, 122, 123
+    ],
+
+    // ✏️ 活動期間 "YYYY-MM-DD"（留空字串=無限制；endAt 過了會自動失效）
+    startAt: "2026-05-01",   // 例："2026-06-01"
+    endAt:   "2026-06-30",   // 例："2026-06-30"
+
+    // ✏️ 在 /offers/ 頁面顯示為活動卡片（不想顯示就把 showOnOffersPage 改成 false）
+    display: {
+      showOnOffersPage: true,
+      title: "🍶 酉時之約：夏日祭典前哨站",
+      summary: "夏日將至，從清酒到葡萄酒精選 11 款解暑酒款，任選 2 件即享 92 折優惠。",
+      bannerImage: "/assets/images/home/夏日活動1920.webp",
+      bannerLink: ""  // 點 banner 跳轉的網址；留空=不可點
+    },
+
+    hint: {
+      kind: "combo-ids",
+      minQty: 2
+    },
+
+    condition(ctx) {
+      if (!isPromoActive(this)) return false;  // ⏰ 活動期間外自動失效
+      const qty = ctx.items
+        .filter(p => this.targetIds.includes(p.id))
+        .reduce((s, p) => s + p.qty, 0);
+      return qty >= 2;
+    },
+
+    apply(ctx) {
+      const sub = ctx.items
+        .filter(p => this.targetIds.includes(p.id))
+        .reduce((s, p) => s + p.price * p.qty, 0);
+      return Math.round(sub * 0.08); // 92折 = 折抵 8%
+    }
+  },
 
   /* =============================
      慶祝官網上架：滿 3 瓶全面 9 折

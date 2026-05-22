@@ -4476,5 +4476,439 @@ const products = [
 
     wineryId: "arimitsu" 
     },
+    {
+      id: 115,
+      priority: 5, 
+      name: "萩之鶴 別仕込生原酒 納涼貓",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/115納涼貓1.webp`,
+      `${CDN}/115納涼貓2.webp`,
+    ], 
+
+    price: 1350, 
+    originPrice: 1500,
+
+    spec: "夏天限定・貓咪生原酒，消暑清爽華麗果香", 
+
+    note: {
+      oneLine: `超人氣萩之鶴貓咪系列推出限定生原酒，嚴選48%精米與宮城酵母，打造15度清透酒體。開瓶帶有細緻氣泡感，交織華麗果香與鮮活酸度，瑞瑞甜韻與乾淨口感完美調和，口感清爽同時保有層次。冰鎮後更能展現生原酒鮮活奔放的魅力，非常適合即將到來的炎熱季節輕鬆享用。
+	無論是單飲或搭配餐點，都能帶來像貓咪午後打盹般慵懶愜意的氛圍。
+
+	日本酒度：-5（偏甘口）`, 
+    },
+
+    info: {
+      brand: "萩野・萩之鶴", 
+      origin: "日本", 
+      rice: "未公開", 
+      yeast: "宮城酵母", 
+      variety: null,
+      polish:"48%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hagino"
+    },
+{
+      id: 116,
+      priority: 5, 
+      name: "光榮菊 Noon CRESCENT 無濾過生原酒",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/116光榮菊Noon1.webp`,
+      `${CDN}/116光榮菊Noon2.webp`,
+    ], 
+
+    price: 1760, 
+    originPrice: 1650, 
+
+    spec: "新潮彈珠汽水香氣，低酒精度極致消暑",
+
+    note: {
+      oneLine: `清酒界超新星「光榮菊」，專為年輕世代打造顛覆傳統的極致夏酒。
+	開瓶洋溢著彈珠汽水與清新柑橘香氣，入口能感受到洋梨的微甜與通透青檸酸感，伴隨細緻微氣泡碳酸感，徹底洗走悶熱暑氣。低酒精度，口感宛如青檸梳打般輕盈舒爽，末梢帶有些許生米飯的獨特澀感。兼具果香、酸度與新潮設計，是抓緊夏天尾巴必喝的限定超人氣款！`, 
+    },
+
+    info: {
+      brand: "光榮菊", 
+      origin: "日本", 
+      rice: "吟銀河、春陽", 
+      yeast: "佐賀はがくれ酵母", 
+      variety: null,
+      polish:"62%",
+      alcohol: "13%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "koueigiku" 
+    },
+{
+      id: 117,
+      priority: 4, 
+      name: "光榮菊 Hello!KOUEIGIKU 無濾過生原霞酒 愛山",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/117光榮菊_愛山1.webp`,
+      `${CDN}/117光榮菊_愛山2.webp`,
+    ], 
+
+    price: 2100, 
+    originPrice: 2300, 
+
+    spec: "日本國內也難一次湊齊的夢幻逸品！",
+
+    note: {
+      oneLine: `日本國內也難一次湊齊的夢幻逸品！【光榮菊 Hello! KOUEIGIKU】系列，嚴選「愛山」與「雄町」雙人氣酒米，悉心精米至50%純米大吟釀規格。
+	此款愛山的霞酒版本，自帶新鮮微氣泡，入口交織著白葡萄、白桃的馥郁清甜與青蘋果的酸爽，旨味醇厚飽滿。隨著時間轉化，還會綻放出紅蘋果與杏桃的香甜層次，極致平衡且餘韻悠長！
+	微溫至約40度的溫酒，更能帶出它溫潤的質地與圓潤的層次感，是一款能讓人愉悅慢飲、細細品味的佳釀！數量珍稀切勿錯過！`, 
+    },
+
+    info: {
+      brand: "光榮菊", 
+      origin: "日本", 
+      rice: "愛山", 
+      yeast: "非公開", 
+      variety: null,
+      polish:"50%",
+      alcohol: "13%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 4, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "koueigiku" 
+    },
+{
+      id: 118,
+      priority: 5, 
+      name: "美亞老藤 夏多內白葡萄酒 2024",
+      type: "葡萄酒", 
+      category: "wine", 
+    imgs: [`${CDN}/118美亞老藤夏多內1.webp`,
+      `${CDN}/118美亞老藤夏多內2.webp`,
+    ], 
+
+    price: 520, 
+    originPrice: 520, 
+
+    spec: "智利百大一級酒莊，熱帶果香老藤白酒",
+
+    note: {
+      oneLine: `🏆全球葡萄酒權威Tim Atkin評選為智利一級酒莊
+	🏆美國重量級酒品雜誌 Wine & Spirits 年度票選 百大酒莊
+	🏆2010 最佳酒莊 Wine Of The Year 最高殊榮
+	
+	出自全球百大一級酒莊「西瓦家族」，嚴選Colchagua谷地1980年契作的三十年以上老藤葡萄，以純手工採摘釀製。
+	酒液呈現動人的淺黃色澤，散發出香蕉、柳橙與鳳梨等迷人的熱帶水果香氣。入口圓潤飽滿、酸度勻稱清新，令人忍不住一再暢飲。
+	
+	搭餐推薦：各式鮮美海鮮料理
+
+	建議適飲溫度：10-12°C`, 
+    },
+
+    info: {
+      brand: "凱撒西瓦", 
+      origin: "智利", 
+      rice: null, 
+      yeast: null, 
+      variety: "Chardonnay",
+      polish: null,
+      alcohol: "14%", //酒精濃度
+      volume: "750ml" //容量
+    },
+
+    scale: {   //1-5分，分數越低越靠左，分數越高越靠右 ，不適用的欄位填入null
+        sakeDrySweet: null,
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null,
+        ftFreshRich: null, 
+      
+        wineTannin: 1,  
+        wineFreshFull: 3 
+    },
+    
+
+    wineryId: "vina-casa-silva" 
+    },
+{
+      id: 119,
+      priority: 5, 
+      name: "美亞老藤 卡本內蘇維濃紅葡萄酒 2022",
+      type: "葡萄酒", 
+      category: "wine", 
+    imgs: [`${CDN}/119美亞老藤卡本內1.webp`,
+      `${CDN}/119美亞老藤卡本內2.webp`,
+    ], 
+
+    price: 520, 
+    originPrice: 520, 
+
+    spec: "百年老藤純手工釀，濃郁黑莓巧克力",
+
+    note: {
+      oneLine: `🏆全球葡萄酒權威Tim Atkin評選為智利一級酒莊
+	🏆美國重量級酒品雜誌 Wine & Spirits 年度票選 百大酒莊
+	🏆2010 最佳酒莊 Wine Of The Year 最高殊榮
+	
+	榮獲全球百大與智利一級酒莊殊榮，「西瓦家族」悉心打造頂級紅酒。嚴選Colchagua谷地1912年栽種的百年老藤葡萄，全程手工採摘，並於法國橡木桶中熟成五個月。
+	酒液呈深邃紫紅色，散發巧克力、黑色莓果與梅子果乾的優雅芳香。酒體均衡圓潤、飽滿集中，充滿甜美果味的優長餘韻，完美展現百年老藤的極致魅力，是搭配肉類或乳酪的頂級首選。
+	
+	搭餐推薦：煎牛排等紅肉、乳酪
+
+	建議適飲溫度：15~17°C`, 
+    },
+
+    info: {
+      brand: "凱撒西瓦", 
+      origin: "智利", 
+      rice: null, 
+      yeast: null, 
+      variety: "Cabernet Sauvignon",
+      polish: null,
+      alcohol: "13.5%", //酒精濃度
+      volume: "750ml" //容量
+    },
+
+    scale: {   //1-5分，分數越低越靠左，分數越高越靠右 ，不適用的欄位填入null
+        sakeDrySweet: null,
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null,
+        ftFreshRich: null, 
+      
+        wineTannin: 4,  
+        wineFreshFull: 4 
+    },
+    
+
+    wineryId: "vina-casa-silva" 
+    },
+{
+      id: 120,
+      priority: 5, 
+      name: "美亞老藤 卡蜜尼耶紅葡萄酒 2023",
+      type: "葡萄酒", 
+      category: "wine", 
+    imgs: [`${CDN}/120美亞老藤卡蜜尼耶1.webp`,
+      `${CDN}/120美亞老藤卡蜜尼耶2.webp`,
+    ], 
+
+    price: 520, 
+    originPrice: 520, 
+
+    spec: "珍稀百年老藤，交織煙草與燻烤層次",
+
+    note: {
+      oneLine: `🏆全球葡萄酒權威Tim Atkin評選為智利一級酒莊
+	🏆美國重量級酒品雜誌 Wine & Spirits 年度票選 百大酒莊
+	🏆2010 最佳酒莊 Wine Of The Year 最高殊榮
+	
+	頂尖一級酒莊「西瓦家族」珍稀之作，嚴選Colchagua谷地1912年的百年老藤葡萄，採全手工摘採並於法國橡木桶熟成五個月。
+	亮麗的紅寶石色澤酒液，交織著紅黑莓果香、煙草與獨特燻烤香氣。入口呈現櫻桃與黑莓的圓潤飽滿，口感華麗、酒體均衡，細緻悠長的果香餘韻連綿不絕，是搭配重口味料理或乳酪的極致饗宴。
+	
+	搭餐推薦：辛香料的烤肉串、乳酪
+
+	建議適飲溫度：15~18°C`, 
+    },
+
+    info: {
+      brand: "凱撒西瓦", 
+      origin: "智利", 
+      rice: null, 
+      yeast: null, 
+      variety: "Carmenere",
+      polish: null,
+      alcohol: "13.5%", //酒精濃度
+      volume: "750ml" //容量
+    },
+
+    scale: {   //1-5分，分數越低越靠左，分數越高越靠右 ，不適用的欄位填入null
+        sakeDrySweet: null,
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null,
+        ftFreshRich: null, 
+      
+        wineTannin: 3,  
+        wineFreshFull: 4 
+    },
+    
+
+    wineryId: "vina-casa-silva" 
+    },
+{
+      id: 121,
+      priority: 5, 
+      name: "渡邊 Infusion Spirits Hidama Green",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/121渡邊green1.webp`,
+      `${CDN}/121渡邊green2.webp`,
+    ], 
+
+    price: 1450, 
+    originPrice: 1650, 
+
+    spec: "【極限量】大人口味的綠茶，極致搭餐的選擇", 
+
+    note: {
+      oneLine: `渡邊酒造熱銷第二彈「Hidama Green」重磅登場！以守護神火玉為名，打造芋燒酎結合綠茶的「大人的綠茶」烈酒。
+	嚴選宮崎縣田野町茶葉，將清爽茶香、鮮味與微澀層次完美浸漬於本格燒酎中。酒液呈現療癒嫩綠色，口感比居酒屋綠茶兌燒酎更具豐富深度，冰飲溫熱皆宜，是新手也著迷的餐中酒首選！`, 
+    },
+
+    info: {
+      brand: "渡邊", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "25%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "watanabe-distillery" 
+    },
+{
+      id: 122,
+      priority: 5, 
+      name: "渡邊 夏之萬年 芋燒酎",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/122渡邊夏之萬年1.webp`,
+      `${CDN}/122渡邊夏之萬年2.webp`,
+    ], 
+
+    price: 1200, 
+    originPrice: 1200, 
+
+    spec: "水藍企鵝限定夏燒酎，甘甜冰鎮最暢快", 
+
+    note: {
+      oneLine: `水藍色瓶身印上可愛企鵝，這款限定夏燒酎渾身散發清涼感！
+	酒造特別調和至易入口的20度低酒精，原料全新升級為自家栽種的地瓜「大地之夢」，比以往呈現更具延展性的甘甜滋味。舒爽的地瓜香氣撲鼻，伴隨微似山椒的香辛感刺激味蕾，層次豐富！
+	極度推薦加入冰塊或兌氣泡水飲用，是消解暑氣的夏季暢快首選！`, 
+    },
+
+    info: {
+      brand: "渡邊", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "20%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "watanabe-distillery" 
+    },
+{
+      id: 123,
+      priority: 5, 
+      name: "赤鹿毛 麥燒酎 夏日版",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/123赤鹿毛_夏日版1.webp`,
+      `${CDN}/123赤鹿毛_夏日版2.webp`,
+      `${CDN}/123赤鹿毛_夏日版3.webp`,
+    ], 
+
+    price: 1060, 
+    originPrice: 1060, 
+
+    spec: "天藍晴空限定麥燒酎，感受宮崎縣的夏天", 
+
+    note: {
+      oneLine: `這款夏季限定麥燒酎，將宮崎的夏日晴空轉化為活潑的天藍色酒標。
+	嚴選九州二条大麥，特地改良蒸餾製法，免除新酒的澀味，帶來香氣輕盈卻飽滿香醇的獨特麥香。酒精濃度調和至易入喉的20度，採用「平成宮崎酵母」打造圓潤酒質。無論是加冰塊、兌水或氣泡水都極致暢快，甚至做成溫水割，風味依然能延伸延展！`, 
+    },
+
+    info: {
+      brand: "渡邊", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "20%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "yanagita-shochu" 
+    }
 ]
 if (typeof window !== 'undefined') { window.products = products; }

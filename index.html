@@ -48,9 +48,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-<link rel="preload" as="image" href="https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/LINE_ALBUM_果實酒茶酒_251205_1.webp" fetchpriority="high">
-<link rel="preload" as="image" href="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_500,h_600,c_limit/f_auto,q_auto/19%E6%B0%B4%E6%A2%A8%E9%A2%A8%E5%91%B31.webp" fetchpriority="high">
-<link rel="preload" as="image" href="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_500,h_600,c_limit/f_auto,q_auto/7%E5%8D%83%E5%B9%B4%E6%8A%B9%E8%8C%B6%E9%85%921.webp" fetchpriority="high">
+<!-- <link rel="preload" as="image" href="/assets/images/home/三大保證1920.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/images/home/三大保證750.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/images/home/夏日活動1920.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/images/home/夏日活動750.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/images/home/貓咪系列1920.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/images/home/貓咪系列750.webp" fetchpriority="high"> -->
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css">
@@ -252,6 +255,7 @@
       <nav>
         <a href="/">首頁</a>
         <a href="/about/">關於</a>
+        <a href="/promotions/">優惠活動</a>
         <a href="/products/">商品分類</a>
         <a href="/offers/">活動分享</a>
         <a href="/blog/">酉時圖書館</a>
@@ -265,55 +269,114 @@
     </div>
   </div>
 
-  <section class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-inner">
-      <div>
-        
-        <div class="kicker">專業品鑑師嚴選全類別酩酒</div>
-        <h1 class="hero-title">酉時喝酒 YOU-SI</h1>
-        
+  <!-- ✅ SEO 用 H1（視覺隱藏，搜尋引擎讀得到） -->
+  <h1 class="visually-hidden">酉時喝酒 YOU-SI｜日系清酒・果實酒・葡萄酒選酒品牌：台北新竹自取推薦</h1>
 
-        <div class="hero-features zen">
-          <div class="feature-item">
-            <div class="vertical-content">
-              <span class="v-label">專家選品</span>
-              <span class="v-sep">｜</span>
-              <span class="v-desc">跨產區試飲嚴選，為你挑選風味穩定、具風土精神的日常首選。</span>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="vertical-content">
-              <span class="v-label">全程控溫</span>
-              <span class="v-sep">｜</span>
-              <span class="v-desc">依類別精準管理，確保從產地到餐桌，每一口都是原廠品質。</span>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="vertical-content">
-              <span class="v-label">深度品飲</span>
-              <span class="v-sep">｜</span>
-              <span class="v-desc">專業知識文影音，帶你領略職人故事與餐桌搭配的藝術。</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-actions">
-          <!-- <a class="btn btn-primary" href="/products/">瀏覽商品</a> -->
-          <!-- <a class="btn" href="/offers/">本月推薦</a> -->
-          <!-- <a class="btn" data-line-link href="#">LINE 詢問</a> -->
-        </div>
-      </div>
-
-      <!-- <div class="hero-card">
-        <h3>快速下單</h3>
-        <div class="mini">先把想要的酒加入購物車，最後在下單頁一次送出。付款方式為轉帳，店內取貨或郵寄皆可。</div>
-        <div style="margin-top:12px">
-          <a class="btn btn-primary" href="/order/">查看購物車 / 送出訂單</a>
-        </div>
-      </div> -->
-    </div>
+  <section class="hero-carousel" id="heroCarousel" aria-label="主視覺輪播">
+    <div class="hero-carousel-track" id="heroTrack"></div>
+    <button class="hero-carousel-arrow prev" id="heroPrev" aria-label="上一張">‹</button>
+    <button class="hero-carousel-arrow next" id="heroNext" aria-label="下一張">›</button>
+    <div class="hero-carousel-dots" id="heroDots"></div>
   </section>
+
+  <script>
+    /* =============================================================
+
+       每張投影片可設定：
+         image:       桌機版圖片路徑（必填，1920×550）
+         imageMobile: 手機版圖片路徑（選填，750×500；沒給的話手機也用桌機版）
+         alt:         無障礙描述（必填）
+         link:        點擊跳轉網址（選填）— 留空字串 "" 或刪掉這行 = 不可點擊
+    ============================================================= */
+    const SLIDES = [
+    {
+      image:       "/assets/images/home/三大保證1920.webp",
+      imageMobile: "/assets/images/home/三大保證750.webp",
+      alt:   "酉時三大保證:專家選品，全程控溫，深度品飲",
+      link:  ''
+    },
+      {
+        image:       "/assets/images/home/夏日活動1920.webp",
+        imageMobile: "/assets/images/home/夏日活動750.webp",
+        alt:   "酉時之約：夏日祭典前哨站，指定酒款任選 2 入 92 折",
+        link:  "/promotions/"
+      },
+      {
+        image:       "/assets/images/home/貓咪系列1920.webp",
+        imageMobile: "/assets/images/home/貓咪系列750.webp",
+        alt:   "萩之鶴 貓咪系列",
+        link:  "/products/sake/萩之鶴-貓咪組合-純米吟釀-生原酒/"
+      }
+    ];
+
+    // 自動播放秒數（毫秒）。設為 0 = 不自動播放
+    const HERO_AUTOPLAY_MS = 5000;
+
+    // ---------- 以下為輪播引擎，一般不用改 ----------
+    (function initHeroCarousel() {
+      const track = document.getElementById('heroTrack');
+      const dots  = document.getElementById('heroDots');
+      const prev  = document.getElementById('heroPrev');
+      const next  = document.getElementById('heroNext');
+      if (!track) return;
+      let idx = 0;
+      let timer = null;
+
+      SLIDES.forEach((s, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'hero-slide';
+        // 用 CSS 變數注入圖片：桌機讀 --bg-desktop，手機（≤640px）讀 --bg-mobile
+        slide.style.setProperty('--bg-desktop', `url("${s.image}")`);
+        if (s.imageMobile) {
+          slide.style.setProperty('--bg-mobile', `url("${s.imageMobile}")`);
+        }
+        slide.setAttribute('role', 'img');
+        slide.setAttribute('aria-label', s.alt);
+        if (s.link) {
+          const a = document.createElement('a');
+          a.className = 'hero-slide-link';
+          a.href = s.link;
+          a.textContent = s.alt;
+          slide.appendChild(a);
+        }
+        track.appendChild(slide);
+
+        const dot = document.createElement('button');
+        dot.className = 'hero-carousel-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `第 ${i + 1} 張`);
+        dot.addEventListener('click', () => go(i));
+        dots.appendChild(dot);
+      });
+
+      if (SLIDES.length <= 1) {
+        prev.style.display = 'none';
+        next.style.display = 'none';
+        dots.style.display = 'none';
+        return;
+      }
+
+      function go(n) {
+        idx = (n + SLIDES.length) % SLIDES.length;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        [...dots.children].forEach((d, i) => d.classList.toggle('active', i === idx));
+        restart();
+      }
+      function restart() {
+        if (!HERO_AUTOPLAY_MS) return;
+        clearInterval(timer);
+        timer = setInterval(() => go(idx + 1), HERO_AUTOPLAY_MS);
+      }
+
+      prev.addEventListener('click', () => go(idx - 1));
+      next.addEventListener('click', () => go(idx + 1));
+
+      const root = document.getElementById('heroCarousel');
+      root.addEventListener('mouseenter', () => clearInterval(timer));
+      root.addEventListener('mouseleave', restart);
+
+      restart();
+    })();
+  </script>
 
 
   <main class="section">

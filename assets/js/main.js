@@ -258,6 +258,7 @@ function pathKey(){
   if(p.startsWith("/age"))                             return "age";
   if(p.startsWith("/about"))                           return "about";
   if(p.startsWith("/offers"))                          return "offers";
+  if(p.startsWith("/promotions"))                      return "promotions";
   if(p.startsWith("/order"))                           return "order";
   if(p === "/products/" || p === "/products/index.html") return "products";
   // 分類頁：路徑剛好結束在 /<cat>/ 或 /<cat>/index.html，不可吃到底下個別商品頁
@@ -283,6 +284,7 @@ function setNavActive(){
     if(key === "about"              && href.startsWith("/about"))     active = true;
     if(key.startsWith("products")   && href.startsWith("/products")) active = true;
     if(key === "offers"             && href.startsWith("/offers"))    active = true;
+    if(key === "promotions"         && href.startsWith("/promotions")) active = true;
     if(key === "order"              && href.startsWith("/order"))     active = true;
     if(key === "wineries"           && href.startsWith("/wineries")) active = true;
     if(key === "blog"               && href.startsWith("/blog"))     active = true;
