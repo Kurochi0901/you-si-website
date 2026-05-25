@@ -132,7 +132,7 @@ export const PROMOTIONS = [
     display: {
       showOnOffersPage: true,
       title: "🐱 慵懶貓咪系列 任 2 件 NT$2,600",
-      summary: "萩之鶴櫻花貓・暖桌貓・納涼貓，任選 2 件固定 NT$2,600。季節限定：萩之鶴生原酒春櫻、冬暖、夏涼三貓，季季果香微甜。",
+      summary: "萩之鶴櫻花貓・暖桌貓・納涼貓，任選 2 件 NT$2,600。季節限定：萩之鶴生原酒春櫻、冬暖、夏涼三貓，季季果香微甜。",
       bannerImage: "/assets/images/home/貓咪系列1920.webp",
       bannerLink: ""
     },
