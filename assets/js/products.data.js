@@ -1172,46 +1172,6 @@ const products = [
     },
     wineryId: "hagino"
   },
-  {
-    id: 31,
-    priority: 5,
-    name: "萩之鶴 貓咪組合 純米吟釀 生原酒",
-    type: "清酒",
-    category: "sake",
-    imgs: [`${CDN}/31萩之鶴_純米吟釀_貓咪組合1.webp`,
-      `${CDN}/31萩之鶴_純米吟釀_貓咪組合2.webp`,
-      `${CDN}/31萩之鶴_純米吟釀_貓咪組合3.webp`,
-    ],
-    price: 2600,
-    originPrice: 3000,
-    spec: "萩之鶴「暖桌貓×櫻花貓」組合限定登場",
-    note: {
-      oneLine: `不必出國，也能同步感受日本酒造的季節更迭。這對超人氣貓咪組合是生原酒愛好者的首選：
-	暖桌貓｜帶有蘋果與哈密瓜香氣，旨味圓潤微甜，如躲在暖桌般療癒。推薦從冰飲至常溫，感受多層次風味變化。
-	櫻花貓（預計4月中下旬抵台）｜採用大吟釀等級宮城酵母，在嚴格溫控下釀造，酒質輕盈甘甜。
-	此組合在萩之鶴特有的宜人酸度調和下，展現極佳的易飲性，是任何人都能輕鬆享受的生原酒酒款。
-	原料：米、米麴`,
-    },
-    info: {
-      brand: "萩野・萩之鶴",
-      origin: "日本",
-      rice: "美山錦",
-      yeast: "未公開",
-      variety: null,
-      polish:"48%、55%",
-      alcohol: "15%",
-      volume: "720ml"
-    },
-    scale: {  
-        sakeDrySweet: 3,
-        sakeUmamiFruity: 3, 
-        ftAcidSweet: null,
-        ftFreshRich: null, 
-        wineTannin: null, 
-        wineFreshFull: null 
-    },
-    wineryId: "hagino"
-    },
 {
     id: 32,
     priority: 5,
