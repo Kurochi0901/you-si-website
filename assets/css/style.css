@@ -3642,6 +3642,19 @@ body.age-overlay-active{ overflow:hidden; }
     background-image: var(--bg-mobile, var(--bg-desktop));
   }
 }
+/* 第一張 slide 用真實 <img> 取代 background-image，方便瀏覽器選為 LCP 元素 */
+.hero-slide--first picture,
+.hero-slide--first .hero-slide-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+.hero-slide--first .hero-slide-img{
+  object-fit:cover;
+  object-position:center;
+}
 .hero-slide a.hero-slide-link{
   position:absolute;
   inset:0;

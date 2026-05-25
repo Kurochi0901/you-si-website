@@ -48,12 +48,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-<!-- <link rel="preload" as="image" href="/assets/images/home/三大保證1920.webp" fetchpriority="high">
-<link rel="preload" as="image" href="/assets/images/home/三大保證750.webp" fetchpriority="high">
-<link rel="preload" as="image" href="/assets/images/home/夏日活動1920.webp" fetchpriority="high">
-<link rel="preload" as="image" href="/assets/images/home/夏日活動750.webp" fetchpriority="high">
-<link rel="preload" as="image" href="/assets/images/home/貓咪系列1920.webp" fetchpriority="high">
-<link rel="preload" as="image" href="/assets/images/home/貓咪系列750.webp" fetchpriority="high"> -->
+<!-- 只 preload 第一張 hero slide，桌機/手機依視窗各下載一張，加速 LCP -->
+<link rel="preload" as="image" href="/assets/images/home/三大保證1920.webp" media="(min-width:641px)" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/images/home/三大保證750.webp" media="(max-width:640px)" fetchpriority="high">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css">
@@ -325,13 +322,37 @@
       SLIDES.forEach((s, i) => {
         const slide = document.createElement('div');
         slide.className = 'hero-slide';
-        // 用 CSS 變數注入圖片：桌機讀 --bg-desktop，手機（≤640px）讀 --bg-mobile
-        slide.style.setProperty('--bg-desktop', `url("${s.image}")`);
-        if (s.imageMobile) {
-          slide.style.setProperty('--bg-mobile', `url("${s.imageMobile}")`);
+
+        if (i === 0) {
+          // 第一張：用真實 <picture>/<img>，搭配 <link rel="preload"> 加速 LCP
+          slide.classList.add('hero-slide--first');
+          const pic = document.createElement('picture');
+          if (s.imageMobile) {
+            const src = document.createElement('source');
+            src.media = '(max-width:640px)';
+            src.srcset = s.imageMobile;
+            pic.appendChild(src);
+          }
+          const img = document.createElement('img');
+          img.className = 'hero-slide-img';
+          img.src = s.image;
+          img.alt = s.alt;
+          img.width = 1920;
+          img.height = 550;
+          img.decoding = 'async';
+          img.setAttribute('fetchpriority', 'high');
+          pic.appendChild(img);
+          slide.appendChild(pic);
+        } else {
+          // 後續 slide：維持 CSS 背景圖（延後下載、節省首屏資源）
+          slide.style.setProperty('--bg-desktop', `url("${s.image}")`);
+          if (s.imageMobile) {
+            slide.style.setProperty('--bg-mobile', `url("${s.imageMobile}")`);
+          }
+          slide.setAttribute('role', 'img');
+          slide.setAttribute('aria-label', s.alt);
         }
-        slide.setAttribute('role', 'img');
-        slide.setAttribute('aria-label', s.alt);
+
         if (s.link) {
           const a = document.createElement('a');
           a.className = 'hero-slide-link';
