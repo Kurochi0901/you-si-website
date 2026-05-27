@@ -1145,7 +1145,7 @@ function renderCartMini(){
 
   let pickup = "", shipTemp = "常溫", shippingFee = 0, grandTotal = itemsTotal;
   if(isOrderPage){
-    pickup      = (document.getElementById("order-pickup")?.value || "店內取貨").trim();
+    pickup      = (document.getElementById("order-pickup")?.value || "自取").trim();
     shipTemp    = pickup === "郵寄" ? getSelectedShipTemp() : "常溫";
     shippingFee = calcShippingFee(pickup, itemsTotal, shipTemp);
     grandTotal  = itemsTotal + shippingFee;
@@ -1703,7 +1703,7 @@ async function submitOrder(){
   const name    = (document.getElementById("order-name")?.value    || "").trim();
   const phone   = (document.getElementById("order-phone")?.value   || "").trim();
   const email   = (document.getElementById("order-email")?.value   || "").trim();
-  const pickup  = (document.getElementById("order-pickup")?.value  || "店內取貨").trim();
+  const pickup  = (document.getElementById("order-pickup")?.value  || "自取").trim();
   const address = (document.getElementById("order-address")?.value || "").trim();
   const note    = (document.getElementById("order-note")?.value    || "").trim();
 
@@ -1727,7 +1727,7 @@ async function submitOrder(){
 電話：${phone}
 Email：${email}
 取貨方式：${pickup}
-地址：${pickup === "郵寄" ? address : "（店內取貨）"}
+地址：${pickup === "郵寄" ? address : "（自取）"}
 備註：${note || "（無）"}
 
 【品項】
