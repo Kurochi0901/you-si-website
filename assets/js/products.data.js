@@ -1105,7 +1105,7 @@ const products = [
       `${CDN}/29果凍梅酒3.webp`,
       `${CDN}/29果凍梅酒4.webp`,
     ],
-    price: 1080,
+    price: 990,
     originPrice: 1400,
     spec: "Q彈果凍濃梅酸甜",
     note: {
