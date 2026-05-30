@@ -35,6 +35,18 @@ const articles = [
     subTags: [],
     relatedProductIds: []
   },
+  {
+    id: 4,
+    slug: "2026-internationalalcoholcompetition",
+    title: "五月微醺大季！直擊日本新酒鑑評會、IWSC、IWC 頂級得獎榜單",
+    excerpt: "【台灣之光】梅侍蟬聯IWSC金牌，梅酒類唯一獲獎品牌！",
+    cover: "/assets/images/blog/id4封面.webp",
+    date: "2026/05/29",
+    author: "酉時喝酒",
+    mainTags: ["酉時快訊"],
+    subTags: null,
+    relatedProductIds: [4, 56, 61, 62, 117]
+  },
 
 ];
 // 強制掛載到全域 window 物件以確保跨腳本讀取

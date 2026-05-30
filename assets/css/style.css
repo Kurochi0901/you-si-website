@@ -3244,7 +3244,7 @@ body.age-overlay-active{ overflow:hidden; }
 .article-content blockquote { margin: 40px 0; padding: 24px 32px; border-radius: 12px; background: rgba(180,138,99,0.06); border-left: none; position: relative; font-weight: 600; color: #5e412a; font-size: 18px; text-align: center; }
 .article-content blockquote::before { content: "“"; font-size: 60px; color: rgba(180,138,99,0.2); position: absolute; top: -10px; left: 16px; font-family: serif; }
 .article-cta { margin-top: 80px; text-align: center; padding-top: 48px; border-top: 1px dashed rgba(0,0,0,0.1); }
-/* ===== 文章一分鐘重點（TL;DR，供讀者與 AI 快速擷取） ===== */
+/* ===== 文章AI 一分鐘重點（TL;DR，供讀者與 AI 快速擷取） ===== */
 .post-tldr { margin: 0 0 40px; padding: 20px 24px; border-radius: 12px; background: rgba(180,138,99,0.10); border-left: 5px solid var(--accent); font-size: 16px; line-height: 1.9; color: #3c332b; }
 .post-tldr strong { color: #5e412a; }
 .post-tldr ul { margin: 10px 0 0; padding-left: 22px; }
