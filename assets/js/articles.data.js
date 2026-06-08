@@ -47,6 +47,18 @@ const articles = [
     subTags: null,
     relatedProductIds: [4, 56, 61, 62, 117]
   },
+  {
+    id: 5,
+    slug: "what-is-shochu",
+    title: "燒酎是什麼？和清酒有什麼不同？上伊那牡丹裡的微醺秘密",
+    excerpt: "一次看懂日本國民酒！加氣泡水、熱飲、茶割，隨心所欲的自由調配哲學",
+    cover: "/assets/images/blog/id5封面.webp",
+    date: "2026/06/08",
+    author: "酉時喝酒",
+    mainTags: ["酉時圖書館"],
+    subTags: ["烈酒","日本酒"],
+    relatedProductIds: [86, 121, 122, 87]
+  },
 
 ];
 // 強制掛載到全域 window 物件以確保跨腳本讀取

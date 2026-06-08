@@ -104,6 +104,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.yousi-drink.com/blog/what-is-shochu/</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.yousi-drink.com/products/fruit-tea/%E6%A2%85%E4%BE%8D%E7%B4%94%E9%87%80-%E7%B4%85%E7%8E%89%E7%B4%85%E8%8C%B6%E6%A2%85%E9%85%92/</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
