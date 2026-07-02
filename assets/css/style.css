@@ -279,7 +279,9 @@ p{ color:var(--muted); line-height:1.9; margin:10px 0; }
   background:var(--card);
   border:1px solid rgba(0,0,0,.05);
   border-radius:var(--radius);
-  overflow:hidden;
+  overflow:visible; /* 活動徽章浮窗需外溢卡片；圖片裁圓角改由 .card-media 處理 */
+  min-width:0; /* overflow 非 hidden 後，避免 nowrap 內容把 grid 軌道撐超出容器 */
+  position:relative; /* 活動徽章絕對定位基準 */
   box-shadow:var(--shadow2);
   transition:.28s ease;
   display: flex;
@@ -294,6 +296,7 @@ p{ color:var(--muted); line-height:1.9; margin:10px 0; }
   width:100%;
   aspect-ratio:4/5;
   overflow:hidden;
+  border-radius:var(--radius) var(--radius) 0 0; /* .card 改 overflow:visible 後，圖片圓角改由此裁切 */
   background:#f6f3ee; /* 淺米色背景：作為圖片載入前的佔位符，減少視覺跳動 */
 }
 .card-media img{
@@ -2495,7 +2498,7 @@ body.modal-open{ overflow:hidden; }
     gap: 12px;
 
     border-radius: 16px;
-    overflow: hidden;
+    overflow: visible;                /* 活動徽章浮窗需外溢卡片（圖片圓角由 .card-media 裁切） */
     box-shadow: none;                 /* momo 類更扁平 */
     border: 1px solid rgba(0,0,0,.06);
     transform: none !important;       /* 取消 hover 飄起造成抖動 */
@@ -3916,3 +3919,161 @@ body.age-overlay-active{ overflow:hidden; }
   .promo-card{ padding:18px; }
   .promo-card h3{ font-size:17px; }
 }
+
+/* =========================================================
+   ✅ 商品卡活動徽章 + 說明浮窗
+   資料來源：promotions.data.js 的 display.cardBadge（main.js renderPromoBadge）
+   桌機：徽章絕對定位於圖片上緣空白帶，hover / 點擊顯示浮窗
+   手機（<=860px）：徽章排在「店長精選／推薦」標籤列下方，點擊往下展開
+========================================================= */
+/* 金縁和紙風格：米白和紙底 + 金棕雙細線框，延用「店長精選」的金框語彙 */
+.card-promo-badge{
+  position:absolute;
+  top:6px;
+  left:8px;
+  z-index:3;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.06em;
+  background:#fbf6ea;
+  color:#7a5217;
+  border:1px solid #c9a87a;
+  border-radius:3px;
+  box-shadow:inset 0 0 0 2px #fbf6ea, inset 0 0 0 3px #e3cda4; /* 內層第二道金細線 */
+  padding:3px 10px;
+  cursor:pointer;
+  white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* 浮窗同為和紙語彙：米白紙底 + 金棕細框 */
+.card-promo-pop{
+  visibility:hidden;
+  opacity:0;
+  transition:opacity .18s ease, visibility .18s ease;
+  position:absolute;
+  left:0;
+  top:calc(100% + 8px);
+  width:210px;
+  background:#fdfaf5;
+  border:1px solid #c9a87a;
+  border-radius:3px;
+  padding:12px 14px;
+  box-shadow:0 16px 40px rgba(17,12,8,.14);
+  z-index:9;
+  font-weight:400;
+  cursor:default;
+  white-space:normal;
+  text-align:left;
+  letter-spacing:.02em;
+}
+.card-promo-pop::before{
+  content:"";
+  position:absolute;
+  top:-6px;
+  left:22px;
+  width:10px;
+  height:10px;
+  background:#fdfaf5;
+  border-left:1px solid #c9a87a;
+  border-top:1px solid #c9a87a;
+  transform:rotate(45deg);
+}
+
+/* 桌機 hover 顯示；點擊（.open，桌機手機皆可）固定顯示 */
+@media (hover:hover){
+  .card-promo-badge:hover .card-promo-pop{ visibility:visible; opacity:1; }
+}
+.card-promo-badge.open .card-promo-pop{ visibility:visible; opacity:1; }
+.card-promo-badge:focus-visible{ outline:2px solid #c9a87a; outline-offset:2px; }
+
+.card-promo-pop-title{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  color:#6b4e1c;
+  line-height:1.5;
+}
+.card-promo-pop-desc{
+  display:block;
+  font-size:12px;
+  color:#7a6f66;
+  line-height:1.7;
+  margin-top:4px;
+}
+.card-promo-pop-link{
+  display:inline-block;
+  font-size:12px;
+  font-weight:700;
+  color:#8a5e16;
+  margin-top:8px;
+}
+.card-promo-pop-link:hover{ text-decoration:underline; }
+
+/* 手機（momo 式水平卡）：徽章改排進版面流，位於「店長精選／推薦」標籤列下方 */
+@media (max-width:860px){
+  .card-promo-badge{
+    position:relative; /* 回到版面流，同時作為浮窗定位基準 */
+    top:auto;
+    left:auto;
+    right:auto;
+    align-self:flex-start;
+    margin:4px 0 4px;
+    font-size:10px;
+    letter-spacing:.02em;
+    padding:2px 7px;
+  }
+  /* 沒有精選/推薦標籤的商品：空標籤列收合，讓活動徽章頂上第一行 */
+  .card-tag-row:empty{
+    height:0;
+    margin:0;
+  }
+  .card-promo-pop{
+    left:auto;
+    right:-4px; /* 靠右錨定往左展開，避免窄螢幕右緣溢出 */
+    width:min(240px, 72vw);
+  }
+  .card-promo-pop::before{
+    left:auto;
+    right:24px;
+  }
+}
+
+/* =========================================================
+   ✅ 商品詳情頁活動橫幅（main.js injectPdpPromoBanner 注入）
+   位置：加入購物車按鈕（.pdp-cta）之後，避免注入位移影響 CTA
+========================================================= */
+.pdp-promo-banners{ margin-top:12px; }
+/* 金縁和紙風格：米白和紙底 + 金棕雙細線框，呼應商品卡徽章 */
+.pdp-promo-banner{
+  background:#fbf6ea;
+  border:1px solid #c9a87a;
+  border-radius:3px;
+  box-shadow:inset 0 0 0 2px #fbf6ea, inset 0 0 0 3px #e3cda4; /* 內層第二道金細線 */
+  padding:12px 16px;
+}
+.pdp-promo-banner + .pdp-promo-banner{ margin-top:8px; }
+.pdp-promo-banner-title{
+  font-size:14px;
+  font-weight:700;
+  color:#6b4e1c;
+  letter-spacing:.04em;
+  line-height:1.5;
+}
+.pdp-promo-banner-desc{
+  font-size:13px;
+  color:#7a6f66;
+  line-height:1.7;
+  margin-top:4px;
+}
+.pdp-promo-banner-link{
+  display:inline-block;
+  font-size:13px;
+  font-weight:700;
+  color:#8a5e16;
+  margin-top:6px;
+}
+.pdp-promo-banner-link:hover{ text-decoration:underline; }

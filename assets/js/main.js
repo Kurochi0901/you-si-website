@@ -671,9 +671,116 @@ function renderPriorityBadge(p){
   return "";
 }
 
+/* ===== 5.1 商品卡活動徽章 ===== */
+
+/**
+ * main.js 為傳統 script 無法 import promotions.data.js 的 isPromoActive，
+ * 此處為對應的活動期間判斷（邏輯需與 promotions.data.js 保持一致）
+ */
+function isPromoLive(promo){
+  const now = Date.now();
+  if(promo.startAt){
+    const start = new Date(promo.startAt + "T00:00:00").getTime();
+    if(!isNaN(start) && now < start) return false;
+  }
+  if(promo.endAt){
+    const end = new Date(promo.endAt + "T23:59:59").getTime();
+    if(!isNaN(end) && now > end) return false;
+  }
+  return true;
+}
+
+/** 商品 id → 進行中且設有 display.cardBadge 的促銷（同商品命中多個活動時取第一個） */
+function getPromoBadgeMap(){
+  const map = new Map();
+  (window.PROMOTIONS || []).forEach(promo => {
+    if(!promo.display || !promo.display.cardBadge) return;
+    if(!Array.isArray(promo.targetIds)) return;
+    if(!isPromoLive(promo)) return;
+    promo.targetIds.forEach(pid => { if(!map.has(pid)) map.set(pid, promo); });
+  });
+  return map;
+}
+
+/**
+ * 商品卡活動徽章 + 說明浮窗
+ * 桌機：徽章絕對定位於圖片上緣空白帶，hover 顯示浮窗
+ * 手機：徽章排在「店長精選／推薦」標籤列下方，點擊展開浮窗（樣式見 style.css .card-promo-badge）
+ */
+function renderPromoBadge(p, badgeMap){
+  const promo = badgeMap.get(p.id);
+  if(!promo) return "";
+  const d = promo.display;
+  return `
+    <span class="card-promo-badge" data-promo-badge role="button" tabindex="0" aria-expanded="false" aria-label="活動說明：${d.cardBadge}">
+      ${d.cardBadge}
+      <span class="card-promo-pop">
+        <span class="card-promo-pop-title">${d.title || promo.label}</span>
+        <span class="card-promo-pop-desc">${d.cardBadgeDetail || promo.description}</span>
+        <a class="card-promo-pop-link" href="/promotions/">查看活動 →</a>
+      </span>
+    </span>`;
+}
+
+/* 徽章點擊展開／收合（手機主要互動；桌機 hover 由 CSS 處理，點擊亦可固定浮窗） */
+document.addEventListener("click", (e) => {
+  if(e.target.closest(".card-promo-pop")) return; // 點浮窗內容（含連結）不收合
+  const badge = e.target.closest("[data-promo-badge]");
+  document.querySelectorAll("[data-promo-badge].open").forEach(b => {
+    if(b !== badge){ b.classList.remove("open"); b.setAttribute("aria-expanded", "false"); }
+  });
+  if(badge){
+    const opened = badge.classList.toggle("open");
+    badge.setAttribute("aria-expanded", String(opened));
+  }
+});
+document.addEventListener("keydown", (e) => {
+  if(e.key !== "Enter" && e.key !== " ") return;
+  if(!e.target || !e.target.closest) return;
+  if(e.target.closest(".card-promo-pop")) return; // 浮窗內的連結維持原生 Enter 行為
+  const badge = e.target.closest("[data-promo-badge]");
+  if(!badge) return;
+  e.preventDefault();
+  const opened = badge.classList.toggle("open");
+  badge.setAttribute("aria-expanded", String(opened));
+});
+
+/**
+ * 商品詳情頁：於加入購物車按鈕下方注入活動橫幅
+ * 商品 id 從 .pdp-btn-cart 的 onclick="addToCart(N)" 解析，靜態頁不需重新生成
+ */
+function injectPdpPromoBanner(){
+  const cta = document.querySelector(".pdp-cta");
+  if(!cta) return;
+  const btn = cta.querySelector(".pdp-btn-cart");
+  const m = btn && btn.getAttribute("onclick") ? btn.getAttribute("onclick").match(/addToCart\((\d+)\)/) : null;
+  const id = m ? parseInt(m[1], 10) : NaN;
+  if(Number.isNaN(id)) return;
+
+  const promos = (window.PROMOTIONS || []).filter(promo =>
+    promo.display && promo.display.cardBadge &&
+    Array.isArray(promo.targetIds) && promo.targetIds.includes(id) &&
+    isPromoLive(promo)
+  );
+  if(!promos.length) return;
+
+  const box = document.createElement("div");
+  box.className = "pdp-promo-banners";
+  box.innerHTML = promos.map(promo => `
+    <div class="pdp-promo-banner">
+      <div class="pdp-promo-banner-title">活動中：${promo.display.title || promo.label}</div>
+      <div class="pdp-promo-banner-desc">${promo.display.cardBadgeDetail || promo.description}</div>
+      <a class="pdp-promo-banner-link" href="/promotions/">查看所有活動 →</a>
+    </div>
+  `).join("");
+  cta.insertAdjacentElement("afterend", box);
+}
+
 function renderGrid(list, id){
   const box = document.getElementById(id);
   if(!box) return;
+
+  const promoBadgeMap = getPromoBadgeMap();
 
   box.innerHTML = list.map((p, index) => {
     let cover = Array.isArray(p.imgs) ? p.imgs[0] : "";
@@ -702,6 +809,7 @@ function renderGrid(list, id){
         </div>
         <div class="card-body">
           <div class="card-tag-row">${renderPriorityBadge(p)}</div>
+          ${renderPromoBadge(p, promoBadgeMap)}
           <a href="${productUrl}" class="name">${p.name}</a>
           <div class="spec">${p.spec || ""}</div>
           <div class="card-meta">
@@ -2129,6 +2237,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* 活動頁 */
   if(key === "offers") renderEvents();
+
+  /* 商品詳情頁：活動橫幅注入 */
+  if(key === "product-detail") injectPdpPromoBanner();
 
   /* 部落格文章列表 */
   if(key === "blog") initBlogList();

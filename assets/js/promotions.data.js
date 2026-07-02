@@ -77,7 +77,7 @@ export const PROMOTIONS = [
 
     // ✏️ 活動期間 "YYYY-MM-DD"（留空字串=無限制；endAt 過了會自動失效）
     startAt: "2026-05-01",   // 例："2026-06-01"
-    endAt:   "2026-06-30",   // 例："2026-06-30"
+    endAt:   "2026-07-31",   // 例："2026-06-30"
 
     // ✏️ 在 /offers/ 頁面顯示為活動卡片（不想顯示就把 showOnOffersPage 改成 false）
     display: {
@@ -85,7 +85,12 @@ export const PROMOTIONS = [
       title: "🍶 酉時之約：夏日祭典前哨站",
       summary: "夏日將至，從清酒到葡萄酒精選 11 款解暑酒款，任選 2 件即享 92 折優惠。",
       bannerImage: "/assets/images/home/夏日活動1920.webp",
-      bannerLink: ""  // 點 banner 跳轉的網址；留空=不可點
+      bannerLink: "",  // 點 banner 跳轉的網址；留空=不可點
+
+      // ✏️ 商品卡活動徽章：cardBadge = 卡片上的短標籤（留空/刪除 = 不顯示徽章）
+      //    cardBadgeDetail = 滑鼠移過 / 點擊徽章時浮窗顯示的完整說明
+      cardBadge: "🍶夏日祭典 任2件92折",
+      cardBadgeDetail: "指定酒款任選 2 件（含）以上，活動商品小計享 92 折。"
     },
 
     hint: {
@@ -134,7 +139,12 @@ export const PROMOTIONS = [
       title: "🐱 慵懶貓咪系列 任 2 件 NT$2,600",
       summary: "萩之鶴櫻花貓・暖桌貓・納涼貓，任選 2 件 NT$2,600。季節限定：萩之鶴生原酒春櫻、冬暖、夏涼三貓，季季果香微甜。",
       bannerImage: "/assets/images/home/貓咪系列1920.webp",
-      bannerLink: ""
+      bannerLink: "",
+
+      // ✏️ 商品卡活動徽章：cardBadge = 卡片上的短標籤（留空/刪除 = 不顯示徽章）
+      //    cardBadgeDetail = 滑鼠移過 / 點擊徽章時浮窗顯示的完整說明
+      cardBadge: "🐱貓咪系列 任2件$2,600",
+      cardBadgeDetail: "萩之鶴 櫻花貓・暖桌貓・納涼貓 任選 2 件固定 NT$2,600（不與其他折扣疊加）。"
     },
 
     hint: {
