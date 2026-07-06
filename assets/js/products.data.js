@@ -1672,7 +1672,7 @@ const products = [
     },
 {
       id: 45,
-      priority: 4,
+      priority: 5,
       name: "純米大吟釀 初花 金魚台輪",
       type: "清酒",
       category: "sake",
@@ -3172,7 +3172,7 @@ const products = [
     },
     {
       id: 80,
-      priority: 5, 
+      priority: 3, 
       name: "浪乃音 Te To Te手牽手 母の日",
       type: "清酒", 
       category: "sake", 
@@ -3321,7 +3321,7 @@ const products = [
     },
 {
       id: 83,
-      priority: 5, 
+      priority: 4, 
       name: "蓬萊泉 烹雪韻 生普洱茶梅酒",
       type: "果實酒", 
       category: "fruit-tea", 
@@ -3371,7 +3371,7 @@ const products = [
     },
     {
       id: 84,
-      priority: 5, 
+      priority: 4, 
       name: "蝴蝶加濃 龍舌蘭 藍鑽",
       type: "烈酒", 
       category: "spirits", 
@@ -3418,7 +3418,7 @@ const products = [
     },
 {
       id: 85,
-      priority: 5, 
+      priority: 4, 
       name: "蝴蝶加濃 龍舌蘭 粉鑽",
       type: "烈酒",
       category: "spirits", 
@@ -4438,7 +4438,7 @@ const products = [
     },
     {
       id: 115,
-      priority: 5, 
+      priority: 4, 
       name: "萩之鶴 別仕込生原酒 納涼貓",
       type: "清酒", 
       category: "sake", 
@@ -4576,7 +4576,7 @@ const products = [
     },
 {
       id: 118,
-      priority: 5, 
+      priority: 4, 
       name: "美亞老藤 夏多內白葡萄酒 2024",
       type: "葡萄酒", 
       category: "wine", 
@@ -4629,7 +4629,7 @@ const products = [
     },
 {
       id: 119,
-      priority: 5, 
+      priority: 4, 
       name: "美亞老藤 卡本內蘇維濃紅葡萄酒 2022",
       type: "葡萄酒", 
       category: "wine", 
@@ -4682,7 +4682,7 @@ const products = [
     },
 {
       id: 120,
-      priority: 5, 
+      priority: 4, 
       name: "美亞老藤 卡蜜尼耶紅葡萄酒 2023",
       type: "葡萄酒", 
       category: "wine", 
@@ -4869,6 +4869,148 @@ const products = [
     
 
     wineryId: "yanagita-shochu" 
-    }
+    },
+    {
+      id: 124,
+      priority: 5, 
+      name: "林本店 Silent Galaxy 純米大吟釀 無濾過生原酒",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/124百十郎SG1.webp`,
+      `${CDN}/124百十郎SG2.webp`,
+    ], 
+
+    price: 1450, 
+    originPrice: 1500,
+
+    spec: "宇宙靈感限定酒，果香清雅，微氣泡清爽細膩", 
+
+    note: {
+      oneLine: `百十郎是岐阜縣林本店旗下代表品牌，以現代感設計與細膩酒質聞名，致力打造兼具個性與餐搭魅力的日本酒。
+
+	限定酒款「SILENT GALAXY」以浩瀚宇宙為靈感，採純米大吟釀無濾過生原酒釀造，散發水梨、白葡萄與淡雅白花香。
+	酒體透明細緻，伴隨柔和米旨味、清爽酸度與輕盈微氣泡感，尾韻乾淨俐落，冰鎮後更能展現鮮活層次，是夏日品飲與搭配海鮮、白肉料理的理想之選！
+
+	日本酒度：-5.6（偏甘口）`, 
+    },
+
+    info: {
+      brand: "林本店・百十郎", 
+      origin: "日本", 
+      rice: "出羽燦燦", 
+      yeast: "M310", 
+      variety: null,
+      polish:"50%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 4, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hayasihonten"
+    },
+{
+      id: 125,
+      priority: 5, 
+      name: "安藝虎 夏純吟 生酒 2026",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/125安藝虎夏純吟1.webp`,
+      `${CDN}/125安藝虎夏純吟2.webp`,
+    ], 
+
+    price: 1400, 
+    originPrice: 1500, 
+
+    spec: "異於高知傳統風味，果香奔放，酸度清爽俐落",
+
+    note: {
+      oneLine: `安藝虎酒造今年採用在地酒米「吟之夢」與高知酵母釀造，展現更純粹的土佐風土。
+	酒款帶有葡萄柚、柑橘等清新吟釀香，入口延續安藝虎一貫紮實飽滿的酒體與爽快俐落的酸度，層次鮮明卻不甜膩。既保有高知酒耐喝、適合佐餐的特色，又多了細緻清新的現代感。
+	爽快的口感不僅適合炎炎夏日冰飲，冰鎮後更能襯托海鮮、炸物與各式夏季料理的鮮美滋味。`, 
+    },
+
+    info: {
+      brand: "有光・安藝虎", 
+      origin: "日本", 
+      rice: "吟之夢", 
+      yeast: null, 
+      variety: null,
+      polish:"60%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "arimitsu" 
+    },
+{
+      id: 126,
+      priority: 5, 
+      name: "山形正宗 花火 夏季限定 純米酒",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/126山形正宗_花火1.webp`,
+      `${CDN}/126山形正宗_花火2.webp`,
+      `${CDN}/126山形正宗_花火3.webp`,
+    ], 
+
+    price: 1480, 
+    originPrice: 1600, 
+
+    spec: "果香如花火般綻放，夏日限定佐餐氣泡酒",
+
+    note: {
+      oneLine: `每年夏季限量推出的「花火純米酒」，是山形正宗最具代表性的夏酒之一，也是日本居酒屋的人氣搭餐酒！
+	以清爽易飲為特色，今年因酒醪酸度表現優異，酸甜層次更加鮮明！散發洋梨、蘋果與熱帶水果香氣，伴隨細緻氣泡感、飽滿米旨味與優雅酸度，入口鮮活輕快，尾韻帶有淡淡礦物感與微苦韻，收尾乾淨俐落。
+	無論冰飲、常溫品飲，或加入檸檬與冰塊，都能展現盛夏限定的沁涼魅力。`, 
+    },
+
+    info: {
+      brand: "水戶部・山形正宗", 
+      origin: "日本", 
+      rice: "雪女神", 
+      yeast: "非公開", 
+      variety: null,
+      polish:"60%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "mitobe" 
+    },
 ]
 if (typeof window !== 'undefined') { window.products = products; }
