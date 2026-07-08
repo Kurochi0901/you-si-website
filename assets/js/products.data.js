@@ -5020,7 +5020,7 @@ const products = [
       category: "fruit-tea", 
     imgs: [`${CDN}/127包種茶柚子1.webp`,
       `${CDN}/127包種茶柚子2.webp`,
-      `${CDN}/127包種茶柚子3.webp`,
+      `${CDN}/127包種茶柚子13.webp`,
     ], 
 
     price: 1500, 
