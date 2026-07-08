@@ -5012,5 +5012,52 @@ const products = [
 
     wineryId: "mitobe" 
     },
+    {
+      id: 127,
+      priority: 5, 
+      name: "蓬萊泉 乘興院 包種茶柚子酒",
+      type: "果實酒", 
+      category: "fruit-tea", 
+    imgs: [`${CDN}/127包種茶柚子1.webp`,
+      `${CDN}/127包種茶柚子2.webp`,
+      `${CDN}/127包種茶柚子3.webp`,
+    ], 
+
+    price: 1500, 
+    originPrice: 1500,
+
+    spec: "柚香新鮮明亮，茶韻悠長回甘", 
+
+    note: {
+      oneLine: `日本關谷酒造以人氣柚子酒為基底，結合台北茶文化美學空間「乘興院」精選的台灣包種茶，打造這款充滿台日風味的聯名酒款。
+
+入口清新柚香伴隨酸甜果韻，隨後綻放包種茶細膩花香與柔和茶韻，尾韻甘潤悠長。冰飲或加入氣泡水皆能展現不同層次，是一款兼具果香、茶香與清爽口感的夏日佳釀。
+
+	原料：柚子、包種茶、燒酎`, 
+    },
+
+    info: {
+      brand: "關谷・蓬萊泉", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "7%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 3,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    wineryId: "sekiya"
+    }
 ]
 if (typeof window !== 'undefined') { window.products = products; }
