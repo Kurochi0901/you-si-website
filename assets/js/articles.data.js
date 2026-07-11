@@ -59,6 +59,18 @@ const articles = [
     subTags: ["烈酒","日本酒"],
     relatedProductIds: [86, 121, 122, 87]
   },
+  {
+    id: 6,
+    slug: "world-cup-viewing-buddy",
+    title: "【球迷必看】世足熬夜觀賽新隊友——「氣泡清酒」！！",
+    excerpt: "想要輕鬆喝無負擔？來杯清爽「氣泡清酒」，你的觀戰好夥伴！",
+    cover: "/assets/images/blog/id6封面.webp",
+    date: "2026/07/11",
+    author: "酉時喝酒",
+    mainTags: ["酉時圖書館"],
+    subTags: ["日本酒"],
+    relatedProductIds: [32, 124, 44, 125, 37]
+  },
 
 ];
 // 強制掛載到全域 window 物件以確保跨腳本讀取

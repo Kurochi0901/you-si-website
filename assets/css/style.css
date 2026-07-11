@@ -3226,11 +3226,14 @@ body.age-overlay-active{ overflow:hidden; }
 .blog-empty-sub { font-size: 14px; color: var(--muted); }
 
 /* Article Detail Styles */
-.article-hero { position: relative; width: 100%; height: 420px; background: linear-gradient(135deg, #f0e6d6, #e8d5b8); display: flex; align-items: flex-end; justify-content: center ; overflow: hidden; }
+/* 素色版標題區：底色與下方內容一致（原底圖版樣式保留於註解，恢復底圖時換回）
+   background: linear-gradient(135deg, #f0e6d6, #e8d5b8);
+   ::after 壓暗漸層: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+   title: color:#fff; text-shadow: 0 4px 16px rgba(0,0,0,0.6); */
+.article-hero { position: relative; width: 100%; min-height: 200px; background: var(--bg); display: flex; align-items: flex-end; justify-content: center ; overflow: hidden; } /* 素色版縮小高度並改 min-height 容納長標題（底圖版原為 height: 420px） */
 .article-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover top; z-index: 1; }
-.article-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); z-index: 2; }
-.article-hero-content { position: relative; z-index: 3; padding: 0 20px 48px; text-align: center; max-width: 840px; }
-.article-hero-title { color: #fff; font-size: 40px; font-weight: 800; margin: 0; letter-spacing: .05em; line-height: 1.25; text-shadow: 0 4px 16px rgba(0,0,0,0.6); }
+.article-hero-content { position: relative; z-index: 3; padding: 0 20px 24px; text-align: center; max-width: 840px; }
+.article-hero-title { color: var(--ink); font-size: 40px; font-weight: 800; margin: 0; letter-spacing: .05em; line-height: 1.25; }
 .article-container { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; position: relative; z-index: 4; background: var(--bg); border-radius: 24px 24px 0 0; }
 .breadcrumbs { font-size: 13px; color: var(--muted); margin-top: 10px; margin-bottom: 32px; font-weight: 600; letter-spacing: .02em; display: block; }
 .breadcrumbs a { color: var(--muted); transition: color .2s ease; padding: 0; border-radius: 0; background: none; }
@@ -3253,7 +3256,7 @@ body.age-overlay-active{ overflow:hidden; }
 .post-tldr ul { margin: 10px 0 0; padding-left: 22px; }
 .post-tldr li { margin-bottom: 6px; }
 @media (max-width: 860px) {
-    .article-hero { height: 320px; margin-top: 100px; }
+    .article-hero { min-height: 150px; height: auto; margin-top: 100px; } /* 素色版縮小高度並改 min-height 容納長標題（底圖版原為 height: 320px） */
     .article-hero-title { font-size: 28px; }
     .article-container { margin: 0 auto; padding: 24px 20px 60px; border-radius: 0; }
     .article-content h2 { font-size: 20px; }
@@ -3269,6 +3272,15 @@ body.age-overlay-active{ overflow:hidden; }
   padding: 30px 18px;
   border-top: 1px solid var(--line);
 }
+/* 桌機：文章容器僅 760px 寬，相關商品區以置中定位突破容器，利用左右空白 */
+@media (min-width: 861px) {
+  .blog-related-section {
+    width: min(1200px, calc(100vw - 80px));
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 .blog-related-section h3 {
   text-align: center;
   margin-bottom: 24px;
@@ -3278,12 +3290,15 @@ body.age-overlay-active{ overflow:hidden; }
 }
 #blog-related-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 #blog-related-grid .card { flex-direction: row; }
 #blog-related-grid .card-media { aspect-ratio: 3/4; width: 40%; flex-shrink: 0; }
 #blog-related-grid .card-body { width: 60%; }
+/* 橫式卡片文字區較窄：價格與按鈕改為換行排列，避免按鈕超出卡片 */
+#blog-related-grid .card-meta { flex-wrap: wrap; }
+#blog-related-grid .btn-add { width: 100%; text-align: center; }
 @media (max-width: 860px) {
   #blog-related-grid {
     grid-template-columns: 1fr;
@@ -3294,6 +3309,20 @@ body.age-overlay-active{ overflow:hidden; }
   #blog-related-grid .card-body { width: auto; }
   #blog-related-grid .card-meta { flex-wrap: wrap; }
   #blog-related-grid .btn-add { width: 100%; text-align: center; }
+}
+/* 桌機：blog 橫式卡片沒有圖片上緣空白帶，活動徽章改排進版面流（同手機處理），
+   避免絕對定位壓到商品圖與「店長精選」標籤 */
+@media (min-width: 861px) {
+  #blog-related-grid .card-promo-badge {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    align-self: flex-start;
+    margin: 0 0 4px;
+    max-width: 100%;
+    white-space: normal; /* 卡片較窄，徽章文字允許換行避免超出卡片 */
+  }
 }
 
 /* ===== Inline CTA Link Style ===== */
