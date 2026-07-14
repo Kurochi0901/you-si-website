@@ -1407,6 +1407,7 @@ const products = [
     },
     wineryId: "kobayashi"
     },
+/* ── 已下架 2026-07-14（保留資料，恢復上架時取消註解即可）──
 {
       id: 38,
       priority: 4,
@@ -1434,16 +1435,18 @@ const products = [
       alcohol: "17%",
       volume: "720ml"
     },
-    scale: {  
+    scale: {
         sakeDrySweet: 3,
-        sakeUmamiFruity: 2, 
+        sakeUmamiFruity: 2,
         ftAcidSweet: null,
-        ftFreshRich: null, 
-        wineTannin: null, 
-        wineFreshFull: null 
+        ftFreshRich: null,
+        wineTannin: null,
+        wineFreshFull: null
     },
     wineryId: "kobayashi"
     },
+*/
+/* ── 已下架 2026-07-14（保留資料，恢復上架時取消註解即可）──
 {
       id: 39,
       priority: 4,
@@ -1471,16 +1474,17 @@ const products = [
       alcohol: "16%",
       volume: "720ml"
     },
-    scale: {  
+    scale: {
         sakeDrySweet: 3,
-        sakeUmamiFruity: 4, 
+        sakeUmamiFruity: 4,
         ftAcidSweet: null,
-        ftFreshRich: null, 
-        wineTannin: null, 
-        wineFreshFull: null 
+        ftFreshRich: null,
+        wineTannin: null,
+        wineFreshFull: null
     },
     wineryId: "kobayashi"
     },
+*/
 {
       id: 40,
       priority: 3,
@@ -1518,6 +1522,7 @@ const products = [
     },
     wineryId: "kobayashi"
     },
+/* ── 已下架 2026-07-14（保留資料，恢復上架時取消註解即可）──
     {
       id: 41,
       priority: 4,
@@ -1546,16 +1551,17 @@ const products = [
       alcohol: "17%",
       volume: "720ml"
     },
-    scale: {  
+    scale: {
         sakeDrySweet: 3,
-        sakeUmamiFruity: 4, 
+        sakeUmamiFruity: 4,
         ftAcidSweet: null,
-        ftFreshRich: null, 
-        wineTannin: null, 
-        wineFreshFull: null 
+        ftFreshRich: null,
+        wineTannin: null,
+        wineFreshFull: null
     },
     wineryId: "kobayashi"
     },
+*/
 {
       id: 42,
       priority: 3,
@@ -2308,20 +2314,21 @@ const products = [
 
     wineryId: "mitobe" 
     },
+/* ── 已下架 2026-07-14（保留資料，恢復上架時取消註解即可）──
 {
       id: 59,
-      priority: 3, 
+      priority: 3,
       name: "山形正宗 純米吟釀 生霞酒 橫山式",
-      type: "清酒", 
-      category: "sake", 
+      type: "清酒",
+      category: "sake",
     imgs: [`${CDN}/59.山形正宗_純米吟釀_生霞酒_橫山式1.webp`,
       `${CDN}/59.山形正宗_純米吟釀_生霞酒_橫山式2.webp`,
-    ], 
+    ],
 
-    price: 1650, 
+    price: 1650,
     originPrice: 1800,
 
-    spec: "橫山式經典之作，", 
+    spec: "橫山式經典之作，",
 
     note: {
       oneLine: `嘗試新型的藪田式小型壓榨機，能夠快速完成壓榨，因此保有微微氣泡感的新鮮風味，擁有水潤口感。（橫山式）
@@ -2329,34 +2336,35 @@ const products = [
 	酒液如薄霧般帶有純淨的霞色（かすみ），這是生酒保留醪中微細成分的證明。入口時能感受到鮮榨麝香葡萄和葡萄柚汁的氣息，口感輕盈靈動，帶有生酒專屬的清新跳躍感。隨著舌尖擴散，細緻的旨味逐漸堆疊，尾韻乾淨俐落。
 	橫山式的嚴謹工藝，賦予了這款生霞酒絕佳的結構平衡，是一款在清爽與深度之間取得完美和諧的季節逸品，非常適合搭配新鮮刺身、白身魚料理，或風味淡雅的日式家常菜。
 
-	原料：米、米麴`, 
+	原料：米、米麴`,
     },
 
     info: {
-      brand: "水戶部・山形正宗", 
-      origin: "日本", 
-      rice: "出羽燦燦", 
-      yeast: "未公開", 
+      brand: "水戶部・山形正宗",
+      origin: "日本",
+      rice: "出羽燦燦",
+      yeast: "未公開",
       variety: null,
       polish:"50%",
-      alcohol: "15%", 
-      volume: "720ml" 
+      alcohol: "15%",
+      volume: "720ml"
     },
 
-    scale: {  
-        sakeDrySweet: 3, 
-        sakeUmamiFruity: 3,  
-      
-        ftAcidSweet: null, 
-        ftFreshRich: null,  
-      
-        wineTannin: null,  
-        wineFreshFull: null  
-    },
-    
+    scale: {
+        sakeDrySweet: 3,
+        sakeUmamiFruity: 3,
 
-    wineryId: "mitobe" 
+        ftAcidSweet: null,
+        ftFreshRich: null,
+
+        wineTannin: null,
+        wineFreshFull: null
     },
+
+
+    wineryId: "mitobe"
+    },
+*/
 {
       id: 60,
       priority: 4, 
@@ -2645,7 +2653,7 @@ const products = [
     ],
     price: 1100,
     originPrice: 1250,
-    spec: "頂級山田錦釀造，極致絲滑果香饗宴",
+    spec: "蜜蘋果般果香，甜美清爽的德拉瓦葡萄酒",
     note: {
       oneLine: `選用盛夏陽光滋養的完熟德拉瓦葡萄釀造，釋放出宛如蜜蘋果般的華麗果香，融合濃郁果實風味及蜂蜜般的甜美餘韻，層層堆疊豐富層次，清爽酸度巧妙地平衡了整體甜感，口感飽滿卻不顯厚重，適合作為餐後甜點酒享用。
 	搭餐推薦：飯後甜食、冷盤沙拉
@@ -4436,53 +4444,55 @@ const products = [
 
     wineryId: "arimitsu" 
     },
+/* ── 已下架 2026-07-14（保留資料，恢復上架時取消註解即可）──
     {
       id: 115,
-      priority: 4, 
+      priority: 4,
       name: "萩之鶴 別仕込生原酒 納涼貓",
-      type: "清酒", 
-      category: "sake", 
+      type: "清酒",
+      category: "sake",
     imgs: [`${CDN}/115納涼貓1.webp`,
       `${CDN}/115納涼貓2.webp`,
-    ], 
+    ],
 
-    price: 1350, 
+    price: 1350,
     originPrice: 1500,
 
-    spec: "夏天限定・貓咪生原酒，消暑清爽華麗果香", 
+    spec: "夏天限定・貓咪生原酒，消暑清爽華麗果香",
 
     note: {
       oneLine: `超人氣萩之鶴貓咪系列推出限定生原酒，嚴選48%精米與宮城酵母，打造15度清透酒體。開瓶帶有細緻氣泡感，交織華麗果香與鮮活酸度，瑞瑞甜韻與乾淨口感完美調和，口感清爽同時保有層次。冰鎮後更能展現生原酒鮮活奔放的魅力，非常適合即將到來的炎熱季節輕鬆享用。
 	無論是單飲或搭配餐點，都能帶來像貓咪午後打盹般慵懶愜意的氛圍。
 
-	日本酒度：-5（偏甘口）`, 
+	日本酒度：-5（偏甘口）`,
     },
 
     info: {
-      brand: "萩野・萩之鶴", 
-      origin: "日本", 
-      rice: "未公開", 
-      yeast: "宮城酵母", 
+      brand: "萩野・萩之鶴",
+      origin: "日本",
+      rice: "未公開",
+      yeast: "宮城酵母",
       variety: null,
       polish:"48%",
-      alcohol: "15%", 
-      volume: "720ml" 
+      alcohol: "15%",
+      volume: "720ml"
     },
 
-    scale: {   
-        sakeDrySweet: 3, 
-        sakeUmamiFruity: 4,  
-      
-        ftAcidSweet: null, 
-        ftFreshRich: null,  
-      
-        wineTannin: null,  
-        wineFreshFull: null  
+    scale: {
+        sakeDrySweet: 3,
+        sakeUmamiFruity: 4,
+
+        ftAcidSweet: null,
+        ftFreshRich: null,
+
+        wineTannin: null,
+        wineFreshFull: null
     },
-    
+
 
     wineryId: "hagino"
     },
+*/
 {
       id: 116,
       priority: 5, 
@@ -4935,7 +4945,7 @@ const products = [
     spec: "異於高知傳統風味，果香奔放，酸度清爽俐落",
 
     note: {
-      oneLine: `安藝虎酒造今年採用在地酒米「吟之夢」與高知酵母釀造，展現更純粹的土佐風土。
+      oneLine: `有光酒造今年採用在地酒米「吟之夢」與高知酵母釀造，展現更純粹的土佐風土。
 	酒款帶有葡萄柚、柑橘等清新吟釀香，入口延續安藝虎一貫紮實飽滿的酒體與爽快俐落的酸度，層次鮮明卻不甜膩。既保有高知酒耐喝、適合佐餐的特色，又多了細緻清新的現代感。
 	爽快的口感不僅適合炎炎夏日冰飲，冰鎮後更能襯托海鮮、炸物與各式夏季料理的鮮美滋味。`, 
     },

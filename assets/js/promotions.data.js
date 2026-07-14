@@ -116,7 +116,7 @@ export const PROMOTIONS = [
 
   /* =============================
      可愛貓咪系列 任兩件 NT$2,600
-     ✏️  參與商品：32 / 33 / 115（萩之鶴 櫻花貓・暖桌貓・納涼貓）
+     ✏️  參與商品：32 / 33（萩之鶴 櫻花貓・暖桌貓；115 納涼貓已下架）
      ✏️  規則：任 2 件固定 2600；4 件 → 兩組 2600；3 件 → 1 組 2600 + 多的 1 件原價（可參與其他優惠）
      ✏️  stackable: false → 與其他不可疊加優惠（夏日活動、折扣碼）擇優套用，避免貓咪價再被折扣碼疊到
   ============================= */
@@ -126,9 +126,9 @@ export const PROMOTIONS = [
     stackable: false,
 
     label: "慵懶貓咪系列 任 2 件 NT$2,600",
-    description: "萩之鶴 櫻花貓・暖桌貓・納涼貓 任選 2 件固定 NT$2,600（不與其他折扣疊加）",
+    description: "萩之鶴 櫻花貓・暖桌貓 任選 2 件固定 NT$2,600（不與其他折扣疊加）",
 
-    targetIds: [32, 33, 115],
+    targetIds: [32, 33],
 
     // 此活動不設期間 → 永久有效；如需限時請填 startAt / endAt
     startAt: "",
@@ -137,14 +137,14 @@ export const PROMOTIONS = [
     display: {
       showOnOffersPage: true,
       title: "🐱 慵懶貓咪系列 任 2 件 NT$2,600",
-      summary: "萩之鶴櫻花貓・暖桌貓・納涼貓，任選 2 件 NT$2,600。季節限定：萩之鶴生原酒春櫻、冬暖、夏涼三貓，季季果香微甜。",
+      summary: "萩之鶴櫻花貓・暖桌貓，任選 2 件 NT$2,600。季節限定：萩之鶴生原酒春櫻、冬暖雙貓，季季果香微甜。",
       bannerImage: "/assets/images/home/貓咪系列1920.webp",
       bannerLink: "",
 
       // ✏️ 商品卡活動徽章：cardBadge = 卡片上的短標籤（留空/刪除 = 不顯示徽章）
       //    cardBadgeDetail = 滑鼠移過 / 點擊徽章時浮窗顯示的完整說明
       cardBadge: "🐱貓咪系列 任2件$2,600",
-      cardBadgeDetail: "萩之鶴 櫻花貓・暖桌貓・納涼貓 任選 2 件固定 NT$2,600（不與其他折扣疊加）。"
+      cardBadgeDetail: "萩之鶴 櫻花貓・暖桌貓 任選 2 件固定 NT$2,600（不與其他折扣疊加）。"
     },
 
     hint: {
