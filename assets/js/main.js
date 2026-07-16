@@ -1534,12 +1534,22 @@ async function sha256Hex(str){
     .map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
+/** 檢查折扣碼是否在有效期間內（validFrom / validUntil 皆含當天，未設定則不限） */
+function isCouponInPeriod(coupon){
+  const today = new Date();
+  if (coupon.validFrom  && today < new Date(coupon.validFrom  + "T00:00:00")) return false;
+  if (coupon.validUntil && today > new Date(coupon.validUntil + "T23:59:59")) return false;
+  return true;
+}
+
 /** 取得當前已啟用的折扣碼定義（用 sessionStorage 的 hash 反查） */
 function getActiveCoupon(){
   if (!window.COUPONS) return null;
   const hash = sessionStorage.getItem(COUPON_STORAGE_KEY);
   if (!hash) return null;
-  return window.COUPONS.find(c => c.hash === hash) || null;
+  const coupon = window.COUPONS.find(c => c.hash === hash) || null;
+  if (coupon && !isCouponInPeriod(coupon)) return null;
+  return coupon;
 }
 
 /** 將已啟用折扣碼包裝成 promotion 陣列，供 applyPromotions 統一評選 */
@@ -1574,6 +1584,10 @@ async function applyCouponCode(rawInput){
 
   if (!matched) {
     return { ok: false, message: "折扣碼無效" };
+  }
+
+  if (!isCouponInPeriod(matched)) {
+    return { ok: false, message: "折扣碼不在活動期間內" };
   }
 
   sessionStorage.setItem(COUPON_STORAGE_KEY, hash);
