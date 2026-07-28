@@ -207,24 +207,24 @@ export const PROMOTIONS = [
   /* =============================
      滿 2800 送開運御守
   ============================= */
-  {
-    id: "lucky-charm-2800",
-    type: "flag",
-    stackable: true, // 可與其他優惠疊加（因為是送贈品）
+  // {
+  //   id: "lucky-charm-2800",
+  //   type: "flag",
+  //   stackable: true, // 可與其他優惠疊加（因為是送贈品）
 
-    label: "滿 NT$2,800 送開運御守（數量有限，送完為止）",
-    description: "下單滿 NT$2,800 即贈送「開運御守」乙個（數量有限，送完為止）",
+  //   label: "滿 NT$2,800 送開運御守（數量有限，送完為止）",
+  //   description: "下單滿 NT$2,800 即贈送「開運御守」乙個（數量有限，送完為止）",
 
-    condition(ctx) {
+  //   condition(ctx) {
 
-      return ctx.subtotal >= 2800;
-    },
+  //     return ctx.subtotal >= 2800;
+  //   },
 
-    apply(ctx) {
-      // 贈品不影響金額，回傳 0
-      return 0;
-    }
-  },
+  //   apply(ctx) {
+  //     // 贈品不影響金額，回傳 0
+  //     return 0;
+  //   }
+  // },
 
 
   /* =============================
