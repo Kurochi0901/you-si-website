@@ -1848,7 +1848,7 @@ async function submitOrder(){
 姓名：${name}
 電話：${phone}
 Email：${email}
-取貨方式：${pickup}
+取貨方式：${pickup}${pickup === "郵寄" ? `（${shipTemp}配送）` : ""}
 地址：${pickup === "郵寄" ? address : "（自取）"}
 備註：${note || "（無）"}
 
