@@ -5068,6 +5068,350 @@ const products = [
         wineFreshFull: null  
     },
     wineryId: "sekiya"
+    },
+    {
+      id: 95,
+      priority: 5, 
+      name: "六代目百合 芋燒酎",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/95六代目百合1.webp`,
+      `${CDN}/95六代目百合2.webp`,
+      `${CDN}/95六代目百合3.webp`,
+    ], 
+
+    price: 1410, 
+    originPrice: 1500,
+
+    spec: "黑麴無濾過工藝，展現濃郁地瓜香與悠長回甘", 
+
+    note: {
+      oneLine: `承襲鹿兒島甑島塩田酒造的六代製法，以黑麴仕込、常壓蒸餾與無濾過熟成打造，完整展現地瓜原料的濃郁個性。
+	入口散發溫潤甜感與奔放芋香，酒體厚實卻俐落，旨味層層堆疊，尾韻悠長回甘。
+	建議先以純飲感受最原始風味，加水或加冰後依然保有鮮明個性，是一款兼具傳統工藝與陽剛魅力的經典芋燒酎！`, 
+    },
+
+    info: {
+      brand: "塩田・六代目百合", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "25%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "shiota"
+    },
+{
+      id: 96,
+      priority: 5, 
+      name: "山櫻威士忌 PRECIOUS",
+      type: "烈酒", 
+      category: "spirits", 
+    imgs: [`${CDN}/96山櫻PRECIOUS1.webp`,
+      `${CDN}/96山櫻PRECIOUS2.webp`,
+      `${CDN}/96山櫻PRECIOUS3.webp`,
+      `${CDN}/96山櫻PRECIOUS4.webp`,
+    ], 
+
+    price: 1750, 
+    originPrice: 1650, 
+
+    spec: "雪莉桶熟成，交織煙燻堅果與香草層次風味",
+
+    note: {
+      oneLine: `嚴選麥芽與泥煤威士忌原酒，於雪莉桶熟成，展現濃郁雪莉果香與細膩層次。入口散發奶油香草、堅果與煙燻氣息，伴隨微妙辛香，酒體圓潤飽滿、餘韻悠長。
+	由創立於1765年的笹之川酒造釀製，以「山櫻」品牌享譽日本及海外，更因扶持安積蒸餾所與肥土伊知郎創業而備受威士忌愛好者推崇，是兼具歷史底蘊與收藏價值的日本威士忌。`, 
+    },
+
+    info: {
+      brand: "笹之川・山櫻", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "46%", 
+      volume: "700ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "sasanokawa" 
+    },
+{
+      id: 97,
+      priority: 5, 
+      name: "聖母之乳 金凱勒精選優質白葡萄酒",
+      type: "葡萄酒", 
+      category: "wine", 
+    imgs: [`${CDN}/97聖母之乳1.webp`,
+      `${CDN}/97聖母之乳2.webp`,
+      `${CDN}/97聖母之乳3.webp`,
+    ], 
+
+    price: 540, 
+    originPrice: 540, 
+
+    spec: "柑橘果香清新爽口，酸甜平衡易飲白酒",
+
+    note: {
+      oneLine: `🏆WSD餐酒大賞專業人士評選 銅牌獎
+	
+	散發黃檸檬與葡萄柚的清新果香，入口帶有適中的甜味、細緻礦石感與淡雅柑橘酸度，口感輕盈爽口、酸甜平衡。
+	來自德國萊茵黑森的Kessler Zink酒莊，結合家族傳承與現代釀酒技術，展現純淨且富有產區特色的風味。無論搭配蒸煮海鮮、白肉料理或作為餐前酒，都能襯托食材鮮味，是一款輕鬆易飲的經典德國白酒。
+	酒莊出品的「小藍瓶」系列，以其優雅外型與清爽順口風味成為德國甜白葡萄酒的經典代表之一，無論日常飲用或送禮皆十分適合。
+
+	搭餐推薦：蒸煮類的海鮮料理 
+
+	建議適飲溫度：8~12°C`, 
+    },
+
+    info: {
+      brand: "金凱勒", 
+      origin: "德國", 
+      rice: null, 
+      yeast: null, 
+      variety: "Riesling、Rivaner",
+      polish: null,
+      alcohol: "10.5%", //酒精濃度
+      volume: "750ml" //容量
+    },
+
+    scale: {   //1-5分，分數越低越靠左，分數越高越靠右 ，不適用的欄位填入null
+        sakeDrySweet: null,
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null,
+        ftFreshRich: null, 
+      
+        wineTannin: 1,  
+        wineFreshFull: 2 
+    },
+    
+
+    wineryId: "kessler-zink" 
+    },
+{
+      id: 98,
+      priority: 5, 
+      name: "巧克力鹿 精選混釀紅葡萄酒",
+      type: "葡萄酒", 
+      category: "wine", 
+    imgs: [`${CDN}/98巧克力鹿1.webp`,
+      `${CDN}/98巧克力鹿2.webp`,
+    ], 
+
+    price: 680, 
+    originPrice: 680, 
+
+    spec: "深色果香濃郁飽滿，圓潤優雅法國紅酒",
+
+    note: {
+      oneLine: `🏆2021 柏林葡萄酒大賽 金牌獎
+	
+	由南法知名酒廠LGI精選釀製，產自法國南部歷史悠久——2600年歷史的葡萄園，在地中海海風與充足日照孕育下，釀造出層次豐富的紅酒。
+	散發藍莓、紫羅蘭與橡木香氣，入口柔順濃郁，深色果實風味飽滿且富有層次，尾韻圓潤悠長，展現法國紅酒的經典魅力。
+	
+	搭餐推薦：牛排、燉肉、烤肉及各式蔬菜料理
+
+	建議適飲溫度：14-18°C`, 
+    },
+
+    info: {
+      brand: "LGI", 
+      origin: "法國", 
+      rice: null, 
+      yeast: null, 
+      variety: "50% Cabernet Sauvignon, 50% Syrah",
+      polish: null,
+      alcohol: "13.5%", //酒精濃度
+      volume: "750ml" //容量
+    },
+
+    scale: {   //1-5分，分數越低越靠左，分數越高越靠右 ，不適用的欄位填入null
+        sakeDrySweet: null,
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null,
+        ftFreshRich: null, 
+      
+        wineTannin: 3,  
+        wineFreshFull: 4 
+    },
+    
+
+    wineryId: "lgi-wines" 
+    },
+{
+      id: 99,
+      priority: 5, 
+      name: "雙魚 DUO 白葡萄酒",
+      type: "葡萄酒", 
+      category: "wine", 
+    imgs: [`${CDN}/99雙魚DUO1.webp`,
+      `${CDN}/99雙魚DUO2.webp`,
+      `${CDN}/99雙魚DUO3.webp`,
+    ], 
+
+    price: 750, 
+    originPrice: 750, 
+
+    spec: "熱帶果香與柑橘交織，搭餐與否都完美的白酒",
+
+    note: {
+      oneLine: `🏆2025 日本女性葡萄酒櫻花賞 雙金牌獎、最佳女性釀酒師獎、鑽石獎、最佳表現獎
+	🎖️國際標章：素食者可飲用酒
+	
+	以 Sauvignon Blanc 與 Viognier 混釀，融合醋栗、葡萄柚、西洋梨、杏桃與熱帶水果香氣，入口伴隨新鮮柑橘果香、細緻礦石感與滑順口感，清爽易飲且餘韻悠長。
+	由法國南部知名酒商 LGI 精心打造，曾獲柏林葡萄酒大賽「最佳靜態酒生產者」肯定。
+	
+	搭餐推薦：海鮮、烤魚、天婦羅及清爽料理，也非常適合作為餐前酒單獨享用。
+
+	建議適飲溫度：10~12°C`, 
+    },
+
+    info: {
+      brand: "LGI", 
+      origin: "法國", 
+      rice: null, 
+      yeast: null, 
+      variety: "70% Sauvignon, 30% Viognier",
+      polish: null,
+      alcohol: "12%", //酒精濃度
+      volume: "750ml" //容量
+    },
+
+    scale: {   //1-5分，分數越低越靠左，分數越高越靠右 ，不適用的欄位填入null
+        sakeDrySweet: null,
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null,
+        ftFreshRich: null, 
+      
+        wineTannin: 1,  
+        wineFreshFull: 3 
+    },
+    
+
+    wineryId: "lgi-wines" 
+    },
+{
+      id: 100,
+      priority: 5, 
+      name: "百十郎 蒼藍 純米大吟釀 2026",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/100百十郎_蒼藍1.webp`,
+      `${CDN}/100百十郎_蒼藍2.webp`,
+      `${CDN}/100百十郎_蒼藍3.webp`,
+    ], 
+
+    price: 1550, 
+    originPrice: 1780, 
+
+    spec: "帶草本礦物感的吟釀香氣，旨味俐落的夏季辛口酒！",
+
+    note: {
+      oneLine: `以愛知縣酒米「愛知之香」釀造，採用 M310（明利小川）酵母，散發清爽吟釀香、草本涼感與細緻礦物氣息。入口展現沉穩旨味與滑順酒體，尾韻乾淨俐落、收斂迅速，如同描繪著澎湃海浪與歌舞伎隈取臉譜的強烈酒標展現，呈現鮮明辛口風格。
+	夏季限定酒款，冰飲更能凸顯清爽層次，無論搭配和食、炸物或海鮮皆相得益彰，帶來如海風般沁涼舒暢的品飲體驗！`, 
+    },
+
+    info: {
+      brand: "林本店・百十郎", 
+      origin: "日本", 
+      rice: "愛知之香", 
+      yeast: "M310酵母", 
+      variety: null,
+      polish: "50%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 1, 
+        sakeUmamiFruity: 2,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hayasihonten" 
+    },
+{
+      id: 101,
+      priority: 5, 
+      name: "林本店 花火與企鵝 純米大吟釀 無濾過生原酒 2026",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/101林本店_花火與企鵝1.webp`,
+      `${CDN}/101林本店_花火與企鵝2.webp`,
+    ], 
+
+    price: 1450, 
+    originPrice: 1500, 
+
+    spec: "果香馥郁甘旨細緻，清新易飲無濾過生酒",
+
+    note: {
+      oneLine: `保留無濾過生原酒的新鮮風味，散發宛如果實般華麗吟釀香。入口展現透明細緻的甘甜與飽滿旨味，酒體滑順柔和，尾韻輕盈優雅、乾淨舒適。
+	酒標描繪仰望煙火的企鵝，象徵酒藏懷抱夢想，持續釀造讓更多人感動的美味日本酒。無論搭配和食、西式料理或起司皆十分合拍，親切易飲的風格，也非常適合作為初次接觸日本酒的入門之選。
+
+	日本酒度：-7.5（甘口）`, 
+    },
+
+    info: {
+      brand: "林本店", 
+      origin: "日本", 
+      rice: "蔵の華", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "50%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 4, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hayasihonten" 
     }
 ]
 if (typeof window !== 'undefined') { window.products = products; }
