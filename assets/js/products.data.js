@@ -1446,7 +1446,6 @@ const products = [
     wineryId: "kobayashi"
     },
 */
-/* ── 已下架 2026-07-14（保留資料，恢復上架時取消註解即可）──
 {
       id: 39,
       priority: 4,
@@ -1484,7 +1483,6 @@ const products = [
     },
     wineryId: "kobayashi"
     },
-*/
 {
       id: 40,
       priority: 3,
@@ -1640,7 +1638,7 @@ const products = [
     },
 {
       id: 44,
-      priority: 5,
+      priority: 4,
       name: "蓬萊泉 一念不動 特別純米 無濾過 しぼりたて",
       type: "清酒",
       category: "sake",
@@ -3231,7 +3229,7 @@ const products = [
     },
 {
       id: 81,
-      priority: 5, 
+      priority: 4, 
       name: "梅侍 紅烏龍梅酒",
       type: "果實酒", 
       category: "fruit-tea", 
@@ -3281,7 +3279,7 @@ const products = [
     },
 {
       id: 82,
-      priority: 5, 
+      priority: 4, 
       name: "蓬萊泉 徐耀良 東方美人茶梅酒",
       type: "果實酒", 
       category: "fruit-tea", 
@@ -3379,7 +3377,7 @@ const products = [
     },
     {
       id: 84,
-      priority: 4, 
+      priority: 3, 
       name: "蝴蝶加濃 龍舌蘭 藍鑽",
       type: "烈酒", 
       category: "spirits", 
@@ -3426,7 +3424,7 @@ const products = [
     },
 {
       id: 85,
-      priority: 4, 
+      priority: 3, 
       name: "蝴蝶加濃 龍舌蘭 粉鑽",
       type: "烈酒",
       category: "spirits", 
@@ -3473,7 +3471,7 @@ const products = [
     },
 {
       id: 86,
-      priority: 5, 
+      priority: 4, 
       name: "黑木本店 百年孤獨 麥燒酎",
       type: "烈酒", 
       category: "spirits", 
@@ -4495,7 +4493,7 @@ const products = [
 */
 {
       id: 116,
-      priority: 5, 
+      priority: 4, 
       name: "光榮菊 Noon CRESCENT 無濾過生原酒",
       type: "清酒", 
       category: "sake", 

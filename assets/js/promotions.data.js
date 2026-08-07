@@ -12,6 +12,16 @@
    - endAt       → 活動結束日 "YYYY-MM-DD"（留空 = 不會結束）
    - display     → 是否要在 /offers/ 頁面顯示為活動卡片
 
+   🖼 Banner 兩種尺寸：
+   display.bannerImage       = 桌機版（1920 寬）
+   display.bannerImageMobile = 手機版（750 寬），螢幕 ≤640px 時自動換這張
+   兩者用 <picture> + media query 切換（同首頁 hero 輪播的做法）。
+   只填 bannerImage 也可以，手機會直接縮放桌機版那張。
+
+   📌 /promotions/ 卡片排序：
+   由頁面自動依狀態排（進行中 → 長期活動 → 即將開始 → 已結束），
+   同狀態內維持本檔案的排列順序，所以這裡不用為了版位順序搬動 block。
+
    apply(ctx) 計算邏輯：
    只計算「在白名單內的商品」的小計，再乘以折扣率
    回傳「折抵金額」（正整數）
@@ -84,7 +94,8 @@ export const PROMOTIONS = [
       showOnOffersPage: true,
       title: "🍶 酉時之約：夏日祭典前哨站",
       summary: "夏日將至，從清酒到葡萄酒精選 11 款解暑酒款，任選 2 件即享 92 折優惠。",
-      bannerImage: "/assets/images/home/夏日活動1920.webp",
+      bannerImage:       "/assets/images/home/夏日活動1920.webp",  // 桌機版（1920 寬）
+      bannerImageMobile: "/assets/images/home/夏日活動750.webp",   // 手機版（750 寬，≤640px 時自動切換；留空=手機也用桌機版）
       bannerLink: "",  // 點 banner 跳轉的網址；留空=不可點
 
       // ✏️ 商品卡活動徽章：cardBadge = 卡片上的短標籤（留空/刪除 = 不顯示徽章）
@@ -138,7 +149,8 @@ export const PROMOTIONS = [
       showOnOffersPage: true,
       title: "🐱 慵懶貓咪系列 任 2 件 NT$2,600",
       summary: "萩之鶴櫻花貓・暖桌貓，任選 2 件 NT$2,600。季節限定：萩之鶴生原酒春櫻、冬暖雙貓，季季果香微甜。",
-      bannerImage: "/assets/images/home/貓咪系列1920.webp",
+      bannerImage:       "/assets/images/home/貓咪系列1920.webp",
+      bannerImageMobile: "/assets/images/home/貓咪系列750.webp",
       bannerLink: "",
 
       // ✏️ 商品卡活動徽章：cardBadge = 卡片上的短標籤（留空/刪除 = 不顯示徽章）
@@ -175,6 +187,59 @@ export const PROMOTIONS = [
       const pairedSum = unitPrices.slice(0, pairs * 2).reduce((s, v) => s + v, 0);
       const discount = pairedSum - 2600 * pairs;
       return discount > 0 ? Math.round(discount) : 0;
+    }
+  },
+
+  /* =============================
+     酉時之約：醉美圓月迎中秋
+     指定酒款 95 折（無件數門檻，購物車出現任一款即生效）
+     ✏️  要調整哪幾瓶參與，改 targetIds 即可
+     ✏️  要設定活動期間，改 startAt / endAt（到期會自動失效）
+     ✏️  要關閉活動，把整個 block 註解掉即可
+  ============================= */
+  {
+    id: "mid-autumn-2026-95",
+    type: "combo-ids",
+    stackable: false, // 與其他不可疊加優惠擇優
+
+    label: "酉時之約：醉美圓月迎中秋 — 指定酒款 95 折",
+    description: "指定酒款不限件數，該活動商品小計享 95 折",
+
+    targetIds: [
+      5, 6, 7, 10, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23, 32,
+      35, 36, 39, 40, 44, 45, 67, 71, 97, 98, 99, 122, 123, 126, 127
+      // ⚠️ id 39（鳳凰美田 冷卸 山田錦）目前在 products.data.js 內被註解下架，
+      //    活動頁與購物車暫時不會帶到；商品重新上架後會自動加入本活動。
+    ],
+
+    // ✏️ 活動期間 "YYYY-MM-DD"（留空字串=無限制；endAt 過了會自動失效）
+    startAt: "2026-08-07",
+    endAt:   "2026-08-31",
+
+    display: {
+      showOnOffersPage: true,
+      title: "🌕 中秋前哨：醉美圓月迎中秋",
+      summary: "月圓人團圓，精選梅酒、果實酒、清酒與葡萄酒，不限件數即享 95 折，佐一桌烤肉與柚香。",
+      bannerImage:       "/assets/images/home/8月中秋前哨1920.webp",
+      bannerImageMobile: "/assets/images/home/8月中秋前哨750.webp",
+      bannerLink: "",
+
+      cardBadge: "🌕中秋95折",
+      cardBadgeDetail: "指定酒款不限件數，活動商品小計享 95 折。活動至 2026/09/30 止。"
+    },
+
+    // 無件數門檻 → 不需要 hint（hint 是用來提示「再買 N 件就享優惠」）
+
+    condition(ctx) {
+      if (!isPromoActive(this)) return false;  // ⏰ 活動期間外自動失效
+      return ctx.items.some(p => this.targetIds.includes(p.id));
+    },
+
+    apply(ctx) {
+      const sub = ctx.items
+        .filter(p => this.targetIds.includes(p.id))
+        .reduce((s, p) => s + p.price * p.qty, 0);
+      return Math.round(sub * 0.05); // 95折 = 折抵 5%
     }
   },
 

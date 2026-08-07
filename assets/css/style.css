@@ -3794,7 +3794,9 @@ body.age-overlay-active{ overflow:hidden; }
 .badge-upcoming{ background:#fff3cd; color:#856404; border:1px solid #f0dfa1; }
 .badge-ended{    background:#e9ecef; color:#6c757d; border:1px solid #ced4da; }
 
-/* 活動 banner 圖（卡片內） */
+/* 活動 banner 圖（卡片內）
+   <picture> 預設 display:inline，會在圖下方留一行 baseline 空隙 → 改成 block */
+.promo-banner-pic{ display:block; }
 .promo-banner{
   display:block;
   width:100%;

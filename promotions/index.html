@@ -269,7 +269,14 @@
 
     try {
       const mod = await import('/assets/js/promotions.data.js');
-      const promos = (mod.PROMOTIONS || []).filter(p => p.display && p.display.showOnOffersPage);
+
+      // 卡片排序：進行中 → 長期活動 → 即將開始 → 已結束
+      // （sort 穩定，同狀態內維持 promotions.data.js 的原始順序）
+      const STATUS_RANK = { active: 0, always: 1, upcoming: 2, ended: 3 };
+      const statusOf = p => (mod.getPromoStatus ? mod.getPromoStatus(p) : 'active');
+      const promos = (mod.PROMOTIONS || [])
+        .filter(p => p.display && p.display.showOnOffersPage)
+        .sort((a, b) => (STATUS_RANK[statusOf(a)] ?? 0) - (STATUS_RANK[statusOf(b)] ?? 0));
 
       if (!promos.length) {
         hint.style.display = 'block';
@@ -286,11 +293,15 @@
         const ids    = promo.targetIds || [];
         const items  = products.filter(p => ids.includes(p.id));
 
-        const bannerHtml = d.bannerImage ? (
-          d.bannerLink
-            ? `<a href="${d.bannerLink}"><img src="${d.bannerImage}" alt="${d.title||promo.label}" class="promo-banner" loading="lazy"></a>`
-            : `<img src="${d.bannerImage}" alt="${d.title||promo.label}" class="promo-banner" loading="lazy">`
-        ) : '';
+        // banner：有 bannerImageMobile 就用 <picture> 在 ≤640px 換手機版圖（同首頁 hero 輪播）
+        const bannerImg = d.bannerImage ? `
+            <picture class="promo-banner-pic">
+              ${d.bannerImageMobile ? `<source media="(max-width:640px)" srcset="${d.bannerImageMobile}">` : ''}
+              <img src="${d.bannerImage}" alt="${d.title||promo.label}" class="promo-banner" loading="lazy" decoding="async">
+            </picture>` : '';
+        const bannerHtml = (bannerImg && d.bannerLink)
+          ? `<a href="${d.bannerLink}">${bannerImg}</a>`
+          : bannerImg;
 
         const gridId = `promoGrid_${promo.id}`;
         const productsBlock = ended ? '' : (
