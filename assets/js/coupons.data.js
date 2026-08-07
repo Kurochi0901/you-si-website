@@ -37,4 +37,21 @@ export const COUPONS = [
     rateTarget:  0.10   // 指定商品 9折 → 折抵 10%
   },
 
+  /* 2026 秋季全站碼（明碼另外保管，勿寫入本檔 — 本檔會完整送到瀏覽器）
+     全站一律 95 折 → targetIds 留空，rateTarget 也設 0.05，
+     日後若真要加指定商品加碼，再把 rateTarget 調成 0.10 */
+  {
+    hash: "46c02a6298fbe89b1f7ad3ea8708e6cf0e2e342e22cd4b77ba90670daa097b0a",
+    id: "coupon-autumn-95",
+    label: "全站 95 折折扣碼（活動至 10/10）",
+    stackable: false,
+    targetIds: [],
+
+    validFrom:  "2026-08-07",  // 活動開始日（含當天）
+    validUntil: "2026-10-10",  // 活動結束日（含當天）
+
+    rateDefault: 0.05,  // 全站 95折 → 折抵 5%
+    rateTarget:  0.05   // 無指定商品，與 rateDefault 一致
+  },
+
 ];
