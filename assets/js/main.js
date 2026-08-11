@@ -860,8 +860,9 @@ function openProduct(id){
   if(img) img.style.display = "none";
   note.style.display = "block";
 
-  // 初始化圖片切換狀態
-  window._currentProductImgs = Array.isArray(p.imgs) ? p.imgs : [];
+  // 初始化圖片切換狀態（尾端附加出貨保證圖）
+  const baseImgs = Array.isArray(p.imgs) ? p.imgs : [];
+  window._currentProductImgs = baseImgs.length ? [...baseImgs, SHIPPING_GUARANTEE_IMG] : [];
   _currentImgIndex = 0;
 
   note.innerHTML = `
@@ -1009,6 +1010,9 @@ function renderBlogRelatedProducts(retryCount = 0) {
 /* ===== 7. 商品圖片切換 ===== */
 
 let _currentImgIndex = 0; // 目前顯示的圖片索引（對應 window._currentProductImgs）
+
+// 所有商品輪播的最後一張固定為出貨保證圖
+const SHIPPING_GUARANTEE_IMG = "/assets/images/home/出貨保證.webp";
 
 /** 渲染商品圖片區域（含左右切換按鈕與指示點） */
 function renderProductImages(imgs = [], name = ""){
@@ -1662,16 +1666,21 @@ window.handleRemoveCoupon = handleRemoveCoupon;
 
 /**
  * 渲染促銷區塊（#promotionBlock）
- * 列出所有促銷規則，已達成的打勾標示
+ * 只列出活動期間內的促銷規則，已達成的打勾標示
  */
 function renderPromotionBlock(){
   const box = document.getElementById("promotionBlock");
   if(!box || !window.PROMOTIONS) return;
+
+  // 已結束／尚未開始的活動不列出（金額計算另由各 promo 的 condition 擋掉）
+  const livePromos = window.PROMOTIONS.filter(isPromoLive);
+  if(livePromos.length === 0){ box.innerHTML = ""; return; }
+
   const res = applyPromotions(getCartContext());
   box.innerHTML = `
     <div class="promo-title">目前優惠</div>
     <ul class="promo-list">
-      ${window.PROMOTIONS.map(p => {
+      ${livePromos.map(p => {
         const ok = res.applied.some(a => a.id === p.id);
         return `<li class="promo-item${ok ? ' achieved' : ''}"><span class="promo-check-box"></span>${p.label}</li>`;
       }).join("")}
@@ -1687,7 +1696,7 @@ function renderHomePromotion(){
   box.innerHTML = `
     <div class="home-promo-inner">
       <div class="home-promo-title">目前優惠</div>
-      <div class="home-promo-items">${window.PROMOTIONS.map(p => p.label).join(" ／ ")}</div>
+      <div class="home-promo-items">${window.PROMOTIONS.filter(isPromoLive).map(p => p.label).join(" ／ ")}</div>
     </div>
   `;
 }
@@ -1704,7 +1713,7 @@ function getNextPromotionHint(cartQty, addedId){
   const cart = readCart();
 
   const hintPromos = PROMOTIONS
-    .filter(p => p.hint && typeof p.hint.minQty === "number")
+    .filter(p => isPromoLive(p) && p.hint && typeof p.hint.minQty === "number")
     .sort((a, b) => a.hint.minQty - b.hint.minQty);
 
   for(const p of hintPromos){
