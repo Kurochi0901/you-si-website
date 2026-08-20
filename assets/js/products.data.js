@@ -5410,6 +5410,102 @@ const products = [
     
 
     wineryId: "hayasihonten" 
+    },
+    {
+      id: 102,
+      priority: 5, 
+      name: "日日 酒小町 2026",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/102日日酒小町1.webp`,
+      `${CDN}/102日日酒小町2.webp`,
+      `${CDN}/102日日酒小町3.webp`,
+    ], 
+
+    price: 2250, 
+    originPrice: 2500, 
+
+    spec: "採秋田酒小町釀造，柔和細膩，微甜米旨風味悠長",
+
+    note: {
+      oneLine: `日日釀造以新政酒造提供的秋田縣產「酒小町」精心釀製，展現柔和細緻的現代風格。
+	輕柔甜香優雅展開，入口質地柔軟，伴隨細微發泡感，帶出純淨柔和的甜味與米旨風味；淡淡柑橘氣息點綴其中，使整體更顯清新明亮。尾韻俐落清爽，收束輕盈而不失層次。
+
+	酒款並非固定每年推出，產量與取得皆相當稀少，是日日釀造少見的特別限定品。
+
+	日日釀造成立於京都伏見，由釀酒名人松本日出彥先生領導，以少數精銳的釀造團隊追求理想酒質，並選用優質酒米與伏見清澈伏流水，細心釀製每一款日本酒。`, 
+    },
+
+    info: {
+      brand: "日日", 
+      origin: "日本", 
+      rice: "酒小町", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "非公開",
+      alcohol: "11%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "nichinichi" 
+    },
+{
+      id: 103,
+      priority: 5, 
+      name: "日日 玉榮 2026",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/103日日玉榮1.webp`,
+      `${CDN}/103日日玉榮2.webp`,
+      `${CDN}/103日日玉榮3.webp`,
+    ], 
+
+    price: 2250, 
+    originPrice: 2500, 
+
+    spec: "蒸米般輕潤甘甜，純淨旨味與細緻清爽交織",
+
+    note: {
+      oneLine: `日日釀造創立於京都伏見，以「日日是好日」為理念，持續探索理想的日本酒風格。
+	本款選用滋賀縣湖北地區「玉榮」酒米釀造，並以較低酒精度呈現純淨輕盈的旨味。入口柔和，散發如蒸熟米飯般溫潤自然的甘甜，玉榮特有的苦感則被細緻柔化，使整體風味更加平衡順口。清爽而不失米旨層次，令人不自覺一再舉杯；隨著時間熟成，亦有望展現更深邃的風味變化。`, 
+    },
+
+    info: {
+      brand: "日日", 
+      origin: "日本", 
+      rice: "玉榮", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "非公開",
+      alcohol: "11%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 2,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "nichinichi" 
     }
 ]
 if (typeof window !== 'undefined') { window.products = products; }
