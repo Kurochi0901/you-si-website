@@ -47,10 +47,9 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<script defer src="/assets/js/products.data.js"></script>
-<script defer src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
-<script src="/assets/js/announcement_data.js"></script>
+<script defer src="/assets/js/announcement_data.js"></script>
 
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
 <!-- ✅ 階層導覽 Breadcrumb Schema -->
@@ -356,7 +355,7 @@
 </head>
 <body>
 <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
-<div class="announce-bar" id="announceBar" role="marquee" aria-live="polite">
+<div class="announce-bar" id="announceBar" role="status" aria-live="polite">
   <div class="announce-track" id="announceTrack"></div>
 </div>
   <div class="header-wrap">
@@ -381,13 +380,542 @@
 
   <main class="section">
     <header class="cat-hero">
-      <h1 class="cat-hero-title">果實酒・茶酒選購：</h1>
+      <h1 class="cat-hero-title">果實酒・茶酒選購｜梅酒・柚子酒・抹茶酒</h1>
       <p class="cat-hero-lead">
         果實酒與茶酒，是最沒有壓力的微醺選擇。精選來自各地的梅酒、柚子酒、茶酒與水果風味酒——香氣親切、甜度平衡，不論是剛接觸酒類、喜歡果香茶香，或想輕鬆喝一杯，都能在這裡找到心頭好。
       </p>
     </header>
 
-    <div id="productGrid" class="grid"></div>
+    <div id="productGrid" class="grid">
+      <div class="card" data-id="127">
+        <div class="card-media">
+          <a href="/products/fruit-tea/蓬萊泉-乘興院-包種茶柚子酒/" aria-label="查看 蓬萊泉 乘興院 包種茶柚子酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/127包種茶柚子1.webp" alt="蓬萊泉 乘興院 包種茶柚子酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/fruit-tea/蓬萊泉-乘興院-包種茶柚子酒/" class="name">蓬萊泉 乘興院 包種茶柚子酒</a>
+          <div class="spec">柚香新鮮明亮，茶韻悠長回甘</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(127)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="1">
+        <div class="card-media">
+          <a href="/products/fruit-tea/梅侍純釀-紅玉紅茶梅酒/" aria-label="查看 梅侍純釀 紅玉紅茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/1梅侍紅玉1.webp" alt="梅侍純釀 紅玉紅茶梅酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/梅侍純釀-紅玉紅茶梅酒/" class="name">梅侍純釀 紅玉紅茶梅酒</a>
+          <div class="spec">紅玉茶香與梅韻圓潤酸甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$948</div><div class="price-origin">NT$1118</div></div>
+            <button class="btn-add" onclick="addToCart(1)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="2">
+        <div class="card-media">
+          <a href="/products/fruit-tea/梅侍純釀-碧螺春綠茶梅酒/" aria-label="查看 梅侍純釀 碧螺春綠茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/2梅侍碧螺春1.webp" alt="梅侍純釀 碧螺春綠茶梅酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/梅侍純釀-碧螺春綠茶梅酒/" class="name">梅侍純釀 碧螺春綠茶梅酒</a>
+          <div class="spec">碧螺春與梅韻交錯清爽甘甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$948</div><div class="price-origin">NT$1118</div></div>
+            <button class="btn-add" onclick="addToCart(2)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="3">
+        <div class="card-media">
+          <a href="/products/fruit-tea/梅侍純釀-凍頂烏龍茶梅酒/" aria-label="查看 梅侍純釀 凍頂烏龍茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/3梅侍凍頂1.webp" alt="梅侍純釀 凍頂烏龍茶梅酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/梅侍純釀-凍頂烏龍茶梅酒/" class="name">梅侍純釀 凍頂烏龍茶梅酒</a>
+          <div class="spec">焙香烏龍尾韻醇厚</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1018</div><div class="price-origin">NT$1198</div></div>
+            <button class="btn-add" onclick="addToCart(3)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="4">
+        <div class="card-media">
+          <a href="/products/fruit-tea/梅侍純釀-東方美人茶梅酒/" aria-label="查看 梅侍純釀 東方美人茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/4梅侍東方1.webp" alt="梅侍純釀 東方美人茶梅酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/梅侍純釀-東方美人茶梅酒/" class="name">梅侍純釀 東方美人茶梅酒</a>
+          <div class="spec">蜜香美人茶韻遇上甘潤梅果</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1018</div><div class="price-origin">NT$1198</div></div>
+            <button class="btn-add" onclick="addToCart(4)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="5">
+        <div class="card-media">
+          <a href="/products/fruit-tea/天吹-抹茶梅酒/" aria-label="查看 天吹 抹茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/5抹茶梅酒1.webp" alt="天吹 抹茶梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/天吹-抹茶梅酒/" class="name">天吹 抹茶梅酒</a>
+          <div class="spec">京都抹茶濃醇梅果清甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$950</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(5)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="6">
+        <div class="card-media">
+          <a href="/products/fruit-tea/天吹-伯爵紅茶梅酒/" aria-label="查看 天吹 伯爵紅茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/6伯爵紅茶梅酒1.webp" alt="天吹 伯爵紅茶梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/天吹-伯爵紅茶梅酒/" class="name">天吹 伯爵紅茶梅酒</a>
+          <div class="spec">柑橘紅茶香融合酸甜梅果</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$950</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(6)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="7">
+        <div class="card-media">
+          <a href="/products/fruit-tea/天吹-京都千年抹茶酒/" aria-label="查看 天吹 京都千年抹茶酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/7千年抹茶酒1.webp" alt="天吹 京都千年抹茶酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/天吹-京都千年抹茶酒/" class="name">天吹 京都千年抹茶酒</a>
+          <div class="spec">世界首創 抹茶柚子清新微甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1150</div><div class="price-origin">NT$1350</div></div>
+            <button class="btn-add" onclick="addToCart(7)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="12">
+        <div class="card-media">
+          <a href="/products/fruit-tea/若鶴-梅酒威士忌-UMESKY/" aria-label="查看 若鶴 梅酒威士忌 UMESKY">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/12梅酒威士忌1.webp" alt="若鶴 梅酒威士忌 UMESKY" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/若鶴-梅酒威士忌-UMESKY/" class="name">若鶴 梅酒威士忌 UMESKY</a>
+          <div class="spec">大人口味的梅酒！</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1350</div><div class="price-origin">NT$1650</div></div>
+            <button class="btn-add" onclick="addToCart(12)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="23">
+        <div class="card-media">
+          <a href="/products/fruit-tea/北川本家-八橋肉桂梅酒/" aria-label="查看 北川本家 八橋肉桂梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/23八橋肉桂梅酒1.webp" alt="北川本家 八橋肉桂梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/北川本家-八橋肉桂梅酒/" class="name">北川本家 八橋肉桂梅酒</a>
+          <div class="spec">京都特產！肉桂口味梅酒！</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1250</div><div class="price-origin">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(23)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="29">
+        <div class="card-media">
+          <a href="/products/fruit-tea/池亀-果凍梅酒/" aria-label="查看 池亀 果凍梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/29果凍梅酒1.webp" alt="池亀 果凍梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/池亀-果凍梅酒/" class="name">池亀 果凍梅酒</a>
+          <div class="spec">Q彈果凍濃梅酸甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$990</div><div class="price-origin">NT$1400</div></div>
+            <button class="btn-add" onclick="addToCart(29)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="81">
+        <div class="card-media">
+          <a href="/products/fruit-tea/梅侍-紅烏龍梅酒/" aria-label="查看 梅侍 紅烏龍梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/81梅侍 紅烏龍梅酒1.webp" alt="梅侍 紅烏龍梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/梅侍-紅烏龍梅酒/" class="name">梅侍 紅烏龍梅酒</a>
+          <div class="spec">鮮明的蜜香與茶澀風味，交織梅果酸甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1018</div><div class="price-origin">NT$1198</div></div>
+            <button class="btn-add" onclick="addToCart(81)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="82">
+        <div class="card-media">
+          <a href="/products/fruit-tea/蓬萊泉-徐耀良-東方美人茶梅酒/" aria-label="查看 蓬萊泉 徐耀良 東方美人茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/82蓬萊泉_東方美人1.webp" alt="蓬萊泉 徐耀良 東方美人茶梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/蓬萊泉-徐耀良-東方美人茶梅酒/" class="name">蓬萊泉 徐耀良 東方美人茶梅酒</a>
+          <div class="spec">台日職人結晶，蜜香茶韻梅酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(82)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="83">
+        <div class="card-media">
+          <a href="/products/fruit-tea/蓬萊泉-烹雪韻-生普洱茶梅酒/" aria-label="查看 蓬萊泉 烹雪韻 生普洱茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/83蓬萊泉_生普洱茶1.webp" alt="蓬萊泉 烹雪韻 生普洱茶梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/fruit-tea/蓬萊泉-烹雪韻-生普洱茶梅酒/" class="name">蓬萊泉 烹雪韻 生普洱茶梅酒</a>
+          <div class="spec">生普洱醇厚，映襯梅果餘韻</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(83)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="8">
+        <div class="card-media">
+          <a href="/products/fruit-tea/梅侍純釀-果泥梅酒/" aria-label="查看 梅侍純釀 果泥梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/8梅侍果泥1.webp" alt="梅侍純釀 果泥梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/梅侍純釀-果泥梅酒/" class="name">梅侍純釀 果泥梅酒</a>
+          <div class="spec">果泥濃郁，梅香層次豐富</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$868</div><div class="price-origin">NT$1018</div></div>
+            <button class="btn-add" onclick="addToCart(8)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="9">
+        <div class="card-media">
+          <a href="/products/fruit-tea/梅侍純釀-香米梅酒/" aria-label="查看 梅侍純釀 香米梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/9梅侍香米1.webp" alt="梅侍純釀 香米梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/梅侍純釀-香米梅酒/" class="name">梅侍純釀 香米梅酒</a>
+          <div class="spec">台稉米香與梅果交融</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$948</div><div class="price-origin">NT$1118</div></div>
+            <button class="btn-add" onclick="addToCart(9)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="10">
+        <div class="card-media">
+          <a href="/products/fruit-tea/北海道十勝-白蘭地梅酒/" aria-label="查看 北海道十勝 白蘭地梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/10白蘭地梅酒1.webp" alt="北海道十勝 白蘭地梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/北海道十勝-白蘭地梅酒/" class="name">北海道十勝 白蘭地梅酒</a>
+          <div class="spec">白蘭地橡木桶熟成，梅香醇厚</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$980</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(10)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="11">
+        <div class="card-media">
+          <a href="/products/fruit-tea/山形正宗-濃郁梅酒/" aria-label="查看 山形正宗 濃郁梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/11濃郁梅酒1.webp" alt="山形正宗 濃郁梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/山形正宗-濃郁梅酒/" class="name">山形正宗 濃郁梅酒</a>
+          <div class="spec">吃得到果肉的梅酒！</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1200</div><div class="price-origin">NT$1480</div></div>
+            <button class="btn-add" onclick="addToCart(11)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="13">
+        <div class="card-media">
+          <a href="/products/fruit-tea/本坊-上等梅酒-知覽茶/" aria-label="查看 本坊 上等梅酒 知覽茶">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/13知覽茶1.webp" alt="本坊 上等梅酒 知覽茶" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/本坊-上等梅酒-知覽茶/" class="name">本坊 上等梅酒 知覽茶</a>
+          <div class="spec">清新一番茶清雅回甘</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$820</div><div class="price-origin">NT$1100</div></div>
+            <button class="btn-add" onclick="addToCart(13)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="14">
+        <div class="card-media">
+          <a href="/products/fruit-tea/西吉田-八女綠茶梅酒/" aria-label="查看 西吉田 八女綠茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/14八女綠茶1.webp" alt="西吉田 八女綠茶梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/西吉田-八女綠茶梅酒/" class="name">西吉田 八女綠茶梅酒</a>
+          <div class="spec">採用日本知名八女綠茶</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1250</div><div class="price-origin">NT$1600</div></div>
+            <button class="btn-add" onclick="addToCart(14)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="15">
+        <div class="card-media">
+          <a href="/products/fruit-tea/上喜元-柚子酒/" aria-label="查看 上喜元 柚子酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/15上喜元柚子1.webp" alt="上喜元 柚子酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/上喜元-柚子酒/" class="name">上喜元 柚子酒</a>
+          <div class="spec">高知柚子清香，酸甜果味輕盈</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$950</div><div class="price-origin">NT$1080</div></div>
+            <button class="btn-add" onclick="addToCart(15)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="16">
+        <div class="card-media">
+          <a href="/products/fruit-tea/河武釀造-鉾杉柚子酒/" aria-label="查看 河武釀造 鉾杉柚子酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/16鉾杉柚子1.webp" alt="河武釀造 鉾杉柚子酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/河武釀造-鉾杉柚子酒/" class="name">河武釀造 鉾杉柚子酒</a>
+          <div class="spec">柚香清爽甘甜 酸爽平衡</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$990</div><div class="price-origin">NT$1100</div></div>
+            <button class="btn-add" onclick="addToCart(16)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="17">
+        <div class="card-media">
+          <a href="/products/fruit-tea/堤酒造-晚白柚酒/" aria-label="查看 堤酒造 晚白柚酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/17晚白柚1.webp" alt="堤酒造 晚白柚酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/堤酒造-晚白柚酒/" class="name">堤酒造 晚白柚酒</a>
+          <div class="spec">熊本晚白柚 層次豐富不膩口</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$990</div><div class="price-origin">NT$1150</div></div>
+            <button class="btn-add" onclick="addToCart(17)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="18">
+        <div class="card-media">
+          <a href="/products/fruit-tea/愛知國盛-水蜜桃風味酒/" aria-label="查看 愛知國盛 水蜜桃風味酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/18蜜桃風味1.webp" alt="愛知國盛 水蜜桃風味酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/愛知國盛-水蜜桃風味酒/" class="name">愛知國盛 水蜜桃風味酒</a>
+          <div class="spec">水蜜桃原汁濃醇甜美</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$800</div><div class="price-origin">NT$1080</div></div>
+            <button class="btn-add" onclick="addToCart(18)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="19">
+        <div class="card-media">
+          <a href="/products/fruit-tea/愛知國盛-水梨風味酒/" aria-label="查看 愛知國盛 水梨風味酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/19水梨風味1.webp" alt="愛知國盛 水梨風味酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/愛知國盛-水梨風味酒/" class="name">愛知國盛 水梨風味酒</a>
+          <div class="spec">難得一見的水梨果酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$800</div><div class="price-origin">NT$1080</div></div>
+            <button class="btn-add" onclick="addToCart(19)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="20">
+        <div class="card-media">
+          <a href="/products/fruit-tea/愛知國盛-蜜柑風味酒/" aria-label="查看 愛知國盛 蜜柑風味酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/20蜜柑風味1.webp" alt="愛知國盛 蜜柑風味酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/愛知國盛-蜜柑風味酒/" class="name">愛知國盛 蜜柑風味酒</a>
+          <div class="spec">80%蜜柑原汁 濃厚柑橘風味</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$800</div><div class="price-origin">NT$1080</div></div>
+            <button class="btn-add" onclick="addToCart(20)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="21">
+        <div class="card-media">
+          <a href="/products/fruit-tea/愛知國盛-芒果風味酒/" aria-label="查看 愛知國盛 芒果風味酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/21芒果風味酒1.webp" alt="愛知國盛 芒果風味酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/愛知國盛-芒果風味酒/" class="name">愛知國盛 芒果風味酒</a>
+          <div class="spec">芒果濃熟果香甜潤</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$800</div><div class="price-origin">NT$1080</div></div>
+            <button class="btn-add" onclick="addToCart(21)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="22">
+        <div class="card-media">
+          <a href="/products/fruit-tea/愛知國盛-白葡萄風味酒/" aria-label="查看 愛知國盛 白葡萄風味酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/22白葡萄風味酒1.webp" alt="愛知國盛 白葡萄風味酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/愛知國盛-白葡萄風味酒/" class="name">愛知國盛 白葡萄風味酒</a>
+          <div class="spec">清甜白葡萄果香細緻</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$800</div><div class="price-origin">NT$1080</div></div>
+            <button class="btn-add" onclick="addToCart(22)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="24">
+        <div class="card-media">
+          <a href="/products/fruit-tea/精釀菊花袖珍奇異果酒/" aria-label="查看 精釀菊花袖珍奇異果酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/24菊花奇異果酒1.webp" alt="精釀菊花袖珍奇異果酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/精釀菊花袖珍奇異果酒/" class="name">精釀菊花袖珍奇異果酒</a>
+          <div class="spec">菊香清雅奇異果酸甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$930</div><div class="price-origin">NT$1180</div></div>
+            <button class="btn-add" onclick="addToCart(24)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="25">
+        <div class="card-media">
+          <a href="/products/fruit-tea/精釀生薑青紫蘇酒/" aria-label="查看 精釀生薑青紫蘇酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/25生薑青紫蘇酒1.webp" alt="精釀生薑青紫蘇酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/精釀生薑青紫蘇酒/" class="name">精釀生薑青紫蘇酒</a>
+          <div class="spec">寒冬中辛薑暖香 紫蘇清冽</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$930</div><div class="price-origin">NT$1180</div></div>
+            <button class="btn-add" onclick="addToCart(25)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="26">
+        <div class="card-media">
+          <a href="/products/fruit-tea/金ケ崎-鳥海梅花酒/" aria-label="查看 金ケ崎 鳥海梅花酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/26鳥海梅花酒1.webp" alt="金ケ崎 鳥海梅花酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/金ケ崎-鳥海梅花酒/" class="name">金ケ崎 鳥海梅花酒</a>
+          <div class="spec">梅花雅馥清甜細緻</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$990</div><div class="price-origin">NT$1250</div></div>
+            <button class="btn-add" onclick="addToCart(26)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="27">
+        <div class="card-media">
+          <a href="/products/fruit-tea/池亀-浮露鳳梨果實酒/" aria-label="查看 池亀 浮露鳳梨果實酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/27浮露鳳梨果實酒1.webp" alt="池亀 浮露鳳梨果實酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/池亀-浮露鳳梨果實酒/" class="name">池亀 浮露鳳梨果實酒</a>
+          <div class="spec">熟成鳳梨蜜香濃郁 層次奔放</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$930</div><div class="price-origin">NT$1180</div></div>
+            <button class="btn-add" onclick="addToCart(27)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="28">
+        <div class="card-media">
+          <a href="/products/fruit-tea/金ケ崎-蘋果餐前酒/" aria-label="查看 金ケ崎 蘋果餐前酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/28蘋果餐前酒1.webp" alt="金ケ崎 蘋果餐前酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/fruit-tea/金ケ崎-蘋果餐前酒/" class="name">金ケ崎 蘋果餐前酒</a>
+          <div class="spec">清新蘋果 開胃爽口</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$990</div><div class="price-origin">NT$1250</div></div>
+            <button class="btn-add" onclick="addToCart(28)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <section class="cat-faq">
       <h2 class="cat-faq-title">果實酒・茶酒常見問題</h2>
@@ -414,47 +942,6 @@
       </details>
     </section>
     
-    <!-- SEO_PRODUCT_LIST -->
-    <noscript>
-      <div class="seo-static-list" style="margin-top: 20px; padding: 20px; border: 1px solid #eee;">
-        <h3>果實酒·茶酒商品清單</h3>
-        <ul>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/梅侍純釀-紅玉紅茶梅酒/">梅侍純釀 紅玉紅茶梅酒</a> - 紅玉茶香與梅韻圓潤酸甜</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/梅侍純釀-碧螺春綠茶梅酒/">梅侍純釀 碧螺春綠茶梅酒</a> - 碧螺春與梅韻交錯清爽甘甜</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/梅侍純釀-凍頂烏龍茶梅酒/">梅侍純釀 凍頂烏龍茶梅酒</a> - 焙香烏龍尾韻醇厚</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/梅侍純釀-東方美人茶梅酒/">梅侍純釀 東方美人茶梅酒</a> - 蜜香美人茶韻遇上甘潤梅果</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/天吹-抹茶梅酒/">天吹 抹茶梅酒</a> - 京都抹茶濃醇梅果清甜</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/天吹-伯爵紅茶梅酒/">天吹 伯爵紅茶梅酒</a> - 柑橘紅茶香融合酸甜梅果</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/天吹-京都千年抹茶酒/">天吹 京都千年抹茶酒</a> - 世界首創 抹茶柚子清新微甜</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/梅侍純釀-果泥梅酒/">梅侍純釀 果泥梅酒</a> - 果泥濃郁，梅香層次豐富</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/梅侍純釀-香米梅酒/">梅侍純釀 香米梅酒</a> - 台稉米香與梅果交融</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/北海道十勝-白蘭地梅酒/">北海道十勝 白蘭地梅酒</a> - 白蘭地橡木桶熟成，梅香醇厚</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/山形正宗-濃郁梅酒/">山形正宗 濃郁梅酒</a> - 吃得到果肉的梅酒！</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/若鶴-梅酒威士忌-UMESKY/">若鶴 梅酒威士忌 UMESKY</a> - 大人口味的梅酒！</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/本坊-上等梅酒-知覽茶/">本坊 上等梅酒 知覽茶</a> - 清新一番茶清雅回甘</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/西吉田-八女綠茶梅酒/">西吉田 八女綠茶梅酒</a> - 採用日本知名八女綠茶</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/上喜元-柚子酒/">上喜元 柚子酒</a> - 高知柚子清香，酸甜果味輕盈</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/河武釀造-鉾杉柚子酒/">河武釀造 鉾杉柚子酒</a> - 柚香清爽甘甜 酸爽平衡</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/堤酒造-晚白柚酒/">堤酒造 晚白柚酒</a> - 熊本晚白柚 層次豐富不膩口</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/愛知國盛-水蜜桃風味酒/">愛知國盛 水蜜桃風味酒</a> - 水蜜桃原汁濃醇甜美</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/愛知國盛-水梨風味酒/">愛知國盛 水梨風味酒</a> - 難得一見的水梨果酒</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/愛知國盛-蜜柑風味酒/">愛知國盛 蜜柑風味酒</a> - 80%蜜柑原汁 濃厚柑橘風味</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/愛知國盛-芒果風味酒/">愛知國盛 芒果風味酒</a> - 芒果濃熟果香甜潤</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/愛知國盛-白葡萄風味酒/">愛知國盛 白葡萄風味酒</a> - 清甜白葡萄果香細緻</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/北川本家-八橋肉桂梅酒/">北川本家 八橋肉桂梅酒</a> - 京都特產！肉桂口味梅酒！</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/精釀菊花袖珍奇異果酒/">精釀菊花袖珍奇異果酒</a> - 菊香清雅奇異果酸甜</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/精釀生薑青紫蘇酒/">精釀生薑青紫蘇酒</a> - 寒冬中辛薑暖香 紫蘇清冽</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/金ケ崎-鳥海梅花酒/">金ケ崎 鳥海梅花酒</a> - 梅花雅馥清甜細緻</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/池亀-浮露鳳梨果實酒/">池亀 浮露鳳梨果實酒</a> - 熟成鳳梨蜜香濃郁 層次奔放</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/金ケ崎-蘋果餐前酒/">金ケ崎 蘋果餐前酒</a> - 清新蘋果 開胃爽口</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/池亀-果凍梅酒/">池亀 果凍梅酒</a> - Q彈果凍濃梅酸甜</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/梅侍-紅烏龍梅酒/">梅侍 紅烏龍梅酒</a> - 鮮明的蜜香與茶澀風味，交織梅果酸甜</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/蓬萊泉-徐耀良-東方美人茶梅酒/">蓬萊泉 徐耀良 東方美人茶梅酒</a> - 台日職人結晶，蜜香茶韻梅酒</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/蓬萊泉-烹雪韻-生普洱茶梅酒/">蓬萊泉 烹雪韻 生普洱茶梅酒</a> - 生普洱醇厚，映襯梅果餘韻</li>
-          <li><a href="https://www.yousi-drink.com/products/fruit-tea/蓬萊泉-乘興院-包種茶柚子酒/">蓬萊泉 乘興院 包種茶柚子酒</a> - 柚香新鮮明亮，茶韻悠長回甘</li>
-        </ul>
-      </div>
-    </noscript>
   </main>
 
   <footer class="footer">
@@ -470,7 +957,7 @@
       <!-- 右側：整組 QR（紅框就是這一塊） -->
       <div class="footer-right">
         <div class="footer-qr">
-          <img class="line-qr-img" alt="加入 LINE">
+          <img class="line-qr-img" src="/assets/images/qr-code_line.png" alt="加入 LINE 官方帳號 QR Code" width="84" height="84" loading="lazy" decoding="async">
           <div class="qr-label">
             Line 
             <span class="qr-sub">會員集點累贈</span>
@@ -478,7 +965,7 @@
         </div>
   
         <div class="footer-qr">
-          <img class="ig-qr-img" alt="Instagram">
+          <img class="ig-qr-img" src="/assets/images/qr-code_IG.png" alt="Instagram yousi1719_drink QR Code" width="84" height="84" loading="lazy" decoding="async">
           <div class="qr-label">Instagram yousi1719_drink</div>
         </div>
       </div>

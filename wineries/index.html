@@ -41,7 +41,7 @@
 
 
   <!-- ✅ 資料檔優先載入，確保變數在 script 執行前就存在 -->
-  <script src="/assets/js/announcement_data.js"></script>
+  <script defer src="/assets/js/announcement_data.js"></script>
 
   <script defer src="/assets/js/wineries.data.js"></script>
 </head>
@@ -49,7 +49,7 @@
 <body>
 
   <!-- ✅ 公告條 -->
-  <div class="announce-bar" id="announceBar" role="marquee" aria-live="polite">
+  <div class="announce-bar" id="announceBar" role="status" aria-live="polite">
     <div class="announce-track" id="announceTrack"></div>
   </div>
 

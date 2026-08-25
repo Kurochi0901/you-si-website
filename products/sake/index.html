@@ -47,11 +47,9 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<script defer src="/assets/js/products.data.js"></script>
-<script defer src="/assets/js/wineries.data.js"></script>
-<script defer src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
-<script src="/assets/js/announcement_data.js"></script>
+<script defer src="/assets/js/announcement_data.js"></script>
 
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
 <!-- ✅ 階層導覽 Breadcrumb Schema -->
@@ -376,7 +374,7 @@
 </head>
 <body>
 <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
-<div class="announce-bar" id="announceBar" role="marquee" aria-live="polite">
+<div class="announce-bar" id="announceBar" role="status" aria-live="polite">
   <div class="announce-track" id="announceTrack"></div>
 </div>
   <div class="header-wrap">
@@ -401,7 +399,7 @@
 
   <main class="section">
     <header class="cat-hero">
-      <h1 class="cat-hero-title">日本清酒選品：</h1>
+      <h1 class="cat-hero-title">日本清酒選品｜純米大吟釀・純米吟釀・生原酒</h1>
       <p class="cat-hero-lead">
         包含知名酒造作品，涵蓋純米大吟釀、純米吟釀、生原酒、無濾過、冷卸、貴釀酒與氣泡清酒等類型。每款皆附風味圖譜（辛口／甘口、米旨／果香），方便您依喜好挑選。
       </p>
@@ -409,7 +407,648 @@
         清酒全程冷鏈運送。不確定該選哪一支？歡迎閱讀 <a href="/blog/Beginner-Guide-Discover-Your-Soul-Sake/">新手必看・清酒入門指南</a>，或直接透過 LINE 與我們聊聊您的喜好。
       </p>
     </header>
-    <div id="productGrid" class="grid"></div>
+    <div id="productGrid" class="grid">
+      <div class="card" data-id="32">
+        <div class="card-media">
+          <a href="/products/sake/萩之鶴-純米吟釀-生原酒-櫻花貓/" aria-label="查看 萩之鶴 純米吟釀 生原酒 櫻花貓">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/32萩之鶴_純米吟釀_櫻花貓1.webp" alt="萩之鶴 純米吟釀 生原酒 櫻花貓" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/sake/萩之鶴-純米吟釀-生原酒-櫻花貓/" class="name">萩之鶴 純米吟釀 生原酒 櫻花貓</a>
+          <div class="spec">春季限定，大吟釀等級的輕盈甘甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1350</div><div class="price-origin">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(32)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="45">
+        <div class="card-media">
+          <a href="/products/sake/純米大吟釀-初花-金魚台輪/" aria-label="查看 純米大吟釀 初花 金魚台輪">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/45初花_金魚台輪純米大吟釀1.webp" alt="純米大吟釀 初花 金魚台輪" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/sake/純米大吟釀-初花-金魚台輪/" class="name">純米大吟釀 初花 金魚台輪</a>
+          <div class="spec">兩百年祭典神韻，高雅清冽</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1890</div><div class="price-origin">NT$2100</div></div>
+            <button class="btn-add" onclick="addToCart(45)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="100">
+        <div class="card-media">
+          <a href="/products/sake/百十郎-蒼藍-純米大吟釀-2026/" aria-label="查看 百十郎 蒼藍 純米大吟釀 2026">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/100百十郎_蒼藍1.webp" alt="百十郎 蒼藍 純米大吟釀 2026" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/sake/百十郎-蒼藍-純米大吟釀-2026/" class="name">百十郎 蒼藍 純米大吟釀 2026</a>
+          <div class="spec">帶草本礦物感的吟釀香氣，旨味俐落的夏季辛口酒！</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1550</div><div class="price-origin">NT$1780</div></div>
+            <button class="btn-add" onclick="addToCart(100)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="101">
+        <div class="card-media">
+          <a href="/products/sake/林本店-花火與企鵝-純米大吟釀-無濾過生原酒-2026/" aria-label="查看 林本店 花火與企鵝 純米大吟釀 無濾過生原酒 2026">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/101林本店_花火與企鵝1.webp" alt="林本店 花火與企鵝 純米大吟釀 無濾過生原酒 2026" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/sake/林本店-花火與企鵝-純米大吟釀-無濾過生原酒-2026/" class="name">林本店 花火與企鵝 純米大吟釀 無濾過生原酒 2026</a>
+          <div class="spec">果香馥郁甘旨細緻，清新易飲無濾過生酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1450</div><div class="price-origin">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(101)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="102">
+        <div class="card-media">
+          <a href="/products/sake/日日-酒小町-2026/" aria-label="查看 日日 酒小町 2026">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/102日日酒小町1.webp" alt="日日 酒小町 2026" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/sake/日日-酒小町-2026/" class="name">日日 酒小町 2026</a>
+          <div class="spec">採秋田酒小町釀造，柔和細膩，微甜米旨風味悠長</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$2250</div><div class="price-origin">NT$2500</div></div>
+            <button class="btn-add" onclick="addToCart(102)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="103">
+        <div class="card-media">
+          <a href="/products/sake/日日-玉榮-2026/" aria-label="查看 日日 玉榮 2026">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/103日日玉榮1.webp" alt="日日 玉榮 2026" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/sake/日日-玉榮-2026/" class="name">日日 玉榮 2026</a>
+          <div class="spec">蒸米般輕潤甘甜，純淨旨味與細緻清爽交織</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$2250</div><div class="price-origin">NT$2500</div></div>
+            <button class="btn-add" onclick="addToCart(103)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="124">
+        <div class="card-media">
+          <a href="/products/sake/林本店-Silent-Galaxy-純米大吟釀-無濾過生原酒/" aria-label="查看 林本店 Silent Galaxy 純米大吟釀 無濾過生原酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/124百十郎SG1.webp" alt="林本店 Silent Galaxy 純米大吟釀 無濾過生原酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/sake/林本店-Silent-Galaxy-純米大吟釀-無濾過生原酒/" class="name">林本店 Silent Galaxy 純米大吟釀 無濾過生原酒</a>
+          <div class="spec">宇宙靈感限定酒，果香清雅，微氣泡清爽細膩</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1450</div><div class="price-origin">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(124)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="125">
+        <div class="card-media">
+          <a href="/products/sake/安藝虎-夏純吟-生酒-2026/" aria-label="查看 安藝虎 夏純吟 生酒 2026">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/125安藝虎夏純吟1.webp" alt="安藝虎 夏純吟 生酒 2026" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/sake/安藝虎-夏純吟-生酒-2026/" class="name">安藝虎 夏純吟 生酒 2026</a>
+          <div class="spec">異於高知傳統風味，果香奔放，酸度清爽俐落</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1400</div><div class="price-origin">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(125)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="126">
+        <div class="card-media">
+          <a href="/products/sake/山形正宗-花火-夏季限定-純米酒/" aria-label="查看 山形正宗 花火 夏季限定 純米酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/126山形正宗_花火1.webp" alt="山形正宗 花火 夏季限定 純米酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/sake/山形正宗-花火-夏季限定-純米酒/" class="name">山形正宗 花火 夏季限定 純米酒</a>
+          <div class="spec">果香如花火般綻放，夏日限定佐餐氣泡酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1480</div><div class="price-origin">NT$1600</div></div>
+            <button class="btn-add" onclick="addToCart(126)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="30">
+        <div class="card-media">
+          <a href="/products/sake/萩之鶴-純米吟釀-辛口/" aria-label="查看 萩之鶴 純米吟釀 辛口">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/30萩之鶴_純米吟釀_辛口1.webp" alt="萩之鶴 純米吟釀 辛口" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/萩之鶴-純米吟釀-辛口/" class="name">萩之鶴 純米吟釀 辛口</a>
+          <div class="spec">酒度+10，俐落辛口旨味清透</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1350</div><div class="price-origin">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(30)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="33">
+        <div class="card-media">
+          <a href="/products/sake/萩之鶴-純米吟釀-生原酒-暖桌貓/" aria-label="查看 萩之鶴 純米吟釀 生原酒 暖桌貓">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/33萩之鶴_純米吟釀_暖桌貓1.webp" alt="萩之鶴 純米吟釀 生原酒 暖桌貓" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/萩之鶴-純米吟釀-生原酒-暖桌貓/" class="name">萩之鶴 純米吟釀 生原酒 暖桌貓</a>
+          <div class="spec">窩進暖桌般的療癒感，圓潤果香生原酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1350</div><div class="price-origin">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(33)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="34">
+        <div class="card-media">
+          <a href="/products/sake/萩之鶴-貴釀酒-Gradation-Aged-1year/" aria-label="查看 萩之鶴 貴釀酒 Gradation Aged 1year">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/34萩之鶴_貴釀酒_GA1.webp" alt="萩之鶴 貴釀酒 Gradation Aged 1year" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/萩之鶴-貴釀酒-Gradation-Aged-1year/" class="name">萩之鶴 貴釀酒 Gradation Aged 1year</a>
+          <div class="spec">一年熟成貴釀酒，層疊醇厚甘甜餘韻</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1350</div><div class="price-origin">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(34)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="36">
+        <div class="card-media">
+          <a href="/products/sake/鳳凰美田-Assemblage-White-Bronze/" aria-label="查看 鳳凰美田 Assemblage-White Bronze">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/36鳳凰美田1.webp" alt="鳳凰美田 Assemblage-White Bronze" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/鳳凰美田-Assemblage-White-Bronze/" class="name">鳳凰美田 Assemblage-White Bronze</a>
+          <div class="spec">果香與旨味交疊，絕美調配層次感</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1620</div><div class="price-origin">NT$1800</div></div>
+            <button class="btn-add" onclick="addToCart(36)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="37">
+        <div class="card-media">
+          <a href="/products/sake/鳳凰美田-藍鳳凰-純米大吟釀-Sparkling/" aria-label="查看 鳳凰美田 藍鳳凰 純米大吟釀 Sparkling">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/37鳳凰美田_藍鳳凰1.webp" alt="鳳凰美田 藍鳳凰 純米大吟釀 Sparkling" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/鳳凰美田-藍鳳凰-純米大吟釀-Sparkling/" class="name">鳳凰美田 藍鳳凰 純米大吟釀 Sparkling</a>
+          <div class="spec">如香檳般細緻，華麗果香氣泡酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$4050</div><div class="price-origin">NT$4500</div></div>
+            <button class="btn-add" onclick="addToCart(37)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="39">
+        <div class="card-media">
+          <a href="/products/sake/鳳凰美田-純米吟釀-冷卸-山田錦/" aria-label="查看 鳳凰美田 純米吟釀 冷卸 山田錦">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/39鳳凰美田_純米吟釀冷卸1.webp" alt="鳳凰美田 純米吟釀 冷卸 山田錦" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/鳳凰美田-純米吟釀-冷卸-山田錦/" class="name">鳳凰美田 純米吟釀 冷卸 山田錦</a>
+          <div class="spec">秋季限定熟成，山田錦圓潤旨味</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1750</div><div class="price-origin">NT$1850</div></div>
+            <button class="btn-add" onclick="addToCart(39)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="44">
+        <div class="card-media">
+          <a href="/products/sake/蓬萊泉-一念不動-特別純米-無濾過-しぼりたて/" aria-label="查看 蓬萊泉 一念不動 特別純米 無濾過 しぼりたて">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/44一念不動_特別純米新酒1.webp" alt="蓬萊泉 一念不動 特別純米 無濾過 しぼりたて" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/蓬萊泉-一念不動-特別純米-無濾過-しぼりたて/" class="name">蓬萊泉 一念不動 特別純米 無濾過 しぼりたて</a>
+          <div class="spec">新酒首發，初榨生酒香氣飽滿活力</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1350</div><div class="price-origin">NT$1450</div></div>
+            <button class="btn-add" onclick="addToCart(44)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="48">
+        <div class="card-media">
+          <a href="/products/sake/蓬萊泉-美-純米大吟釀/" aria-label="查看 蓬萊泉 美 純米大吟釀">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/48蓬萊泉_美_純米大吟釀1.webp" alt="蓬萊泉 美 純米大吟釀" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/蓬萊泉-美-純米大吟釀/" class="name">蓬萊泉 美 純米大吟釀</a>
+          <div class="spec">如花綻放，極致細緻優雅純米大吟釀</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$2900</div></div>
+            <button class="btn-add" onclick="addToCart(48)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="52">
+        <div class="card-media">
+          <a href="/products/sake/安藝虎-light-純米吟釀/" aria-label="查看 安藝虎 light 純米吟釀">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/52安藝虎_light_純米吟釀1.webp" alt="安藝虎 light 純米吟釀" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/安藝虎-light-純米吟釀/" class="name">安藝虎 light 純米吟釀</a>
+          <div class="spec">清新澄澈，感受輕盈的果香魅力</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1380</div><div class="price-origin">NT$1450</div></div>
+            <button class="btn-add" onclick="addToCart(52)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="53">
+        <div class="card-media">
+          <a href="/products/sake/安藝虎-純米大吟釀-CEL-24/" aria-label="查看 安藝虎 純米大吟釀 CEL-24">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/53安藝虎_純米大吟釀_CEL1.webp" alt="安藝虎 純米大吟釀 CEL-24" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/安藝虎-純米大吟釀-CEL-24/" class="name">安藝虎 純米大吟釀 CEL-24</a>
+          <div class="spec">華麗果香，CEL-24酵母的夢幻綻放</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1800</div><div class="price-origin">NT$2100</div></div>
+            <button class="btn-add" onclick="addToCart(53)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="54">
+        <div class="card-media">
+          <a href="/products/sake/安藝虎-純米吟釀-土佐麗-初榨無濾過生酒/" aria-label="查看 安藝虎 純米吟釀 土佐麗 初榨無濾過生酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/54安藝虎_純米吟釀_土佐麗1.webp" alt="安藝虎 純米吟釀 土佐麗 初榨無濾過生酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/安藝虎-純米吟釀-土佐麗-初榨無濾過生酒/" class="name">安藝虎 純米吟釀 土佐麗 初榨無濾過生酒</a>
+          <div class="spec">鮮活初榨，無濾過的純粹米旨</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(54)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="55">
+        <div class="card-media">
+          <a href="/products/sake/安藝虎-藏內限定-純米大吟釀-生原酒/" aria-label="查看 安藝虎 藏內限定 純米大吟釀 生原酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/55安藝虎_藏內限定_生原酒1.webp" alt="安藝虎 藏內限定 純米大吟釀 生原酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/安藝虎-藏內限定-純米大吟釀-生原酒/" class="name">安藝虎 藏內限定 純米大吟釀 生原酒</a>
+          <div class="spec">限定流通・濃郁帶層次的夢幻逸品</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1980</div></div>
+            <button class="btn-add" onclick="addToCart(55)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="60">
+        <div class="card-media">
+          <a href="/products/sake/山形正宗-純米吟釀-酒未來-生酒/" aria-label="查看 山形正宗 純米吟釀 酒未來 生酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/60山形正宗_純米吟釀_酒未來_生酒1.webp" alt="山形正宗 純米吟釀 酒未來 生酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/山形正宗-純米吟釀-酒未來-生酒/" class="name">山形正宗 純米吟釀 酒未來 生酒</a>
+          <div class="spec">酒未來全新風味，打造與傳統不同的傳奇</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1850</div><div class="price-origin">NT$2100</div></div>
+            <button class="btn-add" onclick="addToCart(60)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="61">
+        <div class="card-media">
+          <a href="/products/sake/初龜-大吟釀-愛/" aria-label="查看 初龜 大吟釀 愛">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/61初龜_大吟釀_愛1.webp" alt="初龜 大吟釀 愛" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/初龜-大吟釀-愛/" class="name">初龜 大吟釀 愛</a>
+          <div class="spec">復刻歷史，靜岡流派的頂級獻禮</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$3580</div><div class="price-origin">NT$3800</div></div>
+            <button class="btn-add" onclick="addToCart(61)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="62">
+        <div class="card-media">
+          <a href="/products/sake/初亀-純米大吟釀-瓢月/" aria-label="查看 初亀 純米大吟釀 瓢月">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/62初亀_純米大吟釀_瓢月1.webp" alt="初亀 純米大吟釀 瓢月" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/初亀-純米大吟釀-瓢月/" class="name">初亀 純米大吟釀 瓢月</a>
+          <div class="spec">初龜夢幻名品，展現極致純淨</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$2650</div><div class="price-origin">NT$3050</div></div>
+            <button class="btn-add" onclick="addToCart(62)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="63">
+        <div class="card-media">
+          <a href="/products/sake/初龜-特別純米-生霞酒/" aria-label="查看 初龜 特別純米 生霞酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/63初龜_特別純米_生霞酒1.webp" alt="初龜 特別純米 生霞酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/初龜-特別純米-生霞酒/" class="name">初龜 特別純米 生霞酒</a>
+          <div class="spec">初龜夢幻名品，展現極致純淨</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1250</div><div class="price-origin">NT$1400</div></div>
+            <button class="btn-add" onclick="addToCart(63)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="116">
+        <div class="card-media">
+          <a href="/products/sake/光榮菊-Noon-CRESCENT-無濾過生原酒/" aria-label="查看 光榮菊 Noon CRESCENT 無濾過生原酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/116光榮菊Noon1.webp" alt="光榮菊 Noon CRESCENT 無濾過生原酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/光榮菊-Noon-CRESCENT-無濾過生原酒/" class="name">光榮菊 Noon CRESCENT 無濾過生原酒</a>
+          <div class="spec">新潮彈珠汽水香氣，低酒精度極致消暑</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1760</div></div>
+            <button class="btn-add" onclick="addToCart(116)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="117">
+        <div class="card-media">
+          <a href="/products/sake/光榮菊-Hello!KOUEIGIKU-無濾過生原霞酒-愛山/" aria-label="查看 光榮菊 Hello!KOUEIGIKU 無濾過生原霞酒 愛山">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/117光榮菊_愛山1.webp" alt="光榮菊 Hello!KOUEIGIKU 無濾過生原霞酒 愛山" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/sake/光榮菊-Hello!KOUEIGIKU-無濾過生原霞酒-愛山/" class="name">光榮菊 Hello!KOUEIGIKU 無濾過生原霞酒 愛山</a>
+          <div class="spec">日本國內也難一次湊齊的夢幻逸品！</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$2100</div><div class="price-origin">NT$2300</div></div>
+            <button class="btn-add" onclick="addToCart(117)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="35">
+        <div class="card-media">
+          <a href="/products/sake/谷川岳-純米大吟釀/" aria-label="查看 谷川岳 純米大吟釀">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/35谷川岳_純米大吟釀1.webp" alt="谷川岳 純米大吟釀" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/谷川岳-純米大吟釀/" class="name">谷川岳 純米大吟釀</a>
+          <div class="spec">如山嵐清冽，俐落甘口純米大吟釀</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1320</div><div class="price-origin">NT$1400</div></div>
+            <button class="btn-add" onclick="addToCart(35)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="40">
+        <div class="card-media">
+          <a href="/products/sake/鳳凰美田-黑鳳凰-純米吟釀/" aria-label="查看 鳳凰美田 黑鳳凰 純米吟釀">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/40鳳凰美田_黑鳳凰1.webp" alt="鳳凰美田 黑鳳凰 純米吟釀" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/鳳凰美田-黑鳳凰-純米吟釀/" class="name">鳳凰美田 黑鳳凰 純米吟釀</a>
+          <div class="spec">華麗麝香葡萄氣息，濃郁果香代名詞</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1750</div><div class="price-origin">NT$2150</div></div>
+            <button class="btn-add" onclick="addToCart(40)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="42">
+        <div class="card-media">
+          <a href="/products/sake/鳳凰美田-純米吟釀/" aria-label="查看 鳳凰美田 純米吟釀">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/42鳳凰美田_純米吟釀1.webp" alt="鳳凰美田 純米吟釀" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/鳳凰美田-純米吟釀/" class="name">鳳凰美田 純米吟釀</a>
+          <div class="spec">雅緻哈密瓜芳香，經典平衡純米吟釀</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1750</div><div class="price-origin">NT$1950</div></div>
+            <button class="btn-add" onclick="addToCart(42)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="43">
+        <div class="card-media">
+          <a href="/products/sake/鳳凰美田-純米大吟釀-赤判/" aria-label="查看 鳳凰美田 純米大吟釀 赤判">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/43鳳凰美田_赤判1.webp" alt="鳳凰美田 純米大吟釀 赤判" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/鳳凰美田-純米大吟釀-赤判/" class="name">鳳凰美田 純米大吟釀 赤判</a>
+          <div class="spec">頂級山田錦釀造，極致絲滑果香饗宴</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$2450</div><div class="price-origin">NT$3750</div></div>
+            <button class="btn-add" onclick="addToCart(43)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="46">
+        <div class="card-media">
+          <a href="/products/sake/蓬萊泉-和-純米吟釀-わ/" aria-label="查看 蓬萊泉 和 純米吟釀 わ">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/46蓬萊泉_和_純米吟釀1.webp" alt="蓬萊泉 和 純米吟釀 わ" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/蓬萊泉-和-純米吟釀-わ/" class="name">蓬萊泉 和 純米吟釀 わ</a>
+          <div class="spec">如絹絲滑順，和諧溫潤的純米吟釀</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1680</div><div class="price-origin">NT$1800</div></div>
+            <button class="btn-add" onclick="addToCart(46)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="47">
+        <div class="card-media">
+          <a href="/products/sake/蓬萊泉-和-熟成生酒-わ/" aria-label="查看 蓬萊泉 和 熟成生酒 わ">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/47蓬萊泉_和_熟成生酒1.webp" alt="蓬萊泉 和 熟成生酒 わ" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/蓬萊泉-和-熟成生酒-わ/" class="name">蓬萊泉 和 熟成生酒 わ</a>
+          <div class="spec">生酒一年熟成，難得一見的稀有珍釀</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1750</div><div class="price-origin">NT$1920</div></div>
+            <button class="btn-add" onclick="addToCart(47)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="49">
+        <div class="card-media">
+          <a href="/products/sake/蓬萊泉-金-純米大吟釀/" aria-label="查看 蓬萊泉 金 純米大吟釀">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/49蓬萊泉_金_純米大吟釀1.webp" alt="蓬萊泉 金 純米大吟釀" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/蓬萊泉-金-純米大吟釀/" class="name">蓬萊泉 金 純米大吟釀</a>
+          <div class="spec">如葡萄酒般輕快優雅，綻放極致旨味</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$2300</div><div class="price-origin">NT$2450</div></div>
+            <button class="btn-add" onclick="addToCart(49)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="50">
+        <div class="card-media">
+          <a href="/products/sake/蓬萊泉-銀-純米吟釀/" aria-label="查看 蓬萊泉 銀 純米吟釀">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/50蓬萊泉_銀_純米吟釀1.webp" alt="蓬萊泉 銀 純米吟釀" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/蓬萊泉-銀-純米吟釀/" class="name">蓬萊泉 銀 純米吟釀</a>
+          <div class="spec">品味溫潤如玉，溫柔且圓潤入口</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1530</div><div class="price-origin">NT$1740</div></div>
+            <button class="btn-add" onclick="addToCart(50)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="51">
+        <div class="card-media">
+          <a href="/products/sake/蓬萊泉-黑-純米酒/" aria-label="查看 蓬萊泉 黑 純米酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/51蓬萊泉_黑_純米酒1.webp" alt="蓬萊泉 黑 純米酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/蓬萊泉-黑-純米酒/" class="name">蓬萊泉 黑 純米酒</a>
+          <div class="spec">水嫩俐落的口感，日常餐桌的最佳首選</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1180</div><div class="price-origin">NT$1440</div></div>
+            <button class="btn-add" onclick="addToCart(51)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="56">
+        <div class="card-media">
+          <a href="/products/sake/山形正宗-稻造-純米吟釀/" aria-label="查看 山形正宗 稻造 純米吟釀">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/56山形正宗_稻造_純米吟釀1.webp" alt="山形正宗 稻造 純米吟釀" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/山形正宗-稻造-純米吟釀/" class="name">山形正宗 稻造 純米吟釀</a>
+          <div class="spec">地方酒米釀造，打造極致的地酒風味</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1450</div><div class="price-origin">NT$1600</div></div>
+            <button class="btn-add" onclick="addToCart(56)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="57">
+        <div class="card-media">
+          <a href="/products/sake/山形正宗-燗-純米/" aria-label="查看 山形正宗 燗 純米">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/57山形正宗_燗_純米1.webp" alt="山形正宗 燗 純米" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/山形正宗-燗-純米/" class="name">山形正宗 燗 純米</a>
+          <div class="spec">職人溫暖之作，燗酒愛好者首選</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1680</div><div class="price-origin">NT$1880</div></div>
+            <button class="btn-add" onclick="addToCart(57)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="58">
+        <div class="card-media">
+          <a href="/products/sake/山形正宗-純米吟釀-生霞酒-木槽式/" aria-label="查看 山形正宗 純米吟釀 生霞酒 木槽式">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/58山形正宗_純米吟釀_生霞酒_木槽式1.webp" alt="山形正宗 純米吟釀 生霞酒 木槽式" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/山形正宗-純米吟釀-生霞酒-木槽式/" class="name">山形正宗 純米吟釀 生霞酒 木槽式</a>
+          <div class="spec">古法木槽壓榨，散發澄淨果香</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1650</div><div class="price-origin">NT$1800</div></div>
+            <button class="btn-add" onclick="addToCart(58)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="80">
+        <div class="card-media">
+          <a href="/products/sake/浪乃音-Te-To-Te手牽手-母の日/" aria-label="查看 浪乃音 Te To Te手牽手 母の日">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/80浪乃音_母の日1.webp" alt="浪乃音 Te To Te手牽手 母の日" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/sake/浪乃音-Te-To-Te手牽手-母の日/" class="name">浪乃音 Te To Te手牽手 母の日</a>
+          <div class="spec">手牽手，獻給媽媽的溫柔</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1700</div></div>
+            <button class="btn-add" onclick="addToCart(80)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <section class="cat-faq">
       <h2 class="cat-faq-title">日本清酒常見問題</h2>
@@ -436,54 +1075,6 @@
       </details>
     </section>
 
-    <!-- SEO_PRODUCT_LIST -->
-    <noscript>
-      <div class="seo-static-list" style="margin-top: 20px; padding: 20px; border: 1px solid #eee;">
-        <h3>清酒商品清單</h3>
-        <ul>
-          <li><a href="https://www.yousi-drink.com/products/sake/萩之鶴-純米吟釀-辛口/">萩之鶴 純米吟釀 辛口</a> - 酒度+10，俐落辛口旨味清透</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/萩之鶴-純米吟釀-生原酒-櫻花貓/">萩之鶴 純米吟釀 生原酒 櫻花貓</a> - 春季限定，大吟釀等級的輕盈甘甜</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/萩之鶴-純米吟釀-生原酒-暖桌貓/">萩之鶴 純米吟釀 生原酒 暖桌貓</a> - 窩進暖桌般的療癒感，圓潤果香生原酒</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/萩之鶴-貴釀酒-Gradation-Aged-1year/">萩之鶴 貴釀酒 Gradation Aged 1year</a> - 一年熟成貴釀酒，層疊醇厚甘甜餘韻</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/谷川岳-純米大吟釀/">谷川岳 純米大吟釀</a> - 如山嵐清冽，俐落甘口純米大吟釀</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/鳳凰美田-Assemblage-White-Bronze/">鳳凰美田 Assemblage-White Bronze</a> - 果香與旨味交疊，絕美調配層次感</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/鳳凰美田-藍鳳凰-純米大吟釀-Sparkling/">鳳凰美田 藍鳳凰 純米大吟釀 Sparkling</a> - 如香檳般細緻，華麗果香氣泡酒</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/鳳凰美田-純米吟釀-冷卸-山田錦/">鳳凰美田 純米吟釀 冷卸 山田錦</a> - 秋季限定熟成，山田錦圓潤旨味</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/鳳凰美田-黑鳳凰-純米吟釀/">鳳凰美田 黑鳳凰 純米吟釀</a> - 華麗麝香葡萄氣息，濃郁果香代名詞</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/鳳凰美田-純米吟釀/">鳳凰美田 純米吟釀</a> - 雅緻哈密瓜芳香，經典平衡純米吟釀</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/鳳凰美田-純米大吟釀-赤判/">鳳凰美田 純米大吟釀 赤判</a> - 頂級山田錦釀造，極致絲滑果香饗宴</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/蓬萊泉-一念不動-特別純米-無濾過-しぼりたて/">蓬萊泉 一念不動 特別純米 無濾過 しぼりたて</a> - 新酒首發，初榨生酒香氣飽滿活力</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/純米大吟釀-初花-金魚台輪/">純米大吟釀 初花 金魚台輪</a> - 兩百年祭典神韻，高雅清冽</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/蓬萊泉-和-純米吟釀-わ/">蓬萊泉 和 純米吟釀 わ</a> - 如絹絲滑順，和諧溫潤的純米吟釀</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/蓬萊泉-和-熟成生酒-わ/">蓬萊泉 和 熟成生酒 わ</a> - 生酒一年熟成，難得一見的稀有珍釀</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/蓬萊泉-美-純米大吟釀/">蓬萊泉 美 純米大吟釀</a> - 如花綻放，極致細緻優雅純米大吟釀</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/蓬萊泉-金-純米大吟釀/">蓬萊泉 金 純米大吟釀</a> - 如葡萄酒般輕快優雅，綻放極致旨味</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/蓬萊泉-銀-純米吟釀/">蓬萊泉 銀 純米吟釀</a> - 品味溫潤如玉，溫柔且圓潤入口</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/蓬萊泉-黑-純米酒/">蓬萊泉 黑 純米酒</a> - 水嫩俐落的口感，日常餐桌的最佳首選</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/安藝虎-light-純米吟釀/">安藝虎 light 純米吟釀</a> - 清新澄澈，感受輕盈的果香魅力</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/安藝虎-純米大吟釀-CEL-24/">安藝虎 純米大吟釀 CEL-24</a> - 華麗果香，CEL-24酵母的夢幻綻放</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/安藝虎-純米吟釀-土佐麗-初榨無濾過生酒/">安藝虎 純米吟釀 土佐麗 初榨無濾過生酒</a> - 鮮活初榨，無濾過的純粹米旨</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/安藝虎-藏內限定-純米大吟釀-生原酒/">安藝虎 藏內限定 純米大吟釀 生原酒</a> - 限定流通・濃郁帶層次的夢幻逸品</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/山形正宗-稻造-純米吟釀/">山形正宗 稻造 純米吟釀</a> - 地方酒米釀造，打造極致的地酒風味</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/山形正宗-燗-純米/">山形正宗 燗 純米</a> - 職人溫暖之作，燗酒愛好者首選</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/山形正宗-純米吟釀-生霞酒-木槽式/">山形正宗 純米吟釀 生霞酒 木槽式</a> - 古法木槽壓榨，散發澄淨果香</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/山形正宗-純米吟釀-酒未來-生酒/">山形正宗 純米吟釀 酒未來 生酒</a> - 酒未來全新風味，打造與傳統不同的傳奇</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/初龜-大吟釀-愛/">初龜 大吟釀 愛</a> - 復刻歷史，靜岡流派的頂級獻禮</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/初亀-純米大吟釀-瓢月/">初亀 純米大吟釀 瓢月</a> - 初龜夢幻名品，展現極致純淨</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/初龜-特別純米-生霞酒/">初龜 特別純米 生霞酒</a> - 初龜夢幻名品，展現極致純淨</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/浪乃音-Te-To-Te手牽手-母の日/">浪乃音 Te To Te手牽手 母の日</a> - 手牽手，獻給媽媽的溫柔</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/光榮菊-Noon-CRESCENT-無濾過生原酒/">光榮菊 Noon CRESCENT 無濾過生原酒</a> - 新潮彈珠汽水香氣，低酒精度極致消暑</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/光榮菊-Hello!KOUEIGIKU-無濾過生原霞酒-愛山/">光榮菊 Hello!KOUEIGIKU 無濾過生原霞酒 愛山</a> - 日本國內也難一次湊齊的夢幻逸品！</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/林本店-Silent-Galaxy-純米大吟釀-無濾過生原酒/">林本店 Silent Galaxy 純米大吟釀 無濾過生原酒</a> - 宇宙靈感限定酒，果香清雅，微氣泡清爽細膩</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/安藝虎-夏純吟-生酒-2026/">安藝虎 夏純吟 生酒 2026</a> - 異於高知傳統風味，果香奔放，酸度清爽俐落</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/山形正宗-花火-夏季限定-純米酒/">山形正宗 花火 夏季限定 純米酒</a> - 果香如花火般綻放，夏日限定佐餐氣泡酒</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/百十郎-蒼藍-純米大吟釀-2026/">百十郎 蒼藍 純米大吟釀 2026</a> - 帶草本礦物感的吟釀香氣，旨味俐落的夏季辛口酒！</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/林本店-花火與企鵝-純米大吟釀-無濾過生原酒-2026/">林本店 花火與企鵝 純米大吟釀 無濾過生原酒 2026</a> - 果香馥郁甘旨細緻，清新易飲無濾過生酒</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/日日-酒小町-2026/">日日 酒小町 2026</a> - 採秋田酒小町釀造，柔和細膩，微甜米旨風味悠長</li>
-          <li><a href="https://www.yousi-drink.com/products/sake/日日-玉榮-2026/">日日 玉榮 2026</a> - 蒸米般輕潤甘甜，純淨旨味與細緻清爽交織</li>
-        </ul>
-      </div>
-    </noscript>
   </main>
 
   <footer class="footer">
@@ -499,7 +1090,7 @@
       <!-- 右側：整組 QR（紅框就是這一塊） -->
       <div class="footer-right">
         <div class="footer-qr">
-          <img class="line-qr-img" alt="加入 LINE">
+          <img class="line-qr-img" src="/assets/images/qr-code_line.png" alt="加入 LINE 官方帳號 QR Code" width="84" height="84" loading="lazy" decoding="async">
           <div class="qr-label">
             Line 
             <span class="qr-sub">會員集點累贈</span>
@@ -507,7 +1098,7 @@
         </div>
   
         <div class="footer-qr">
-          <img class="ig-qr-img" alt="Instagram">
+          <img class="ig-qr-img" src="/assets/images/qr-code_IG.png" alt="Instagram yousi1719_drink QR Code" width="84" height="84" loading="lazy" decoding="async">
           <div class="qr-label">Instagram yousi1719_drink</div>
         </div>
       </div>

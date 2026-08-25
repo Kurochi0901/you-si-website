@@ -15,7 +15,7 @@
 <title>下單與聯繫｜LINE 訂購・台北大安・新竹竹北｜酉時喝酒 YOU-SI</title>
 <link rel="canonical" href="https://www.yousi-drink.com/order/">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="noindex, follow">
 <meta name="keywords" content="酉時喝酒下單, 清酒購買, 日本酒訂購, 台北自取, 新竹自取, 竹北自取, LINE 下單, 果實酒訂購, 梅酒下單, 葡萄酒訂購, 酉時喝酒">
 <meta name="description" content="酉時喝酒 YOU-SI 線上下單頁面：購物車一鍵送出訂單，透過 LINE 官方帳號專人確認。台北大安・新竹竹北預約自取，亦可宅配到府（冷藏／常溫），付款方式為銀行轉帳，滿 NT$2,800 免運。">
 <meta name="author" content="酉時喝酒 YOU-SI">
@@ -48,10 +48,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 
-<script defer src="/assets/js/products.data.js"></script>
-<script defer src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
-<script src="/assets/js/announcement_data.js"></script>
+<script defer src="/assets/js/announcement_data.js"></script>
 
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
 
@@ -112,7 +111,7 @@
 </head>
 <body class="page-order">
   <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
-<div class="announce-bar" id="announceBar" role="marquee" aria-live="polite">
+<div class="announce-bar" id="announceBar" role="status" aria-live="polite">
   <div class="announce-track" id="announceTrack"></div>
 </div>
   <div class="header-wrap">
@@ -273,7 +272,7 @@
           郵寄：請務必填寫完整地址</p>
         <div class="order-notice">
           <strong>重要提醒</strong><br>
-          遵循台灣法規 ,酒類交易依規定必須確認購買者為年滿18歲本人 ,下單後請至line進行實名身分驗證 ,以保障雙方的權益。
+          遵循台灣法規 ,酒類交易依規定必須確認購買者為年滿18歲本人 ,送出後請至line進行實名身分驗證 ,以保障雙方的權益。
         </div>
 
       </div>
@@ -317,7 +316,7 @@
       <!-- 右側：整組 QR（紅框就是這一塊） -->
       <div class="footer-right">
         <div class="footer-qr">
-          <img class="line-qr-img" alt="加入 LINE">
+          <img class="line-qr-img" src="/assets/images/qr-code_line.png" alt="加入 LINE 官方帳號 QR Code" width="84" height="84" loading="lazy" decoding="async">
           <div class="qr-label">
             Line 
             <span class="qr-sub">會員集點累贈</span>
@@ -325,7 +324,7 @@
         </div>
   
         <div class="footer-qr">
-          <img class="ig-qr-img" alt="Instagram">
+          <img class="ig-qr-img" src="/assets/images/qr-code_IG.png" alt="Instagram yousi1719_drink QR Code" width="84" height="84" loading="lazy" decoding="async">
           <div class="qr-label">Instagram yousi1719_drink</div>
         </div>
       </div>

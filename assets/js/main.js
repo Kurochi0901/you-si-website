@@ -24,9 +24,6 @@ const SHIPPING_FEE_COLD       = 230;  // 冷藏運費
 // 商品分類顯示順序（總覽頁排序用）
 const CATEGORY_ORDER = ["fruit-tea", "sake",  "wine", "spirits", "mini"];
 
-// 風味刻度格數（1~5）
-const SCALE_MAX = 5;
-
 /* ===== 1.2 GA4 事件追蹤 (Event Tracking) ===== */
 function trackEvent(eventName, params = {}) {
   try {
@@ -39,212 +36,6 @@ function trackEvent(eventName, params = {}) {
     console.warn('[GA4 Tracking Error]', error);
   }
 }
-
-/* ===== 1.5 SEO 管理器 ===== */
-const SEOMonitor = (function() {
-  // 1. 先取得不包含參數 (?item=...) 的純淨網址，避免使用者直接帶參數落地時，關閉 Modal 無法退回列表
-  const baseUrlWithoutQuery = window.location.origin + window.location.pathname;
-
-  const originalMeta = {
-    title: document.title,
-    description: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
-    ogTitle: document.querySelector('meta[property="og:title"]')?.getAttribute('content') || '',
-    ogDescription: document.querySelector('meta[property="og:description"]')?.getAttribute('content') || '',
-    canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') || baseUrlWithoutQuery,
-    ogUrl: document.querySelector('meta[property="og:url"]')?.getAttribute('content') || baseUrlWithoutQuery,
-    url: baseUrlWithoutQuery
-  };
-
-  // 初始化時，如果 HTML 沒寫 canonical，主動補上（對 SEO 較好）
-  function _ensureInitialCanonical() {
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
-      canonical.setAttribute('href', originalMeta.canonical);
-      document.head.appendChild(canonical);
-    }
-  }
-  _ensureInitialCanonical();
-
-  function setMetaTag(selector, attribute, value) {
-    let element = document.querySelector(selector);
-    if (!element && attribute === 'content') {
-      element = document.createElement('meta');
-      if (selector.includes('name=')) {
-        element.setAttribute('name', selector.match(/name="([^"]+)"/)[1]);
-      } else if (selector.includes('property=')) {
-        element.setAttribute('property', selector.match(/property="([^"]+)"/)[1]);
-      }
-      document.head.appendChild(element);
-    }
-    if (element) element.setAttribute(attribute, value);
-  }
-
-  function getCategoryPathSegment(catKey) {
-    if (!catKey || catKey === 'all') return '';
-    if (catKey === 'fruittea') return 'fruit-tea/';
-    return `${catKey}/`;
-  }
-
-  function getNormalizedProductUrl(productId, category) {
-    const p = (typeof products !== 'undefined') ? products.find(x => x.id === productId) : null;
-    if (p) {
-      const slug = p.name.replace(/[&]+/g, '').replace(/\s+/g, '-');
-      const cat = p.category || category || 'all';
-      return `${window.location.origin}/products/${cat}/${slug}/`;
-    }
-    return `${window.location.origin}/products/${getCategoryPathSegment(category)}/`;
-  }
-
-  function getProductSEOTemplates(product, category) {
-    const name = product.name || '精選商品';
-    let title = `${name} | 酉時喝酒 YOU-SI`;
-    let description = product.note?.oneLine || `${name}，酉時喝酒提供您精選酒款，立即選購！`;
-
-    switch(category) {
-      case 'sake':
-        title = `${name} – 嚴選日本清酒推薦 | 酉時喝酒 YOU-SI`;
-        description = `探索「${name}」，特選優質日本清酒，香氣細緻、口感層次豐富。無論是佐餐或獨飲，酉時喝酒提供您最棒的品飲體驗。`;
-        break;
-      case 'fruittea':
-      case 'fruit-tea':
-        title = `${name} – 人氣果實酒與茶酒 | 酉時喝酒 YOU-SI`;
-        description = `想找好喝的果實酒與茶酒？推薦您「${name}」，融合鮮甜果香與優雅茶韻，酸甜順口超百搭。來酉時喝酒 YOU-SI，享受微醺滋味。`;
-        break;
-      case 'wine':
-        title = `${name} – 經典質感葡萄酒推薦 | 酉時喝酒 YOU-SI`;
-        description = `品味「${name}」，嚴選來自知名產區的優質葡萄酒，單寧獨特、風味醇厚。酉時喝酒 YOU-SI 為您精選餐酒搭配佳釀。`;
-        break;
-      case 'spirits':
-        title = `${name} – 頂級烈酒、威士忌與琴酒選品 | 酉時喝酒 YOU-SI`;
-        description = `尋找層次豐富的烈酒？「${name}」帶給您純粹的品飲享受。酉時喝酒 YOU-SI 嚴選各國佳釀，滿足烈酒愛好者的挑剔味蕾。`;
-        break;
-      case 'mini':
-      case 'small-can':
-        title = `${name} – 輕巧小罐酒，隨時享受微醺 | 酉時喝酒 YOU-SI`;
-        description = `「${name}」小容量包裝設計，讓您隨時隨地輕鬆開罐！酉時喝酒小罐專區，提供多款風味酒類，適合露營、野餐或獨自小酌。`;
-        break;
-    }
-    return { title, description };
-  }
-
-  return {
-    openProduct: function(product, category) {
-      if (!product || !product.id) return;
-      const catKey = category || groupOf(product);
-      const seoData = getProductSEOTemplates(product, catKey);
-      const standardUrl = getNormalizedProductUrl(product.id, catKey);
-      
-      document.title = seoData.title;
-      setMetaTag('meta[name="description"]', 'content', seoData.description);
-      setMetaTag('meta[property="og:title"]', 'content', seoData.title);
-      setMetaTag('meta[property="og:description"]', 'content', seoData.description);
-      
-      let canonical = document.querySelector('link[rel="canonical"]');
-      if (!canonical) {
-        canonical = document.createElement('link');
-        canonical.setAttribute('rel', 'canonical');
-        document.head.appendChild(canonical);
-      }
-      if (canonical) canonical.setAttribute('href', standardUrl);
-
-      // 同步更新 OG URL
-      setMetaTag('meta[property="og:url"]', 'content', standardUrl);
-
-      history.pushState({ productId: product.id }, '', standardUrl);
-    },
-    closeProduct: function() {
-      document.title = originalMeta.title;
-      setMetaTag('meta[name="description"]', 'content', originalMeta.description);
-      setMetaTag('meta[property="og:title"]', 'content', originalMeta.ogTitle);
-      setMetaTag('meta[property="og:description"]', 'content', originalMeta.ogDescription);
-      
-      const canonical = document.querySelector('link[rel="canonical"]');
-      if (canonical) canonical.setAttribute('href', originalMeta.canonical);
-
-      setMetaTag('meta[property="og:url"]', 'content', originalMeta.ogUrl);
-      
-      history.pushState(null, '', originalMeta.url);
-    },
-    sanitizeLandingUrl: function(productId, category, delayMs = 2000) {
-      if (!productId) return;
-      const catKey = category || 'all';
-      const standardUrl = getNormalizedProductUrl(productId, catKey);
-      const currentUrl = window.location.href;
-
-      if (currentUrl !== standardUrl) {
-        setTimeout(() => {
-          history.replaceState({ productId: productId }, '', standardUrl);
-          console.log('[SEO] URL sanitized');
-        }, delayMs);
-      }
-    },
-    injectSchema: function(products, category = 'all') {
-      const schemaId = 'product-schema-jsonld';
-      const existingSchema = document.getElementById(schemaId);
-      if (existingSchema) existingSchema.remove();
-      if (!products || !Array.isArray(products) || products.length === 0) return;
-
-      const baseUrl = window.location.origin;
-      const path = `/products/${getCategoryPathSegment(category)}`;
-
-      const productSchemas = products.map((product) => {
-        const pSlug = product.name.replace(/[&]+/g, '').replace(/\s+/g, '-');
-        const pCat = product.category || category;
-        const productUrl = `${baseUrl}/products/${pCat}/${pSlug}/`;
-        const imageUrl = (product.imgs && product.imgs[0]) ? new URL(product.imgs[0], baseUrl).href : "";
-        
-        const schema = {
-          "@context": "https://schema.org",
-          "@type": "Product",
-          "name": product.name,
-          "image": imageUrl ? [imageUrl] : [],
-          "description": product.note?.oneLine || product.name,
-          "sku": product.id,
-          "brand": { "@type": "Brand", "name": product.brand || "酉時喝酒 YOU-SI" },
-          "offers": {
-            "@type": "Offer",
-            "url": productUrl,
-            "priceCurrency": "TWD",
-            "price": product.price,
-            "availability": "https://schema.org/InStock",
-            "itemCondition": "https://schema.org/NewCondition"
-          }
-        };
-        if (product.rating && product.rating.value) {
-          schema.aggregateRating = {
-            "@type": "AggregateRating",
-            "ratingValue": product.rating.value,
-            "reviewCount": product.rating.count || 1
-          };
-        }
-        return schema;
-      });
-
-      const itemListSchema = {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "itemListElement": products.map((product, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "url": `${baseUrl}/products/${product.category || category}/${product.name.replace(/[&]+/g, '').replace(/\s+/g, '-')}/`
-        }))
-      };
-
-      const finalSchema = {
-        "@context": "https://schema.org",
-        "@graph": [itemListSchema, ...productSchemas]
-      };
-
-      const script = document.createElement('script');
-      script.id = schemaId;
-      script.type = 'application/ld+json';
-      script.text = JSON.stringify(finalSchema);
-      document.head.appendChild(script);
-    }
-  };
-})();
 
 /* ===== 2. 路由與頁面工具 ===== */
 
@@ -780,6 +571,16 @@ function renderGrid(list, id){
   const box = document.getElementById(id);
   if(!box) return;
 
+  // 篩選無結果時給明確提示，避免使用者看到一片空白不知道發生什麼事
+  if(!list || !list.length){
+    box.innerHTML = `
+      <div class="grid-empty">
+        <p class="grid-empty-title">找不到符合條件的酒款</p>
+        <p class="grid-empty-hint">試試放寬價格範圍、換個關鍵字，或<a href="/products/">查看全部商品</a>。</p>
+      </div>`;
+    return;
+  }
+
   const promoBadgeMap = getPromoBadgeMap();
 
   box.innerHTML = list.map((p, index) => {
@@ -801,7 +602,7 @@ function renderGrid(list, id){
     const productUrl = `/products/${catPath}${slug}/`;
 
     return `
-      <div class="card">
+      <div class="card" data-id="${p.id}">
         <div class="card-media">
           <a href="${productUrl}" aria-label="查看 ${p.name}">
             <img src="${cover}" alt="${p.name}" width="400" height="500" loading="${loading}" decoding="${decoding}" ${priority}>
@@ -822,6 +623,48 @@ function renderGrid(list, id){
   }).join("");
 }
 
+/**
+ * 靜態商品卡的 runtime 掛載
+ *
+ * build.js 會把商品卡直接寫進 HTML（供不執行 JS 的 AI 爬蟲讀取，同時加速 LCP）。
+ * 這些靜態卡刻意不含活動徽章 —— 促銷有起訖日期，烘進 HTML 會過期。
+ * 本函式在頁面載入後補上目前進行中的活動徽章。
+ *
+ * @param {string} id 容器 element id
+ * @returns {boolean} 是否找到靜態卡（false 代表需要走 renderGrid 動態渲染）
+ */
+function hydrateStaticGrid(id){
+  const box = document.getElementById(id);
+  if(!box) return false;
+  const cards = box.querySelectorAll(".card[data-id]");
+  if(!cards.length) return false;
+
+  const badgeMap = getPromoBadgeMap();
+  if(badgeMap.size){
+    cards.forEach(card => {
+      if(card.querySelector(".card-promo-badge")) return;   // 冪等，避免重複掛載
+      const html = renderPromoBadge({ id: Number(card.dataset.id) }, badgeMap);
+      if(!html) return;
+      const row = card.querySelector(".card-tag-row");
+      if(row) row.insertAdjacentHTML("afterend", html);
+    });
+  }
+  return true;
+}
+
+/** 商品總覽頁：判斷四個篩選欄位是否都還是預設值（無條件＝可直接沿用靜態卡） */
+function filtersAreDefault(){
+  const q = document.getElementById("q");
+  const cat = document.getElementById("cat");
+  const minp = document.getElementById("minp");
+  const maxp = document.getElementById("maxp");
+  if(q && q.value.trim() !== "") return false;
+  if(cat && cat.value !== "all") return false;
+  if(minp && minp.value !== "") return false;
+  if(maxp && maxp.value !== "") return false;
+  return true;
+}
+
 /** 渲染商品價格，有原價則同時顯示劃線原價 */
 function renderPrice(p){
   if(p.originPrice && p.originPrice > p.price){
@@ -830,121 +673,19 @@ function renderPrice(p){
   return `<div class="price-now">NT$${p.price}</div>`;
 }
 
-/** 產生 Schema.org JSON-LD 商品結構化資料，注入 <head>（SEO 用） */
-function injectProductSchema(list, title){
-  // 改由 SEOMonitor 統一處裡
-  SEOMonitor.injectSchema(list, document.body.dataset.category || 'all');
-}
 
-
-/* ===== 6. 商品 Modal（Lightbox）===== */
+/* ===== 6. Lightbox（PDP 商品圖放大）===== */
 
 // 點擊 lightbox 背景關閉
 document.addEventListener("click", (e) => {
   if(e.target && e.target.id === "lightbox") closeLightbox();
 });
 
-/**
- * 點擊商品卡片後開啟商品詳情 Modal
- * 包含：圖片切換、風味刻度、產品資訊、酒造介紹
- */
-function openProduct(id){
-  const p = products.find(x => x.id === id);
-  if(!p) return;
-
-  const box  = document.getElementById("lightbox");
-  const img  = document.getElementById("lightbox-img");
-  const note = document.getElementById("lightbox-note");
-  if(!box || !note) return;
-
-  if(img) img.style.display = "none";
-  note.style.display = "block";
-
-  // 初始化圖片切換狀態（尾端附加出貨保證圖）
-  const baseImgs = Array.isArray(p.imgs) ? p.imgs : [];
-  window._currentProductImgs = baseImgs.length ? [...baseImgs, SHIPPING_GUARANTEE_IMG] : [];
-  _currentImgIndex = 0;
-
-  note.innerHTML = `
-    <div class="product-modal" role="dialog" aria-modal="true" aria-label="${p.name}">
-      <button class="modal-close" type="button" aria-label="關閉" onclick="closeLightbox()">✕</button>
-
-      <div class="product-media">
-        ${renderProductImages(window._currentProductImgs, p.name)}
-      </div>
-
-      <div class="product-content">
-        <h3>${p.name}</h3>
-        <div class="price-block">${renderPrice(p)}</div>
-
-        <div class="feature-block">
-          <h4 class="feature-title">酒款特色</h4>
-          <p class="feature-desc">${p.note?.oneLine || ""}</p>
-        </div>
-
-        ${getScaleMetaByType(p.type).map(meta => renderScaleAxis(meta, p.scale?.[meta.key])).join("")}
-
-        <div class="info-section">
-          <h4 class="info-title">產品資訊</h4>
-          <ul class="info-list">
-            ${p.info?.brand   ? `<li><span>品牌：</span><b>${p.info.brand}</b></li>`       : ""}
-            ${p.info?.origin  ? `<li><span>產地：</span><b>${p.info.origin}</b></li>`      : ""}
-            ${p.info?.rice    ? `<li><span>原料米：</span><b>${p.info.rice}</b></li>`      : ""}
-            ${p.info?.variety ? `<li><span>葡萄品種：</span><b>${p.info.variety}</b></li>` : ""}
-            ${p.info?.yeast   ? `<li><span>酵母：</span><b>${p.info.yeast}</b></li>`       : ""}
-            ${p.info?.polish  ? `<li><span>精米步合：</span><b>${p.info.polish}</b></li>`  : ""}
-            ${p.info?.alcohol ? `<li><span>酒精濃度：</span><b>${p.info.alcohol}</b></li>` : ""}
-            ${p.info?.volume  ? `<li><span>容量：</span><b>${p.info.volume}</b></li>`      : ""}
-          </ul>
-        </div>
-
-        ${renderWinery(p.wineryId)}
-      </div>
-    </div>
-  `;
-
-  box.style.display = "flex";
-  document.body.classList.add("modal-open");
-  
-  trackEvent('view_item', {
-    currency: 'TWD',
-    value: p.price,
-    items: [{
-      item_id: String(p.id),
-      item_name: p.name,
-      item_category: p.category,
-      price: p.price,
-      quantity: 1
-    }]
-  });
-
-  // 觸發動態 SEO 與 URL 更新
-  if (typeof SEOMonitor !== 'undefined') {
-    SEOMonitor.openProduct(p, groupOf(p));
-  }
-}
-
 /** 關閉 lightbox / 商品 Modal，解除 body 捲動鎖定 */
 function closeLightbox(){
   const box = document.getElementById("lightbox");
   if(box) box.style.display = "none";
   document.body.classList.remove("modal-open");
-  
-  // 還原頁面 SEO 與 URL 狀態
-  SEOMonitor.closeProduct();
-}
-
-/** 渲染酒造介紹區塊（需商品有 wineryId 且 wineries 資料已載入） */
-function renderWinery(id){
-  if(!id || !window.wineries) return "";
-  const w = window.wineries.find(x => x.id === id);
-  if(!w) return "";
-  return `
-    <hr>
-    <h4>酒造介紹</h4>
-    <p><strong>${w.name}</strong>｜${w.location}</p>
-    <p>${w.description}</p>
-  `;
 }
 
 
@@ -1004,120 +745,6 @@ function renderBlogRelatedProducts(retryCount = 0) {
   
   // 5. 若無資料則隱藏該區塊防止顯示無效按鈕
   ctaContainer.style.display = 'none';
-}
-
-
-/* ===== 7. 商品圖片切換 ===== */
-
-let _currentImgIndex = 0; // 目前顯示的圖片索引（對應 window._currentProductImgs）
-
-// 所有商品輪播的最後一張固定為出貨保證圖
-const SHIPPING_GUARANTEE_IMG = "/assets/images/home/出貨保證.webp";
-
-/** 渲染商品圖片區域（含左右切換按鈕與指示點） */
-function renderProductImages(imgs = [], name = ""){
-  if(!imgs.length){
-    return `<div class="product-gallery empty"><div class="product-img-empty">（尚未提供圖片）</div></div>`;
-  }
-  
-  // 若只有一張圖，不顯示左右按鈕與點點
-  if(imgs.length === 1){
-    return `
-      <div class="product-gallery">
-        <img id="productImg" src="${imgs[0]}" alt="${name}" width="500" height="600">
-      </div>
-    `;
-  }
-
-  // 多張圖時正常顯示按鈕與下方點點指示器
-  return `
-    <div class="product-gallery">
-      <button class="img-btn left" aria-label="上一張" onclick="prevProductImg()">‹</button>
-      <img id="productImg" src="${imgs[0]}" alt="${name}" width="500" height="600">
-      <button class="img-btn right" aria-label="下一張" onclick="nextProductImg()">›</button>
-      <div class="gallery-dots">
-        ${imgs.map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}" id="gallery-dot-${i}"></span>`).join("")}
-      </div>
-    </div>
-  `;
-}
-
-/** 將 #productImg 切換為 _currentImgIndex 對應的圖片，並同步更新點點狀態 */
-function updateProductImg(){
-  const img = document.getElementById("productImg");
-  if(!img || !window._currentProductImgs.length) return;
-  img.src = window._currentProductImgs[_currentImgIndex];
-  
-  const dots = document.querySelectorAll(".gallery-dots .dot");
-  if(dots.length > 0){
-    dots.forEach(d => d.classList.remove("active"));
-    const activeDot = document.getElementById(`gallery-dot-${_currentImgIndex}`);
-    if(activeDot) activeDot.classList.add("active");
-  }
-}
-
-function prevProductImg(){
-  if(!window._currentProductImgs.length) return;
-  _currentImgIndex = (_currentImgIndex - 1 + window._currentProductImgs.length) % window._currentProductImgs.length;
-  updateProductImg();
-}
-
-function nextProductImg(){
-  if(!window._currentProductImgs.length) return;
-  _currentImgIndex = (_currentImgIndex + 1) % window._currentProductImgs.length;
-  updateProductImg();
-}
-
-
-/* ===== 8. 風味刻度 ===== */
-
-/**
- * 依商品 type 回傳對應的風味刻度軸設定
- * 清酒：口感（辛口/甘口）+ 風味（米旨/果香）
- * 果實酒/茶酒：風味（酸度/甜度）+ 口感（清爽/濃郁）
- * 葡萄酒：單寧 + 酒體
- * 烈酒：不顯示刻度
- * @returns {Array<{key, title, left, right}>}
- */
-function getScaleMetaByType(type){
-  if(type === "烈酒") return [];
-  if(type === "清酒") return [
-    { key: "sakeDrySweet",    title: "口感", left: "辛口", right: "甘口" },
-    { key: "sakeUmamiFruity", title: "風味", left: "米旨", right: "果香" }
-  ];
-  if(type === "果實酒" || type === "茶酒") return [
-    { key: "ftAcidSweet", title: "風味", left: "酸度", right: "甜度" },
-    { key: "ftFreshRich", title: "口感", left: "清爽", right: "濃郁" }
-  ];
-  if(type === "葡萄酒") return [
-    { key: "wineTannin",    title: "單寧", left: "單寧輕盈", right: "單寧強烈" },
-    { key: "wineFreshFull", title: "酒體", left: "清爽",     right: "厚實" }
-  ];
-  return [];
-}
-
-/**
- * 渲染單條風味刻度軸（單點高亮，非累積式）
- * @param {{ title, left, right }} meta - 刻度設定
- * @param {number|null} rawLevel        - 原始數值（1~SCALE_MAX）
- */
-function renderScaleAxis(meta, rawLevel){
-  const lv = (() => { const v = parseInt(rawLevel, 10); return Number.isNaN(v) ? null : Math.min(SCALE_MAX, Math.max(1, v)); })();
-  return `
-    <div class="scale-block">
-      <div class="scale-head"><strong class="scale-title">${meta.title}</strong></div>
-      <div class="scale-track">
-        <div class="scale-bars" aria-label="${meta.title}：${meta.left} 到 ${meta.right}">
-          ${Array.from({ length: SCALE_MAX }, (_, i) => `<span class="${lv === i+1 ? 'on' : ''}"></span>`).join("")}
-        </div>
-        <div class="scale-axis" aria-hidden="true">
-          <span class="axis-left">${meta.left}</span>
-          <span class="axis-right">${meta.right}</span>
-        </div>
-      </div>
-      <div class="scale-note">${lv ? "" : "未標示"}</div>
-    </div>
-  `;
 }
 
 
@@ -2050,23 +1677,6 @@ function bindOnlyNumberInputs(){
 }
 
 
-/* ===== 15. QR Code ===== */
-
-/** 填入本地 IG QR Code 圖片到所有 .ig-qr-img 元素 */
-function setIgQr(){
-  const imgs = document.querySelectorAll(".ig-qr-img");
-  if(!imgs.length) return;
-  imgs.forEach(img => { img.src = "/assets/images/https_www_instagram_com_yousi1719_drink_.webp"; });
-}
-
-/** 填入本地 LINE QR Code 圖片到所有 .line-qr-img 元素 */
-function setLineQr(){
-  const imgs = document.querySelectorAll(".line-qr-img");
-  if(!imgs.length) return;
-  imgs.forEach(img => { img.src = "/assets/images/https_line_me_ti_p_008jcfgc.webp"; });
-}
-
-
 /* ===== 16. 活動頁 ===== */
 
 /**
@@ -2194,8 +1804,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   document.querySelectorAll("[data-ig-link]").forEach(a => { a.href = BRAND.igUrl; a.target = "_blank"; a.rel = "noopener"; });
 
-  setIgQr();              // 產生 IG QR Code
-  setLineQr();            // 產生 LINE QR Code
   renderCartMini();       // 渲染購物車摘要（order 頁右側）
   bindOnlyNumberInputs(); // 綁定數字輸入限制
   renderHomePromotion();  // 渲染首頁促銷橫幅
@@ -2208,17 +1816,22 @@ document.addEventListener("DOMContentLoaded", () => {
   if(key === "home"){
     initHeroBackground();
 
-    // 精選商品：優先取 priority 5（超過 5 個隨機抽）
-    // 不足 5 個時，用 priority 4 隨機補齊
-    const HOME_MAX = 5;
-    const p5 = products.filter(p => getPriority(p) === 5);
-    let featured = p5.length > HOME_MAX ? shuffleArray(p5).slice(0, HOME_MAX) : [...p5];
-    if(featured.length < HOME_MAX){
-      const used = new Set(featured.map(p => p.id));
-      const p4   = products.filter(p => getPriority(p) === 4 && !used.has(p.id));
-      featured   = [...featured, ...shuffleArray(p4).slice(0, HOME_MAX - featured.length)];
+    // 精選商品由 build.js 預渲染成靜態卡：整個 priority-5 池都寫在 HTML 裡，
+    // style.css 只顯示前 5 張，洗牌則由 index.html 內緊接 #homeGrid 的 inline script
+    // 在「瀏覽器繪製前」完成。這裡不要再洗一次 —— DOMContentLoaded 已在繪製之後，
+    // 再動順序會造成使用者看得到的閃爍。此處只負責掛上進行中的活動徽章。
+    if(!hydrateStaticGrid("homeGrid")){
+      // fallback：build.js 尚未執行時仍能正常顯示
+      const HOME_MAX = 5;
+      const p5 = products.filter(p => getPriority(p) === 5);
+      let featured = p5.length > HOME_MAX ? shuffleArray(p5).slice(0, HOME_MAX) : [...p5];
+      if(featured.length < HOME_MAX){
+        const used = new Set(featured.map(p => p.id));
+        const p4   = products.filter(p => getPriority(p) === 4 && !used.has(p.id));
+        featured   = [...featured, ...shuffleArray(p4).slice(0, HOME_MAX - featured.length)];
+      }
+      renderGrid(featured, "homeGrid");
     }
-    renderGrid(featured, "homeGrid");
   }
 
   /* 商品總覽頁 */
@@ -2233,29 +1846,35 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("cat")?.addEventListener("change", applyFilters);
     document.getElementById("minp")?.addEventListener("input", applyFilters);
     document.getElementById("maxp")?.addEventListener("input", applyFilters);
-    applyFilters();
+    // 已有靜態卡且尚未設定任何篩選條件 → 直接沿用，不重繪（使用者一操作就會走 applyFilters）
+    if(!(hydrateStaticGrid("productGrid") && filtersAreDefault())) applyFilters();
   }
 
-  /* 商品分類頁（各自渲染 + 注入 Schema.org）— 必須有 #productGrid 才視為分類頁，雙重保險 */
+  /* 商品分類頁（必須有 #productGrid 才視為分類頁，雙重保險）*/
   if(key === "products-sake" && document.getElementById("productGrid")){
-    const s = sortByPriorityDesc(products.filter(p => groupOf(p) === "sake"));
-    renderGrid(s, "productGrid"); injectProductSchema(s, "清酒商品列表｜酉時喝酒");
+    if(!hydrateStaticGrid("productGrid")){
+      renderGrid(sortByPriorityDesc(products.filter(p => groupOf(p) === "sake")), "productGrid");
+    }
   }
   if(key === "products-fruittea" && document.getElementById("productGrid")){
-    const s = sortByPriorityDesc(products.filter(p => groupOf(p) === "fruittea"));
-    renderGrid(s, "productGrid"); injectProductSchema(s, "果實酒・茶酒商品列表｜酉時喝酒");
+    if(!hydrateStaticGrid("productGrid")){
+      renderGrid(sortByPriorityDesc(products.filter(p => groupOf(p) === "fruittea")), "productGrid");
+    }
   }
   if(key === "products-spirits" && document.getElementById("productGrid")){
-    const s = sortByPriorityDesc(products.filter(p => groupOf(p) === "spirits"));
-    renderGrid(s, "productGrid"); injectProductSchema(s, "烈酒商品列表｜酉時喝酒");
+    if(!hydrateStaticGrid("productGrid")){
+      renderGrid(sortByPriorityDesc(products.filter(p => groupOf(p) === "spirits")), "productGrid");
+    }
   }
   if(key === "products-wine" && document.getElementById("productGrid")){
-    const s = sortByPriorityDesc(products.filter(p => groupOf(p) === "wine"));
-    renderGrid(s, "productGrid"); injectProductSchema(s, "葡萄酒商品列表｜酉時喝酒");
+    if(!hydrateStaticGrid("productGrid")){
+      renderGrid(sortByPriorityDesc(products.filter(p => groupOf(p) === "wine")), "productGrid");
+    }
   }
   if(key === "products-mini" && document.getElementById("productGrid")){
-    const s = sortByPriorityDesc(products.filter(p => groupOf(p) === "mini"));
-    renderGrid(s, "productGrid"); injectProductSchema(s, "小罐專區商品列表｜酉時喝酒");
+    if(!hydrateStaticGrid("productGrid")){
+      renderGrid(sortByPriorityDesc(products.filter(p => groupOf(p) === "mini")), "productGrid");
+    }
   }
 
   /* 活動頁 */

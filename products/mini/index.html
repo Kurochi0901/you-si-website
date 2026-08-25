@@ -47,11 +47,9 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<script defer src="/assets/js/products.data.js"></script>
-<script defer src="/assets/js/wineries.data.js"></script>
-<script defer src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
-<script src="/assets/js/announcement_data.js"></script>
+<script defer src="/assets/js/announcement_data.js"></script>
 
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
 <!-- ✅ 階層導覽 Breadcrumb Schema -->
@@ -184,7 +182,7 @@
 </head>
 <body>
 <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
-<div class="announce-bar" id="announceBar" role="marquee" aria-live="polite">
+<div class="announce-bar" id="announceBar" role="status" aria-live="polite">
   <div class="announce-track" id="announceTrack"></div>
 </div>
   <div class="header-wrap">
@@ -209,7 +207,7 @@
 
   <main class="section">
     <header class="cat-hero">
-      <h1 class="cat-hero-title">小罐專區：</h1>
+      <h1 class="cat-hero-title">小罐專區｜小容量入門嚐鮮</h1>
       <p class="cat-hero-lead">
         想試試不同酒款，卻不想一次買大瓶？讓探索變得輕鬆無壓力。不論是新手想 <strong>試飲多款風味</strong>、情侶共享一瓶不浪費、露營野餐的輕量酒款，或是生日、婚禮、企業送禮的 <strong>質感酒禮</strong>，都能在這裡找到合適選擇。
       </p>
@@ -218,7 +216,184 @@
       </p>
     </header>
 
-    <div id="productGrid" class="grid"></div>
+    <div id="productGrid" class="grid">
+      <div class="card" data-id="104">
+        <div class="card-media">
+          <a href="/products/mini/梅侍純釀-紅烏龍梅酒/" aria-label="查看 梅侍純釀 紅烏龍梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/104小梅侍紅烏龍1.webp" alt="梅侍純釀 紅烏龍梅酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/mini/梅侍純釀-紅烏龍梅酒/" class="name">梅侍純釀 紅烏龍梅酒</a>
+          <div class="spec">鮮明的蜜香與茶澀風味，交織梅果酸甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$405</div><div class="price-origin">NT$480</div></div>
+            <button class="btn-add" onclick="addToCart(104)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="111">
+        <div class="card-media">
+          <a href="/products/mini/末廣-微發泡清酒/" aria-label="查看 末廣 微發泡清酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/111末廣微發泡300_1.webp" alt="末廣 微發泡清酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/mini/末廣-微發泡清酒/" class="name">末廣 微發泡清酒</a>
+          <div class="spec">天然微氣泡與清爽酸甜，解膩首選</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$430</div><div class="price-origin">NT$480</div></div>
+            <button class="btn-add" onclick="addToCart(111)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="112">
+        <div class="card-media">
+          <a href="/products/mini/小左衛門-純米-壽司標/" aria-label="查看 小左衛門 純米 壽司標">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/112小左衛門壽司標300_1.webp" alt="小左衛門 純米 壽司標" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/mini/小左衛門-純米-壽司標/" class="name">小左衛門 純米 壽司標</a>
+          <div class="spec">山田錦細緻米香，壽司餐酒不二之選</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$500</div><div class="price-origin">NT$600</div></div>
+            <button class="btn-add" onclick="addToCart(112)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="105">
+        <div class="card-media">
+          <a href="/products/mini/梅侍純釀-東方美人茶梅酒/" aria-label="查看 梅侍純釀 東方美人茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/105小東方美人1.webp" alt="梅侍純釀 東方美人茶梅酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/mini/梅侍純釀-東方美人茶梅酒/" class="name">梅侍純釀 東方美人茶梅酒</a>
+          <div class="spec">蜜香美人茶韻遇上甘潤梅果</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$405</div><div class="price-origin">NT$480</div></div>
+            <button class="btn-add" onclick="addToCart(105)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="106">
+        <div class="card-media">
+          <a href="/products/mini/梅侍純釀-凍頂烏龍茶梅酒/" aria-label="查看 梅侍純釀 凍頂烏龍茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/106小凍頂烏龍1.webp" alt="梅侍純釀 凍頂烏龍茶梅酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/mini/梅侍純釀-凍頂烏龍茶梅酒/" class="name">梅侍純釀 凍頂烏龍茶梅酒</a>
+          <div class="spec">焙香烏龍尾韻醇厚</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$405</div><div class="price-origin">NT$480</div></div>
+            <button class="btn-add" onclick="addToCart(106)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="107">
+        <div class="card-media">
+          <a href="/products/mini/梅侍純釀-紅玉紅茶梅酒/" aria-label="查看 梅侍純釀 紅玉紅茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/107小紅玉紅茶1.webp" alt="梅侍純釀 紅玉紅茶梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/mini/梅侍純釀-紅玉紅茶梅酒/" class="name">梅侍純釀 紅玉紅茶梅酒</a>
+          <div class="spec">紅玉茶香與梅韻圓潤酸甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$375</div><div class="price-origin">NT$435</div></div>
+            <button class="btn-add" onclick="addToCart(107)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="108">
+        <div class="card-media">
+          <a href="/products/mini/梅侍純釀-碧螺春綠茶梅酒/" aria-label="查看 梅侍純釀 碧螺春綠茶梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/108小碧螺春綠1.webp" alt="梅侍純釀 碧螺春綠茶梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/mini/梅侍純釀-碧螺春綠茶梅酒/" class="name">梅侍純釀 碧螺春綠茶梅酒</a>
+          <div class="spec">碧螺春與梅韻交錯清爽甘甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$375</div><div class="price-origin">NT$435</div></div>
+            <button class="btn-add" onclick="addToCart(108)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="109">
+        <div class="card-media">
+          <a href="/products/mini/梅侍純釀-香米梅酒/" aria-label="查看 梅侍純釀 香米梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/109小香米1.webp" alt="梅侍純釀 香米梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/mini/梅侍純釀-香米梅酒/" class="name">梅侍純釀 香米梅酒</a>
+          <div class="spec">台稉米香與梅果交融</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$375</div><div class="price-origin">NT$435</div></div>
+            <button class="btn-add" onclick="addToCart(109)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="110">
+        <div class="card-media">
+          <a href="/products/mini/梅侍純釀-果泥梅酒/" aria-label="查看 梅侍純釀 果泥梅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/110小果泥1.webp" alt="梅侍純釀 果泥梅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/mini/梅侍純釀-果泥梅酒/" class="name">梅侍純釀 果泥梅酒</a>
+          <div class="spec">果泥濃郁，梅香層次豐富</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$360</div><div class="price-origin">NT$420</div></div>
+            <button class="btn-add" onclick="addToCart(110)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="113">
+        <div class="card-media">
+          <a href="/products/mini/安藝虎-純米吟釀-素-發泡生酒/" aria-label="查看 安藝虎 純米吟釀 素 發泡生酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/113安藝虎_素330_1.webp" alt="安藝虎 純米吟釀 素 發泡生酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/mini/安藝虎-純米吟釀-素-發泡生酒/" class="name">安藝虎 純米吟釀 素 發泡生酒</a>
+          <div class="spec">蜜蘋果香與綿密氣泡，如白酒般甘甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$620</div><div class="price-origin">NT$780</div></div>
+            <button class="btn-add" onclick="addToCart(113)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="114">
+        <div class="card-media">
+          <a href="/products/mini/安藝虎-純米大吟釀/" aria-label="查看 安藝虎 純米大吟釀">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/114安藝虎_純米大300_1.webp" alt="安藝虎 純米大吟釀" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/mini/安藝虎-純米大吟釀/" class="name">安藝虎 純米大吟釀</a>
+          <div class="spec">蜜蘋果香與綿密氣泡，如白酒般甘甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$830</div><div class="price-origin">NT$950</div></div>
+            <button class="btn-add" onclick="addToCart(114)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- <section class="cat-faq">
       <h2 class="cat-faq-title">小罐專區常見問題</h2>
@@ -236,25 +411,6 @@
       </details>
     </section> -->
 
-    <!-- SEO_PRODUCT_LIST -->
-    <noscript>
-      <div class="seo-static-list" style="margin-top: 20px; padding: 20px; border: 1px solid #eee;">
-        <h3>小罐專區商品清單</h3>
-        <ul>
-          <li><a href="https://www.yousi-drink.com/products/mini/梅侍純釀-紅烏龍梅酒/">梅侍純釀 紅烏龍梅酒</a> - 鮮明的蜜香與茶澀風味，交織梅果酸甜</li>
-          <li><a href="https://www.yousi-drink.com/products/mini/梅侍純釀-東方美人茶梅酒/">梅侍純釀 東方美人茶梅酒</a> - 蜜香美人茶韻遇上甘潤梅果</li>
-          <li><a href="https://www.yousi-drink.com/products/mini/梅侍純釀-凍頂烏龍茶梅酒/">梅侍純釀 凍頂烏龍茶梅酒</a> - 焙香烏龍尾韻醇厚</li>
-          <li><a href="https://www.yousi-drink.com/products/mini/梅侍純釀-紅玉紅茶梅酒/">梅侍純釀 紅玉紅茶梅酒</a> - 紅玉茶香與梅韻圓潤酸甜</li>
-          <li><a href="https://www.yousi-drink.com/products/mini/梅侍純釀-碧螺春綠茶梅酒/">梅侍純釀 碧螺春綠茶梅酒</a> - 碧螺春與梅韻交錯清爽甘甜</li>
-          <li><a href="https://www.yousi-drink.com/products/mini/梅侍純釀-香米梅酒/">梅侍純釀 香米梅酒</a> - 台稉米香與梅果交融</li>
-          <li><a href="https://www.yousi-drink.com/products/mini/梅侍純釀-果泥梅酒/">梅侍純釀 果泥梅酒</a> - 果泥濃郁，梅香層次豐富</li>
-          <li><a href="https://www.yousi-drink.com/products/mini/末廣-微發泡清酒/">末廣 微發泡清酒</a> - 天然微氣泡與清爽酸甜，解膩首選</li>
-          <li><a href="https://www.yousi-drink.com/products/mini/小左衛門-純米-壽司標/">小左衛門 純米 壽司標</a> - 山田錦細緻米香，壽司餐酒不二之選</li>
-          <li><a href="https://www.yousi-drink.com/products/mini/安藝虎-純米吟釀-素-發泡生酒/">安藝虎 純米吟釀 素 發泡生酒</a> - 蜜蘋果香與綿密氣泡，如白酒般甘甜</li>
-          <li><a href="https://www.yousi-drink.com/products/mini/安藝虎-純米大吟釀/">安藝虎 純米大吟釀</a> - 蜜蘋果香與綿密氣泡，如白酒般甘甜</li>
-        </ul>
-      </div>
-    </noscript>
   </main>
 
   <footer class="footer">
@@ -270,7 +426,7 @@
       <!-- 右側：整組 QR（紅框就是這一塊） -->
       <div class="footer-right">
         <div class="footer-qr">
-          <img class="line-qr-img" alt="加入 LINE">
+          <img class="line-qr-img" src="/assets/images/qr-code_line.png" alt="加入 LINE 官方帳號 QR Code" width="84" height="84" loading="lazy" decoding="async">
           <div class="qr-label">
             Line 
             <span class="qr-sub">會員集點累贈</span>
@@ -278,7 +434,7 @@
         </div>
   
         <div class="footer-qr">
-          <img class="ig-qr-img" alt="Instagram">
+          <img class="ig-qr-img" src="/assets/images/qr-code_IG.png" alt="Instagram yousi1719_drink QR Code" width="84" height="84" loading="lazy" decoding="async">
           <div class="qr-label">Instagram yousi1719_drink</div>
         </div>
       </div>

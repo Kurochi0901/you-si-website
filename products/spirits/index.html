@@ -47,10 +47,9 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<script defer src="/assets/js/products.data.js"></script>
-<script defer src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
-<script src="/assets/js/announcement_data.js"></script>
+<script defer src="/assets/js/announcement_data.js"></script>
 
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
 <!-- ✅ 階層導覽 Breadcrumb Schema -->
@@ -216,7 +215,7 @@
 </head>
 <body>
 <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
-<div class="announce-bar" id="announceBar" role="marquee" aria-live="polite">
+<div class="announce-bar" id="announceBar" role="status" aria-live="polite">
   <div class="announce-track" id="announceTrack"></div>
 </div>
   <div class="header-wrap">
@@ -241,7 +240,7 @@
 
   <main class="section">
     <header class="cat-hero">
-      <h1 class="cat-hero-title">烈酒選品：</h1>
+      <h1 class="cat-hero-title">烈酒選品｜燒酎・威士忌</h1>
       <p class="cat-hero-lead">
         燒酎與威士忌，適合慢下來的時候。推薦給想專心感受酒本身，或喜歡靜靜品飲的人。
       </p>
@@ -250,7 +249,264 @@
       </p>
     </header>
 
-    <div id="productGrid" class="grid"></div>
+    <div id="productGrid" class="grid">
+      <div class="card" data-id="95">
+        <div class="card-media">
+          <a href="/products/spirits/六代目百合-芋燒酎/" aria-label="查看 六代目百合 芋燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/95六代目百合1.webp" alt="六代目百合 芋燒酎" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/spirits/六代目百合-芋燒酎/" class="name">六代目百合 芋燒酎</a>
+          <div class="spec">黑麴無濾過工藝，展現濃郁地瓜香與悠長回甘</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1410</div><div class="price-origin">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(95)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="96">
+        <div class="card-media">
+          <a href="/products/spirits/山櫻威士忌-PRECIOUS/" aria-label="查看 山櫻威士忌 PRECIOUS">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/96山櫻PRECIOUS1.webp" alt="山櫻威士忌 PRECIOUS" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/spirits/山櫻威士忌-PRECIOUS/" class="name">山櫻威士忌 PRECIOUS</a>
+          <div class="spec">雪莉桶熟成，交織煙燻堅果與香草層次風味</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1750</div></div>
+            <button class="btn-add" onclick="addToCart(96)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="121">
+        <div class="card-media">
+          <a href="/products/spirits/渡邊-Infusion-Spirits-Hidama-Green/" aria-label="查看 渡邊 Infusion Spirits Hidama Green">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/121渡邊green1.webp" alt="渡邊 Infusion Spirits Hidama Green" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/spirits/渡邊-Infusion-Spirits-Hidama-Green/" class="name">渡邊 Infusion Spirits Hidama Green</a>
+          <div class="spec">【極限量】大人口味的綠茶，極致搭餐的選擇</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1450</div><div class="price-origin">NT$1650</div></div>
+            <button class="btn-add" onclick="addToCart(121)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="122">
+        <div class="card-media">
+          <a href="/products/spirits/渡邊-夏之萬年-芋燒酎/" aria-label="查看 渡邊 夏之萬年 芋燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/122渡邊夏之萬年1.webp" alt="渡邊 夏之萬年 芋燒酎" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/spirits/渡邊-夏之萬年-芋燒酎/" class="name">渡邊 夏之萬年 芋燒酎</a>
+          <div class="spec">水藍企鵝限定夏燒酎，甘甜冰鎮最暢快</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(122)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="123">
+        <div class="card-media">
+          <a href="/products/spirits/赤鹿毛-麥燒酎-夏日版/" aria-label="查看 赤鹿毛 麥燒酎 夏日版">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/123赤鹿毛_夏日版1.webp" alt="赤鹿毛 麥燒酎 夏日版" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/spirits/赤鹿毛-麥燒酎-夏日版/" class="name">赤鹿毛 麥燒酎 夏日版</a>
+          <div class="spec">天藍晴空限定麥燒酎，感受宮崎縣的夏天</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1060</div></div>
+            <button class="btn-add" onclick="addToCart(123)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="86">
+        <div class="card-media">
+          <a href="/products/spirits/黑木本店-百年孤獨-麥燒酎/" aria-label="查看 黑木本店 百年孤獨 麥燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/86百年孤獨1.webp" alt="黑木本店 百年孤獨 麥燒酎" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/spirits/黑木本店-百年孤獨-麥燒酎/" class="name">黑木本店 百年孤獨 麥燒酎</a>
+          <div class="spec">如威士忌般深邃，麥燒酎界的藝術巔峰</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$3800</div><div class="price-origin">NT$4500</div></div>
+            <button class="btn-add" onclick="addToCart(86)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="87">
+        <div class="card-media">
+          <a href="/products/spirits/黑木本店-中中-麥燒酎/" aria-label="查看 黑木本店 中中 麥燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/87中中_麥燒酎1.webp" alt="黑木本店 中中 麥燒酎" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/spirits/黑木本店-中中-麥燒酎/" class="name">黑木本店 中中 麥燒酎</a>
+          <div class="spec">輕盈與麥香醇厚的完美平衡，經典日常之作</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1180</div><div class="price-origin">NT$1300</div></div>
+            <button class="btn-add" onclick="addToCart(87)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="88">
+        <div class="card-media">
+          <a href="/products/spirits/黑木本店-陶眠中中-麥燒酎/" aria-label="查看 黑木本店 陶眠中中 麥燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/88陶眠中中_麥燒酎1.webp" alt="黑木本店 陶眠中中 麥燒酎" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/spirits/黑木本店-陶眠中中-麥燒酎/" class="name">黑木本店 陶眠中中 麥燒酎</a>
+          <div class="spec">陶甕兩年歲月淬鍊，絲綢般柔順的焦糖麥香</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$2500</div><div class="price-origin">NT$2600</div></div>
+            <button class="btn-add" onclick="addToCart(88)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="89">
+        <div class="card-media">
+          <a href="/products/spirits/黑木本店-陶醉中中-麥燒酎/" aria-label="查看 黑木本店 陶醉中中 麥燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/89陶醉中中_麥燒酎1.webp" alt="黑木本店 陶醉中中 麥燒酎" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/spirits/黑木本店-陶醉中中-麥燒酎/" class="name">黑木本店 陶醉中中 麥燒酎</a>
+          <div class="spec">35度高比例熟成原酒，如威士忌般強韌深邃</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$2050</div><div class="price-origin">NT$2100</div></div>
+            <button class="btn-add" onclick="addToCart(89)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="92">
+        <div class="card-media">
+          <a href="/products/spirits/宮泉-玄武-米燒酎/" aria-label="查看 宮泉 玄武 米燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/92玄武_米燒酎1.webp" alt="宮泉 玄武 米燒酎" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/spirits/宮泉-玄武-米燒酎/" class="name">宮泉 玄武 米燒酎</a>
+          <div class="spec">守護北方的水神之作，吟釀級黃麴釀出的米旨清甜</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1080</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(92)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="93">
+        <div class="card-media">
+          <a href="/products/spirits/宮泉-玄武-麥燒酎/" aria-label="查看 宮泉 玄武 麥燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/93玄武_麥燒酎1.webp" alt="宮泉 玄武 麥燒酎" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/spirits/宮泉-玄武-麥燒酎/" class="name">宮泉 玄武 麥燒酎</a>
+          <div class="spec">麥香甘醇與米旨圓潤的完美揉合</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1080</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(93)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="94">
+        <div class="card-media">
+          <a href="/products/spirits/宮泉-皇貴玄武-清酒燒酎/" aria-label="查看 宮泉 皇貴玄武 清酒燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/94皇貴玄武1.webp" alt="宮泉 皇貴玄武 清酒燒酎" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/spirits/宮泉-皇貴玄武-清酒燒酎/" class="name">宮泉 皇貴玄武 清酒燒酎</a>
+          <div class="spec">40度極致醇厚，清酒工法與長期貯藏交織的高雅韻味。</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$2250</div><div class="price-origin">NT$2550</div></div>
+            <button class="btn-add" onclick="addToCart(94)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="84">
+        <div class="card-media">
+          <a href="/products/spirits/蝴蝶加濃-龍舌蘭-藍鑽/" aria-label="查看 蝴蝶加濃 龍舌蘭 藍鑽">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/84蝴蝶加濃_藍鑽1.webp" alt="蝴蝶加濃 龍舌蘭 藍鑽" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/spirits/蝴蝶加濃-龍舌蘭-藍鑽/" class="name">蝴蝶加濃 龍舌蘭 藍鑽</a>
+          <div class="spec">超現實幻幻藍調，遇酸即變色的感官魔術</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1050</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(84)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="85">
+        <div class="card-media">
+          <a href="/products/spirits/蝴蝶加濃-龍舌蘭-粉鑽/" aria-label="查看 蝴蝶加濃 龍舌蘭 粉鑽">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/85蝴蝶加濃_粉鑽1.webp" alt="蝴蝶加濃 龍舌蘭 粉鑽" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/spirits/蝴蝶加濃-龍舌蘭-粉鑽/" class="name">蝴蝶加濃 龍舌蘭 粉鑽</a>
+          <div class="spec">粉紅浪漫微醺，柚香與龍舌蘭的優雅共舞</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1050</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(85)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="90">
+        <div class="card-media">
+          <a href="/products/spirits/北海道-清里-樽-馬鈴薯燒酎/" aria-label="查看 北海道 清里 樽 馬鈴薯燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/90清里_樽_馬鈴薯1.webp" alt="北海道 清里 樽 馬鈴薯燒酎" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/spirits/北海道-清里-樽-馬鈴薯燒酎/" class="name">北海道 清里 樽 馬鈴薯燒酎</a>
+          <div class="spec">琥珀色的優雅慢時，馬鈴薯甜感與橡木香氣的醇厚交織</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$990</div><div class="price-origin">NT$1080</div></div>
+            <button class="btn-add" onclick="addToCart(90)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="91">
+        <div class="card-media">
+          <a href="/products/spirits/北海道-清里-原酒-馬鈴薯燒酎/" aria-label="查看 北海道 清里 原酒 馬鈴薯燒酎">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/91清里_原酒_馬鈴薯1.webp" alt="北海道 清里 原酒 馬鈴薯燒酎" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/spirits/北海道-清里-原酒-馬鈴薯燒酎/" class="name">北海道 清里 原酒 馬鈴薯燒酎</a>
+          <div class="spec">44度極限原酒，封存大麥與馬鈴薯最純粹的濃郁芳香</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1750</div><div class="price-origin">NT$1880</div></div>
+            <button class="btn-add" onclick="addToCart(91)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- <section class="cat-faq">
       <h2 class="cat-faq-title">烈酒常見問題</h2>
@@ -272,30 +528,6 @@
       </details>
     </section> -->
 
-    <!-- SEO_PRODUCT_LIST -->
-    <noscript>
-      <div class="seo-static-list" style="margin-top: 20px; padding: 20px; border: 1px solid #eee;">
-        <h3>烈酒商品清單</h3>
-        <ul>
-          <li><a href="https://www.yousi-drink.com/products/spirits/蝴蝶加濃-龍舌蘭-藍鑽/">蝴蝶加濃 龍舌蘭 藍鑽</a> - 超現實幻幻藍調，遇酸即變色的感官魔術</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/蝴蝶加濃-龍舌蘭-粉鑽/">蝴蝶加濃 龍舌蘭 粉鑽</a> - 粉紅浪漫微醺，柚香與龍舌蘭的優雅共舞</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/黑木本店-百年孤獨-麥燒酎/">黑木本店 百年孤獨 麥燒酎</a> - 如威士忌般深邃，麥燒酎界的藝術巔峰</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/黑木本店-中中-麥燒酎/">黑木本店 中中 麥燒酎</a> - 輕盈與麥香醇厚的完美平衡，經典日常之作</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/黑木本店-陶眠中中-麥燒酎/">黑木本店 陶眠中中 麥燒酎</a> - 陶甕兩年歲月淬鍊，絲綢般柔順的焦糖麥香</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/黑木本店-陶醉中中-麥燒酎/">黑木本店 陶醉中中 麥燒酎</a> - 35度高比例熟成原酒，如威士忌般強韌深邃</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/北海道-清里-樽-馬鈴薯燒酎/">北海道 清里 樽 馬鈴薯燒酎</a> - 琥珀色的優雅慢時，馬鈴薯甜感與橡木香氣的醇厚交織</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/北海道-清里-原酒-馬鈴薯燒酎/">北海道 清里 原酒 馬鈴薯燒酎</a> - 44度極限原酒，封存大麥與馬鈴薯最純粹的濃郁芳香</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/宮泉-玄武-米燒酎/">宮泉 玄武 米燒酎</a> - 守護北方的水神之作，吟釀級黃麴釀出的米旨清甜</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/宮泉-玄武-麥燒酎/">宮泉 玄武 麥燒酎</a> - 麥香甘醇與米旨圓潤的完美揉合</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/宮泉-皇貴玄武-清酒燒酎/">宮泉 皇貴玄武 清酒燒酎</a> - 40度極致醇厚，清酒工法與長期貯藏交織的高雅韻味。</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/渡邊-Infusion-Spirits-Hidama-Green/">渡邊 Infusion Spirits Hidama Green</a> - 【極限量】大人口味的綠茶，極致搭餐的選擇</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/渡邊-夏之萬年-芋燒酎/">渡邊 夏之萬年 芋燒酎</a> - 水藍企鵝限定夏燒酎，甘甜冰鎮最暢快</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/赤鹿毛-麥燒酎-夏日版/">赤鹿毛 麥燒酎 夏日版</a> - 天藍晴空限定麥燒酎，感受宮崎縣的夏天</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/六代目百合-芋燒酎/">六代目百合 芋燒酎</a> - 黑麴無濾過工藝，展現濃郁地瓜香與悠長回甘</li>
-          <li><a href="https://www.yousi-drink.com/products/spirits/山櫻威士忌-PRECIOUS/">山櫻威士忌 PRECIOUS</a> - 雪莉桶熟成，交織煙燻堅果與香草層次風味</li>
-        </ul>
-      </div>
-    </noscript>
   </main>
 
   <footer class="footer">
@@ -311,7 +543,7 @@
       <!-- 右側：整組 QR（紅框就是這一塊） -->
       <div class="footer-right">
         <div class="footer-qr">
-          <img class="line-qr-img" alt="加入 LINE">
+          <img class="line-qr-img" src="/assets/images/qr-code_line.png" alt="加入 LINE 官方帳號 QR Code" width="84" height="84" loading="lazy" decoding="async">
           <div class="qr-label">
             Line 
             <span class="qr-sub">會員集點累贈</span>
@@ -319,7 +551,7 @@
         </div>
   
         <div class="footer-qr">
-          <img class="ig-qr-img" alt="Instagram">
+          <img class="ig-qr-img" src="/assets/images/qr-code_IG.png" alt="Instagram yousi1719_drink QR Code" width="84" height="84" loading="lazy" decoding="async">
           <div class="qr-label">Instagram yousi1719_drink</div>
         </div>
       </div>

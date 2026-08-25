@@ -48,11 +48,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 
-<script defer src="/assets/js/products.data.js"></script>
-<script defer src="/assets/js/wineries.data.js"></script>
-<script defer src="/assets/js/events.data.js"></script>
+<script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
-<script src="/assets/js/announcement_data.js"></script>
+<script defer src="/assets/js/announcement_data.js"></script>
 
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
 <!-- ✅ 階層導覽 Breadcrumb Schema -->
@@ -290,7 +288,7 @@
 </head>
 <body>
 <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
-<div class="announce-bar" id="announceBar" role="marquee" aria-live="polite">
+<div class="announce-bar" id="announceBar" role="status" aria-live="polite">
   <div class="announce-track" id="announceTrack"></div>
 </div>
   <div class="header-wrap">
@@ -315,7 +313,7 @@
 
   <main class="section">
     <header class="cat-hero">
-      <h1 class="cat-hero-title">葡萄酒選購：</h1>
+      <h1 class="cat-hero-title">葡萄酒選購｜紅酒・白酒・氣泡酒</h1>
       <p class="cat-hero-lead">
         這裡的葡萄酒，以「好搭餐、好分享」為出發點。精選來自日本、西班牙、義大利與德國的葡萄酒
       </p>
@@ -324,7 +322,360 @@
       </p>
     </header>
 
-    <div id="productGrid" class="grid"></div>
+    <div id="productGrid" class="grid">
+      <div class="card" data-id="64">
+        <div class="card-media">
+          <a href="/products/wine/奧野田-La-Florette-粉紅酒/" aria-label="查看 奧野田 La Florette 粉紅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/64奧野田_LaFlorette1.webp" alt="奧野田 La Florette 粉紅酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/wine/奧野田-La-Florette-粉紅酒/" class="name">奧野田 La Florette 粉紅酒</a>
+          <div class="spec">稀有品種，玫瑰荔枝香甜奔放</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1350</div><div class="price-origin">NT$1400</div></div>
+            <button class="btn-add" onclick="addToCart(64)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="97">
+        <div class="card-media">
+          <a href="/products/wine/聖母之乳-金凱勒精選優質白葡萄酒/" aria-label="查看 聖母之乳 金凱勒精選優質白葡萄酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/97聖母之乳1.webp" alt="聖母之乳 金凱勒精選優質白葡萄酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/wine/聖母之乳-金凱勒精選優質白葡萄酒/" class="name">聖母之乳 金凱勒精選優質白葡萄酒</a>
+          <div class="spec">柑橘果香清新爽口，酸甜平衡易飲白酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$540</div></div>
+            <button class="btn-add" onclick="addToCart(97)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="98">
+        <div class="card-media">
+          <a href="/products/wine/巧克力鹿-精選混釀紅葡萄酒/" aria-label="查看 巧克力鹿 精選混釀紅葡萄酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/98巧克力鹿1.webp" alt="巧克力鹿 精選混釀紅葡萄酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/wine/巧克力鹿-精選混釀紅葡萄酒/" class="name">巧克力鹿 精選混釀紅葡萄酒</a>
+          <div class="spec">深色果香濃郁飽滿，圓潤優雅法國紅酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$680</div></div>
+            <button class="btn-add" onclick="addToCart(98)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="99">
+        <div class="card-media">
+          <a href="/products/wine/雙魚-DUO-白葡萄酒/" aria-label="查看 雙魚 DUO 白葡萄酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/99雙魚DUO1.webp" alt="雙魚 DUO 白葡萄酒" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
+          <a href="/products/wine/雙魚-DUO-白葡萄酒/" class="name">雙魚 DUO 白葡萄酒</a>
+          <div class="spec">熱帶果香與柑橘交織，搭餐與否都完美的白酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$750</div></div>
+            <button class="btn-add" onclick="addToCart(99)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="65">
+        <div class="card-media">
+          <a href="/products/wine/奧野田-花水木-甲州白葡萄酒-2024/" aria-label="查看 奧野田 花水木 甲州白葡萄酒 2024">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/65奧野田_花水木1.webp" alt="奧野田 花水木 甲州白葡萄酒 2024" width="400" height="500" loading="eager" decoding="sync" fetchpriority="high">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/wine/奧野田-花水木-甲州白葡萄酒-2024/" class="name">奧野田 花水木 甲州白葡萄酒 2024</a>
+          <div class="spec">如花水木優雅，純淨山梨甲州風味</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1400</div><div class="price-origin">NT$1680</div></div>
+            <button class="btn-add" onclick="addToCart(65)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="66">
+        <div class="card-media">
+          <a href="/products/wine/奧野田-DOLCE-白葡萄酒-2024/" aria-label="查看 奧野田 DOLCE 白葡萄酒 2024">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/66奧野田_DOLCE1.webp" alt="奧野田 DOLCE 白葡萄酒 2024" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/wine/奧野田-DOLCE-白葡萄酒-2024/" class="name">奧野田 DOLCE 白葡萄酒 2024</a>
+          <div class="spec">蜜蘋果般果香，甜美清爽的德拉瓦葡萄酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1100</div><div class="price-origin">NT$1250</div></div>
+            <button class="btn-add" onclick="addToCart(66)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="67">
+        <div class="card-media">
+          <a href="/products/wine/瑪爾維西亞-氣泡甜白酒/" aria-label="查看 瑪爾維西亞 氣泡甜白酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/67瑪爾維西亞_氣泡甜白1.webp" alt="瑪爾維西亞 氣泡甜白酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/wine/瑪爾維西亞-氣泡甜白酒/" class="name">瑪爾維西亞 氣泡甜白酒</a>
+          <div class="spec">百年酒莊經典，蜜香細緻氣泡甜白</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$780</div><div class="price-origin">NT$880</div></div>
+            <button class="btn-add" onclick="addToCart(67)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="77">
+        <div class="card-media">
+          <a href="/products/wine/安娜詠-經選桶陳紅酒/" aria-label="查看 安娜詠 經選桶陳紅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/77安娜詠_經選桶陳1.webp" alt="安娜詠 經選桶陳紅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/wine/安娜詠-經選桶陳紅酒/" class="name">安娜詠 經選桶陳紅酒</a>
+          <div class="spec">老藤混釀醇厚果香，法國老桶香氣層次</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1280</div><div class="price-origin">NT$1350</div></div>
+            <button class="btn-add" onclick="addToCart(77)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="118">
+        <div class="card-media">
+          <a href="/products/wine/美亞老藤-夏多內白葡萄酒-2024/" aria-label="查看 美亞老藤 夏多內白葡萄酒 2024">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/118美亞老藤夏多內1.webp" alt="美亞老藤 夏多內白葡萄酒 2024" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/wine/美亞老藤-夏多內白葡萄酒-2024/" class="name">美亞老藤 夏多內白葡萄酒 2024</a>
+          <div class="spec">智利百大一級酒莊，熱帶果香老藤白酒</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$520</div></div>
+            <button class="btn-add" onclick="addToCart(118)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="119">
+        <div class="card-media">
+          <a href="/products/wine/美亞老藤-卡本內蘇維濃紅葡萄酒-2022/" aria-label="查看 美亞老藤 卡本內蘇維濃紅葡萄酒 2022">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/119美亞老藤卡本內1.webp" alt="美亞老藤 卡本內蘇維濃紅葡萄酒 2022" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/wine/美亞老藤-卡本內蘇維濃紅葡萄酒-2022/" class="name">美亞老藤 卡本內蘇維濃紅葡萄酒 2022</a>
+          <div class="spec">百年老藤純手工釀，濃郁黑莓巧克力</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$520</div></div>
+            <button class="btn-add" onclick="addToCart(119)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="120">
+        <div class="card-media">
+          <a href="/products/wine/美亞老藤-卡蜜尼耶紅葡萄酒-2023/" aria-label="查看 美亞老藤 卡蜜尼耶紅葡萄酒 2023">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/120美亞老藤卡蜜尼耶1.webp" alt="美亞老藤 卡蜜尼耶紅葡萄酒 2023" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"><span class="name-tag name-tag--4">✦ 推薦</span></div>
+          <a href="/products/wine/美亞老藤-卡蜜尼耶紅葡萄酒-2023/" class="name">美亞老藤 卡蜜尼耶紅葡萄酒 2023</a>
+          <div class="spec">珍稀百年老藤，交織煙草與燻烤層次</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$520</div></div>
+            <button class="btn-add" onclick="addToCart(120)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="68">
+        <div class="card-media">
+          <a href="/products/wine/進化系薰衣草-白葡萄酒/" aria-label="查看 進化系薰衣草 白葡萄酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/68進化系薰衣草1.webp" alt="進化系薰衣草 白葡萄酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/進化系薰衣草-白葡萄酒/" class="name">進化系薰衣草 白葡萄酒</a>
+          <div class="spec">最少的人為干預釀造，濃郁香氣奔放</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1150</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(68)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="69">
+        <div class="card-media">
+          <a href="/products/wine/向祖父致敬-經典老Cava氣泡酒/" aria-label="查看 向祖父致敬 經典老Cava氣泡酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/69向祖父致敬_Cava1.webp" alt="向祖父致敬 經典老Cava氣泡酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/向祖父致敬-經典老Cava氣泡酒/" class="name">向祖父致敬 經典老Cava氣泡酒</a>
+          <div class="spec">祖傳黃金比例，36個月瓶陳熟成</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1500</div></div>
+            <button class="btn-add" onclick="addToCart(69)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="70">
+        <div class="card-media">
+          <a href="/products/wine/阿拔迪亞小神父-白葡萄酒/" aria-label="查看 阿拔迪亞小神父 白葡萄酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/70阿拔迪亞小神父1.webp" alt="阿拔迪亞小神父 白葡萄酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/阿拔迪亞小神父-白葡萄酒/" class="name">阿拔迪亞小神父 白葡萄酒</a>
+          <div class="spec">原生酵母發酵，綻放成熟熱帶果香</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$950</div><div class="price-origin">NT$1000</div></div>
+            <button class="btn-add" onclick="addToCart(70)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="71">
+        <div class="card-media">
+          <a href="/products/wine/安提利亞-白葡萄酒/" aria-label="查看 安提利亞 白葡萄酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/71安提利亞_白酒1.webp" alt="安提利亞 白葡萄酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/安提利亞-白葡萄酒/" class="name">安提利亞 白葡萄酒</a>
+          <div class="spec">西西里浪漫・海風氣息與果香交織</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$990</div></div>
+            <button class="btn-add" onclick="addToCart(71)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="72">
+        <div class="card-media">
+          <a href="/products/wine/TOSO-微甜氣泡酒/" aria-label="查看 TOSO 微甜氣泡酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/72TOSO_微甜氣泡酒1.webp" alt="TOSO 微甜氣泡酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/TOSO-微甜氣泡酒/" class="name">TOSO 微甜氣泡酒</a>
+          <div class="spec">細緻珠光微甜氣泡</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$450</div></div>
+            <button class="btn-add" onclick="addToCart(72)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="73">
+        <div class="card-media">
+          <a href="/products/wine/卡本內之父-桶香紅/" aria-label="查看 卡本內之父 桶香紅">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/73卡本內之父_桶香紅1.webp" alt="卡本內之父 桶香紅" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/卡本內之父-桶香紅/" class="name">卡本內之父 桶香紅</a>
+          <div class="spec">多瑙河畔羅馬堡壘，現代優雅風土</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1000</div></div>
+            <button class="btn-add" onclick="addToCart(73)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="74">
+        <div class="card-media">
+          <a href="/products/wine/馬瑟蘭-花果香紅酒/" aria-label="查看 馬瑟蘭 花果香紅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/74馬瑟蘭1.webp" alt="馬瑟蘭 花果香紅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/馬瑟蘭-花果香紅酒/" class="name">馬瑟蘭 花果香紅酒</a>
+          <div class="spec">法桶陳釀石榴紅，莓果與煙燻層次</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1150</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(74)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="75">
+        <div class="card-media">
+          <a href="/products/wine/飛機-手工紅酒/" aria-label="查看 飛機 手工紅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/75飛機_手工紅酒1.webp" alt="飛機 手工紅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/飛機-手工紅酒/" class="name">飛機 手工紅酒</a>
+          <div class="spec">不壓榨釀造，單寧輕盈細緻</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1150</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(75)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="76">
+        <div class="card-media">
+          <a href="/products/wine/酒神-桶陳紅酒/" aria-label="查看 酒神 桶陳紅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/76酒神_桶陳紅酒1.webp" alt="酒神 桶陳紅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/酒神-桶陳紅酒/" class="name">酒神 桶陳紅酒</a>
+          <div class="spec">冰雪與烈日的淬鍊，多汁純淨石榴紅</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$1150</div><div class="price-origin">NT$1200</div></div>
+            <button class="btn-add" onclick="addToCart(76)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="78">
+        <div class="card-media">
+          <a href="/products/wine/我們的經典熱紅酒/" aria-label="查看 我們的經典熱紅酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/78我們的經典熱紅酒1.webp" alt="我們的經典熱紅酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/我們的經典熱紅酒/" class="name">我們的經典熱紅酒</a>
+          <div class="spec">德國傳統工法，歐洲經典聖誕風味</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$550</div><div class="price-origin">NT$600</div></div>
+            <button class="btn-add" onclick="addToCart(78)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-id="79">
+        <div class="card-media">
+          <a href="/products/wine/我們的德國烤蘋果熱酒/" aria-label="查看 我們的德國烤蘋果熱酒">
+            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/79烤蘋果熱酒1.webp" alt="我們的德國烤蘋果熱酒" width="400" height="500" loading="lazy" decoding="async">
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="card-tag-row"></div>
+          <a href="/products/wine/我們的德國烤蘋果熱酒/" class="name">我們的德國烤蘋果熱酒</a>
+          <div class="spec">德國傳統工法，溫潤烤蘋果派香氣</div>
+          <div class="card-meta">
+            <div class="price-wrap"><div class="price-now">NT$550</div><div class="price-origin">NT$600</div></div>
+            <button class="btn-add" onclick="addToCart(79)">加入購物車</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <section class="cat-faq">
       <h2 class="cat-faq-title">葡萄酒常見問題</h2>
@@ -352,36 +703,6 @@
       </details>
     </section>
 
-    <!-- SEO_PRODUCT_LIST -->
-    <noscript>
-      <div class="seo-static-list" style="margin-top: 20px; padding: 20px; border: 1px solid #eee;">
-        <h3>葡萄酒商品清單</h3>
-        <ul>
-          <li><a href="https://www.yousi-drink.com/products/wine/奧野田-La-Florette-粉紅酒/">奧野田 La Florette 粉紅酒</a> - 稀有品種，玫瑰荔枝香甜奔放</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/奧野田-花水木-甲州白葡萄酒-2024/">奧野田 花水木 甲州白葡萄酒 2024</a> - 如花水木優雅，純淨山梨甲州風味</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/奧野田-DOLCE-白葡萄酒-2024/">奧野田 DOLCE 白葡萄酒 2024</a> - 蜜蘋果般果香，甜美清爽的德拉瓦葡萄酒</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/瑪爾維西亞-氣泡甜白酒/">瑪爾維西亞 氣泡甜白酒</a> - 百年酒莊經典，蜜香細緻氣泡甜白</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/進化系薰衣草-白葡萄酒/">進化系薰衣草 白葡萄酒</a> - 最少的人為干預釀造，濃郁香氣奔放</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/向祖父致敬-經典老Cava氣泡酒/">向祖父致敬 經典老Cava氣泡酒</a> - 祖傳黃金比例，36個月瓶陳熟成</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/阿拔迪亞小神父-白葡萄酒/">阿拔迪亞小神父 白葡萄酒</a> - 原生酵母發酵，綻放成熟熱帶果香</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/安提利亞-白葡萄酒/">安提利亞 白葡萄酒</a> - 西西里浪漫・海風氣息與果香交織</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/TOSO-微甜氣泡酒/">TOSO 微甜氣泡酒</a> - 細緻珠光微甜氣泡</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/卡本內之父-桶香紅/">卡本內之父 桶香紅</a> - 多瑙河畔羅馬堡壘，現代優雅風土</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/馬瑟蘭-花果香紅酒/">馬瑟蘭 花果香紅酒</a> - 法桶陳釀石榴紅，莓果與煙燻層次</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/飛機-手工紅酒/">飛機 手工紅酒</a> - 不壓榨釀造，單寧輕盈細緻</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/酒神-桶陳紅酒/">酒神 桶陳紅酒</a> - 冰雪與烈日的淬鍊，多汁純淨石榴紅</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/安娜詠-經選桶陳紅酒/">安娜詠 經選桶陳紅酒</a> - 老藤混釀醇厚果香，法國老桶香氣層次</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/我們的經典熱紅酒/">我們的經典熱紅酒</a> - 德國傳統工法，歐洲經典聖誕風味</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/我們的德國烤蘋果熱酒/">我們的德國烤蘋果熱酒</a> - 德國傳統工法，溫潤烤蘋果派香氣</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/美亞老藤-夏多內白葡萄酒-2024/">美亞老藤 夏多內白葡萄酒 2024</a> - 智利百大一級酒莊，熱帶果香老藤白酒</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/美亞老藤-卡本內蘇維濃紅葡萄酒-2022/">美亞老藤 卡本內蘇維濃紅葡萄酒 2022</a> - 百年老藤純手工釀，濃郁黑莓巧克力</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/美亞老藤-卡蜜尼耶紅葡萄酒-2023/">美亞老藤 卡蜜尼耶紅葡萄酒 2023</a> - 珍稀百年老藤，交織煙草與燻烤層次</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/聖母之乳-金凱勒精選優質白葡萄酒/">聖母之乳 金凱勒精選優質白葡萄酒</a> - 柑橘果香清新爽口，酸甜平衡易飲白酒</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/巧克力鹿-精選混釀紅葡萄酒/">巧克力鹿 精選混釀紅葡萄酒</a> - 深色果香濃郁飽滿，圓潤優雅法國紅酒</li>
-          <li><a href="https://www.yousi-drink.com/products/wine/雙魚-DUO-白葡萄酒/">雙魚 DUO 白葡萄酒</a> - 熱帶果香與柑橘交織，搭餐與否都完美的白酒</li>
-        </ul>
-      </div>
-    </noscript>
   </main>
 
 <footer class="footer">
@@ -397,7 +718,7 @@
     <!-- 右側：整組 QR -->
     <div class="footer-right">
       <div class="footer-qr">
-        <img class="line-qr-img" alt="加入 LINE">
+        <img class="line-qr-img" src="/assets/images/qr-code_line.png" alt="加入 LINE 官方帳號 QR Code" width="84" height="84" loading="lazy" decoding="async">
         <div class="qr-label">
           Line 
           <span class="qr-sub">會員集點累贈</span>
@@ -405,7 +726,7 @@
       </div>
 
       <div class="footer-qr">
-        <img class="ig-qr-img" alt="Instagram">
+        <img class="ig-qr-img" src="/assets/images/qr-code_IG.png" alt="Instagram yousi1719_drink QR Code" width="84" height="84" loading="lazy" decoding="async">
         <div class="qr-label">Instagram yousi1719_drink</div>
       </div>
     </div>
