@@ -1252,6 +1252,7 @@ const products = [
     },
     wineryId: "hagino"
     },
+/* ── 已下架 2026-09-02（保留資料，恢復上架時取消註解即可）──
 {
       id: 34,
       priority: 4,
@@ -1291,6 +1292,7 @@ const products = [
     },
     wineryId: "hagino"
     },
+*/
 {
       id: 35,
       priority: 3,
@@ -4491,6 +4493,7 @@ const products = [
     wineryId: "hagino"
     },
 */
+/* ── 已下架 2026-09-02（保留資料，恢復上架時取消註解即可）──
 {
       id: 116,
       priority: 4, 
@@ -4536,6 +4539,7 @@ const products = [
 
     wineryId: "koueigiku" 
     },
+*/
 {
       id: 117,
       priority: 4, 
@@ -4927,6 +4931,7 @@ const products = [
 
     wineryId: "hayasihonten"
     },
+/* ── 已下架 2026-09-02（保留資料，恢復上架時取消註解即可）──
 {
       id: 125,
       priority: 5, 
@@ -4973,6 +4978,8 @@ const products = [
 
     wineryId: "arimitsu" 
     },
+*/
+/* ── 已下架 2026-09-02（保留資料，恢復上架時取消註解即可）──
 {
       id: 126,
       priority: 5, 
@@ -5020,6 +5027,7 @@ const products = [
 
     wineryId: "mitobe" 
     },
+*/
     {
       id: 127,
       priority: 5, 
@@ -5318,6 +5326,7 @@ const products = [
 
     wineryId: "lgi-wines" 
     },
+/* ── 已下架 2026-09-02（保留資料，恢復上架時取消註解即可）──
 {
       id: 100,
       priority: 5, 
@@ -5364,6 +5373,7 @@ const products = [
 
     wineryId: "hayasihonten" 
     },
+*/
 {
       id: 101,
       priority: 5, 

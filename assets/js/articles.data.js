@@ -69,7 +69,7 @@ const articles = [
     author: "酉時喝酒",
     mainTags: ["酉時圖書館"],
     subTags: ["日本酒"],
-    relatedProductIds: [32, 124, 44, 125, 37]
+    relatedProductIds: [32, 124, 44, 111, 37]
   },
 
 ];
