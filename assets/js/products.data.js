@@ -5516,6 +5516,236 @@ const products = [
     
 
     wineryId: "nichinichi" 
+    },
+    {
+      id: 128,
+      priority: 5, 
+      name: "本坊酒造 上等柚子梅酒",
+      type: "果實酒", 
+      category: "fruit-tea", 
+    imgs: [`${CDN}/128柚子梅酒1.webp`,
+      `${CDN}/128柚子梅酒2.webp`
+    ], 
+
+    price: 800, 
+    originPrice: 1100,
+
+    spec: "梅香清雅柚香明亮，酸甜平衡爽口不刺激", 
+
+    note: {
+      oneLine: `嚴選金黃飽滿柚子榨取新鮮果汁，與本坊酒造所釀製的上等梅酒調和，交織出清新雅緻的果實風味。
+	開瓶即散發明亮細緻的柑橘香氣，入口先感受梅酒柔和的甜香，隨後柚子的清爽酸度展開，酸甜比例恰到好處。梅子香氣相對突出，柚子則增添明快清新的層次，尾韻爽淨不膩。
+	整體風味輕盈順口，特別適合喜愛柚子梅酒、卻不偏好過度酸感的飲者。
+
+	原料：梅果實、柚子果汁、釀造酒精、糖類、蜂蜜`, 
+    },
+
+    info: {
+      brand: "本坊", 
+      origin: "日本", 
+      rice: null, 
+      yeast: null, 
+      variety: null,
+      polish: null,
+      alcohol: "10%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: 3, 
+        ftFreshRich: 2,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hombo"
+    },
+    {
+      id: 129,
+      priority: 5, 
+      name: "鳳凰美田 試驗釀造 千本錦 本生",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/129鳳凰美田_試驗釀造1.webp`,
+      `${CDN}/129鳳凰美田_試驗釀造2.webp`
+    ], 
+
+    price: 1850, 
+    originPrice: 1980,
+
+    spec: "華麗果香交織豐潤旨味，甜酸明亮柔和收尾", 
+
+    note: {
+      oneLine: `鳳凰美田首次以廣島縣契約農家栽培的「千本錦」釀造的限量試驗之作。
+	開瓶散發華麗馥郁的果香，入口滑順柔和，豐潤旨味與圓潤質地交織，展現飽滿而細緻的甜感。隨後浮現明亮的莓果系酸度，為整體風味增添層次與俐落感。尾韻柔順清爽，香氣與味道乾淨收束。
+	作為鳳凰美田的試驗釀造作品，生產數量極少，是是融合探索精神與細膩釀造工藝的限定珍品。`, 
+    },
+
+    info: {
+      brand: "小林・鳳凰美田", 
+      origin: "日本", 
+      rice: "廣島縣 千本錦", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "55%",
+      alcohol: "16%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 5,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "kobayashi"
+    },
+    {
+      id: 130,
+      priority: 5, 
+      name: "鳳凰美田 純米吟釀 龜之尾",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/130鳳凰美田_龜之尾1.webp`,
+      `${CDN}/130鳳凰美田_龜之尾2.webp`
+    ], 
+
+    price: 2200, 
+    originPrice: 2350,
+
+    spec: "馥郁香氣令人著迷，風味豐醇深邃的佳品", 
+
+    note: {
+      oneLine: `鳳凰美田選用山形縣高畠町產稀有酒米「龜之尾」，開瓶散發華麗馥郁的果香，入口柔和滑順，洋梨般清甜多汁的風味逐漸展開，並交織豐厚旨味與細緻酸度，呈現飽滿而富有層次的口感。
+	龜之尾獨有的風味為整體增添鮮明個性，濃郁甜美卻不顯厚重，尾韻柔和圓潤後轉為清爽。兼具華麗香氣與深邃風味。稍微用手掌包覆溫熱酒杯，空氣中瀰漫高揚芬芳，陶醉在春季的鳳凰美田那悠然浪漫的氛圍之中，是格外令人印象深刻的限定作品。`, 
+    },
+
+    info: {
+      brand: "小林・鳳凰美田", 
+      origin: "日本", 
+      rice: "山形縣 龜之尾", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "55%",
+      alcohol: "17%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 4, 
+        sakeUmamiFruity: 5,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "kobayashi"
+    },
+    {
+      id: 131,
+      priority: 5, 
+      name: "山形正宗 謎米",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/131山形正宗謎米1.webp`,
+      `${CDN}/131山形正宗謎米2.webp`
+    ], 
+
+    price: 1790, 
+    originPrice: 1850,
+
+    spec: "四年育成謎米初登場，90%精米展現原生個性", 
+
+    note: {
+      oneLine: `水戸部酒造自2022年啟動自家酒米育種計畫，歷經四年培育，首次以100%尚未命名的自家培育酒米完成試驗釀造。為完整保留米種原有個性，本款特意採用90%精米步合，讓米本身的特質得以充分展現。
+	香氣辛香而富層次，風味鮮明且個性突出，適合搭配亞洲辛辣料理，在酒款與料理之間享受「個性對個性」的風味碰撞。作為四年育種成果首次亮相的限量試驗作品，亦是探索未來酒米可能性的珍稀一作。`, 
+    },
+
+    info: {
+      brand: "水戶部・山形正宗", 
+      origin: "日本", 
+      rice: "自社農園 水戸部稲造 謎米", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "90%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 2, 
+        sakeUmamiFruity: 3,
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "mitobe"
+    },
+    {
+      id: 132,
+      priority: 5, 
+      name: "初龜 純米吟釀 300ml",
+      type: "小罐專區", 
+      category: "mini", 
+    imgs: [`${CDN}/132初龜純米吟釀300_1.webp`,
+      `${CDN}/132初龜純米吟釀300_2.webp`
+    ], 
+
+    price: 550, 
+    originPrice: 600,
+
+    spec: "優雅吟香輕盈滑順，冷熱皆宜", 
+
+    note: {
+      oneLine: `選用100%靜岡縣產酒米「令和譽富士」釀造，以300ml小容量設計，輕鬆享受初龜經典的純米吟釀風格。
+	開瓶散發優雅舒適的吟釀香氣，入口輕盈滑順，風味細膩柔和，展現清爽而平衡的層次。搭配當季鮮魚、壽司，或肉類、海鮮與蔬菜燒烤皆相得益彰。
+	冷藏飲用能感受清新細緻的風味，溫熱後則呈現不同的香氣與旨味變化。一瓶多種飲法，適合日常品飲與餐桌搭配。`, 
+    },
+
+    info: {
+      brand: "初龜", 
+      origin: "日本", 
+      rice: "令和譽富士", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "60%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 2, 
+        sakeUmamiFruity: 3,
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hatsukame"
     }
 ]
 if (typeof window !== 'undefined') { window.products = products; }

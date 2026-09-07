@@ -2,15 +2,17 @@
    PROMOTIONS DATA（指定商品 ID 組合促銷版）
 
    新增促銷只需複製一個 block，修改：
-   - id          → 唯一識別碼（自訂字串）
-   - label       → 顯示在購物車的文字
-   - description → 說明文字
-   - targetIds   → 參與此促銷的商品 id 白名單（陣列）
-   - minQty      → 白名單商品加總需達到幾件才觸發
-   - discount    → 折扣率，例如 0.05 = 95折（折抵 5%）
-   - startAt     → 活動開始日 "YYYY-MM-DD"（留空 = 無起始限制）
-   - endAt       → 活動結束日 "YYYY-MM-DD"（留空 = 不會結束）
-   - display     → 是否要在 /offers/ 頁面顯示為活動卡片
+   - id           → 唯一識別碼（自訂字串）
+   - label        → 顯示在購物車的文字
+   - description  → 說明文字
+   - targetIds    → 參與此促銷的商品 id 白名單（陣列）
+   - minQty       → 白名單商品加總需達到幾件才觸發
+   - discount     → 折扣率，例如 0.05 = 95折（折抵 5%）
+   - stepAmount   → 滿額折抵級距：白名單商品小計每滿多少元（選填）
+   - stepDiscount → 滿額折抵金額：每達一個級距折多少元（選填）
+   - startAt      → 活動開始日 "YYYY-MM-DD"（留空 = 無起始限制）
+   - endAt        → 活動結束日 "YYYY-MM-DD"（留空 = 不會結束）
+   - display      → 是否要在 /offers/ 頁面顯示為活動卡片
 
    🖼 Banner 兩種尺寸：
    display.bannerImage       = 桌機版（1920 寬）
@@ -25,6 +27,20 @@
    apply(ctx) 計算邏輯：
    只計算「在白名單內的商品」的小計，再乘以折扣率
    回傳「折抵金額」（正整數）
+
+   💰 滿額折抵（stepAmount / stepDiscount）：
+   在 apply(ctx) 內以 Math.floor(白名單小計 / stepAmount) * stepDiscount 計算，
+   可與同一個 block 的折扣率「累計」（例：95 折 ＋ 每滿 1500 折 100）。
+   基準一律是「白名單商品的原價小計」——不含非活動商品，也不用折後價再折。
+   不想設上限就不用寫上限；要設上限請在 apply() 內自行 Math.min()。
+
+   🛒 加購提示 hint（加入購物車時的引導 toast，見 main.js getNextPromotionHint）：
+   hint.minQty        → 件數型：「再買 N 件可享…」
+   hint.kind:"amount" → 金額型：「活動酒款再買 NT$X，可多折 NT$Y」
+                        級距直接讀本 block 的 stepAmount / stepDiscount
+   hint.nudgeWithin   → 金額型專用：差額 ≤ 此值才提示（預設 = stepAmount），
+                        避免出現「再買 NT$1,500」這種無感提示
+   ⚠️ 件數型優先；且客人身上有折扣碼時金額型不提示（折扣碼與活動擇優，提示可能不成立）
 
    ⏰ 日期自動結束：
    只要 condition(ctx) 開頭呼叫 isPromoActive(this)，
@@ -191,44 +207,102 @@ export const PROMOTIONS = [
   },
 
   /* =============================
-     酉時之約：醉美圓月迎中秋
-     指定酒款 95 折（無件數門檻，購物車出現任一款即生效）
+     ⛔ 已結束封存：酉時之約：醉美圓月迎中秋（中秋前哨，2026/08/07–08/31）
+     指定酒款 95 折（無件數門檻）— 已由下方「中秋團圓慶」正式檔接手
+  ============================= */
+  // {
+  //   id: "mid-autumn-2026-95",
+  //   type: "combo-ids",
+  //   stackable: false, // 與其他不可疊加優惠擇優
+
+  //   label: "酉時之約：醉美圓月迎中秋 — 指定酒款 95 折",
+  //   description: "指定酒款不限件數，該活動商品小計享 95 折",
+
+  //   targetIds: [
+  //     5, 6, 7, 10, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23, 32,
+  //     35, 36, 39, 40, 44, 45, 67, 71, 97, 98, 99, 122, 123, 127
+  //     // ⚠️ id 39（鳳凰美田 冷卸 山田錦）目前在 products.data.js 內被註解下架，
+  //     //    活動頁與購物車暫時不會帶到；商品重新上架後會自動加入本活動。
+  //   ],
+
+  //   // ✏️ 活動期間 "YYYY-MM-DD"（留空字串=無限制；endAt 過了會自動失效）
+  //   startAt: "2026-08-07",
+  //   endAt:   "2026-08-31",
+
+  //   display: {
+  //     showOnOffersPage: true,
+  //     title: "🌕 中秋前哨：醉美圓月迎中秋",
+  //     summary: "月圓人團圓，精選梅酒、果實酒、清酒與葡萄酒，不限件數即享 95 折，佐一桌烤肉與柚香。",
+  //     bannerImage:       "/assets/images/home/8月中秋前哨1920.webp?v=2",
+  //     bannerImageMobile: "/assets/images/home/8月中秋前哨750.webp?v=2",
+  //     bannerLink: "",
+
+  //     cardBadge: "🌕中秋95折",
+  //     cardBadgeDetail: "指定酒款不限件數，活動商品小計享 95 折。活動至 2026/08/31 止。"
+  //   },
+
+  //   // 無件數門檻 → 不需要 hint（hint 是用來提示「再買 N 件就享優惠」）
+
+  //   condition(ctx) {
+  //     if (!isPromoActive(this)) return false;  // ⏰ 活動期間外自動失效
+  //     return ctx.items.some(p => this.targetIds.includes(p.id));
+  //   },
+
+  //   apply(ctx) {
+  //     const sub = ctx.items
+  //       .filter(p => this.targetIds.includes(p.id))
+  //       .reduce((s, p) => s + p.price * p.qty, 0);
+  //     return Math.round(sub * 0.05); // 95折 = 折抵 5%
+  //   }
+  // },
+
+  /* =============================
+     酉時之約：中秋團圓慶（2026 正式檔）
+     指定酒款 95 折（無件數門檻）＋ 活動酒款小計每滿 1500 再折 100，兩項累計
      ✏️  要調整哪幾瓶參與，改 targetIds 即可
+     ✏️  要調整滿額級距，改 stepAmount / stepDiscount（目前不設上限）
      ✏️  要設定活動期間，改 startAt / endAt（到期會自動失效）
      ✏️  要關閉活動，把整個 block 註解掉即可
   ============================= */
   {
-    id: "mid-autumn-2026-95",
+    id: "mid-autumn-2026-festival",
     type: "combo-ids",
-    stackable: false, // 與其他不可疊加優惠擇優
+    stackable: false, // 與全站折扣碼、貓咪系列擇優，不疊加
 
-    label: "酉時之約：醉美圓月迎中秋 — 指定酒款 95 折",
-    description: "指定酒款不限件數，該活動商品小計享 95 折",
+    label: "酉時之約：中秋團圓慶 — 指定酒款 95 折＋滿額折抵",
+    description: "指定酒款不限件數享 95 折；活動酒款小計每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推），兩項優惠可累計",
 
+    // 中秋前哨的 29 款 ＋ 新增 128 柚子梅酒、130 龜之尾（banner 主視覺酒款），共 31 款
     targetIds: [
       5, 6, 7, 10, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23, 32,
-      35, 36, 39, 40, 44, 45, 67, 71, 97, 98, 99, 122, 123, 127
-      // ⚠️ id 39（鳳凰美田 冷卸 山田錦）目前在 products.data.js 內被註解下架，
-      //    活動頁與購物車暫時不會帶到；商品重新上架後會自動加入本活動。
+      35, 36, 39, 40, 44, 45, 67, 71, 97, 98, 99, 122, 123, 127,
+      128, 130
     ],
 
     // ✏️ 活動期間 "YYYY-MM-DD"（留空字串=無限制；endAt 過了會自動失效）
-    startAt: "2026-08-07",
-    endAt:   "2026-08-31",
+    startAt: "2026-09-07",
+    endAt:   "2026-10-31",
+
+    // ✏️ 滿額折抵級距：活動酒款小計每滿 stepAmount 元，折 stepDiscount 元（不設上限）
+    stepAmount:   1500,
+    stepDiscount: 100,
 
     display: {
       showOnOffersPage: true,
-      title: "🌕 中秋前哨：醉美圓月迎中秋",
-      summary: "月圓人團圓，精選梅酒、果實酒、清酒與葡萄酒，不限件數即享 95 折，佐一桌烤肉與柚香。",
-      bannerImage:       "/assets/images/home/8月中秋前哨1920.webp?v=2",
-      bannerImageMobile: "/assets/images/home/8月中秋前哨750.webp?v=2",
+      title: "🌕 中秋團圓慶：兩瓶，才完整",
+      summary: "月圓人團圓。精選梅酒、果實酒、清酒與葡萄酒，指定酒款不限件數即享 95 折；活動酒款小計每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推），兩項優惠可累計。活動至 2026/10/31 止。",
+      bannerImage:       "/assets/images/home/9月中秋慶1920.webp",
+      bannerImageMobile: "/assets/images/home/9月中秋慶750.webp",
       bannerLink: "",
 
-      cardBadge: "🌕中秋95折",
-      cardBadgeDetail: "指定酒款不限件數，活動商品小計享 95 折。活動至 2026/08/31 止。"
+      cardBadge: "🌕中秋95折＋滿額折",
+      cardBadgeDetail: "指定酒款不限件數享 95 折；活動酒款小計每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推），兩項可累計。活動至 2026/10/31 止。"
     },
 
-    // 無件數門檻 → 不需要 hint（hint 是用來提示「再買 N 件就享優惠」）
+    hint: {
+      kind: "amount",     // 金額型加購提示（級距讀上方 stepAmount / stepDiscount）
+      nudgeWithin: 1000   // 差額 ≤ 1000 才提示，避免「再買 NT$1,500」這種無感提示
+    },
 
     condition(ctx) {
       if (!isPromoActive(this)) return false;  // ⏰ 活動期間外自動失效
@@ -236,10 +310,14 @@ export const PROMOTIONS = [
     },
 
     apply(ctx) {
+      // 折扣基準：只算白名單商品的「原價小計」（不含非活動商品，也不用折後價再折）
       const sub = ctx.items
         .filter(p => this.targetIds.includes(p.id))
         .reduce((s, p) => s + p.price * p.qty, 0);
-      return Math.round(sub * 0.05); // 95折 = 折抵 5%
+
+      const rateOff = Math.round(sub * 0.05);                                // 95 折
+      const stepOff = Math.floor(sub / this.stepAmount) * this.stepDiscount; // 每滿 1500 折 100
+      return rateOff + stepOff;                                              // 兩項累計
     }
   },
 

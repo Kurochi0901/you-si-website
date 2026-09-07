@@ -792,7 +792,7 @@ function addToCart(id){
   // 傳入剛加入的商品 id，只對「該商品屬於促銷白名單」的促銷顯示 toast
   const totalQty  = cart.reduce((s, x) => s + (x.qty || 0), 0);
   const nextPromo = getNextPromotionHint(totalQty, id);
-  if(nextPromo) showPromoToast(`再買 ${nextPromo.need} 件可享 ${nextPromo.text}`);
+  if(nextPromo) showPromoToast(nextPromo.msg || `再買 ${nextPromo.need} 件可享 ${nextPromo.text}`);
 }
 
 /** 從購物車移除指定商品 */
@@ -1329,9 +1329,10 @@ function renderHomePromotion(){
 }
 
 /**
- * 計算距離下一個數量折扣還差幾件
+ * 計算距離下一個折扣還差幾件（件數型）或還差多少金額（金額型）
  * 供加入購物車時的引導 toast 使用
- * @returns {{ need: number, text: string } | null}
+ * 金額型會自帶 msg（完整訊息），件數型只回 need / text 由呼叫端組訊息
+ * @returns {{ need: number, text: string, msg?: string } | null}
  */
 function getNextPromotionHint(cartQty, addedId){
   if(!window.PROMOTIONS || !Array.isArray(PROMOTIONS)) return null;
@@ -1359,6 +1360,38 @@ function getNextPromotionHint(cartQty, addedId){
     const need = p.hint.minQty - currentQty;
     if(need > 0) return { need, text: p.label };
   }
+
+  /* ── 金額型提示（hint.kind === "amount"）：「再買 NT$X，可多折 NT$Y」──
+     基準與 promo 的 apply() 一致：只算白名單商品的「原價小計」。
+     上方件數型提示優先 —— 兩者都成立時只會發出件數型那一則。
+     ⚠️ 客人身上有折扣碼時一律不提示：折扣碼與活動是擇優（stackable:false），
+        此時「再買 X 元多折 100」不一定成立，寧可不提示也不要誤導。 */
+  if(typeof getActiveCouponPromotions === "function" && getActiveCouponPromotions().length) return null;
+
+  const amountPromos = PROMOTIONS.filter(p =>
+    isPromoLive(p) && p.hint && p.hint.kind === "amount" &&
+    Array.isArray(p.targetIds) &&
+    Number(p.stepAmount) > 0 && Number(p.stepDiscount) > 0
+  );
+
+  for(const p of amountPromos){
+    // 與 combo-ids 一致：剛加入的商品不在白名單內就不提示
+    if(addedId !== undefined && !p.targetIds.includes(addedId)) continue;
+
+    // 白名單商品的原價小計（下架品已由 readCart 濾掉；price 缺值當 0）
+    const sub = cart
+      .filter(item => p.targetIds.includes(item.id))
+      .reduce((s, item) => s + (Number(item.price) || 0) * (Number(item.qty) || 0), 0);
+    if(!Number.isFinite(sub) || sub <= 0) continue;   // 注意 NaN <= 0 為 false，需 isFinite 擋
+
+    const step   = Number(p.stepAmount);
+    const need   = step - (sub % step);               // 正好落在級距上 → need === step（指向下一級）
+    const within = Number(p.hint.nudgeWithin) || step;
+    if(!(need > 0) || need > within) continue;        // 差太多就不提示，避免無感提示
+
+    return { need, text: p.label, msg: `活動酒款再買 NT$${need}，可多折 NT$${Number(p.stepDiscount)}` };
+  }
+
   return null;
 }
 
