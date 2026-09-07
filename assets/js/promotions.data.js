@@ -94,8 +94,8 @@ export const PROMOTIONS = [
       showOnOffersPage: true,
       title: "🍶 酉時之約：夏日祭典前哨站",
       summary: "夏日將至，從清酒到葡萄酒精選 11 款解暑酒款，任選 2 件即享 92 折優惠。",
-      bannerImage:       "/assets/images/home/夏日活動1920.webp",  // 桌機版（1920 寬）
-      bannerImageMobile: "/assets/images/home/夏日活動750.webp",   // 手機版（750 寬，≤640px 時自動切換；留空=手機也用桌機版）
+      bannerImage:       "/assets/images/home/夏日活動1920.webp?v=2",  // 桌機版（1920 寬）
+      bannerImageMobile: "/assets/images/home/夏日活動750.webp?v=2",   // 手機版（750 寬，≤640px 時自動切換；留空=手機也用桌機版）
       bannerLink: "",  // 點 banner 跳轉的網址；留空=不可點
 
       // ✏️ 商品卡活動徽章：cardBadge = 卡片上的短標籤（留空/刪除 = 不顯示徽章）
@@ -149,8 +149,8 @@ export const PROMOTIONS = [
       showOnOffersPage: true,
       title: "🐱 慵懶貓咪系列 任 2 件 NT$2,600",
       summary: "萩之鶴櫻花貓・暖桌貓，任選 2 件 NT$2,600。季節限定：萩之鶴生原酒春櫻、冬暖雙貓，季季果香微甜。",
-      bannerImage:       "/assets/images/home/貓咪系列1920.webp",
-      bannerImageMobile: "/assets/images/home/貓咪系列750.webp",
+      bannerImage:       "/assets/images/home/貓咪系列1920.webp?v=2",
+      bannerImageMobile: "/assets/images/home/貓咪系列750.webp?v=2",
       bannerLink: "",
 
       // ✏️ 商品卡活動徽章：cardBadge = 卡片上的短標籤（留空/刪除 = 不顯示徽章）
@@ -220,12 +220,12 @@ export const PROMOTIONS = [
       showOnOffersPage: true,
       title: "🌕 中秋前哨：醉美圓月迎中秋",
       summary: "月圓人團圓，精選梅酒、果實酒、清酒與葡萄酒，不限件數即享 95 折，佐一桌烤肉與柚香。",
-      bannerImage:       "/assets/images/home/8月中秋前哨1920.webp",
-      bannerImageMobile: "/assets/images/home/8月中秋前哨750.webp",
+      bannerImage:       "/assets/images/home/8月中秋前哨1920.webp?v=2",
+      bannerImageMobile: "/assets/images/home/8月中秋前哨750.webp?v=2",
       bannerLink: "",
 
       cardBadge: "🌕中秋95折",
-      cardBadgeDetail: "指定酒款不限件數，活動商品小計享 95 折。活動至 2026/09/30 止。"
+      cardBadgeDetail: "指定酒款不限件數，活動商品小計享 95 折。活動至 2026/08/31 止。"
     },
 
     // 無件數門檻 → 不需要 hint（hint 是用來提示「再買 N 件就享優惠」）
