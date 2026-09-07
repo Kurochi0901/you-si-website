@@ -295,7 +295,7 @@ export const PROMOTIONS = [
       bannerImageMobile: "/assets/images/home/9月中秋慶750.webp",
       bannerLink: "",
 
-      cardBadge: "🌕中秋95折＋滿額折",
+      cardBadge: "🌕中秋95折",
       cardBadgeDetail: "指定酒款不限件數享 95 折；活動酒款小計每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推），兩項可累計。活動至 2026/10/31 止。"
     },
 
