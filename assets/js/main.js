@@ -1362,7 +1362,9 @@ function getNextPromotionHint(cartQty, addedId){
   }
 
   /* ── 金額型提示（hint.kind === "amount"）：「再買 NT$X，可多折 NT$Y」──
-     基準與 promo 的 apply() 一致：只算白名單商品的「原價小計」。
+     基準與 promo 的 apply() 一致，跟著該 promo 的 stepScope 走：
+       stepScope:"all"  → 全館原價小計（加任何商品都會推進級距）
+       未填 / "target"  → 只算白名單商品的原價小計
      上方件數型提示優先 —— 兩者都成立時只會發出件數型那一則。
      ⚠️ 客人身上有折扣碼時一律不提示：折扣碼與活動是擇優（stackable:false），
         此時「再買 X 元多折 100」不一定成立，寧可不提示也不要誤導。 */
@@ -1370,18 +1372,22 @@ function getNextPromotionHint(cartQty, addedId){
 
   const amountPromos = PROMOTIONS.filter(p =>
     isPromoLive(p) && p.hint && p.hint.kind === "amount" &&
-    Array.isArray(p.targetIds) &&
+    (p.stepScope === "all" || Array.isArray(p.targetIds)) &&
     Number(p.stepAmount) > 0 && Number(p.stepDiscount) > 0
   );
 
   for(const p of amountPromos){
-    // 與 combo-ids 一致：剛加入的商品不在白名單內就不提示
-    if(addedId !== undefined && !p.targetIds.includes(addedId)) continue;
+    const allScope = p.stepScope === "all";   // 全館型：不受白名單限制
 
-    // 白名單商品的原價小計（下架品已由 readCart 濾掉；price 缺值當 0）
-    const sub = cart
-      .filter(item => p.targetIds.includes(item.id))
-      .reduce((s, item) => s + (Number(item.price) || 0) * (Number(item.qty) || 0), 0);
+    // 只算白名單時，與 combo-ids 一致：剛加入的商品不在白名單內就不提示
+    if(!allScope && addedId !== undefined && !p.targetIds.includes(addedId)) continue;
+
+    // 基準原價小計（下架品已由 readCart 濾掉；price 缺值當 0）
+    const sub = allScope
+      ? cartTotal()
+      : cart
+          .filter(item => p.targetIds.includes(item.id))
+          .reduce((s, item) => s + (Number(item.price) || 0) * (Number(item.qty) || 0), 0);
     if(!Number.isFinite(sub) || sub <= 0) continue;   // 注意 NaN <= 0 為 false，需 isFinite 擋
 
     const step   = Number(p.stepAmount);
@@ -1389,7 +1395,8 @@ function getNextPromotionHint(cartQty, addedId){
     const within = Number(p.hint.nudgeWithin) || step;
     if(!(need > 0) || need > within) continue;        // 差太多就不提示，避免無感提示
 
-    return { need, text: p.label, msg: `活動酒款再買 NT$${need}，可多折 NT$${Number(p.stepDiscount)}` };
+    const prefix = allScope ? "再買" : "活動酒款再買";
+    return { need, text: p.label, msg: `${prefix} NT$${need}，可多折 NT$${Number(p.stepDiscount)}` };
   }
 
   return null;

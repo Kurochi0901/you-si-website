@@ -8,8 +8,9 @@
    - targetIds    → 參與此促銷的商品 id 白名單（陣列）
    - minQty       → 白名單商品加總需達到幾件才觸發
    - discount     → 折扣率，例如 0.05 = 95折（折抵 5%）
-   - stepAmount   → 滿額折抵級距：白名單商品小計每滿多少元（選填）
+   - stepAmount   → 滿額折抵級距：小計每滿多少元（選填，基準看 stepScope）
    - stepDiscount → 滿額折抵金額：每達一個級距折多少元（選填）
+   - stepScope    → 滿額折抵基準："target"（預設｜白名單商品小計）｜"all"（全館小計）
    - startAt      → 活動開始日 "YYYY-MM-DD"（留空 = 無起始限制）
    - endAt        → 活動結束日 "YYYY-MM-DD"（留空 = 不會結束）
    - display      → 是否要在 /offers/ 頁面顯示為活動卡片
@@ -28,16 +29,24 @@
    只計算「在白名單內的商品」的小計，再乘以折扣率
    回傳「折抵金額」（正整數）
 
-   💰 滿額折抵（stepAmount / stepDiscount）：
-   在 apply(ctx) 內以 Math.floor(白名單小計 / stepAmount) * stepDiscount 計算，
+   💰 滿額折抵（stepAmount / stepDiscount / stepScope）：
+   在 apply(ctx) 內以 Math.floor(基準小計 / stepAmount) * stepDiscount 計算，
    可與同一個 block 的折扣率「累計」（例：95 折 ＋ 每滿 1500 折 100）。
-   基準一律是「白名單商品的原價小計」——不含非活動商品，也不用折後價再折。
+   基準小計看 stepScope：
+     "target"（預設）→ 白名單商品的原價小計（不含非活動商品）
+     "all"           → 全館商品的原價小計（含非活動商品）
+   兩者一律用「原價」，不用折後價再折。
+   ⚠️ stepScope:"all" 時記得把 condition(ctx) 放寬成
+      「有白名單商品 || ctx.subtotal >= stepAmount」，
+      否則只買非活動商品的購物車不會觸發，滿額折抵形同虛設。
    不想設上限就不用寫上限；要設上限請在 apply() 內自行 Math.min()。
 
    🛒 加購提示 hint（加入購物車時的引導 toast，見 main.js getNextPromotionHint）：
    hint.minQty        → 件數型：「再買 N 件可享…」
-   hint.kind:"amount" → 金額型：「活動酒款再買 NT$X，可多折 NT$Y」
+   hint.kind:"amount" → 金額型：「（活動酒款）再買 NT$X，可多折 NT$Y」
                         級距直接讀本 block 的 stepAmount / stepDiscount
+                        文案與基準跟著 stepScope：
+                        "all" →「再買 NT$X」；"target" →「活動酒款再買 NT$X」
    hint.nudgeWithin   → 金額型專用：差額 ≤ 此值才提示（預設 = stepAmount），
                         避免出現「再買 NT$1,500」這種無感提示
    ⚠️ 件數型優先；且客人身上有折扣碼時金額型不提示（折扣碼與活動擇優，提示可能不成立）
@@ -258,9 +267,9 @@ export const PROMOTIONS = [
 
   /* =============================
      酉時之約：中秋團圓慶（2026 正式檔）
-     指定酒款 95 折（無件數門檻）＋ 活動酒款小計每滿 1500 再折 100，兩項累計
+     指定酒款 95 折（無件數門檻）＋ 全館小計每滿 1500 再折 100，兩項累計
      ✏️  要調整哪幾瓶參與，改 targetIds 即可
-     ✏️  要調整滿額級距，改 stepAmount / stepDiscount（目前不設上限）
+     ✏️  要調整滿額級距，改 stepAmount / stepDiscount（目前全館、不設上限）
      ✏️  要設定活動期間，改 startAt / endAt（到期會自動失效）
      ✏️  要關閉活動，把整個 block 註解掉即可
   ============================= */
@@ -269,8 +278,8 @@ export const PROMOTIONS = [
     type: "combo-ids",
     stackable: false, // 與全站折扣碼、貓咪系列擇優，不疊加
 
-    label: "酉時之約：中秋團圓慶 — 指定酒款 95 折＋滿額折抵",
-    description: "指定酒款不限件數享 95 折；活動酒款小計每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推），兩項優惠可累計",
+    label: "酉時之約：中秋團圓慶 — 指定酒款 95 折＋全館滿額折抵",
+    description: "指定酒款不限件數享 95 折；全館消費每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推，不設上限），兩項優惠可累計",
 
     // 中秋前哨的 29 款 ＋ 新增 128 柚子梅酒、130 龜之尾（banner 主視覺酒款），共 31 款
     targetIds: [
@@ -281,22 +290,24 @@ export const PROMOTIONS = [
 
     // ✏️ 活動期間 "YYYY-MM-DD"（留空字串=無限制；endAt 過了會自動失效）
     startAt: "2026-09-07",
-    endAt:   "2026-10-31",
+    endAt:   "2026-09-30",
 
-    // ✏️ 滿額折抵級距：活動酒款小計每滿 stepAmount 元，折 stepDiscount 元（不設上限）
+    // ✏️ 滿額折抵：範圍＝全館（stepScope:"all"），全館原價小計每滿 stepAmount 元
+    //    折 stepDiscount 元（不設上限）。要改回只算活動酒款 → stepScope 刪掉或設 "target"
+    stepScope:    "all",
     stepAmount:   1500,
     stepDiscount: 100,
 
     display: {
       showOnOffersPage: true,
       title: "🌕 中秋團圓慶：兩瓶，才完整",
-      summary: "月圓人團圓。精選梅酒、果實酒、清酒與葡萄酒，指定酒款不限件數即享 95 折；活動酒款小計每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推），兩項優惠可累計。活動至 2026/10/31 止。",
+      summary: "月圓人團圓。精選梅酒、果實酒、清酒與葡萄酒，指定酒款不限件數即享 95 折；全館消費每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推，不設上限），兩項優惠可累計。活動至 2026/09/30 止。",
       bannerImage:       "/assets/images/home/9月中秋慶1920.webp",
       bannerImageMobile: "/assets/images/home/9月中秋慶750.webp",
       bannerLink: "",
 
       cardBadge: "🌕中秋95折",
-      cardBadgeDetail: "指定酒款不限件數享 95 折；活動酒款小計每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推），兩項可累計。活動至 2026/10/31 止。"
+      cardBadgeDetail: "指定酒款不限件數享 95 折；全館消費每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推，不設上限），兩項可累計。活動至 2026/09/30 止。"
     },
 
     hint: {
@@ -306,17 +317,21 @@ export const PROMOTIONS = [
 
     condition(ctx) {
       if (!isPromoActive(this)) return false;  // ⏰ 活動期間外自動失效
-      return ctx.items.some(p => this.targetIds.includes(p.id));
+      // 95 折需要活動酒款；滿額折抵是全館 → 全館小計達一個級距就成立
+      return ctx.items.some(p => this.targetIds.includes(p.id))
+          || ctx.subtotal >= this.stepAmount;
     },
 
     apply(ctx) {
-      // 折扣基準：只算白名單商品的「原價小計」（不含非活動商品，也不用折後價再折）
-      const sub = ctx.items
+      // ① 95 折：只算白名單商品的「原價小計」（不用折後價再折）
+      const targetSub = ctx.items
         .filter(p => this.targetIds.includes(p.id))
         .reduce((s, p) => s + p.price * p.qty, 0);
+      const rateOff = Math.round(targetSub * 0.05);                          // 95 折
 
-      const rateOff = Math.round(sub * 0.05);                                // 95 折
-      const stepOff = Math.floor(sub / this.stepAmount) * this.stepDiscount; // 每滿 1500 折 100
+      // ② 滿額折抵：全館原價小計（stepScope:"all"，含非活動商品，一律用原價）
+      const stepOff = Math.floor(ctx.subtotal / this.stepAmount) * this.stepDiscount;
+
       return rateOff + stepOff;                                              // 兩項累計
     }
   },
