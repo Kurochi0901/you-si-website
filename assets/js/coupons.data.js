@@ -2,7 +2,7 @@ export const COUPONS = [
 
 
   /* KPMG 企業合作碼（明碼另外保管，勿寫入本檔 — 本檔會完整送到瀏覽器）
-     優惠＝全館 95 折 ＋ 全館小計每滿 NT$1,500 折 NT$100，兩項可累計、不設上限
+     優惠＝全館 95 折 ＋「95 折後」小計每滿 NT$1,500 折 NT$100，兩項可累計、不設上限
      全館一律 95 折 → targetIds 留空，rateTarget 與 rateDefault 同值
      ⚠️ rateTarget 不可刪：apply() 會算 targetSub * rateTarget，
         缺值時 0 * undefined = NaN，整筆折扣會靜默失效
@@ -17,8 +17,8 @@ export const COUPONS = [
     rateDefault: 0.05,  // 全館 95折 → 折抵 5%
     rateTarget:  0.05,  // 無指定商品，與 rateDefault 一致
 
-    // 滿額折抵：基準＝全館原價小計（stepScope:"all"），
-    // 每滿 stepAmount 元折 stepDiscount 元，不設上限（滿 3,000 折 200，依此類推）
+    // 滿額折抵：基準＝全館「95 折後」小計（stepScope:"all"，先折扣率、再算級距），
+    // 每滿 stepAmount 元折 stepDiscount 元，不設上限
     stepScope:    "all",
     stepAmount:   1500,
     stepDiscount: 100
@@ -39,7 +39,7 @@ export const COUPONS = [
   },
 
   /* GYRO 企業合作碼（明碼另外保管，勿寫入本檔 — 本檔會完整送到瀏覽器）
-     優惠＝全館 95 折 ＋ 全館小計每滿 NT$1,500 折 NT$100，兩項可累計、不設上限
+     優惠＝全館 95 折 ＋「95 折後」小計每滿 NT$1,500 折 NT$100，兩項可累計、不設上限
      全館一律 95 折 → targetIds 留空，rateTarget 與 rateDefault 同值
      ⚠️ rateTarget 不可刪：apply() 會算 targetSub * rateTarget，
         缺值時 0 * undefined = NaN，整筆折扣會靜默失效
@@ -54,8 +54,8 @@ export const COUPONS = [
     rateDefault: 0.05,  // 全館 95折 → 折抵 5%
     rateTarget:  0.05,  // 無指定商品，與 rateDefault 一致
 
-    // 滿額折抵：基準＝全館原價小計（stepScope:"all"），
-    // 每滿 stepAmount 元折 stepDiscount 元，不設上限（滿 3,000 折 200，依此類推）
+    // 滿額折抵：基準＝全館「95 折後」小計（stepScope:"all"，先折扣率、再算級距），
+    // 每滿 stepAmount 元折 stepDiscount 元，不設上限
     stepScope:    "all",
     stepAmount:   1500,
     stepDiscount: 100

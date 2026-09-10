@@ -1184,7 +1184,8 @@ function getActiveCoupon(){
 }
 
 /** 將已啟用折扣碼包裝成 promotion 陣列，供 applyPromotions 統一評選
- *  折抵 = 折扣率（rateTarget / rateDefault）＋ 滿額折抵（stepAmount / stepDiscount，選填），兩項累計 */
+ *  折抵 = 折扣率（rateTarget / rateDefault）＋ 滿額折抵（stepAmount / stepDiscount，選填），兩項累計
+ *  ⚠️ 順序＝「先折扣率、再算滿額級距」：滿額折抵以折扣率套用後的金額為基準 */
 function getActiveCouponPromotions(){
   const coupon = getActiveCoupon();
   if (!coupon) return [];
@@ -1203,13 +1204,16 @@ function getActiveCouponPromotions(){
       const rateOff   = Math.round(targetSub * coupon.rateTarget + otherSub * coupon.rateDefault);
 
       // ② 滿額折抵（選填；語意與 promotions.data.js 的 stepAmount / stepDiscount / stepScope 相同）
-      //    基準看 stepScope："all" → 全館原價小計；未填或 "target" → 指定商品原價小計
+      //    ⚠️ 順序＝「先折扣率、再算滿額級距」：基準是折扣率套用後的金額，不是原價
+      //    基準看 stepScope："all" → 全館折後小計；未填或 "target" → 指定商品折後小計
       //    ⚠️ 未填 stepAmount / stepDiscount 的折扣碼 stepOff 恆為 0，行為與改版前完全相同
       const stepAmount   = Number(coupon.stepAmount)   || 0;
       const stepDiscount = Number(coupon.stepDiscount) || 0;
       let   stepOff      = 0;
       if (stepAmount > 0 && stepDiscount > 0) {
-        const stepBase = coupon.stepScope === "all" ? ctx.subtotal : targetSub;
+        const stepBase = coupon.stepScope === "all"
+          ? ctx.subtotal - rateOff                                   // 全館：扣掉整筆折扣率折抵
+          : targetSub - Math.round(targetSub * coupon.rateTarget);   // 指定商品：只扣該部分的折抵
         stepOff = Math.floor(stepBase / stepAmount) * stepDiscount;
       }
 
@@ -1377,9 +1381,10 @@ function getNextPromotionHint(cartQty, addedId){
   }
 
   /* ── 金額型提示（hint.kind === "amount"）：「再買 NT$X，可多折 NT$Y」──
-     基準與 promo 的 apply() 一致，跟著該 promo 的 stepScope 走：
-       stepScope:"all"  → 全館原價小計（加任何商品都會推進級距）
-       未填 / "target"  → 只算白名單商品的原價小計
+     基準與 promo 的 apply() 一致：promo 有自訂 stepBase() / stepNeed() 就優先呼叫
+     （例：中秋活動的級距是算 95 折後的金額），否則跟著該 promo 的 stepScope 走：
+       stepScope:"all"  → 全館小計（加任何商品都會推進級距）
+       未填 / "target"  → 只算白名單商品的小計
      上方件數型提示優先 —— 兩者都成立時只會發出件數型那一則。
      ⚠️ 客人身上有折扣碼時一律不提示：折扣碼與活動是擇優（stackable:false），
         此時「再買 X 元多折 100」不一定成立，寧可不提示也不要誤導。 */
@@ -1391,22 +1396,30 @@ function getNextPromotionHint(cartQty, addedId){
     Number(p.stepAmount) > 0 && Number(p.stepDiscount) > 0
   );
 
+  const hintCtx = getCartContext();   // 供 promo 自訂的 stepBase() / stepNeed() 使用
+
   for(const p of amountPromos){
     const allScope = p.stepScope === "all";   // 全館型：不受白名單限制
 
     // 只算白名單時，與 combo-ids 一致：剛加入的商品不在白名單內就不提示
     if(!allScope && addedId !== undefined && !p.targetIds.includes(addedId)) continue;
 
-    // 基準原價小計（下架品已由 readCart 濾掉；price 缺值當 0）
-    const sub = allScope
-      ? cartTotal()
-      : cart
-          .filter(item => p.targetIds.includes(item.id))
-          .reduce((s, item) => s + (Number(item.price) || 0) * (Number(item.qty) || 0), 0);
+    // 基準小計：promo 有自訂 stepBase() 就以它為準（下架品已由 readCart 濾掉；price 缺值當 0）
+    const sub = typeof p.stepBase === "function"
+      ? p.stepBase(hintCtx)
+      : allScope
+        ? cartTotal()
+        : cart
+            .filter(item => p.targetIds.includes(item.id))
+            .reduce((s, item) => s + (Number(item.price) || 0) * (Number(item.qty) || 0), 0);
     if(!Number.isFinite(sub) || sub <= 0) continue;   // 注意 NaN <= 0 為 false，需 isFinite 擋
 
     const step   = Number(p.stepAmount);
-    const need   = step - (sub % step);               // 正好落在級距上 → need === step（指向下一級）
+    // 差額要換算回「原價」才能對客人講：基準是折後金額時不能直接拿原價相減，
+    // 所以 promo 有自訂 stepNeed() 就以它為準
+    const need   = typeof p.stepNeed === "function"
+      ? p.stepNeed(hintCtx)
+      : step - (sub % step);                          // 正好落在級距上 → need === step（指向下一級）
     const within = Number(p.hint.nudgeWithin) || step;
     if(!(need > 0) || need > within) continue;        // 差太多就不提示，避免無感提示
 

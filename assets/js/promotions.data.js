@@ -33,9 +33,12 @@
    在 apply(ctx) 內以 Math.floor(基準小計 / stepAmount) * stepDiscount 計算，
    可與同一個 block 的折扣率「累計」（例：95 折 ＋ 每滿 1500 折 100）。
    基準小計看 stepScope：
-     "target"（預設）→ 白名單商品的原價小計（不含非活動商品）
-     "all"           → 全館商品的原價小計（含非活動商品）
-   兩者一律用「原價」，不用折後價再折。
+     "target"（預設）→ 白名單商品小計（不含非活動商品）
+     "all"           → 全館商品小計（含非活動商品）
+   ⚠️ 順序＝「先折扣率、再算滿額級距」：基準小計是折扣率「套用後」的金額，不是原價。
+      block 若自訂 stepBase(ctx) 方法，就一律以該方法的回傳值為準
+      （main.js 的金額型加購提示也會優先呼叫 stepBase / stepNeed，
+        確保「再買 NT$X」的提示金額與結帳實際折抵一致）。
    ⚠️ stepScope:"all" 時記得把 condition(ctx) 放寬成
       「有白名單商品 || ctx.subtotal >= stepAmount」，
       否則只買非活動商品的購物車不會觸發，滿額折抵形同虛設。
@@ -292,8 +295,12 @@ export const PROMOTIONS = [
     startAt: "2026-09-07",
     endAt:   "2026-09-30",
 
-    // ✏️ 滿額折抵：範圍＝全館（stepScope:"all"），全館原價小計每滿 stepAmount 元
-    //    折 stepDiscount 元（不設上限）。要改回只算活動酒款 → stepScope 刪掉或設 "target"
+    // ✏️ 折扣率：0.05 = 95 折（折抵 5%），只套用在上方 targetIds 的活動酒款
+    rate: 0.05,
+
+    // ✏️ 滿額折抵：範圍＝全館（stepScope:"all"），但基準是「扣掉 95 折之後」的全館小計，
+    //    每滿 stepAmount 元折 stepDiscount 元（不設上限）
+    //    要改回只算活動酒款 → stepScope 刪掉或設 "target"
     stepScope:    "all",
     stepAmount:   1500,
     stepDiscount: 100,
@@ -317,20 +324,38 @@ export const PROMOTIONS = [
 
     condition(ctx) {
       if (!isPromoActive(this)) return false;  // ⏰ 活動期間外自動失效
-      // 95 折需要活動酒款；滿額折抵是全館 → 全館小計達一個級距就成立
+      // 95 折需要活動酒款；沒有活動酒款時 rateOff 為 0、折後小計＝原價小計，
+      // 所以第二個條件直接用 ctx.subtotal 判斷即可
       return ctx.items.some(p => this.targetIds.includes(p.id))
           || ctx.subtotal >= this.stepAmount;
     },
 
-    apply(ctx) {
-      // ① 95 折：只算白名單商品的「原價小計」（不用折後價再折）
+    /** ① 95 折折抵金額：只算白名單商品的原價小計 */
+    rateOff(ctx) {
       const targetSub = ctx.items
         .filter(p => this.targetIds.includes(p.id))
         .reduce((s, p) => s + p.price * p.qty, 0);
-      const rateOff = Math.round(targetSub * 0.05);                          // 95 折
+      return Math.round(targetSub * this.rate);
+    },
 
-      // ② 滿額折抵：全館原價小計（stepScope:"all"，含非活動商品，一律用原價）
-      const stepOff = Math.floor(ctx.subtotal / this.stepAmount) * this.stepDiscount;
+    /** ② 滿額折抵的基準小計＝全館小計「扣掉 95 折之後」的金額（先折扣、再滿額）
+     *  main.js 的金額型加購提示也會呼叫這支，確保提示與實際折抵同一個基準 */
+    stepBase(ctx) {
+      return ctx.subtotal - this.rateOff(ctx);
+    },
+
+    /** 距離下一個滿額級距還差多少「原價」（供加購提示用）
+     *  基準是折後金額，但客人再買活動酒款只有 95% 會進帳，
+     *  所以用最保守的換算（假設加購的是活動酒款）：寧可高估，也不要提示了卻折不到 */
+    stepNeed(ctx) {
+      const gap = this.stepAmount - (this.stepBase(ctx) % this.stepAmount);
+      return Math.ceil(gap / (1 - this.rate));
+    },
+
+    apply(ctx) {
+      const rateOff = this.rateOff(ctx);                                     // ① 指定酒款 95 折
+      const stepOff = Math.floor(this.stepBase(ctx) / this.stepAmount)       // ② 折後小計滿額折抵
+                    * this.stepDiscount;
 
       return rateOff + stepOff;                                              // 兩項累計
     }
