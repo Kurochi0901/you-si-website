@@ -1183,7 +1183,8 @@ function getActiveCoupon(){
   return coupon;
 }
 
-/** 將已啟用折扣碼包裝成 promotion 陣列，供 applyPromotions 統一評選 */
+/** 將已啟用折扣碼包裝成 promotion 陣列，供 applyPromotions 統一評選
+ *  折抵 = 折扣率（rateTarget / rateDefault）＋ 滿額折抵（stepAmount / stepDiscount，選填），兩項累計 */
 function getActiveCouponPromotions(){
   const coupon = getActiveCoupon();
   if (!coupon) return [];
@@ -1193,12 +1194,26 @@ function getActiveCouponPromotions(){
     stackable: coupon.stackable === true,  // 預設不可疊加
     condition: () => true,
     apply(ctx){
+      // ① 折扣率：指定商品用 rateTarget，其餘用 rateDefault（皆以原價小計為基準）
       const targetIds = coupon.targetIds || [];
       const targetSub = ctx.items
         .filter(i => targetIds.includes(i.id))
         .reduce((s, p) => s + p.price * p.qty, 0);
       const otherSub  = ctx.subtotal - targetSub;
-      return Math.round(targetSub * coupon.rateTarget + otherSub * coupon.rateDefault);
+      const rateOff   = Math.round(targetSub * coupon.rateTarget + otherSub * coupon.rateDefault);
+
+      // ② 滿額折抵（選填；語意與 promotions.data.js 的 stepAmount / stepDiscount / stepScope 相同）
+      //    基準看 stepScope："all" → 全館原價小計；未填或 "target" → 指定商品原價小計
+      //    ⚠️ 未填 stepAmount / stepDiscount 的折扣碼 stepOff 恆為 0，行為與改版前完全相同
+      const stepAmount   = Number(coupon.stepAmount)   || 0;
+      const stepDiscount = Number(coupon.stepDiscount) || 0;
+      let   stepOff      = 0;
+      if (stepAmount > 0 && stepDiscount > 0) {
+        const stepBase = coupon.stepScope === "all" ? ctx.subtotal : targetSub;
+        stepOff = Math.floor(stepBase / stepAmount) * stepDiscount;
+      }
+
+      return rateOff + stepOff;   // 折扣率與滿額折抵兩項累計
     }
   }];
 }

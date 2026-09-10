@@ -1,15 +1,27 @@
 export const COUPONS = [
 
 
+  /* KPMG 企業合作碼（明碼另外保管，勿寫入本檔 — 本檔會完整送到瀏覽器）
+     優惠＝全館 95 折 ＋ 全館小計每滿 NT$1,500 折 NT$100，兩項可累計、不設上限
+     全館一律 95 折 → targetIds 留空，rateTarget 與 rateDefault 同值
+     ⚠️ rateTarget 不可刪：apply() 會算 targetSub * rateTarget，
+        缺值時 0 * undefined = NaN，整筆折扣會靜默失效
+     未設 validFrom / validUntil → 長期有效，無需每年調整 */
   {
     hash: "0a2e759bdc1e0370d1d9a698c62a981b3a865cea4086a5370dd51bbdaef79d93",
     id: "coupon-kpmg",
-    label: "KPMG 折扣碼（全站95折）",
+    label: "KPMG 折扣碼（全館 95 折＋每滿 NT$1,500 折 NT$100）",
     stackable: false,
     targetIds: [],
 
-    rateDefault: 0.05,  // 非指定商品 95折 → 折抵 5%
-    rateTarget:  0.10   // 指定商品 9折 → 折抵 10%
+    rateDefault: 0.05,  // 全館 95折 → 折抵 5%
+    rateTarget:  0.05,  // 無指定商品，與 rateDefault 一致
+
+    // 滿額折抵：基準＝全館原價小計（stepScope:"all"），
+    // 每滿 stepAmount 元折 stepDiscount 元，不設上限（滿 3,000 折 200，依此類推）
+    stepScope:    "all",
+    stepAmount:   1500,
+    stepDiscount: 100
   },
 
   {
@@ -26,15 +38,27 @@ export const COUPONS = [
     rateTarget:  0.10   // 指定商品 9折 → 折抵 10%
   },
 
+  /* GYRO 企業合作碼（明碼另外保管，勿寫入本檔 — 本檔會完整送到瀏覽器）
+     優惠＝全館 95 折 ＋ 全館小計每滿 NT$1,500 折 NT$100，兩項可累計、不設上限
+     全館一律 95 折 → targetIds 留空，rateTarget 與 rateDefault 同值
+     ⚠️ rateTarget 不可刪：apply() 會算 targetSub * rateTarget，
+        缺值時 0 * undefined = NaN，整筆折扣會靜默失效
+     未設 validFrom / validUntil → 長期有效，無需每年調整 */
   {
     hash: "2eb1b1fde34f252f326d78b8b03f8ef9c07fb4396171f2ac3277d7afb4a98edf",
     id: "coupon-gyro",
-    label: "GYRO 折扣碼（全站95折／指定商品9折）",
+    label: "GYRO 折扣碼（全館 95 折＋每滿 NT$1,500 折 NT$100）",
     stackable: false,
     targetIds: [],
 
-    rateDefault: 0.05,  // 非指定商品 95折 → 折抵 5%
-    rateTarget:  0.10   // 指定商品 9折 → 折抵 10%
+    rateDefault: 0.05,  // 全館 95折 → 折抵 5%
+    rateTarget:  0.05,  // 無指定商品，與 rateDefault 一致
+
+    // 滿額折抵：基準＝全館原價小計（stepScope:"all"），
+    // 每滿 stepAmount 元折 stepDiscount 元，不設上限（滿 3,000 折 200，依此類推）
+    stepScope:    "all",
+    stepAmount:   1500,
+    stepDiscount: 100
   },
 
   /* 2026 秋季全站碼（明碼另外保管，勿寫入本檔 — 本檔會完整送到瀏覽器）
