@@ -2010,6 +2010,7 @@ const products = [
 
     wineryId: "arimitsu" 
     },
+/* ── 已下架 2026-09-21（保留資料，恢復上架時取消註解即可）──
 {
       id: 53,
       priority: 4, 
@@ -2063,6 +2064,7 @@ const products = [
 
     wineryId: "arimitsu" 
     },
+*/
 {
       id: 54,
       priority: 4, 
@@ -2755,6 +2757,7 @@ const products = [
     },
     wineryId: "pares-balta"
     },
+/* ── 已下架 2026-09-21（保留資料，恢復上架時取消註解即可）──
 {
       id: 69,
       priority: 3,
@@ -2794,6 +2797,8 @@ const products = [
     },
     wineryId: "pares-balta"
     },
+*/
+/* ── 已下架 2026-09-21（保留資料，恢復上架時取消註解即可）──
 {
       id: 70,
       priority: 3,
@@ -2832,6 +2837,7 @@ const products = [
     },
     wineryId: "terras-gauda"
     },
+*/
 {
       id: 71,
       priority: 3,
@@ -3062,6 +3068,7 @@ const products = [
     },
     wineryId: "terras-gauda"
     },
+/* ── 已下架 2026-09-21（保留資料，恢復上架時取消註解即可）──
 {
       id: 77,
       priority: 4,
@@ -3103,6 +3110,7 @@ const products = [
     },
     wineryId: "anayón"
     },
+*/
 {
       id: 78,
       priority: 3,
@@ -5374,6 +5382,7 @@ const products = [
     wineryId: "hayasihonten" 
     },
 */
+/* ── 已下架 2026-09-21（保留資料，恢復上架時取消註解即可）──
 {
       id: 101,
       priority: 5, 
@@ -5421,6 +5430,7 @@ const products = [
 
     wineryId: "hayasihonten" 
     },
+*/
     {
       id: 102,
       priority: 5, 
