@@ -5431,6 +5431,7 @@ const products = [
     wineryId: "hayasihonten" 
     },
 */
+/* ── 已下架 2026-09-22（保留資料，恢復上架時取消註解即可）──
     {
       id: 102,
       priority: 5, 
@@ -5481,6 +5482,7 @@ const products = [
 
     wineryId: "nichinichi" 
     },
+*/
 {
       id: 103,
       priority: 5, 
@@ -5666,6 +5668,7 @@ const products = [
 
     wineryId: "kobayashi"
     },
+/* ── 已下架 2026-09-22（保留資料，恢復上架時取消註解即可）──
     {
       id: 131,
       priority: 5, 
@@ -5711,6 +5714,7 @@ const products = [
 
     wineryId: "mitobe"
     },
+*/
     {
       id: 132,
       priority: 5, 
