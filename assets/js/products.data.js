@@ -2267,6 +2267,7 @@ const products = [
 
     wineryId: "mitobe" 
     },
+/* ── 已下架 2026-09-29（保留資料，恢復上架時取消註解即可）──
 {
       id: 58,
       priority: 3, 
@@ -2316,6 +2317,7 @@ const products = [
 
     wineryId: "mitobe" 
     },
+*/
 /* ── 已下架 2026-07-14（保留資料，恢復上架時取消註解即可）──
 {
       id: 59,
@@ -4890,6 +4892,7 @@ const products = [
 
     wineryId: "yanagita-shochu" 
     },
+/* ── 已下架 2026-09-29（保留資料，恢復上架時取消註解即可）──
     {
       id: 124,
       priority: 5, 
@@ -4939,6 +4942,7 @@ const products = [
 
     wineryId: "hayasihonten"
     },
+*/
 /* ── 已下架 2026-09-02（保留資料，恢復上架時取消註解即可）──
 {
       id: 125,
@@ -5760,6 +5764,106 @@ const products = [
     
 
     wineryId: "hatsukame"
+    },
+    {
+      id: 133,
+      priority: 5, 
+      name: "喬治穆勒酒莊 麗絲玲白葡萄酒 2022",
+      type: "葡萄酒", 
+      category: "wine",
+    imgs: [`${CDN}/133喬治穆勒麗絲玲1.webp`,
+      `${CDN}/133喬治穆勒麗絲玲2.webp`
+    ], 
+
+    price: 1080, 
+    originPrice: 1080,
+
+    spec: "德國VDP精英酒莊，7度榮獲最佳酒莊肯定", 
+
+    note: {
+      oneLine: `🏆2024 德國最佳酒莊獎 第7度獲獎
+	🏆2016-2022 德國最佳酒莊獎 六連莊
+
+	來自德國萊茵高的傳奇酒莊Georg Müller Stiftung，名列VDP精英莊園，深厚釀造歷史可追溯至10世紀時期。
+	這款經典麗絲玲選用100% Riesling釀造，綻放桃子、蘋果與杏桃的純粹果香，結合萊茵高標誌性的鮮明酸度與圓潤微甜酒體，於口中交織出絕妙平衡；餘韻精緻悠長，縈繞著怡人的瓜果香氣，極具細緻層次與優秀佐餐能力，完美呈現產區風土魅力。
+
+	搭餐推薦：內臟類料理、煎烤海鮮料理、白子或魚卵料理
+
+	建議適飲溫度：8~12°C`, 
+    },
+
+    info: {
+      brand: "喬治・穆勒", 
+      origin: "德國", 
+      rice: null, 
+      yeast: null, 
+      variety: "Riesling",
+      polish: null,
+      alcohol: "10.5%", //酒精濃度
+      volume: "750ml" //容量
+    },
+
+    scale: {   //1-5分，分數越低越靠左，分數越高越靠右 ，不適用的欄位填入null
+        sakeDrySweet: null,
+        sakeUmamiFruity: null,  
+      
+        ftAcidSweet: null,
+        ftFreshRich: null, 
+      
+        wineTannin: 1,  
+        wineFreshFull: 2 
+    },
+    
+
+    wineryId: "kessler-zink" 
+    },
+    {
+      id: 134,
+      priority: 5, 
+      name: "光榮菊 黃昏 Orange 火入",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/134光榮菊黃昏1.webp`,
+      `${CDN}/134光榮菊黃昏2.webp`
+    ], 
+
+    price: 1540, 
+    originPrice: 1540,
+
+    spec: "天然乳酸菌仕込，柑橘酸甜清爽俐落", 
+
+    note: {
+      oneLine: `佐賀傳奇光榮菊酒造聯手知名杜氏山本克明，以「天然乳酸菌仕込」翻新傳統，開闢搭餐酒全新道路。
+	首度推出的火入版本，延續清新甜美的柑橘香氣，入口綻放蜜柑與八朔橘般的爽朗酸甜，口感柔和細緻。
+	相較生原酒，火入版更顯鮮明優雅的柑橘苦韻，尾韻清爽俐落、平衡自然，極具旨味與酸味層次，是炎熱夏日冰涼飲用的極致清涼首選！
+
+	適合搭配天婦羅、鹽烤鯖魚、烤秋刀魚、南蠻漬等料理。`, 
+    },
+
+    info: {
+      brand: "光榮菊", 
+      origin: "日本", 
+      rice: "非公開", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "非公開",
+      alcohol: "13%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 3,
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "koueigiku"
     }
 ]
 if (typeof window !== 'undefined') { window.products = products; }

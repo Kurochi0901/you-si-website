@@ -363,6 +363,60 @@ export const PROMOTIONS = [
   },
 
   /* =============================
+     酉時之約：國慶（2026/10/01–10/31）
+     指定酒款 95 折（無件數門檻）
+     ✏️  要調整哪幾瓶參與，改 targetIds 即可
+     ✏️  banner 尚未製作 → bannerImage 留空（活動卡片不顯示圖）；
+         有圖後用 scripts/build-banner.js 轉檔再填路徑
+     ✏️  要關閉活動，把整個 block 註解掉即可
+  ============================= */
+  {
+    id: "national-day-2026-95",
+    type: "combo-ids",
+    stackable: false, // 與全站折扣碼、貓咪系列擇優，不疊加
+
+    label: "酉時之約：國慶 — 指定酒款 95 折",
+    description: "指定酒款不限件數，該活動商品小計享 95 折",
+
+    targetIds: [
+      1, 2, 3, 4, 6, 8, 9, 11, 12, 16, 23, 25, 28, 30, 32, 33, 36, 37,
+      39, 43, 45, 48, 52, 55, 56, 57, 61, 62, 64, 67, 71, 73, 74, 75,
+      76, 81, 82, 83, 84, 91, 95, 97, 98, 99, 103, 118, 119, 120, 122,
+      123, 127, 133
+    ],
+
+    // ✏️ 活動期間 "YYYY-MM-DD"（留空字串=無限制；endAt 過了會自動失效）
+    startAt: "2026-10-01",
+    endAt:   "2026-10-31",
+
+    display: {
+      showOnOffersPage: true,
+      title: "🇹🇼 酉時之約：國慶 指定酒款 95 折",
+      summary: "十月連假，精選梅酒、果實酒、清酒與葡萄酒，指定酒款不限件數即享 95 折。活動至 2026/10/31 止。",
+      bannerImage:       "",
+      bannerImageMobile: "",
+      bannerLink: "",
+
+      cardBadge: "🇹🇼國慶95折",
+      cardBadgeDetail: "指定酒款不限件數，活動商品小計享 95 折。活動至 2026/10/31 止。"
+    },
+
+    // 無件數門檻 → 不需要 hint（hint 是用來提示「再買 N 件就享優惠」）
+
+    condition(ctx) {
+      if (!isPromoActive(this)) return false;  // ⏰ 活動期間外自動失效
+      return ctx.items.some(p => this.targetIds.includes(p.id));
+    },
+
+    apply(ctx) {
+      const sub = ctx.items
+        .filter(p => this.targetIds.includes(p.id))
+        .reduce((s, p) => s + p.price * p.qty, 0);
+      return Math.round(sub * 0.05); // 95折 = 折抵 5%
+    }
+  },
+
+  /* =============================
      慶祝官網上架：滿 3 瓶全面 9 折
   ============================= */
   // {

@@ -1196,11 +1196,16 @@ function getActiveCouponPromotions(){
     condition: () => true,
     apply(ctx){
       // ① 折扣率：指定商品用 rateTarget，其餘用 rateDefault（皆以原價小計為基準）
+      //    有填 defaultIds 時，rateDefault 只套用在 defaultIds 內的商品，清單外商品不打折
       const targetIds = coupon.targetIds || [];
       const targetSub = ctx.items
         .filter(i => targetIds.includes(i.id))
         .reduce((s, p) => s + p.price * p.qty, 0);
-      const otherSub  = ctx.subtotal - targetSub;
+      const otherSub  = Array.isArray(coupon.defaultIds)
+        ? ctx.items
+            .filter(i => !targetIds.includes(i.id) && coupon.defaultIds.includes(i.id))
+            .reduce((s, p) => s + p.price * p.qty, 0)
+        : ctx.subtotal - targetSub;
       const rateOff   = Math.round(targetSub * coupon.rateTarget + otherSub * coupon.rateDefault);
 
       // ② 滿額折抵（選填；語意與 promotions.data.js 的 stepAmount / stepDiscount / stepScope 相同）
