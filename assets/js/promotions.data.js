@@ -366,8 +366,7 @@ export const PROMOTIONS = [
      酉時之約：國慶（2026/10/01–10/31）
      指定酒款 95 折（無件數門檻）
      ✏️  要調整哪幾瓶參與，改 targetIds 即可
-     ✏️  banner 尚未製作 → bannerImage 留空（活動卡片不顯示圖）；
-         有圖後用 scripts/build-banner.js 轉檔再填路徑
+     ✏️  banner：10月國慶1920.webp / 10月國慶750.webp（原稿在 assets/images/1920、750，用 scripts/build-banner.js 轉檔）
      ✏️  要關閉活動，把整個 block 註解掉即可
   ============================= */
   {
@@ -393,8 +392,8 @@ export const PROMOTIONS = [
       showOnOffersPage: true,
       title: "🇹🇼 酉時之約：國慶 指定酒款 95 折",
       summary: "十月連假，精選梅酒、果實酒、清酒與葡萄酒，指定酒款不限件數即享 95 折。活動至 2026/10/31 止。",
-      bannerImage:       "",
-      bannerImageMobile: "",
+      bannerImage:       "/assets/images/home/10月國慶1920.webp",
+      bannerImageMobile: "/assets/images/home/10月國慶750.webp",
       bannerLink: "",
 
       cardBadge: "🇹🇼國慶95折",
