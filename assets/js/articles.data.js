@@ -71,6 +71,18 @@ const articles = [
     subTags: ["日本酒"],
     relatedProductIds: [32, 124, 44, 111, 37]
   },
+  {
+    id: 7,
+    slug: "choose-the-right-glass-for-better-taste",
+    title: "【微醺解密】選對杯子，酒更好喝？一杯到底，行不行？",
+    excerpt: "選對杯子，可以喝出酒的深層層次與靈魂風味",
+    cover: "/assets/images/blog/id7封面.webp",
+    date: "2026/10/02",
+    author: "酉時喝酒",
+    mainTags: ["酉時圖書館"],
+    subTags: ["日本酒","葡萄酒","果實酒","烈酒"],
+    relatedProductIds: [127, 129, 133, 134, 128]
+  },
 
 ];
 // 強制掛載到全域 window 物件以確保跨腳本讀取
