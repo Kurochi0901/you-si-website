@@ -2,7 +2,7 @@ const CDN = "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto";
 const products = [
   {
     id: 1,
-    priority: 4,
+    priority: 3,
     name: "梅侍純釀 紅玉紅茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -44,7 +44,7 @@ const products = [
   },
 {
     id: 2,
-    priority: 4,
+    priority: 3,
     name: "梅侍純釀 碧螺春綠茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -83,7 +83,7 @@ const products = [
   },
 {
     id: 3,
-    priority: 4,
+    priority: 3,
     name: "梅侍純釀 凍頂烏龍茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -123,7 +123,7 @@ const products = [
   },
 {
     id: 4,
-    priority: 4,
+    priority: 3,
     name: "梅侍純釀 東方美人茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -1450,7 +1450,7 @@ const products = [
 */
 {
       id: 39,
-      priority: 4,
+      priority: 5,
       name: "鳳凰美田 純米吟釀 冷卸 山田錦",
       type: "清酒",
       category: "sake",
@@ -3389,7 +3389,7 @@ const products = [
     },
     {
       id: 84,
-      priority: 3, 
+      priority: 4, 
       name: "蝴蝶加濃 龍舌蘭 藍鑽",
       type: "烈酒", 
       category: "spirits", 
@@ -3436,7 +3436,7 @@ const products = [
     },
 {
       id: 85,
-      priority: 3, 
+      priority: 4, 
       name: "蝴蝶加濃 龍舌蘭 粉鑽",
       type: "烈酒",
       category: "spirits", 
@@ -3760,7 +3760,7 @@ const products = [
     },
 {
       id: 92,
-      priority: 4, 
+      priority: 3, 
       name: "宮泉 玄武 米燒酎",
       type: "烈酒",
       category: "spirits", 
@@ -3804,7 +3804,7 @@ const products = [
     },
 {
       id: 93,
-      priority: 4, 
+      priority: 3, 
       name: "宮泉 玄武 麥燒酎",
       type: "烈酒", 
       category: "spirits", 
@@ -3850,7 +3850,7 @@ const products = [
     },
 {
       id: 94,
-      priority: 4, 
+      priority: 3, 
       name: "宮泉 皇貴玄武 清酒燒酎",
       type: "烈酒", 
       category: "spirits", 
@@ -3946,7 +3946,7 @@ const products = [
     },
 {
       id: 105,
-      priority: 3,
+      priority: 4,
       name: "梅侍純釀 東方美人茶梅酒",
       type: "小罐專區", 
       category: "mini", 
@@ -4000,7 +4000,7 @@ const products = [
     },
 {
       id: 106,
-      priority: 3, 
+      priority: 4, 
       name: "梅侍純釀 凍頂烏龍茶梅酒",
       type: "小罐專區", 
       category: "mini", 
@@ -4053,7 +4053,7 @@ const products = [
     },
 {
       id: 107,
-      priority: 3,
+      priority: 4,
       name: "梅侍純釀 紅玉紅茶梅酒",
       type: "小罐專區", 
       category: "mini", 
@@ -4108,7 +4108,7 @@ const products = [
     },
 {
       id: 108,
-      priority: 3, 
+      priority: 4, 
       name: "梅侍純釀 碧螺春綠茶梅酒",
       type: "小罐專區", 
       category: "mini", 
@@ -4802,7 +4802,7 @@ const products = [
     },
 {
       id: 122,
-      priority: 5, 
+      priority: 4, 
       name: "渡邊 夏之萬年 芋燒酎",
       type: "烈酒", 
       category: "spirits", 
@@ -4848,7 +4848,7 @@ const products = [
     },
 {
       id: 123,
-      priority: 5, 
+      priority: 4, 
       name: "赤鹿毛 麥燒酎 夏日版",
       type: "烈酒", 
       category: "spirits", 
@@ -5583,7 +5583,7 @@ const products = [
     },
     {
       id: 129,
-      priority: 5, 
+      priority: 4, 
       name: "鳳凰美田 試驗釀造 千本錦 本生",
       type: "清酒", 
       category: "sake", 
@@ -5629,7 +5629,7 @@ const products = [
     },
     {
       id: 130,
-      priority: 5, 
+      priority: 4, 
       name: "鳳凰美田 純米吟釀 龜之尾",
       type: "清酒", 
       category: "sake", 
@@ -5864,6 +5864,239 @@ const products = [
     
 
     wineryId: "koueigiku"
+    },
+    {
+      id: 135,
+      priority: 5, 
+      name: "林本店 原始衝動 純米大吟釀 無濾過生原酒",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/135林本店原始衝動1.webp`,
+      `${CDN}/135林本店原始衝動2.webp`
+    ], 
+
+    price: 1520, 
+    originPrice: 1650,
+
+    spec: "喚醒藏於心底的原始衝動，溫潤旨味中迸發生命力", 
+
+    note: {
+      oneLine: `以心理學中的「原始衝動」為靈感，描繪藏在人們理性與日常之下，最根源的本能與欲求。
+	精磨後的米釀出溫潤而飽滿的旨味，入口柔和細緻，隨著風味逐漸展開，沉穩之中又流露出鮮明的張力，彷彿喚醒內心深處閃爍的智慧、熱情與生命力。
+
+	整體在旨味、酸度與酒體之間取得出色平衡，不僅適合細細品飲，更是一款表現優秀的佐餐酒。由岐阜縣林本店釀造，將抽象的「本能」化為一杯兼具力量與細膩感的作品，值得在餐桌上慢慢感受它的層次。`, 
+    },
+
+    info: {
+      brand: "林本店・百十郎", 
+      origin: "日本", 
+      rice: "初霜", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "50%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 2,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hayasihonten"
+    },
+    {
+      id: 136,
+      priority: 5, 
+      name: "林本店 月詠ARIA 純米大吟釀 無濾過生原酒",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/136林本店月詠1.webp`,
+      `${CDN}/136林本店月詠2.webp`
+    ], 
+
+    price: 1520, 
+    originPrice: 1650,
+
+    spec: "月夜下的一曲詠嘆調，豐潤柔和，餘韻悠長而靜謐", 
+
+    note: {
+      oneLine: `以澄澈月夜與歌劇中的「ARIA 詠嘆調」為靈感，將夜色化作一杯悠揚而細膩的獨唱。香氣深邃舒緩，入口柔和豐潤，風味在口中緩緩展開，不張揚，卻有著令人沉浸其中的層次與情感。
+	隨著酒液滑過舌尖，細緻餘韻悠長延伸，留下深沉而平和的收尾。彷彿夜深人靜時，歌姬獨自向月亮吟唱。適合卸下一日繁忙後慢慢品飲，也是一款充滿詩意與季節感的限定之作。`, 
+    },
+
+    info: {
+      brand: "林本店・百十郎", 
+      origin: "日本", 
+      rice: "初羽燦燦", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "50%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hayasihonten"
+    },
+    {
+      id: 137,
+      priority: 5, 
+      name: "鳳凰美田 純米吟釀 五百萬石 冷卸",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/137鳳凰美田五百萬石_冷卸1.webp`,
+      `${CDN}/137鳳凰美田五百萬石_冷卸2.webp`
+    ], 
+
+    price: 1750, 
+    originPrice: 1650,
+
+    spec: "秋日熟成的溫柔滋味，三盆糖般細緻甘甜，餘韻悠長", 
+
+    note: {
+      oneLine: `秋意漸濃，正是品味熟成清酒的好時節。來自栃木縣小林酒造的「鳳凰美田 冷卸」，選用富山縣南礪市產五百萬石酒米，精米步合55%，自春季釀成後於酒藏中靜靜熟成，等待秋日綻放。
+
+	香氣柔和甘美，隱約透出鳳凰美田經典的華麗吟釀香。入口圓潤滑順，三盆糖般高雅的甜潤交織著細膩旨味，熟成後的稜角逐漸柔化，留下深邃而悠長的餘韻。
+
+	創業於1872年的小林酒造，以細緻釀造工藝聞名。這款季節限定冷卸，尤其適合搭配秋季旬味料理（南瓜、秋葵、栗子⋯等。），感受清酒隨時間淬鍊出的優雅風韻。`, 
+    },
+
+    info: {
+      brand: "小林・鳳凰美田", 
+      origin: "日本", 
+      rice: "富山縣南礪市產 五百萬石", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "55%",
+      alcohol: "17%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "kobayashi"
+    },
+    {
+      id: 138,
+      priority: 5, 
+      name: "萩之鶴 別仕込 萬聖貓",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/138萩之鶴萬聖貓1.webp`,
+      `${CDN}/138萩之鶴萬聖貓2.webp`
+    ], 
+
+    price: 1350, 
+    originPrice: 1500,
+
+    spec: "青蘋果的清新，熟橙與紅茶的秋韻，萌貓限定登場！", 
+
+    note: {
+      oneLine: `一年一度的萬聖節，萩之鶴人氣「貓咪系列」換上節慶新裝！
+	有別於傳統秋酒的沉穩厚重，這款限定酒以清新果香與輕快口感，詮釋秋日的另一種風情。香氣從青蘋果般的清爽氣息展開，逐漸浮現熟橙的甜美果香與淡雅紅茶韻味。採用「超速瓶燗一次火入」工藝，封存新鮮微氣泡感，入口輕盈爽冽，柔和果實甘甜與細緻酸度取得漂亮平衡，尾韻清爽而優雅。
+
+	建議冰飲至常溫品嚐，搭配南瓜濃湯、香草烤雞或新鮮乳酪，更能襯托秋季料理的細膩滋味。`, 
+    },
+
+    info: {
+      brand: "萩野・萩之鶴", 
+      origin: "日本", 
+      rice: "非公開", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "48%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 4,
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hagino"
+    },
+    {
+      id: 139,
+      priority: 5, 
+      name: "谷川岳 純米酒 冷卸",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/139谷川岳冷卸1.webp`,
+      `${CDN}/139谷川岳冷卸2.webp`
+    ], 
+
+    price: 1200, 
+    originPrice: 1080,
+
+    spec: "秋日限定的醇厚米旨，圓潤回甘，從冷飲到熱燗皆迷人", 
+
+    note: {
+      oneLine: `當秋意漸濃，正是品味熟成清酒的好時節！來自群馬縣永井酒造的「谷川岳 秋酒」，延續品牌一貫俐落爽快的辛口風格，經過時間熟成，褪去稜角，展現更加圓潤柔和的迷人風貌。
+	精米步合70%，完整呈現米飯般醇厚飽滿的旨味與自然甘甜。入口豐盈水潤，酒體柔順而不厚重，入喉俐落，尾韻帶有淡淡回甘。
+	酒造取用當地柔軟甘美的水源，追求「隨時都能輕鬆小酌」的釀酒理念。從冰飲、常溫到溫熱燗酒皆宜，尤其適合搭配秋季旬味料理，是餐桌上百搭又耐飲的季節限定佳釀。`, 
+    },
+
+    info: {
+      brand: "永井・谷川岳", 
+      origin: "日本", 
+      rice: "(麴)五百萬石、(掛)國產米", 
+      yeast: "協会701号", 
+      variety: null,
+      polish: "70%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 3, 
+        sakeUmamiFruity: 2,
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "nagai"
     }
 ]
 if (typeof window !== 'undefined') { window.products = products; }
