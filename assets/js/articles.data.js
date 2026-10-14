@@ -82,6 +82,18 @@ const articles = [
     mainTags: ["酉時圖書館"],
     subTags: ["日本酒","葡萄酒","果實酒","烈酒"],
     relatedProductIds: [127, 129, 133, 134, 128]
+  },  
+  {
+    id: 8,
+    slug: "autumn-sake-guide-akiagari-vs-hiyaoroshi",
+    title: "【微醺秋日】當秋風吹起，來喝一杯季節限定的「秋酒」吧！秋上、冷卸到底差在哪？",
+    excerpt: "從秋上到冷卸，帶你認識秋酒的釀造特色、風味變化，以及最適合搭配的秋季料理。",
+    cover: "/assets/images/blog/id8封面.webp",
+    date: "2026/10/14",
+    author: "酉時喝酒",
+    mainTags: ["酉時圖書館"],
+    subTags: ["日本酒"],
+    relatedProductIds: [39, 137, 138, 139]
   },
 
 ];
