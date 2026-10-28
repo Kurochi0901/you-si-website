@@ -95,6 +95,18 @@ const articles = [
     subTags: ["日本酒"],
     relatedProductIds: [39, 137, 138, 139]
   },
+  {
+    id: 9,
+    slug: "how-to-drink-umeshu-5easy-mixes",
+    title: "【微醺解密】梅酒怎麼喝？從氣泡水到咖啡，5種梅酒調飲比例與搭配指南",
+    excerpt: "在家也能輕鬆調！5種梅酒搭配，喝出新花樣",
+    cover: "/assets/images/blog/id9封面.webp",
+    date: "2026/10/28",
+    author: "酉時喝酒",
+    mainTags: ["酉時圖書館"],
+    subTags: ["果實酒"],
+    relatedProductIds: [11, 10, 12, 8]
+  },
 
 ];
 // 強制掛載到全域 window 物件以確保跨腳本讀取
