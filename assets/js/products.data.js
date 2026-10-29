@@ -2,7 +2,7 @@ const CDN = "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto";
 const products = [
   {
     id: 1,
-    priority: 3,
+    priority: 4,
     name: "梅侍純釀 紅玉紅茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -44,7 +44,7 @@ const products = [
   },
 {
     id: 2,
-    priority: 3,
+    priority: 4,
     name: "梅侍純釀 碧螺春綠茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -83,7 +83,7 @@ const products = [
   },
 {
     id: 3,
-    priority: 3,
+    priority: 4,
     name: "梅侍純釀 凍頂烏龍茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -123,7 +123,7 @@ const products = [
   },
 {
     id: 4,
-    priority: 3,
+    priority: 4,
     name: "梅侍純釀 東方美人茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -164,7 +164,7 @@ const products = [
   },
 {
     id: 5,
-    priority: 4,
+    priority: 5,
     name: "天吹 抹茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -202,7 +202,7 @@ const products = [
   },
 {
     id: 6,
-    priority: 4,
+    priority: 5,
     name: "天吹 伯爵紅茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -240,7 +240,7 @@ const products = [
   },
 {
     id: 7,
-    priority: 4,
+    priority: 5,
     name: "天吹 京都千年抹茶酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -440,7 +440,7 @@ const products = [
   },
 {
     id: 12,
-    priority: 4,
+    priority: 3,
     name: "若鶴 梅酒威士忌 UMESKY",
     type: "果實酒",
     category: "fruit-tea",
@@ -479,7 +479,7 @@ const products = [
   },
 {
     id: 13,
-    priority: 3,
+    priority: 4,
     name: "本坊 上等梅酒 知覽茶",
     type: "果實酒",
     category: "fruit-tea",
@@ -518,7 +518,7 @@ const products = [
   },
 {
     id: 14,
-    priority: 3,
+    priority: 4,
     name: "西吉田 八女綠茶梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -867,7 +867,7 @@ const products = [
   },
 {
     id: 23,
-    priority: 4,
+    priority: 3,
     name: "北川本家 八橋肉桂梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -3241,7 +3241,7 @@ const products = [
     },
 {
       id: 81,
-      priority: 4, 
+      priority: 5, 
       name: "梅侍 紅烏龍梅酒",
       type: "果實酒", 
       category: "fruit-tea", 
@@ -3291,7 +3291,7 @@ const products = [
     },
 {
       id: 82,
-      priority: 4, 
+      priority: 5, 
       name: "蓬萊泉 徐耀良 東方美人茶梅酒",
       type: "果實酒", 
       category: "fruit-tea", 
@@ -3339,7 +3339,7 @@ const products = [
     },
 {
       id: 83,
-      priority: 4, 
+      priority: 5, 
       name: "蓬萊泉 烹雪韻 生普洱茶梅酒",
       type: "果實酒", 
       category: "fruit-tea", 
@@ -5535,7 +5535,7 @@ const products = [
     },
     {
       id: 128,
-      priority: 5, 
+      priority: 4, 
       name: "本坊酒造 上等柚子梅酒",
       type: "果實酒", 
       category: "fruit-tea", 
