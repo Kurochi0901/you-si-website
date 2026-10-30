@@ -363,6 +363,64 @@ export const PROMOTIONS = [
   },
 
   /* =============================
+     【雙11・茶酒選物祭】茶酒系列 2 件 92 折（2026/10/30–11/12）
+     指定茶酒任選 2 件（含）以上 92 折，3 件、4 件以上同樣 92 折（不分級距）
+     ✏️  要調整哪幾瓶參與，改 targetIds 即可
+     ✏️  banner：11月雙十一1920.webp / 11月雙十一750.webp（原稿在 assets/images/1920、750，用 scripts/build-banner.js 轉檔）
+     ✏️  要關閉活動，把整個 block 註解掉即可
+  ============================= */
+  {
+    id: "double11-2026-tea-92",
+    type: "combo-ids",
+    stackable: false, // 與全站折扣碼、貓咪系列、國慶擇優，不疊加
+
+    label: "【雙11・茶酒選物祭】茶酒系列 2 件 92 折",
+    description: "指定茶酒任選 2 件（含）以上，該活動商品小計享 92 折",
+
+    // 梅侍純釀 1–4、天吹 5–7、本坊知覽茶 13、西吉田八女綠茶 14、梅侍紅烏龍 81、
+    // 蓬萊泉 東方美人 82・生普洱 83・包種茶柚子 127、渡邊 Hidama Green 121
+    targetIds: [
+      1, 2, 3, 4, 5, 6, 7, 13, 14, 81, 82, 83, 121, 127
+    ],
+
+    // ✏️ 活動期間 "YYYY-MM-DD"（留空字串=無限制；endAt 過了會自動失效）
+    startAt: "2026-10-30",
+    endAt:   "2026-11-12",
+
+    display: {
+      showOnOffersPage: true,
+      title: "🍵 雙11・茶酒選物祭",
+      summary: "茶香入酒，精選梅侍、天吹、蓬萊泉等 14 款茶酒，任選 2 件即享 92 折，3 件、4 件以上同樣 92 折。活動至 2026/11/12 止。",
+      bannerImage:       "/assets/images/home/11月雙十一1920.webp",
+      bannerImageMobile: "/assets/images/home/11月雙十一750.webp",
+      bannerLink: "",
+
+      cardBadge: "🍵雙11 茶酒2件92折",
+      cardBadgeDetail: "指定茶酒任選 2 件（含）以上，活動商品小計享 92 折。活動至 2026/11/12 止。"
+    },
+
+    hint: {
+      kind: "combo-ids",
+      minQty: 2
+    },
+
+    condition(ctx) {
+      if (!isPromoActive(this)) return false;  // ⏰ 活動期間外自動失效
+      const qty = ctx.items
+        .filter(p => this.targetIds.includes(p.id))
+        .reduce((s, p) => s + p.qty, 0);
+      return qty >= 2;
+    },
+
+    apply(ctx) {
+      const sub = ctx.items
+        .filter(p => this.targetIds.includes(p.id))
+        .reduce((s, p) => s + p.price * p.qty, 0);
+      return Math.round(sub * 0.08); // 92折 = 折抵 8%
+    }
+  },
+
+  /* =============================
      酉時之約：國慶（2026/10/01–10/31）
      指定酒款 95 折（無件數門檻）
      ✏️  要調整哪幾瓶參與，改 targetIds 即可
