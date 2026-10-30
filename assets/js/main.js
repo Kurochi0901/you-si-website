@@ -1128,17 +1128,24 @@ function applyPromotions(ctx){
   // 折扣碼包裝成條件式 promotion 後一併參與評選
   const activePromos = PROMOTIONS.concat(getActiveCouponPromotions());
 
-  // 不可疊加：取折抵金額最大的那個
-  let bestExclusive = null, bestDiscount = 0;
+  // 不可疊加：取折抵金額最大的那個；同一 stackGroup 的活動先加總成一個候選
+  const candidates = {};
   activePromos.filter(p => !p.stackable).forEach(p => {
     if(p.condition(ctx)){
+      const key = p.stackGroup || p.id;
+      const c = candidates[key] || (candidates[key] = { amount: 0, entries: [] });
       const discount = p.apply(ctx);
-      if(discount > bestDiscount){ bestDiscount = discount; bestExclusive = p; }
+      c.amount += discount;
+      c.entries.push({ id: p.id, label: p.label, amount: discount });
     }
   });
-  if(bestExclusive){
-    total -= bestDiscount; discountTotal += bestDiscount;
-    applied.push({ id: bestExclusive.id, label: bestExclusive.label, amount: bestDiscount });
+  let best = null;
+  Object.values(candidates).forEach(c => {
+    if(c.amount > 0 && (!best || c.amount > best.amount)) best = c;
+  });
+  if(best){
+    total -= best.amount; discountTotal += best.amount;
+    best.entries.filter(e => e.amount > 0).forEach(e => applied.push(e));
   }
 
   // 可疊加：全部套用

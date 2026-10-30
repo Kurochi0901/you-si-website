@@ -14,6 +14,8 @@
    - startAt      → 活動開始日 "YYYY-MM-DD"（留空 = 無起始限制）
    - endAt        → 活動結束日 "YYYY-MM-DD"（留空 = 不會結束）
    - display      → 是否要在 /offers/ 頁面顯示為活動卡片
+   - stackGroup   → 選填；同組的不可疊加活動「折抵加總」成一個候選，再與其他活動擇優
+                    （同組活動須自行排除彼此重疊的商品，避免重複折）
 
    🖼 Banner 兩種尺寸：
    display.bannerImage       = 桌機版（1920 寬）
@@ -372,7 +374,8 @@ export const PROMOTIONS = [
   {
     id: "double11-2026-tea-92",
     type: "combo-ids",
-    stackable: false, // 與全站折扣碼、貓咪系列、國慶擇優，不疊加
+    stackable: false, // 與全站折扣碼、貓咪系列擇優，不疊加
+    stackGroup: "2026-oct-nov", // 與國慶 95 折同組合併計算（茶酒 92 折＋其餘國慶酒款 95 折）
 
     label: "【雙11・茶酒選物祭】茶酒系列 2 件 92 折",
     description: "指定茶酒任選 2 件（含）以上，該活動商品小計享 92 折",
@@ -431,6 +434,7 @@ export const PROMOTIONS = [
     id: "national-day-2026-95",
     type: "combo-ids",
     stackable: false, // 與全站折扣碼、貓咪系列擇優，不疊加
+    stackGroup: "2026-oct-nov", // 與雙11茶酒同組合併計算；茶酒成立時，茶酒名單內的商品改走 92 折
 
     label: "酉時之約：國慶 — 指定酒款 95 折",
     description: "指定酒款不限件數，該活動商品小計享 95 折",
@@ -460,14 +464,21 @@ export const PROMOTIONS = [
 
     // 無件數門檻 → 不需要 hint（hint 是用來提示「再買 N 件就享優惠」）
 
+    /** 雙11茶酒成立時，茶酒名單內的商品已享 92 折，這裡排除避免重複折 */
+    eligibleItems(ctx) {
+      const tea = PROMOTIONS.find(p => p.id === "double11-2026-tea-92");
+      const teaOn = tea && tea.condition(ctx);
+      return ctx.items.filter(p =>
+        this.targetIds.includes(p.id) && !(teaOn && tea.targetIds.includes(p.id)));
+    },
+
     condition(ctx) {
       if (!isPromoActive(this)) return false;  // ⏰ 活動期間外自動失效
-      return ctx.items.some(p => this.targetIds.includes(p.id));
+      return this.eligibleItems(ctx).length > 0;
     },
 
     apply(ctx) {
-      const sub = ctx.items
-        .filter(p => this.targetIds.includes(p.id))
+      const sub = this.eligibleItems(ctx)
         .reduce((s, p) => s + p.price * p.qty, 0);
       return Math.round(sub * 0.05); // 95折 = 折抵 5%
     }
