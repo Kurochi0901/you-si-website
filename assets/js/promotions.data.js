@@ -448,7 +448,7 @@ export const PROMOTIONS = [
 
     // ✏️ 活動期間 "YYYY-MM-DD"（留空字串=無限制；endAt 過了會自動失效）
     startAt: "2026-10-01",
-    endAt:   "2026-10-31",
+    endAt:   "2026-10-29",
 
     display: {
       showOnOffersPage: true,
