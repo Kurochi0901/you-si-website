@@ -50,7 +50,9 @@
 <link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/product-page.css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E4%B8%AD%E4%BB%8B%E5%93%81%E5%95%86%E5%BA%97%E6%9C%A8%E6%9C%AC%E6%A0%BC%E6%AC%BE%E7%87%92%E7%9B%B8%E7%9C%A0%E7%B4%B9%E8%A6%8F%E9%85%8E%E9%85%92%E9%97%9C%E9%99%B6%E9%BA%A5%E9%BB%91%EF%BC%8C%EF%BC%9A">
 
 <script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
@@ -81,7 +83,7 @@
     "url": "https://www.yousi-drink.com/products/spirits/黑木本店-陶眠中中-麥燒酎/",
     "priceCurrency": "TWD",
     "price": 2500,
-    "priceValidUntil": "2027-10-31",
+    "priceValidUntil": "2027-11-06",
     "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/NewCondition",
     "eligibleRegion": { "@type": "Country", "name": "TW" },
@@ -223,65 +225,57 @@
       </div>
 
       <h1 class="pdp-title">黑木本店 陶眠中中 麥燒酎</h1>
-      <p class="pdp-subtitle">陶甕兩年歲月淬鍊，絲綢般柔順的焦糖麥香｜720ml｜酒精 28%</p>
+      <p class="pdp-subtitle">陶甕兩年歲月淬鍊，絲綢般柔順的焦糖麥香</p>
+      <p class="pdp-facts">720ml｜酒精 28%｜日本</p>
 
       <div class="pdp-price-box">
         <span class="pdp-price-now">NT$2,500</span>
-        <span class="pdp-price-origin">NT$2,600</span>
+        <s class="pdp-price-origin"><span class="pdp-sr">原價 </span>NT$2,600</s>
         <span class="pdp-price-save">省 $100</span>
       </div>
-      <hr class="pdp-divider">
 
       <div class="pdp-cta">
         <button class="pdp-btn-cart" onclick="addToCart(88)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           加入購物車
         </button>
+        <a class="pdp-btn-line" data-line-link href="https://line.me/ti/p/@008jcfgc" target="_blank" rel="noopener">用 LINE 詢問這款酒</a>
       </div>
+      
+      <ul class="pdp-service">
+        <li>新竹竹北預約自取</li>
+        <li>全台宅配</li>
+        <li>LINE 線上客服</li>
+      </ul>
 
-      <div class="pdp-tabs">
-        <button class="pdp-tab active" onclick="switchTab(0)">酒款特色</button>
-        <button class="pdp-tab" onclick="switchTab(1)">風味圖譜</button>
-        <button class="pdp-tab" onclick="switchTab(2)">產品規格</button>
-      </div>
 
-      <div class="pdp-tab-panel active" id="tab-0">
-        <p class="pdp-feature-text">「陶眠中中」是將經典的中中原酒，封存於特製陶甕中歷經兩年時光淬鍊後的成熟之作。
-	嚴選九州大麥與手工製麴，在陶甕的呼吸作用下，酒體蛻變得如絲綢般細膩柔順，展現出紮實且具力量感的穀物層次。
-	初聞是迷人的焦香與麥芽甜感，入口後，濃烈的麥香在舌尖化開，隨後浮現如咖啡與可可般的微苦回甘，風味深遠且餘韻悠長。無論是加冰感受其醇厚重感，或以熱水兌飲激發麥芽溫潤的深度，皆能體驗到這份與時光共舞的極致層次。</p>
-      </div>
-
-      <div class="pdp-tab-panel" id="tab-1">
-        <div class="pdp-scales">
-          <p style="color:var(--muted);font-size:14px;">此類型酒款不提供風味刻度</p>
+      <section class="pdp-section" aria-labelledby="pdpStoryTitle">
+        <h2 class="pdp-section-title" id="pdpStoryTitle">酒款介紹</h2>
+        <div class="pdp-story">
+          <p>「陶眠中中」是將經典的中中原酒，封存於特製陶甕中歷經兩年時光淬鍊後的成熟之作。</p>
+          <p>嚴選九州大麥與手工製麴，在陶甕的呼吸作用下，酒體蛻變得如絲綢般細膩柔順，展現出紮實且具力量感的穀物層次。</p>
+          <p>初聞是迷人的焦香與麥芽甜感，入口後，濃烈的麥香在舌尖化開，隨後浮現如咖啡與可可般的微苦回甘，風味深遠且餘韻悠長。無論是加冰感受其醇厚重感，或以熱水兌飲激發麥芽溫潤的深度，皆能體驗到這份與時光共舞的極致層次。</p>
         </div>
-      </div>
+      </section>
 
-      <div class="pdp-tab-panel" id="tab-2">
+      <section class="pdp-section" aria-labelledby="pdpSpecTitle">
+        <h2 class="pdp-section-title" id="pdpSpecTitle">規格</h2>
         <table class="pdp-spec-table">
-            <tr><td>品牌</td><td>黑木本店</td></tr>
-            <tr><td>產地</td><td>日本</td></tr>
-            <tr><td>酒精濃度</td><td>28%</td></tr>
-            <tr><td>容量</td><td>720ml</td></tr>
-            <tr><td>類型</td><td>烈酒</td></tr>
+            <tr><th scope="row">品牌</th><td>黑木本店</td></tr>
+            <tr><th scope="row">產地</th><td>日本</td></tr>
+            <tr><th scope="row">酒精濃度</th><td>28%</td></tr>
+            <tr><th scope="row">容量</th><td>720ml</td></tr>
+            <tr><th scope="row">類型</th><td>烈酒</td></tr>
         </table>
-      </div>
+      </section>
 
-    </div>
-  </div>
-
-  <div class="pdp-trust-strip">
-    <div class="pdp-trust-strip-inner">
-      <span class="pdp-trust-chip">📦 新竹 預約自取</span>
-      <span class="pdp-trust-chip">💬 LINE 即時客服</span>
-      <span class="pdp-trust-chip">🍶 嚴選品質保障</span>
     </div>
   </div>
 
   <section class="pdp-related">
     <div class="pdp-related-header">
       <h2 class="pdp-related-title">相關商品</h2>
-      <a href="/products/spirits/" class="pdp-related-link">查看全部烈酒 →</a>
+      <a href="/products/spirits/" class="pdp-related-link">查看全部烈酒</a>
     </div>
     <div class="pdp-related-grid" id="pdpRelatedGrid"></div>
   </section>
@@ -336,11 +330,6 @@
   window.pdpNext = function() { idx = (idx + 1) % imgs.length; update(); };
   window.pdpGo = function(i) { idx = i; update(); };
 })();
-
-function switchTab(n) {
-  document.querySelectorAll(".pdp-tab").forEach(function(t, i) { t.classList.toggle("active", i === n); });
-  document.querySelectorAll(".pdp-tab-panel").forEach(function(p, i) { p.classList.toggle("active", i === n); });
-}
 
 function openZoom() {
   var img = document.getElementById("pdpMainImg");

@@ -50,7 +50,9 @@
 <link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/product-page.css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E4%B8%AD%E4%BA%BA%E4%BB%8B%E4%BE%8D%E5%8E%9A%E5%91%B3%E5%93%81%E5%95%86%E5%9D%87%E5%BA%A6%E5%BA%A7%E6%96%B9%E6%9D%B1%E6%A0%BC%E6%A2%85%E6%A8%99%E6%AC%BE%E6%B8%85%E6%BF%83%E7%88%BD%E7%94%9C%E7%9B%B8%E7%B4%94%E7%B4%B9%E7%BE%8E%E8%8C%B6%E8%96%84%E8%A1%A1%E8%A6%8F%E9%81%A9%E9%83%81%E9%85%92%E9%85%B8%E9%87%80%E9%97%9C%E9%A2%A8%EF%BC%8C%EF%BC%9A">
 
 <script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
@@ -81,7 +83,7 @@
     "url": "https://www.yousi-drink.com/products/mini/梅侍純釀-東方美人茶梅酒/",
     "priceCurrency": "TWD",
     "price": 405,
-    "priceValidUntil": "2027-10-31",
+    "priceValidUntil": "2027-11-06",
     "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/NewCondition",
     "eligibleRegion": { "@type": "Country", "name": "TW" },
@@ -219,102 +221,124 @@
 
       <div class="pdp-badges">
         <span class="pdp-badge pdp-badge--recommend">✦ 推薦</span>
-        <span class="pdp-badge pdp-badge--award">🏆 2024年 ISC國際烈酒大賽 金牌</span>
-        <span class="pdp-badge pdp-badge--award">🏆 2026 IWSC國際烈酒大賽 金牌</span>
-        <span class="pdp-badge pdp-badge--award">🏆 選用世界19冠金牌製茶師 張家齊師傅 的茶葉</span>
+        <span class="pdp-badge pdp-badge--award">2024年 ISC國際烈酒大賽 金牌</span>
+        <span class="pdp-badge pdp-badge--award">2026 IWSC國際烈酒大賽 金牌</span>
+        <span class="pdp-badge pdp-badge--award">選用世界19冠金牌製茶師 張家齊師傅 的茶葉</span>
         <span class="pdp-badge pdp-badge--category">小罐專區</span>
       </div>
 
       <h1 class="pdp-title">梅侍純釀 東方美人茶梅酒</h1>
-      <p class="pdp-subtitle">蜜香美人茶韻遇上甘潤梅果｜250ml｜酒精 10%</p>
+      <p class="pdp-subtitle">蜜香美人茶韻遇上甘潤梅果</p>
+      <p class="pdp-facts">250ml｜酒精 10%｜台灣・南投縣青梅・竹苗東方美人茶</p>
 
       <div class="pdp-price-box">
         <span class="pdp-price-now">NT$405</span>
-        <span class="pdp-price-origin">NT$480</span>
+        <s class="pdp-price-origin"><span class="pdp-sr">原價 </span>NT$480</s>
         <span class="pdp-price-save">省 $75</span>
       </div>
-      <hr class="pdp-divider">
 
       <div class="pdp-cta">
         <button class="pdp-btn-cart" onclick="addToCart(105)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           加入購物車
         </button>
+        <a class="pdp-btn-line" data-line-link href="https://line.me/ti/p/@008jcfgc" target="_blank" rel="noopener">用 LINE 詢問這款酒</a>
       </div>
+      
+      <ul class="pdp-service">
+        <li>新竹竹北預約自取</li>
+        <li>全台宅配</li>
+        <li>LINE 線上客服</li>
+      </ul>
 
-      <div class="pdp-tabs">
-        <button class="pdp-tab active" onclick="switchTab(0)">酒款特色</button>
-        <button class="pdp-tab" onclick="switchTab(1)">風味圖譜</button>
-        <button class="pdp-tab" onclick="switchTab(2)">產品規格</button>
-      </div>
-
-      <div class="pdp-tab-panel active" id="tab-0">
-        <p class="pdp-feature-text">🏆2024年 ISC國際烈酒大賽 金牌
-        🏆2026 IWSC國際烈酒大賽 金牌
-	🏆選用世界19冠金牌製茶師 張家齊師傅 的茶葉
-
-	全程不額外添加酒精，以自然發酵將糖分轉化為酒精，風味純淨自然。
-
-	嚴選東方美人茶入釀，天然蜜香與熟成果韻交織，襯托清甜梅果酸香。
-	入口圓潤柔順，花果茶韻層層綻放，
-	尾韻甘潤悠長，展現優雅細緻的茶梅酒風味。
-
-	原料：台灣產精選梅、東方美人茶、糖</p>
-      </div>
-
-      <div class="pdp-tab-panel" id="tab-1">
-        <div class="pdp-scales">
-          
-          <div class="pdp-scale-row">
-            <span class="pdp-scale-label">風味</span>
-            <div class="pdp-scale-track">
-              <div class="pdp-scale-bars" aria-label="風味：酸度 到 甜度">
-                <span></span><span></span><span class="on"></span><span></span><span></span>
-              </div>
-              <div class="pdp-scale-axis">
-                <span>酸度</span><span>甜度</span>
-              </div>
+      <section class="pdp-section pdp-flavor" aria-labelledby="pdpFlavorTitle">
+        <h2 class="pdp-section-title" id="pdpFlavorTitle">風味座標</h2>
+        <div class="pdp-flavor-body">
+          <div class="pdp-map">
+            <span class="pdp-map-ax pdp-map-ax--left">酸度</span>
+            <span class="pdp-map-ax pdp-map-ax--right">甜度</span>
+            <span class="pdp-map-ax pdp-map-ax--bottom">清爽</span>
+            <span class="pdp-map-ax pdp-map-ax--top">濃郁</span>
+            <div class="pdp-map-plot">
+            <a class="pdp-map-dot" href="/products/fruit-tea/梅侍純釀-紅玉紅茶梅酒/" style="left:50.00%;top:46.00%" aria-label="梅侍純釀 紅玉紅茶梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 紅玉紅茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/梅侍純釀-東方美人茶梅酒/" style="left:46.00%;top:50.00%" aria-label="梅侍純釀 東方美人茶梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 東方美人茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/天吹-伯爵紅茶梅酒/" style="left:54.00%;top:50.00%" aria-label="天吹 伯爵紅茶梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">天吹 伯爵紅茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/天吹-京都千年抹茶酒/" style="left:50.00%;top:54.00%" aria-label="天吹 京都千年抹茶酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">天吹 京都千年抹茶酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/梅侍純釀-香米梅酒/" style="left:46.00%;top:46.00%" aria-label="梅侍純釀 香米梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 香米梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/北海道十勝-白蘭地梅酒/" style="left:54.00%;top:46.00%" aria-label="北海道十勝 白蘭地梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">北海道十勝 白蘭地梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/若鶴-梅酒威士忌-UMESKY/" style="left:46.00%;top:54.00%" aria-label="若鶴 梅酒威士忌 UMESKY：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">若鶴 梅酒威士忌 UMESKY</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/西吉田-八女綠茶梅酒/" style="left:54.00%;top:54.00%" aria-label="西吉田 八女綠茶梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">西吉田 八女綠茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/河武釀造-鉾杉柚子酒/" style="left:50.00%;top:42.00%" aria-label="河武釀造 鉾杉柚子酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">河武釀造 鉾杉柚子酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/愛知國盛-水蜜桃風味酒/" style="left:42.00%;top:50.00%" aria-label="愛知國盛 水蜜桃風味酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">愛知國盛 水蜜桃風味酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/愛知國盛-水梨風味酒/" style="left:58.00%;top:50.00%" aria-label="愛知國盛 水梨風味酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">愛知國盛 水梨風味酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/愛知國盛-蜜柑風味酒/" style="left:50.00%;top:58.00%" aria-label="愛知國盛 蜜柑風味酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">愛知國盛 蜜柑風味酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/愛知國盛-白葡萄風味酒/" style="left:46.00%;top:42.00%" aria-label="愛知國盛 白葡萄風味酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">愛知國盛 白葡萄風味酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/精釀生薑青紫蘇酒/" style="left:54.00%;top:42.00%" aria-label="精釀生薑青紫蘇酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">精釀生薑青紫蘇酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/金ケ崎-鳥海梅花酒/" style="left:42.00%;top:46.00%" aria-label="金ケ崎 鳥海梅花酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">金ケ崎 鳥海梅花酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/池亀-浮露鳳梨果實酒/" style="left:58.00%;top:46.00%" aria-label="池亀 浮露鳳梨果實酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">池亀 浮露鳳梨果實酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/池亀-果凍梅酒/" style="left:42.00%;top:54.00%" aria-label="池亀 果凍梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">池亀 果凍梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/梅侍-紅烏龍梅酒/" style="left:58.00%;top:54.00%" aria-label="梅侍 紅烏龍梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">梅侍 紅烏龍梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/蓬萊泉-徐耀良-東方美人茶梅酒/" style="left:46.00%;top:58.00%" aria-label="蓬萊泉 徐耀良 東方美人茶梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">蓬萊泉 徐耀良 東方美人茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/蓬萊泉-烹雪韻-生普洱茶梅酒/" style="left:54.00%;top:58.00%" aria-label="蓬萊泉 烹雪韻 生普洱茶梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">蓬萊泉 烹雪韻 生普洱茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/mini/梅侍純釀-紅玉紅茶梅酒/" style="left:42.00%;top:42.00%" aria-label="梅侍純釀 紅玉紅茶梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 紅玉紅茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/mini/梅侍純釀-香米梅酒/" style="left:58.00%;top:42.00%" aria-label="梅侍純釀 香米梅酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 香米梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/蓬萊泉-乘興院-包種茶柚子酒/" style="left:42.00%;top:58.00%" aria-label="蓬萊泉 乘興院 包種茶柚子酒：酸甜均衡，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">蓬萊泉 乘興院 包種茶柚子酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/梅侍純釀-碧螺春綠茶梅酒/" style="left:50.00%;top:70.00%" aria-label="梅侍純釀 碧螺春綠茶梅酒：酸甜均衡，略偏清爽"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 碧螺春綠茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/本坊-上等梅酒-知覽茶/" style="left:50.00%;top:66.00%" aria-label="本坊 上等梅酒 知覽茶：酸甜均衡，略偏清爽"><span class="pdp-map-tip" aria-hidden="true">本坊 上等梅酒 知覽茶</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/堤酒造-晚白柚酒/" style="left:46.00%;top:70.00%" aria-label="堤酒造 晚白柚酒：酸甜均衡，略偏清爽"><span class="pdp-map-tip" aria-hidden="true">堤酒造 晚白柚酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/精釀菊花袖珍奇異果酒/" style="left:54.00%;top:70.00%" aria-label="精釀菊花袖珍奇異果酒：酸甜均衡，略偏清爽"><span class="pdp-map-tip" aria-hidden="true">精釀菊花袖珍奇異果酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/金ケ崎-蘋果餐前酒/" style="left:50.00%;top:74.00%" aria-label="金ケ崎 蘋果餐前酒：酸甜均衡，略偏清爽"><span class="pdp-map-tip" aria-hidden="true">金ケ崎 蘋果餐前酒</span></a>
+            <a class="pdp-map-dot" href="/products/mini/梅侍純釀-碧螺春綠茶梅酒/" style="left:46.00%;top:66.00%" aria-label="梅侍純釀 碧螺春綠茶梅酒：酸甜均衡，略偏清爽"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 碧螺春綠茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/本坊酒造-上等柚子梅酒/" style="left:54.00%;top:66.00%" aria-label="本坊酒造 上等柚子梅酒：酸甜均衡，略偏清爽"><span class="pdp-map-tip" aria-hidden="true">本坊酒造 上等柚子梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/梅侍純釀-凍頂烏龍茶梅酒/" style="left:50.00%;top:30.00%" aria-label="梅侍純釀 凍頂烏龍茶梅酒：酸甜均衡，略偏濃郁"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 凍頂烏龍茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/天吹-抹茶梅酒/" style="left:50.00%;top:26.00%" aria-label="天吹 抹茶梅酒：酸甜均衡，略偏濃郁"><span class="pdp-map-tip" aria-hidden="true">天吹 抹茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/梅侍純釀-果泥梅酒/" style="left:46.00%;top:30.00%" aria-label="梅侍純釀 果泥梅酒：酸甜均衡，略偏濃郁"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 果泥梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/愛知國盛-芒果風味酒/" style="left:54.00%;top:30.00%" aria-label="愛知國盛 芒果風味酒：酸甜均衡，略偏濃郁"><span class="pdp-map-tip" aria-hidden="true">愛知國盛 芒果風味酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/北川本家-八橋肉桂梅酒/" style="left:50.00%;top:34.00%" aria-label="北川本家 八橋肉桂梅酒：酸甜均衡，略偏濃郁"><span class="pdp-map-tip" aria-hidden="true">北川本家 八橋肉桂梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/mini/梅侍純釀-紅烏龍梅酒/" style="left:46.00%;top:26.00%" aria-label="梅侍純釀 紅烏龍梅酒：酸甜均衡，略偏濃郁"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 紅烏龍梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/mini/梅侍純釀-凍頂烏龍茶梅酒/" style="left:54.00%;top:26.00%" aria-label="梅侍純釀 凍頂烏龍茶梅酒：酸甜均衡，略偏濃郁"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 凍頂烏龍茶梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/mini/梅侍純釀-果泥梅酒/" style="left:46.00%;top:34.00%" aria-label="梅侍純釀 果泥梅酒：酸甜均衡，略偏濃郁"><span class="pdp-map-tip" aria-hidden="true">梅侍純釀 果泥梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/山形正宗-濃郁梅酒/" style="left:50.00%;top:10.00%" aria-label="山形正宗 濃郁梅酒：酸甜均衡，口感濃郁"><span class="pdp-map-tip" aria-hidden="true">山形正宗 濃郁梅酒</span></a>
+            <a class="pdp-map-dot" href="/products/fruit-tea/上喜元-柚子酒/" style="left:30.00%;top:50.00%" aria-label="上喜元 柚子酒：略偏酸，厚薄適中"><span class="pdp-map-tip" aria-hidden="true">上喜元 柚子酒</span></a>
+              <span class="pdp-map-self" style="left:50%;top:50%" role="img" aria-label="本款位置：酸甜均衡，厚薄適中"></span>
             </div>
           </div>
-          <div class="pdp-scale-row">
-            <span class="pdp-scale-label">口感</span>
-            <div class="pdp-scale-track">
-              <div class="pdp-scale-bars" aria-label="口感：清爽 到 濃郁">
-                <span></span><span></span><span class="on"></span><span></span><span></span>
-              </div>
-              <div class="pdp-scale-axis">
-                <span>清爽</span><span>濃郁</span>
-              </div>
-            </div>
+          <div class="pdp-flavor-text">
+            <p class="pdp-flavor-reading"><span class="pdp-flavor-part">酸甜均衡，</span><span class="pdp-flavor-part">厚薄適中</span></p>
+            <p class="pdp-flavor-help"><span class="pdp-legend pdp-legend--self" aria-hidden="true"></span>深色圓點是這一款。<br><span class="pdp-legend pdp-legend--peer" aria-hidden="true"></span>空心圓點是店內其他果實酒與茶酒，共 40 款，點一下可前往比較。</p>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="pdp-tab-panel" id="tab-2">
+      <section class="pdp-section" aria-labelledby="pdpStoryTitle">
+        <h2 class="pdp-section-title" id="pdpStoryTitle">酒款介紹</h2>
+        <div class="pdp-story">
+          <p>全程不額外添加酒精，以自然發酵將糖分轉化為酒精，風味純淨自然。</p>
+          <p>嚴選東方美人茶入釀，天然蜜香與熟成果韻交織，襯托清甜梅果酸香。</p>
+          <p>入口圓潤柔順，花果茶韻層層綻放，</p>
+          <p>尾韻甘潤悠長，展現優雅細緻的茶梅酒風味。</p>
+        </div>
+      </section>
+
+      <section class="pdp-section" aria-labelledby="pdpSpecTitle">
+        <h2 class="pdp-section-title" id="pdpSpecTitle">規格</h2>
         <table class="pdp-spec-table">
-            <tr><td>品牌</td><td>梅侍</td></tr>
-            <tr><td>產地</td><td>台灣・南投縣青梅・竹苗東方美人茶</td></tr>
-            <tr><td>酒精濃度</td><td>10%</td></tr>
-            <tr><td>容量</td><td>250ml</td></tr>
-            <tr><td>類型</td><td>小罐專區</td></tr>
+            <tr><th scope="row">品牌</th><td>梅侍</td></tr>
+            <tr><th scope="row">產地</th><td>台灣・南投縣青梅・竹苗東方美人茶</td></tr>
+            <tr><th scope="row">酒精濃度</th><td>10%</td></tr>
+            <tr><th scope="row">容量</th><td>250ml</td></tr>
+            <tr><th scope="row">類型</th><td>小罐專區</td></tr>
+            <tr><th scope="row">原料</th><td>台灣產精選梅、東方美人茶、糖</td></tr>
         </table>
-      </div>
+      </section>
 
-    </div>
-  </div>
-
-  <div class="pdp-trust-strip">
-    <div class="pdp-trust-strip-inner">
-      <span class="pdp-trust-chip">📦 新竹 預約自取</span>
-      <span class="pdp-trust-chip">💬 LINE 即時客服</span>
-      <span class="pdp-trust-chip">🍶 嚴選品質保障</span>
     </div>
   </div>
 
   <section class="pdp-related">
     <div class="pdp-related-header">
       <h2 class="pdp-related-title">相關商品</h2>
-      <a href="/products/mini/" class="pdp-related-link">查看全部小罐專區 →</a>
+      <a href="/products/mini/" class="pdp-related-link">查看全部小罐專區</a>
     </div>
     <div class="pdp-related-grid" id="pdpRelatedGrid"></div>
   </section>
@@ -369,11 +393,6 @@
   window.pdpNext = function() { idx = (idx + 1) % imgs.length; update(); };
   window.pdpGo = function(i) { idx = i; update(); };
 })();
-
-function switchTab(n) {
-  document.querySelectorAll(".pdp-tab").forEach(function(t, i) { t.classList.toggle("active", i === n); });
-  document.querySelectorAll(".pdp-tab-panel").forEach(function(p, i) { p.classList.toggle("active", i === n); });
-}
 
 function openZoom() {
   var img = document.getElementById("pdpMainImg");

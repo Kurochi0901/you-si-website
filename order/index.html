@@ -45,11 +45,15 @@
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/order.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789EILN%E3%80%81%E4%B8%80%E4%B8%8A%E4%BD%A0%E5%82%99%E5%87%BA%E5%88%B0%E5%8F%96%E5%95%8F%E5%96%AE%E5%A1%AB%E5%B7%AE%E5%B7%B2%E5%BC%8F%E6%96%99%E6%96%B9%E6%98%AF%E6%AC%BE%E6%AD%A5%E7%89%A9%E7%9A%84%E7%A9%BA%E7%B5%A1%E8%81%AF%E8%A8%BB%E8%A9%A2%E8%B2%A8%E8%B2%BC%E8%B3%87%E8%B3%BC%E8%BB%8A%E9%80%81%E9%81%B8%E9%82%84%E9%85%92%EF%BC%8C%EF%BC%9A">
 
 
 <script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
+<script defer src="/assets/js/order-page.js"></script>
 <script defer src="/assets/js/announcement_data.js"></script>
 
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
@@ -134,155 +138,106 @@
     </div>
   </div>
 
-  <main class="section">
-    <div class="kicker">下單與聯繫</div>
-    <h1>送出詢問單</h1>
-    <p class="mono" style="margin-top:4px; opacity:0.85;">酉時喝酒 YOU-SI｜LINE 一鍵下單．新竹竹北可預約自取．宅配冷藏／常溫均可．滿 NT$2,800 免運</p>
-    <!-- ✅ 下單成功 Modal（酉時喝酒・日系） -->
+  <main class="order-page" id="main">
+    <!--
+      ⚠️ 下單頁維護注意
+      - 送單核心 submitOrder()（main.js）屬「禁止修改」等級：它讀取下列 id，請勿改名或刪除
+        order-name / order-phone / order-email / order-pickup / order-address / order-note
+        shipTemp(radio name) / addrWrap / shipWrap / cartMini / couponBlock / promotionBlock
+        orderSuccessModal / orderSummaryText / goVerifyAfterOrder / goLineAfterOrder
+      - 頁面互動（即時驗證、取貨卡片、草稿暫存、空車狀態）在 /assets/js/order-page.js，
+        驗證通過才呼叫 submitOrder()
+    -->
+    <header class="order-intro">
+      <h1 class="order-title">送出詢問單</h1>
+      <p class="order-lede">填好資料送出後，到 LINE 貼上詢問單。專人確認品項、金額與取貨方式後，再轉帳付款。</p>
+      <ol class="order-progress" aria-label="下單步驟">
+        <li class="is-current" aria-current="step"><span aria-hidden="true">1</span>填寫並送出詢問單</li>
+        <li><span aria-hidden="true">2</span>LINE 專人確認</li>
+        <li><span aria-hidden="true">3</span>轉帳付款、取貨</li>
+      </ol>
+    </header>
+
+    <!-- ✅ 下單成功 Modal：送出後還差一步（到 LINE 貼上），所以不寫「完成」 -->
     <div
-    id="orderSuccessModal"
-    class="ys-modal-mask"
-    style="display:none;"
-    onclick="if(event.target===this) closeOrderSuccessModal()"
+      id="orderSuccessModal"
+      class="ys-modal-mask"
+      style="display:none;"
+      onclick="if(event.target===this) closeOrderSuccessModal()"
     >
-    <div class="ys-modal" role="dialog" aria-modal="true" aria-labelledby="ysOrderModalTitle">
-      <div class="ys-modal-head">
-        <div>
-          <div class="ys-modal-title" id="ysOrderModalTitle">感謝您在酉時喝酒下單</div>
-          <div class="ys-modal-sub">
-            我們已收到您的詢問單。<br>
-            請前往 LINE 官方帳號貼上以下內容，將由專人為您確認。
+      <div class="ys-modal order-done" role="dialog" aria-modal="true" aria-labelledby="ysOrderModalTitle">
+        <div class="ys-modal-head">
+          <div>
+            <div class="ys-modal-title" id="ysOrderModalTitle">還差一步：<span class="order-done-nowrap">到 LINE 貼上詢問單</span></div>
+            <div class="ys-modal-sub">詢問單已送出。專人會在 LINE 確認品項、金額與取貨方式，確認後再轉帳付款。</div>
           </div>
+          <button class="ys-modal-close" type="button" onclick="closeOrderSuccessModal()" aria-label="關閉">×</button>
         </div>
-        <button class="ys-modal-close" type="button" onclick="closeOrderSuccessModal()" aria-label="關閉">×</button>
-      </div>
 
-      <div class="ys-copy-row">
-        <div>
-          <div class="ys-copy-status is-ok" data-role="copyStatus">已複製訂單內容</div>
-          <div class="ys-copy-hint" data-role="copyHint">訂單內容已複製，請依下方步驟完成下單。</div>
+        <div class="order-done-copy">
+          <div>
+            <div class="ys-copy-status is-ok" data-role="copyStatus">已複製訂單內容</div>
+            <div class="ys-copy-hint" data-role="copyHint">訂單內容已複製，請依下方步驟完成下單。</div>
+          </div>
+          <button type="button" class="order-done-recopy" onclick="copyOrderSummaryFromModal()">再次複製</button>
         </div>
-      </div>
 
-      <textarea id="orderSummaryText" class="ys-summary" readonly></textarea>
+        <ol class="order-done-steps">
+          <li>
+            <div class="order-done-step-text">
+              <strong>第一次在酉時喝酒下單？</strong>
+              <span>依台灣法規須確認購買者為年滿 18 歲本人，身分驗證只需要做一次。</span>
+            </div>
+            <a id="goVerifyAfterOrder" class="order-done-btn" href="#" target="_blank" rel="noopener">前往身分驗證</a>
+          </li>
+          <li>
+            <div class="order-done-step-text">
+              <strong>到 LINE 貼上詢問單</strong>
+              <span>已驗證過的老顧客，可以直接從這一步開始。</span>
+            </div>
+            <a id="goLineAfterOrder" class="order-done-btn order-done-btn--primary" href="#" target="_blank" rel="noopener">前往 LINE 貼上</a>
+          </li>
+        </ol>
 
-      <div style="margin-top:14px; padding:14px 16px; background:rgba(184,154,106,0.10); border:1px solid rgba(184,154,106,0.35); border-radius:4px; font-size:13.5px; line-height:1.85; color:#5c4a32;">
-        依台灣法規，酒類訂單需確認購買者為<strong>年滿 18 歲本人</strong>。<br>
-        ・<strong>首次於酉時喝酒下單：</strong>請先完成身分驗證，僅需一次。<br>
-        ・<strong>已完成驗證的老顧客：</strong>可直接前往 LINE 貼上訂單。
-      </div>
+        <details class="order-done-detail">
+          <summary>查看詢問單內容</summary>
+          <textarea id="orderSummaryText" class="ys-summary" readonly rows="8" aria-label="詢問單內容"></textarea>
+        </details>
 
-      <div class="ys-modal-actions" style="flex-direction:column; gap:10px; align-items:stretch;">
-        <a id="goVerifyAfterOrder" class="ys-btn ys-btn-primary" href="#" target="_blank" rel="noopener" style="text-align:center;">
-          🪪 前往身分驗證（首次下單）
-        </a>
-        <a id="goLineAfterOrder" class="ys-btn" href="#" target="_blank" rel="noopener" style="text-align:center;">
-          💬 已完成驗證・前往 LINE 貼上訂單
-        </a>
-        <button class="ys-btn ys-btn-ghost" type="button" onclick="closeOrderSuccessModal({goHome:true})">回首頁</button>
+        <div class="order-done-foot">
+          <button class="order-done-home" type="button" onclick="closeOrderSuccessModal({goHome:true})">回首頁</button>
+        </div>
       </div>
     </div>
-    </div>
 
-
-    <div class="split">
-      <div class="panel">
-        <h2>購物車一鍵送出</h2>
-        <p>您在商品頁加入購物車後，可在此填寫聯絡資訊並送出。付款方式為「轉帳」，取貨方式可選「自取 / 郵寄」。</p>
-
-        
-        <div style="margin-top:10px">
-          <label>姓名（必填）</label>
-          <input class="input" id="order-name" placeholder="例如：王小明">
-        </div>
-
-        <div style="margin-top:10px">
-          <label>電話（必填）</label>
-          <input
-            class="input"
-            id="order-phone"
-            placeholder="例如：0912345678"
-            inputmode="tel"
-          >
-          <div class="form-error" id="err-phone"></div>
-        </div>
-
-        <div style="margin-top:10px">
-          <label>Email（必填）</label>
-          <input
-          class="input"
-          id="order-email"
-          type="email"
-          required
-          placeholder="例如：you@example.com"
-        >        
-        </div>
-
-        <div style="margin-top:10px">
-          <label>取貨方式（必填）</label>
-          <select class="select" id="order-pickup">
-            <option value="自取">自取</option>
-            <option value="郵寄">郵寄</option>
-          </select>
-        </div>
-
-        <div id="addrWrap" style="margin-top:10px; display:none;">
-          <label>郵寄地址（選擇郵寄必填）</label>
-          <input class="input" id="order-address" placeholder="請填寫完整收件地址">
-        </div>
-        <!-- 配送溫層（僅郵寄時顯示） -->
-        <div id="shipWrap" style="display:none;">
-          <label class="label">配送方式</label>
-
-          <div class="radio-row">
-            <label class="radio">
-              <input type="radio" name="shipTemp" value="常溫" checked>
-              <span>常溫（運費 NT$170）</span>
-            </label>
-
-            <label class="radio">
-              <input type="radio" name="shipTemp" value="冷藏">
-              <span>冷藏（運費 NT$230）</span>
-            </label>
-          </div>
-
-          <div class="hint" style="color: #b43c3c; font-weight: 700; margin-top: 8px;">
-            🚚 滿 NT$2800 免運（以折扣後商品金額計算）
-          </div>
-          <div class="hint" style="margin-top: 4px; font-size: 0.9em; opacity: 0.8;">
-            💡 清酒商品建議選擇「冷藏」配送，以確保最高品質。
-          </div>
-        </div>
-
-
-        <div id="noteWrap" style="margin-top:10px">
-          <label>備註（選填）</label>
-          <textarea class="input" id="order-note" rows="4" placeholder="例如：希望週末收件、（清酒商品請選冷藏配送）、想要偏甜推薦..."></textarea>
-        </div>
-               
-
-        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn btn-primary" onclick="submitOrder()">送出詢問單</button>
-          <!-- <a class="btn" data-line-link href="#">用 LINE 聯繫</a> -->
-        </div>
-
-        <p class="mono" style="margin-top:12px;">
-          付款方式：轉帳
-          自取：將由 LINE 與您確認取貨時間與地點 ,目前新竹據點為辦公室，無開放參觀選購
-          郵寄：請務必填寫完整地址</p>
-        <div class="order-notice">
-          <strong>重要提醒</strong><br>
-          遵循台灣法規 ,酒類交易依規定必須確認購買者為年滿18歲本人 ,送出後請至line進行實名身分驗證 ,以保障雙方的權益。
-        </div>
-
+    <!-- 空車狀態：order-page.js 依購物車內容切換 -->
+    <section class="order-empty" id="orderEmpty" hidden aria-labelledby="orderEmptyTitle">
+      <h2 class="order-empty-title" id="orderEmptyTitle">購物車還是空的</h2>
+      <p>先挑好酒款再回來填寫。不知道怎麼挑，也可以用口味找，或直接在 LINE 請我們推薦。</p>
+      <div class="order-empty-actions">
+        <a class="order-btn order-btn--primary" href="/products/">去挑酒</a>
+        <a class="order-btn" href="/#homeTasteTitle">用口味找酒</a>
+        <a class="order-btn order-btn--quiet" data-line-link href="https://line.me/ti/p/@008jcfgc" target="_blank" rel="noopener">LINE 請我們推薦</a>
       </div>
+    </section>
 
-      <div class="panel">
-        <h3>購物車內容</h3>
+    <div class="order-layout" id="orderLayout">
 
-        <div id="cartMini"></div>
-        <div id="couponBlock" class="coupon-block"></div>
-        <div id="promotionBlock" class="promotion-block"></div>
+      <!-- 右欄（手機在上方）：訂單摘要 -->
+      <aside class="order-summary" aria-labelledby="orderSummaryTitle">
+        <details class="order-summary-box" id="orderSummaryBox" open>
+          <summary class="order-summary-head">
+            <span class="order-summary-title" id="orderSummaryTitle">你的酒款</span>
+            <span class="order-summary-peek" id="orderSummaryPeek"></span>
+          </summary>
+          <div class="order-summary-body">
+            <div id="cartMini"></div>
+            <div class="order-ship-progress" id="orderShipProgress" hidden aria-live="polite"></div>
+            <div id="couponBlock" class="coupon-block"></div>
+            <div id="promotionBlock" class="promotion-block"></div>
+            <a class="order-summary-more" href="/products/">繼續選購</a>
+          </div>
+        </details>
 
         <script>
           // 等 promotions.bridge.js (module) 載入 COUPONS 後再渲染
@@ -290,15 +245,102 @@
             if (typeof renderCouponBlock === "function") renderCouponBlock();
           });
         </script>
+      </aside>
 
+      <!-- 左欄：表單 -->
+      <form class="order-form" id="orderForm" novalidate onsubmit="return false;">
 
-        <!-- <div style="margin-top:18px">
-          <h3>加入 LINE 官方帳號下單</h3>
-          <p>送出訂單後會開啟 LINE 官方帳號，你只要貼上訂單內容即可完成下單。</p>
-          <a class="btn" data-line-link href="#" target="_blank">前往 LINE 官方帳號</a>
-        </div> -->
+        <fieldset class="order-section">
+          <legend class="order-section-title">聯絡資料</legend>
 
-      </div>
+          <div class="order-field">
+            <label for="order-name">姓名</label>
+            <input id="order-name" name="name" type="text" autocomplete="name" required aria-describedby="err-name" placeholder="例如：王小明">
+            <div class="order-error" id="err-name" aria-live="polite"></div>
+          </div>
+
+          <div class="order-field">
+            <label for="order-phone">電話</label>
+            <input id="order-phone" name="tel" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="hint-phone err-phone" placeholder="例如：0912345678">
+            <div class="order-hint" id="hint-phone">手機或市話都可以，專人會用這支電話與你聯繫。</div>
+            <div class="order-error" id="err-phone" aria-live="polite"></div>
+          </div>
+
+          <div class="order-field">
+            <label for="order-email">Email</label>
+            <input id="order-email" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="err-email" placeholder="例如：you@example.com">
+            <div class="order-error" id="err-email" aria-live="polite"></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="order-section">
+          <legend class="order-section-title">取貨方式</legend>
+
+          <!-- 實際值仍由 #order-pickup 提供給 submitOrder()；畫面上用下面兩張卡片操作 -->
+          <select class="order-pickup-select" id="order-pickup" aria-hidden="true" tabindex="-1">
+            <option value="自取">自取</option>
+            <option value="郵寄">郵寄</option>
+          </select>
+
+          <div class="order-choices" role="radiogroup" aria-label="取貨方式">
+            <label class="order-choice">
+              <input type="radio" name="pickupChoice" value="自取" checked>
+              <span class="order-choice-body">
+                <span class="order-choice-title">新竹竹北預約自取<span class="order-choice-tag">不收運費</span></span>
+                <span class="order-choice-desc">專人在 LINE 與你約時間。自取點是辦公室，不開放現場選購。</span>
+              </span>
+            </label>
+            <label class="order-choice">
+              <input type="radio" name="pickupChoice" value="郵寄">
+              <span class="order-choice-body">
+                <span class="order-choice-title">宅配到府</span>
+                <span class="order-choice-desc">常溫 NT$170、冷藏 NT$230，折扣後滿 NT$2,800 免運。</span>
+              </span>
+            </label>
+          </div>
+
+          <div id="addrWrap" class="order-field order-sub" style="display:none;">
+            <label for="order-address">收件地址</label>
+            <input id="order-address" name="address" type="text" autocomplete="street-address" aria-describedby="err-address" placeholder="縣市、區、路名與門牌">
+            <div class="order-error" id="err-address" aria-live="polite"></div>
+          </div>
+
+          <div id="shipWrap" class="order-sub" style="display:none;">
+            <div class="order-sub-label" id="shipTempLabel">配送溫層</div>
+            <div class="order-temps" role="radiogroup" aria-labelledby="shipTempLabel">
+              <label class="order-temp">
+                <input type="radio" name="shipTemp" value="常溫" checked>
+                <span><strong>常溫</strong>NT$170</span>
+              </label>
+              <label class="order-temp">
+                <input type="radio" name="shipTemp" value="冷藏">
+                <span><strong>冷藏</strong>NT$230</span>
+              </label>
+            </div>
+            <div class="order-hint order-hint--warn" id="shipTempAdvice">清酒建議選冷藏，品質最穩定。</div>
+          </div>
+        </fieldset>
+
+        <fieldset class="order-section">
+          <legend class="order-section-title">備註<span class="order-optional">選填</span></legend>
+          <div class="order-field">
+            <label class="visually-hidden" for="order-note">備註</label>
+            <textarea id="order-note" name="note" rows="3" placeholder="例如：希望週末收件、想要偏甜的推薦"></textarea>
+          </div>
+        </fieldset>
+
+        <div class="order-submit">
+          <div class="order-submit-total">
+            <span>實付金額</span>
+            <strong id="orderPayTotal">—</strong>
+          </div>
+          <div class="order-error order-submit-error" id="err-submit" aria-live="assertive"></div>
+          <button class="order-submit-btn" id="orderSubmitBtn" type="button">送出詢問單</button>
+          <p class="order-submit-note">送出後會自動複製詢問單，並引導你到 LINE 貼上。專人確認後才需要轉帳付款，送出不會扣款。</p>
+          <p class="order-submit-note">依台灣法規，酒類交易須確認購買者為年滿 18 歲本人；第一次下單需完成一次身分驗證。</p>
+        </div>
+      </form>
+
     </div>
   </main>
 

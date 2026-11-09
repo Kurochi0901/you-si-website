@@ -1,0 +1,653 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-06T06:51:01.954Z",
+  "title": "Design System: 酉時喝酒 YOU-SI",
+  "extensions": {
+    "colorMeta": {
+      "jiaocha": {
+        "role": "primary",
+        "displayName": "焦茶",
+        "canonical": "#5c4a32",
+        "oklch": "oklch(42.1% 0.044 74.1)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#2c251c",
+          "#4f4332",
+          "#75634a",
+          "#98866e",
+          "#b9ac9b",
+          "#d7d0c6",
+          "#f1eeea"
+        ]
+      },
+      "yousi-gold": {
+        "role": "secondary",
+        "displayName": "酉時金",
+        "canonical": "#c9a87a",
+        "oklch": "oklch(75.0% 0.073 75.5)",
+        "tonalRamp": [
+          "#0e0b06",
+          "#2f2415",
+          "#554123",
+          "#7e6034",
+          "#a1845b",
+          "#bfab8f",
+          "#dbcfbf",
+          "#f3eee7"
+        ]
+      },
+      "yousi-gold-soft": {
+        "role": "secondary",
+        "displayName": "酉時金・淡",
+        "canonical": "#e3cda4",
+        "oklch": "oklch(85.6% 0.059 82.9)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#2c2518",
+          "#50432a",
+          "#77633d",
+          "#9a8763",
+          "#baac94",
+          "#d8d0c2",
+          "#f1eee8"
+        ]
+      },
+      "gold-text": {
+        "role": "secondary",
+        "displayName": "金褐字",
+        "canonical": "#7a5a35",
+        "oklch": "oklch(49.2% 0.067 69.2)",
+        "tonalRamp": [
+          "#0e0a07",
+          "#302417",
+          "#564027",
+          "#7f5f3a",
+          "#a28360",
+          "#c0aa92",
+          "#dbcfc1",
+          "#f3ede7"
+        ]
+      },
+      "washi-paper": {
+        "role": "neutral",
+        "displayName": "和紙",
+        "canonical": "#fbf6ea",
+        "oklch": "oklch(97.4% 0.017 88.0)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#282623",
+          "#48453e",
+          "#6a665b",
+          "#8d897f",
+          "#b1aea7",
+          "#d2d1cd",
+          "#efeeec"
+        ]
+      },
+      "page-bg": {
+        "role": "neutral",
+        "displayName": "頁面底",
+        "canonical": "#faf7f4",
+        "oklch": "oklch(97.8% 0.005 67.8)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#272625",
+          "#464543",
+          "#686563",
+          "#8b8986",
+          "#afadac",
+          "#d2d1d0",
+          "#efeeee"
+        ]
+      },
+      "card-white": {
+        "role": "neutral",
+        "displayName": "卡片白",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "warm-white": {
+        "role": "neutral",
+        "displayName": "暖白",
+        "canonical": "#fffdf9",
+        "oklch": "oklch(99.4% 0.006 84.6)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#272625",
+          "#464543",
+          "#676662",
+          "#8b8986",
+          "#afaeab",
+          "#d1d1cf",
+          "#efeeee"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "墨",
+        "canonical": "#231a12",
+        "oklch": "oklch(22.6% 0.021 63.1)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#2a2622",
+          "#4b433d",
+          "#6f645a",
+          "#92877e",
+          "#b4aca6",
+          "#d4d0cc",
+          "#f0eeec"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "墨・淡",
+        "canonical": "#4a3f35",
+        "oklch": "oklch(37.6% 0.022 64.3)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#2a2622",
+          "#4b433c",
+          "#706459",
+          "#92877c",
+          "#b4aca5",
+          "#d5d0cc",
+          "#f0eeec"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "灰褐",
+        "canonical": "#7a6f66",
+        "oklch": "oklch(54.9% 0.019 61.7)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#292622",
+          "#4b433d",
+          "#6f645b",
+          "#91877e",
+          "#b4aca6",
+          "#d4d0cc",
+          "#f0eeec"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "細線",
+        "canonical": "#ece6df",
+        "oklch": "oklch(92.8% 0.011 71.9)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#282624",
+          "#484440",
+          "#6a655f",
+          "#8d8882",
+          "#b1ada9",
+          "#d3d0ce",
+          "#efeeed"
+        ]
+      },
+      "field-line": {
+        "role": "neutral",
+        "displayName": "欄位線",
+        "canonical": "#e4d9c6",
+        "oklch": "oklch(88.9% 0.028 81.5)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#292620",
+          "#4b4439",
+          "#6e6554",
+          "#918878",
+          "#b4ada2",
+          "#d4d0ca",
+          "#f0eeeb"
+        ]
+      },
+      "error-red": {
+        "role": "error",
+        "displayName": "錯誤紅",
+        "canonical": "#a1372b",
+        "oklch": "oklch(48.8% 0.143 29.6)",
+        "tonalRamp": [
+          "#130806",
+          "#3f1914",
+          "#722b22",
+          "#a83e31",
+          "#cd6758",
+          "#e1998d",
+          "#f0c5be",
+          "#fdeae6"
+        ]
+      },
+      "pick-dark": {
+        "role": "tertiary",
+        "displayName": "店長精選深棕",
+        "canonical": "#2d1f0e",
+        "oklch": "oklch(25.2% 0.036 70.4)",
+        "tonalRamp": [
+          "#0d0b09",
+          "#2b251e",
+          "#4e4336",
+          "#746350",
+          "#968674",
+          "#b7ac9f",
+          "#d6d0c8",
+          "#f1eeeb"
+        ]
+      },
+      "pick-cream": {
+        "role": "tertiary",
+        "displayName": "奶油金",
+        "canonical": "#f5e0c0",
+        "oklch": "oklch(91.6% 0.048 78.4)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#2c251b",
+          "#4f4330",
+          "#756347",
+          "#98866b",
+          "#b9ac99",
+          "#d7d0c5",
+          "#f1eee9"
+        ]
+      },
+      "legacy-amber": {
+        "role": "tertiary",
+        "displayName": "舊琥珀",
+        "canonical": "#b48a63",
+        "oklch": "oklch(66.4% 0.074 63.9)",
+        "tonalRamp": [
+          "#0f0a07",
+          "#312316",
+          "#593f25",
+          "#845d37",
+          "#a7815d",
+          "#c3a890",
+          "#decec0",
+          "#f4ede7"
+        ]
+      },
+      "legacy-amber-light": {
+        "role": "tertiary",
+        "displayName": "舊琥珀・淺",
+        "canonical": "#d6b79b",
+        "oklch": "oklch(79.9% 0.052 64.1)",
+        "tonalRamp": [
+          "#0e0a08",
+          "#2e241b",
+          "#544130",
+          "#7c6046",
+          "#9e836b",
+          "#bdaa99",
+          "#dacfc5",
+          "#f2ede9"
+        ]
+      },
+      "dusk-sand": {
+        "role": "tertiary",
+        "displayName": "黃昏沙",
+        "canonical": "#f6ead2",
+        "oklch": "oklch(94.0% 0.034 84.6)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#2a261e",
+          "#4b4436",
+          "#6f6550",
+          "#928874",
+          "#b4ad9f",
+          "#d5d0c8",
+          "#f0eeeb"
+        ]
+      },
+      "dusk-honey": {
+        "role": "tertiary",
+        "displayName": "黃昏蜜",
+        "canonical": "#eed7ae",
+        "oklch": "oklch(88.8% 0.060 82.0)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#2d2518",
+          "#51432a",
+          "#77633d",
+          "#9a8663",
+          "#baac94",
+          "#d8d0c2",
+          "#f1eee8"
+        ]
+      },
+      "dusk-amber": {
+        "role": "tertiary",
+        "displayName": "黃昏琥珀",
+        "canonical": "#dcb37c",
+        "oklch": "oklch(79.1% 0.086 74.2)",
+        "tonalRamp": [
+          "#0e0a06",
+          "#312411",
+          "#59401b",
+          "#835e27",
+          "#a68251",
+          "#c3a989",
+          "#ddcfbc",
+          "#f4ede5"
+        ]
+      },
+      "dusk-ink": {
+        "role": "neutral",
+        "displayName": "黃昏墨",
+        "canonical": "#4a3826",
+        "oklch": "oklch(35.6% 0.039 66.0)",
+        "tonalRamp": [
+          "#0d0b09",
+          "#2c251e",
+          "#504235",
+          "#76624f",
+          "#998573",
+          "#b9ab9e",
+          "#d7cfc8",
+          "#f1eeea"
+        ]
+      },
+      "dusk-ink-deep": {
+        "role": "neutral",
+        "displayName": "黃昏墨・深",
+        "canonical": "#3e3227",
+        "oklch": "oklch(32.7% 0.025 64.3)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#2a2521",
+          "#4c433b",
+          "#716357",
+          "#94867b",
+          "#b5aca4",
+          "#d5d0cb",
+          "#f0eeec"
+        ]
+      },
+      "dusk-muted": {
+        "role": "neutral",
+        "displayName": "黃昏灰褐",
+        "canonical": "#6b5740",
+        "oklch": "oklch(47.1% 0.044 70.4)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#2c251d",
+          "#504233",
+          "#76624b",
+          "#99856f",
+          "#b9ab9c",
+          "#d8cfc6",
+          "#f1eeea"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display（明朝）",
+        "purpose": "商品頁品名 h1。"
+      },
+      "headline": {
+        "displayName": "Headline（明朝）",
+        "purpose": "首頁區塊標題。"
+      },
+      "title": {
+        "displayName": "Title（明朝）",
+        "purpose": "商品頁段落標題、酒類快捷列名稱。"
+      },
+      "item-name": {
+        "displayName": "Item name",
+        "purpose": "商品卡品名。"
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "現價，等寬數字。"
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "導言與內文，最寬約 36em。"
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "規格、口味短語、提示、麵包屑。"
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "所有按鈕文字；必須明確繼承 Noto Sans TC。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "soft-shadow",
+        "value": "0 10px 30px rgba(92,74,50,.08)",
+        "purpose": "主圖、風味座標、懸停後的卡片與選項。"
+      },
+      {
+        "name": "soft-shadow-sm",
+        "value": "0 4px 14px rgba(92,74,50,.07)",
+        "purpose": "搜尋列、預算膠囊、縮圖、選中的分頁。"
+      },
+      {
+        "name": "btn-shadow",
+        "value": "0 6px 16px rgba(92,74,50,.18)",
+        "purpose": "焦茶主要按鈕靜止狀態。"
+      },
+      {
+        "name": "btn-shadow-hover",
+        "value": "0 10px 22px rgba(92,74,50,.22)",
+        "purpose": "焦茶主要按鈕懸停。"
+      },
+      {
+        "name": "focus-glow",
+        "value": "0 0 0 4px rgba(201,168,122,.28)",
+        "purpose": "輸入框聚焦光暈。"
+      },
+      {
+        "name": "card-shadow-legacy",
+        "value": "0 10px 24px rgba(17,12,8,.06)",
+        "purpose": "商品卡靜止狀態（舊變數 --shadow2）。"
+      },
+      {
+        "name": "double-frame",
+        "value": "inset 0 0 0 3px #fbf6ea, inset 0 0 0 4px #e3cda4",
+        "purpose": "簽名雙線框的內線，只用在風味座標與下單傳票。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-soft",
+        "value": "cubic-bezier(.2,.7,.3,1)",
+        "purpose": "上浮與按下回饋的預設曲線。"
+      },
+      {
+        "name": "duration-state",
+        "value": ".2s",
+        "purpose": "顏色、框線、陰影的狀態轉換。"
+      },
+      {
+        "name": "lift-hover",
+        "value": "translateY(-1px)",
+        "purpose": "按鈕與膠囊懸停上浮；圖片與卡片為 -3px。"
+      },
+      {
+        "name": "press",
+        "value": "scale(.97–.98)",
+        "purpose": "按下時微微縮小。"
+      },
+      {
+        "name": "reduced-motion",
+        "value": "@media (prefers-reduced-motion: reduce)",
+        "purpose": "關閉 transition 與 transform。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "860px",
+        "purpose": "以下切換手機版：漢堡選單、底部固定列。"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "xs",
+        "value": "520px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button（焦茶）",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "每個視野唯一的主要動作：加入購物車、搜尋、送出訂單。",
+      "html": "<button class=\"ds-btn-primary\">加入購物車</button>",
+      "css": ".ds-btn-primary{font-family:\"Noto Sans TC\",system-ui,sans-serif;height:48px;padding:0 24px;font-size:15px;font-weight:700;letter-spacing:.04em;color:#fbf6ea;background:#5c4a32;border:1px solid #5c4a32;border-radius:999px;box-shadow:0 6px 16px rgba(92,74,50,.18);cursor:pointer;transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s cubic-bezier(.2,.7,.3,1)}.ds-btn-primary:hover{background:#231a12;border-color:#231a12;box-shadow:0 10px 22px rgba(92,74,50,.22);transform:translateY(-1px)}.ds-btn-primary:active{transform:scale(.98)}.ds-btn-primary:focus-visible{outline:2px solid #5c4a32;outline-offset:3px}"
+    },
+    {
+      "name": "Line Button（次要）",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "第二動作，例如「LINE 詢問這款酒」。",
+      "html": "<button class=\"ds-btn-line\">LINE 詢問這款酒</button>",
+      "css": ".ds-btn-line{font-family:\"Noto Sans TC\",system-ui,sans-serif;height:48px;padding:0 24px;font-size:15px;font-weight:700;letter-spacing:.04em;color:#5c4a32;background:#fff;border:1px solid #c9a87a;border-radius:999px;cursor:pointer;transition:background-color .2s ease,border-color .2s ease,transform .2s cubic-bezier(.2,.7,.3,1)}.ds-btn-line:hover{background:#fbf6ea;border-color:#5c4a32}.ds-btn-line:active{transform:scale(.98)}.ds-btn-line:focus-visible{outline:2px solid #5c4a32;outline-offset:3px}"
+    },
+    {
+      "name": "Legacy Amber Button（次要樣式）",
+      "kind": "button",
+      "refersTo": "button-legacy-amber",
+      "description": "舊版琥珀漸層，導覽列與舊頁面仍在用；不放在主要購買動作上。",
+      "html": "<button class=\"ds-btn-amber\">聯繫我們</button>",
+      "css": ".ds-btn-amber{font-family:\"Noto Sans TC\",system-ui,sans-serif;padding:10px 12px;font-size:13px;font-weight:600;color:#fff;background:linear-gradient(90deg,#b48a63,#d6b79b);border:none;border-radius:999px;cursor:pointer;transition:.2s ease}.ds-btn-amber:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(17,12,8,.06)}.ds-btn-amber:focus-visible{outline:2px solid #5c4a32;outline-offset:2px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "下單頁欄位：暖白底，聚焦時出現酉時金光暈。",
+      "html": "<label class=\"ds-field\"><span>收件人姓名</span><input type=\"text\" placeholder=\"王小明\"></label>",
+      "css": ".ds-field{font-family:\"Noto Sans TC\",system-ui,sans-serif;display:block;max-width:360px}.ds-field span{display:block;margin-bottom:8px;font-size:14px;font-weight:700;color:#231a12}.ds-field input{display:block;width:100%;box-sizing:border-box;min-height:48px;padding:11px 14px;font:inherit;font-size:16px;line-height:1.5;color:#231a12;background:#fffdf9;border:1px solid #e4d9c6;border-radius:12px;transition:border-color .15s ease,box-shadow .15s ease}.ds-field input::placeholder{color:#aaa197}.ds-field input:focus{outline:none;background:#fff;border-color:#c9a87a;box-shadow:0 0 0 4px rgba(201,168,122,.28)}"
+    },
+    {
+      "name": "Search Pill",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "首頁搜尋：輸入框與焦茶按鈕組成一整條膠囊。",
+      "html": "<form class=\"ds-search\" onsubmit=\"return false\"><input placeholder=\"例如：梅酒、吟釀、甘口\"><button>搜尋</button></form>",
+      "css": ".ds-search{font-family:\"Noto Sans TC\",system-ui,sans-serif;display:flex;max-width:480px;border-radius:999px;box-shadow:0 4px 14px rgba(92,74,50,.07)}.ds-search input{flex:1;min-width:0;height:46px;padding:0 14px 0 20px;font:inherit;font-size:16px;color:#231a12;background:#fffdf9;border:1px solid #e4d9c6;border-right:none;border-radius:999px 0 0 999px}.ds-search input:focus{outline:none;border-color:#c9a87a;box-shadow:0 0 0 4px rgba(201,168,122,.28)}.ds-search button{height:46px;padding:0 26px;font:inherit;font-size:15px;font-weight:700;letter-spacing:.04em;color:#fbf6ea;background:#5c4a32;border:1px solid #5c4a32;border-radius:0 999px 999px 0;cursor:pointer;box-shadow:0 6px 16px rgba(92,74,50,.18);transition:background-color .2s ease}.ds-search button:hover{background:#231a12}.ds-search button:focus-visible{outline:2px solid #5c4a32;outline-offset:3px}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "白底 sticky header；灰褐膠囊連結，目前頁面為淡米色底。",
+      "html": "<header class=\"ds-nav\"><span class=\"ds-logo\">酉時喝酒 YOU-SI</span><nav><a class=\"is-active\" href=\"#\">首頁</a><a href=\"#\">關於</a><a href=\"#\">商品分類</a><a href=\"#\">品飲活動</a></nav></header>",
+      "css": ".ds-nav{font-family:\"Noto Sans TC\",system-ui,sans-serif;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;background:#fff;border-bottom:1px solid rgba(0,0,0,.04);box-shadow:0 2px 16px rgba(0,0,0,.04)}.ds-logo{font-size:15px;font-weight:800;letter-spacing:.12em;color:#231a12}.ds-nav nav{display:flex;gap:6px}.ds-nav a{font-size:14px;color:#7a6f66;padding:8px 10px;border-radius:999px;text-decoration:none;transition:.2s ease}.ds-nav a:hover{background:#f6f1eb;color:#231a12}.ds-nav a.is-active{background:#f0e7dc;color:#231a12;font-weight:700}.ds-nav a:focus-visible{outline:2px solid #5c4a32;outline-offset:2px}"
+    },
+    {
+      "name": "Pick Tags",
+      "kind": "chip",
+      "refersTo": "tag-pick",
+      "description": "priority 5「店長精選」與 priority 4「推薦」徽章。",
+      "html": "<span class=\"ds-tag ds-tag--5\">✦ 店長精選</span> <span class=\"ds-tag ds-tag--4\">✦ 推薦</span>",
+      "css": ".ds-tag{font-family:\"Noto Sans TC\",system-ui,sans-serif;display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;line-height:1.6;padding:3px 12px;border:1.5px solid #c9a87a;border-radius:999px;white-space:nowrap}.ds-tag--5{background:#2d1f0e;color:#f5e0c0}.ds-tag--4{background:transparent;color:#8a5e16}"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "card-product",
+      "description": "徽章 → 品名 → 一句話 → 口味短語 → 價格＋加入購物車。",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-img\"></div><div class=\"ds-card-body\"><span class=\"ds-tag5\">✦ 店長精選</span><h3>純米大吟釀 初花 金魚台輪</h3><p class=\"ds-spec\">兩百年祭典神韻，高雅清冽</p><p class=\"ds-flavor\">甘辛適中，米旨與果香均衡</p><div class=\"ds-row\"><span class=\"ds-price\">NT$1,890 <s>NT$2,100</s></span><button>加入購物車</button></div></div></article>",
+      "css": ".ds-card{font-family:\"Noto Sans TC\",system-ui,sans-serif;width:240px;background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:18px;box-shadow:0 10px 24px rgba(17,12,8,.06);transition:.28s ease;overflow:hidden}.ds-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(92,74,50,.08)}.ds-card-img{aspect-ratio:1/1;background:#fbf6ea}.ds-card-body{padding:14px}.ds-tag5{display:inline-block;font-size:10px;font-weight:700;padding:3px 12px;background:#2d1f0e;color:#f5e0c0;border:1.5px solid #c9a87a;border-radius:999px}.ds-card h3{margin:6px 0 4px;font-size:16px;font-weight:700;color:#231a12}.ds-spec{margin:0;font-size:13px;color:#7a6f66}.ds-flavor{display:flex;align-items:center;gap:6px;margin:6px 0 0;font-size:12px;line-height:1.5;color:#7a5a35}.ds-flavor::before{content:\"\";width:7px;height:7px;border-radius:50%;background:#5c4a32;box-shadow:0 0 0 1.5px #fbf6ea,0 0 0 2.5px #c9a87a}.ds-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}.ds-price{font-size:20px;font-weight:900;color:#231a12;font-variant-numeric:tabular-nums}.ds-price s{display:block;font-size:14px;font-weight:400;color:#999}.ds-card button{font:inherit;font-size:13px;font-weight:700;letter-spacing:.04em;padding:10px 12px;color:#fbf6ea;background:#5c4a32;border:1px solid #5c4a32;border-radius:999px;box-shadow:0 6px 16px rgba(92,74,50,.18);cursor:pointer;transition:background-color .2s ease,transform .2s cubic-bezier(.2,.7,.3,1)}.ds-card button:hover{background:#231a12;transform:translateY(-1px)}.ds-card button:active{transform:scale(.97)}.ds-card button:focus-visible{outline:2px solid #5c4a32;outline-offset:2px}"
+    },
+    {
+      "name": "風味座標",
+      "kind": "custom",
+      "refersTo": "flavor-map",
+      "description": "全站唯一的視覺重點：和紙底加簽名雙線框，焦茶圓點標出本款。",
+      "html": "<div class=\"ds-map\"><span class=\"ds-ax ds-ax-t\">華麗</span><span class=\"ds-ax ds-ax-b\">穩重</span><span class=\"ds-ax ds-ax-l\">甘口</span><span class=\"ds-ax ds-ax-r\">辛口</span><i class=\"ds-dot\"></i></div>",
+      "css": ".ds-map{font-family:\"Noto Sans TC\",system-ui,sans-serif;position:relative;width:260px;aspect-ratio:1/1;background:#fbf6ea;border:1px solid #c9a87a;border-radius:20px;box-shadow:inset 0 0 0 3px #fbf6ea,inset 0 0 0 4px #e3cda4,0 10px 30px rgba(92,74,50,.08);background-image:linear-gradient(#e3cda4,#e3cda4),linear-gradient(#e3cda4,#e3cda4);background-size:1px 70%,70% 1px;background-position:center;background-repeat:no-repeat}.ds-ax{position:absolute;font-size:12px;color:#7a5a35}.ds-ax-t{top:12px;left:50%;transform:translateX(-50%)}.ds-ax-b{bottom:12px;left:50%;transform:translateX(-50%)}.ds-ax-l{left:12px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl}.ds-ax-r{right:12px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl}.ds-dot{position:absolute;left:58%;top:44%;width:10px;height:10px;border-radius:50%;background:#5c4a32;box-shadow:0 0 0 2px #fbf6ea,0 0 0 3px #c9a87a}"
+    },
+    {
+      "name": "Section Head",
+      "kind": "custom",
+      "refersTo": "typography.headline",
+      "description": "首頁區塊標題：明朝體標題配右側底線連結。",
+      "html": "<div class=\"ds-head\"><h2>本月精選</h2><a href=\"#\">看全部酒款</a></div>",
+      "css": ".ds-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;width:min(100%,640px)}.ds-head h2{font-family:\"Noto Serif TC\",\"Songti TC\",PMingLiU,serif;margin:0;font-size:24px;font-weight:600;letter-spacing:.04em;line-height:1.4;color:#231a12}.ds-head a{font-family:\"Noto Sans TC\",system-ui,sans-serif;font-size:14px;font-weight:600;color:#5c4a32;text-decoration:none;border-bottom:1px solid #e3cda4;padding-bottom:1px;transition:border-color .2s}.ds-head a:hover{border-bottom-color:#5c4a32}.ds-head a:focus-visible{outline:2px solid #5c4a32;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "黃昏酒桌",
+    "overview": "酉時是夜幕將臨、一天慢下來的時刻。整個介面就是那張擺好的酒桌：米白和紙般的底色、焦茶色的木質重量、一道細細的酉時金描邊，光線溫暖但不刺眼。頁面不催促，而是像店主把酒一支支擺上桌、說清楚每一支是什麼味道，讓入門者與送禮的人都選得下手。\n\n密度屬於「好逛的選品店」：商品卡片整齊排列、資訊精簡（品名、一句話、口味短語、價格、加入購物車），重心放在一個真正有用的視覺重點上，也就是**風味座標**。其餘一律安靜。2026-11 的柔和版是現行標準：大圓角、暖棕色的柔和陰影取代硬線，按鈕是膠囊形，懸停時輕輕浮起、按下時微微下沉。「金縁和紙」的雙細線框保留給簽名元件（風味座標、下單傳票），不再當成全站通用的框線語言。\n\n已確認拒絕的方向：**大型量販風**（紅黃促銷、爆炸標籤、滿版折扣字）與**冷調科技風**（灰藍、純白、過度極簡的 SaaS 感）。",
+    "keyCharacteristics": [
+      "暖白和紙底＋焦茶主色＋酉時金細線，全站沒有冷色。",
+      "標題用明朝體（Noto Serif TC）呼應酒標，內文與介面用 Noto Sans TC。",
+      "柔和陰影一律帶暖棕色調（rgba 92,74,50），不使用純黑陰影。",
+      "每個畫面只有一個視覺重點；其他元素退後。首頁首屏的重點是「本月精選輪盤」，往下捲到「用口味找酒」時才輪到風味座標。",
+      "動態輕、短、可關閉（全面支援 `prefers-reduced-motion`）。"
+    ],
+    "rules": [
+      {
+        "name": "The 無冷色 Rule",
+        "body": "全站沒有藍、灰藍或中性冷灰。即使是錯誤狀態也用磚紅（error-red），不用正紅。",
+        "section": "colors"
+      },
+      {
+        "name": "The 金是光不是牆 Rule",
+        "body": "酉時金只用在 1–1.5px 的線、進度條、徽章描邊與光暈。需要「金色文字」時改用金褐字（gold-text）。",
+        "section": "colors"
+      },
+      {
+        "name": "The 一個焦茶 Rule",
+        "body": "同一個視野裡只有一個焦茶實色的主要動作；第二個動作用白底膠囊（button-line）。",
+        "section": "colors"
+      },
+      {
+        "name": "The 明朝說故事 Rule",
+        "body": "襯線字只給標題與品名。按鈕、價格、表單、標籤一律用黑體。",
+        "section": "typography"
+      },
+      {
+        "name": "The 16px 輸入 Rule",
+        "body": "所有輸入框字級至少 16px，避免 iPhone 聚焦時自動放大頁面。",
+        "section": "typography"
+      },
+      {
+        "name": "The 暖影 Rule",
+        "body": "陰影色一律取自焦茶（92,74,50），不用純黑或冷灰。",
+        "section": "elevation"
+      },
+      {
+        "name": "The 陰影取代硬線 Rule",
+        "body": "需要區隔時先用陰影或和紙底色，不加新的實線框；實線只留在簽名元件的雙線框上。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** 把焦茶實色留給每個視野裡唯一的主要動作；第二個動作用白底膠囊（button-line）。",
+      "**Do** 讓陰影帶暖棕色調（rgba 92,74,50），不透明度保持在 .06–.08；只有主要按鈕用到 .18。",
+      "**Do** 在和紙底上需要金色文字時用金褐字（gold-text），確保對比 ≥ 4.5:1。",
+      "**Do** 每個可互動元件都寫 `:focus-visible`（2px 焦茶外框）與 `prefers-reduced-motion` 的關閉規則。",
+      "**Do** 在按鈕上明確寫 `font-family: inherit`。目前商品卡的「加入購物車」沒有繼承字型，會退回 Arial。",
+      "**Do** 新頁面沿用 `--r-*`、`--soft-shadow*`、`--btn-shadow*`、`--focus-glow`、`--ease-soft` 這組共用變數，不要再寫死數值。"
+    ],
+    "donts": [
+      "**Don't** 做成大型量販風：不用紅黃促銷色、爆炸形標籤、滿版折扣大字。促銷用公告列與小徽章表達即可。",
+      "**Don't** 做成冷調科技風：不用灰藍、冷灰、純白大底，也不要過度極簡的 SaaS 版面。",
+      "**Don't** 把新元件做回 3px 小圓角加硬線框；那是柔和版之前的舊語彙，雙線框只留給風味座標與下單傳票。",
+      "**Don't** 把舊琥珀漸層用在加入購物車、送出訂單等主要購買動作。",
+      "**Don't** 在同一個畫面放兩個搶眼的視覺重點（首頁首屏是輪盤，商品頁是風味座標）。",
+      "**Don't** 把黃昏漸層用到首頁首屏以外的地方；其他區塊維持和紙底。",
+      "**Don't** 用明朝體寫按鈕、價格或表單文字。"
+    ]
+  }
+}

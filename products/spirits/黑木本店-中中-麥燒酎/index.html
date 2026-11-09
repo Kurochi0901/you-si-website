@@ -50,7 +50,9 @@
 <link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/product-page.css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E4%B8%AD%E4%BB%8B%E5%93%81%E5%95%86%E5%BA%97%E6%9C%A8%E6%9C%AC%E6%A0%BC%E6%AC%BE%E7%87%92%E7%9B%B8%E7%B4%B9%E8%A6%8F%E9%85%8E%E9%85%92%E9%97%9C%E9%BA%A5%E9%BB%91%EF%BC%8C%EF%BC%9A">
 
 <script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
@@ -81,7 +83,7 @@
     "url": "https://www.yousi-drink.com/products/spirits/黑木本店-中中-麥燒酎/",
     "priceCurrency": "TWD",
     "price": 1180,
-    "priceValidUntil": "2027-10-31",
+    "priceValidUntil": "2027-11-06",
     "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/NewCondition",
     "eligibleRegion": { "@type": "Country", "name": "TW" },
@@ -223,64 +225,56 @@
       </div>
 
       <h1 class="pdp-title">黑木本店 中中 麥燒酎</h1>
-      <p class="pdp-subtitle">輕盈與麥香醇厚的完美平衡，經典日常之作｜720ml｜酒精 25%</p>
+      <p class="pdp-subtitle">輕盈與麥香醇厚的完美平衡，經典日常之作</p>
+      <p class="pdp-facts">720ml｜酒精 25%｜日本</p>
 
       <div class="pdp-price-box">
         <span class="pdp-price-now">NT$1,180</span>
-        <span class="pdp-price-origin">NT$1,300</span>
+        <s class="pdp-price-origin"><span class="pdp-sr">原價 </span>NT$1,300</s>
         <span class="pdp-price-save">省 $120</span>
       </div>
-      <hr class="pdp-divider">
 
       <div class="pdp-cta">
         <button class="pdp-btn-cart" onclick="addToCart(87)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           加入購物車
         </button>
+        <a class="pdp-btn-line" data-line-link href="https://line.me/ti/p/@008jcfgc" target="_blank" rel="noopener">用 LINE 詢問這款酒</a>
       </div>
+      
+      <ul class="pdp-service">
+        <li>新竹竹北預約自取</li>
+        <li>全台宅配</li>
+        <li>LINE 線上客服</li>
+      </ul>
 
-      <div class="pdp-tabs">
-        <button class="pdp-tab active" onclick="switchTab(0)">酒款特色</button>
-        <button class="pdp-tab" onclick="switchTab(1)">風味圖譜</button>
-        <button class="pdp-tab" onclick="switchTab(2)">產品規格</button>
-      </div>
 
-      <div class="pdp-tab-panel active" id="tab-0">
-        <p class="pdp-feature-text">「中中」作為黑木本店的代表作，完美體現了職人對大麥風味的極致追求。選用九州契作大麥，堅持採用傳統的「古甕仕入（甕缸發酵）」工藝，讓酒體在天然陶甕中孕育出柔和而紮實的底蘊。
-	不同於厚重的桶陳風格，中中採用「減壓蒸餾」技術，精準過濾掉多餘的油脂與雜味，只留下大麥最清雅的甜味與輕盈感。入口滑順、尾韻乾淨，無論是加冰塊、蘇打水或是兌入熱水，都能展現其百搭的性格，是日本燒酎迷心中不可撼動的經典日常之作。</p>
-      </div>
-
-      <div class="pdp-tab-panel" id="tab-1">
-        <div class="pdp-scales">
-          <p style="color:var(--muted);font-size:14px;">此類型酒款不提供風味刻度</p>
+      <section class="pdp-section" aria-labelledby="pdpStoryTitle">
+        <h2 class="pdp-section-title" id="pdpStoryTitle">酒款介紹</h2>
+        <div class="pdp-story">
+          <p>「中中」作為黑木本店的代表作，完美體現了職人對大麥風味的極致追求。選用九州契作大麥，堅持採用傳統的「古甕仕入（甕缸發酵）」工藝，讓酒體在天然陶甕中孕育出柔和而紮實的底蘊。</p>
+          <p>不同於厚重的桶陳風格，中中採用「減壓蒸餾」技術，精準過濾掉多餘的油脂與雜味，只留下大麥最清雅的甜味與輕盈感。入口滑順、尾韻乾淨，無論是加冰塊、蘇打水或是兌入熱水，都能展現其百搭的性格，是日本燒酎迷心中不可撼動的經典日常之作。</p>
         </div>
-      </div>
+      </section>
 
-      <div class="pdp-tab-panel" id="tab-2">
+      <section class="pdp-section" aria-labelledby="pdpSpecTitle">
+        <h2 class="pdp-section-title" id="pdpSpecTitle">規格</h2>
         <table class="pdp-spec-table">
-            <tr><td>品牌</td><td>黑木本店</td></tr>
-            <tr><td>產地</td><td>日本</td></tr>
-            <tr><td>酒精濃度</td><td>25%</td></tr>
-            <tr><td>容量</td><td>720ml</td></tr>
-            <tr><td>類型</td><td>烈酒</td></tr>
+            <tr><th scope="row">品牌</th><td>黑木本店</td></tr>
+            <tr><th scope="row">產地</th><td>日本</td></tr>
+            <tr><th scope="row">酒精濃度</th><td>25%</td></tr>
+            <tr><th scope="row">容量</th><td>720ml</td></tr>
+            <tr><th scope="row">類型</th><td>烈酒</td></tr>
         </table>
-      </div>
+      </section>
 
-    </div>
-  </div>
-
-  <div class="pdp-trust-strip">
-    <div class="pdp-trust-strip-inner">
-      <span class="pdp-trust-chip">📦 新竹 預約自取</span>
-      <span class="pdp-trust-chip">💬 LINE 即時客服</span>
-      <span class="pdp-trust-chip">🍶 嚴選品質保障</span>
     </div>
   </div>
 
   <section class="pdp-related">
     <div class="pdp-related-header">
       <h2 class="pdp-related-title">相關商品</h2>
-      <a href="/products/spirits/" class="pdp-related-link">查看全部烈酒 →</a>
+      <a href="/products/spirits/" class="pdp-related-link">查看全部烈酒</a>
     </div>
     <div class="pdp-related-grid" id="pdpRelatedGrid"></div>
   </section>
@@ -335,11 +329,6 @@
   window.pdpNext = function() { idx = (idx + 1) % imgs.length; update(); };
   window.pdpGo = function(i) { idx = i; update(); };
 })();
-
-function switchTab(n) {
-  document.querySelectorAll(".pdp-tab").forEach(function(t, i) { t.classList.toggle("active", i === n); });
-  document.querySelectorAll(".pdp-tab-panel").forEach(function(p, i) { p.classList.toggle("active", i === n); });
-}
 
 function openZoom() {
   var img = document.getElementById("pdpMainImg");

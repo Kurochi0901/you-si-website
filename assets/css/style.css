@@ -9,6 +9,19 @@
   --shadow:0 16px 40px rgba(17,12,8,.08);
   --shadow2:0 10px 24px rgba(17,12,8,.06);
   --radius:18px;
+
+  /* 2026-11 柔和版：圓角／陰影／動態的共用變數（首頁、商品頁、下單頁共用） */
+  --r-xs:8px;
+  --r-sm:12px;
+  --r-md:16px;
+  --r-lg:20px;
+  --r-pill:999px;
+  --soft-shadow:0 10px 30px rgba(92,74,50,.08);
+  --soft-shadow-sm:0 4px 14px rgba(92,74,50,.07);
+  --btn-shadow:0 6px 16px rgba(92,74,50,.18);
+  --btn-shadow-hover:0 10px 22px rgba(92,74,50,.22);
+  --focus-glow:0 0 0 4px rgba(201,168,122,.28);
+  --ease-soft:cubic-bezier(.2,.7,.3,1);
 }
 
 *{ box-sizing:border-box; }
@@ -275,14 +288,6 @@ p{ color:var(--muted); line-height:1.9; margin:10px 0; }
   gap:28px;
 }
 
-/* 首頁精選：build.js 會把「整個 priority-5 池」寫進 #homeGrid（供不執行 JS 的
-   AI 爬蟲讀到所有店長精選酒款），但版面只顯示前 5 張。
-   緊接在 #homeGrid 之後的 inline script 會在瀏覽器首次繪製前洗牌，
-   所以使用者每次載入看到的是隨機 5 款 —— 零閃爍、零版面位移。
-   被隱藏的卡片其 <img loading="lazy"> 不會下載（沒有版面框就不會進入 viewport）。
-   ⚠️ 要改顯示張數時，這裡的 nth-child 數字、index.html 的 inline script 註解、
-      以及 build.js 的 HOME_VISIBLE 必須一起改。 */
-#homeGrid .card:nth-child(n+6){ display:none; }
 
 /* 篩選無結果時的空狀態（renderGrid 在 list 為空時輸出） */
 .grid-empty{
@@ -1340,214 +1345,7 @@ nav a.active{
   margin-top:2px;
 }
 
-/* =========================
-   Order shipping UI polish (minimal change)
-   只影響 order 頁的 addrWrap / shipWrap
-========================= */
-#addrWrap,
-#shipWrap{
-  margin-top: 14px !important;         /* 拉開距離，不要黏在 select 下方 */
-  padding: 14px 14px 12px;
-  border: 1px solid rgba(0,0,0,.08);
-  border-radius: 16px;
-  background: rgba(255,255,255,.78);
-  box-shadow: 0 10px 24px rgba(0,0,0,.035);
-}
-
-/* 讓兩段更像同一組，但仍分開：shipWrap略微更淡 */
-#shipWrap{
-  background: rgba(255,255,255,.70);
-}
-
-/* 調整 label 層級與間距（不影響你其它表單 label） */
-#addrWrap > label,
-#shipWrap > label{
-  display: block;
-  margin-bottom: 10px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: .02em;
-  color: rgba(0,0,0,.78);
-}
-
-/* 你 shipWrap 用到的 class：label / hint / radio-row / radio
-   這裡只限定在 #shipWrap 裡，避免影響全站 */
-#shipWrap .label{
-  display:block;
-  margin-bottom: 10px;
-  font-size: 13px;
-  font-weight: 700;
-  color: rgba(0,0,0,.78);
-}
-
-/* radio 變成選項卡感：左右兩張卡、留白明確 */
-#shipWrap .radio-row{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 4px;
-  margin-bottom: 10px;
-}
-
-#shipWrap .radio{
-  margin: 0;
-  padding: 0;
-}
-
-/* 隱藏原生 radio（保留可用性），用 span 當 UI */
-#shipWrap .radio input{
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* 選項卡外觀 */
-#shipWrap .radio span{
-  display:flex;
-  align-items:center;
-  justify-content: space-between;
-  gap: 10px;
-
-  padding: 12px 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,.10);
-  background: rgba(255,255,255,.92);
-  transition: transform .12s ease, border-color .15s ease, box-shadow .15s ease;
-  font-size: 10px;
-  font-weight: 700;
-  color: #111;
-}
-
-/* 次要文字（運費）淡一點：靠你目前字串格式「常溫（運費 NT$170）」 */
-#shipWrap .radio span{
-  font-weight: 700;
-}
-#shipWrap .radio span{
-  letter-spacing: .01em;
-}
-
-/* checked 狀態 */
-#shipWrap .radio input:checked + span{
-  border-color: rgba(0,0,0,.22);
-  box-shadow: 0 10px 20px rgba(0,0,0,.06);
-  transform: translateY(-1px);
-}
-
-/* 提示文字（免運） */
-#shipWrap .hint{
-  font-size: 12px;
-  line-height: 1.6;
-  color: rgba(0,0,0,.55);
-  padding-top: 10px;
-  border-top: 1px dashed rgba(0,0,0,.10);
-}
-
-/* =========================
-   Shipping option - selected state 강화
-========================= */
-
-/* 預設狀態（未選）稍微再淡一點 */
-#shipWrap .radio span{
-  background: rgba(255,255,255,.85);
-  border-color: rgba(0,0,0,.10);
-}
-
-/* ✅ 選中狀態：背景、邊框、層級一次拉開 */
-#shipWrap .radio input:checked + span{
-  background: #f7f3ee; /* 日系暖白，接近你按鈕色系 */
-  border-color: #c7b39a; /* 品牌暖色邊框 */
-  box-shadow:
-    0 8px 18px rgba(0,0,0,.08),
-    inset 0 0 0 1px rgba(199,179,154,.35);
-  transform: translateY(-1px);
-}
-
-/* ✅ 左側加「選中標記」的小圓點 */
-#shipWrap .radio span::before{
-  content: "";
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid rgba(0,0,0,.25);
-  flex-shrink: 0;
-  margin-right: 8px;
-  transition: all .15s ease;
-}
-
-/* 選中時：實心點 */
-#shipWrap .radio input:checked + span::before{
-  background: #c7b39a;
-  border-color: #c7b39a;
-  box-shadow: 0 0 0 3px rgba(199,179,154,.25);
-}
-
-/* 文字在選中時稍微更實 */
-#shipWrap .radio input:checked + span{
-  color: #111;
-}
-
-/* hover 提示（不影響手機） */
-@media (hover:hover){
-  #shipWrap .radio span:hover{
-    border-color: rgba(0,0,0,.22);
-  }
-}
-/* =========================
-   Shipping option text center
-========================= */
-
-/* 讓選項卡內容置中 */
-#shipWrap .radio span{
-  justify-content: center;   /* 水平置中 */
-  text-align: center;
-}
-
-/* 圓點與文字之間仍保留距離 */
-#shipWrap .radio span::before{
-  margin-right: 10px;
-}
-
-/* 避免小螢幕擠在一起 */
-#shipWrap .radio span{
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-/* 只修正 order 頁「備註」：label 在上、輸入框在下 */
-#noteWrap{
-  display: block !important;
-}
-
-#noteWrap > label{
-  display: block !important;
-  margin-bottom: 10px;
-}
-
-#noteWrap > textarea{
-  display: block !important;
-  width: 100% !important;
-  box-sizing: border-box;
-}
-#noteWrap{
-  margin-top: 18px !important;
-  padding: 14px 14px 12px;
-  border: 1px solid rgba(0,0,0,.08);
-  border-radius: 16px;
-  background: rgba(255,255,255,.78);
-  box-shadow: 0 10px 24px rgba(0,0,0,.035);
-}
-
-/* Order page - 郵寄地址欄位加寬 */
-#order-address{
-  width: 100%;
-  max-width: none;   /* 解除全站 input 的寬度限制 */
-  box-sizing: border-box;
-}
-
-#order-address{
-  min-height: 48px;
-  font-size: 15px;
-}
+/* 舊版下單頁地址／溫層／備註樣式：下單頁 2026-11 改版後改由 assets/css/order.css 負責，舊規則已移除 */
 /* 分類入口卡片：讓按鈕永遠貼底對齊 */
 a.panel{
   display: flex;
@@ -2147,71 +1945,7 @@ body.modal-open{ overflow:hidden; }
 }
 .ys-btn-ghost:hover{ background:rgba(0,0,0,.05); }
 
-/* =========================================================
-   ORDER PAGE ONLY
-   1) 桌機左右對調（購物車內容在左／一鍵送出在右）
-   2) 手機上下順序一致（購物車內容在上／一鍵送出在下）
-   ※ 只影響 .page-order（下單頁），不影響首頁
-   ========================================================= */
-
-/* 桌機：左右對調（只限下單頁） */
-.page-order .split{
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: "cart form";
-}
-
-/* 假設：
-   第一塊 = 購物車一鍵送出（表單）
-   第二塊 = 購物車內容
-*/
-.page-order .split > :nth-child(1){ grid-area: form; }
-.page-order .split > :nth-child(2){ grid-area: cart; }
-
-/* 手機：上下順序（內容在上、表單在下） */
-@media (max-width: 860px){
-  .page-order .split{
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "cart"
-      "form";
-  }
-}
-
-
-/* =========================================================
-   Order page – Important Notice（更顯眼但維持日系溫潤）
-   ========================================================= */
-
-.page-order .order-notice{
-  margin: 18px 0 24px;
-  padding: 14px 16px 14px 18px;
-
-  background: #f6f3ee;              /* 米色底：延續整體背景 */
-  border-left: 4px solid #c8a47e;    /* 低彩度金：符合品牌 */
-
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.04);
-
-  font-size: 15px;
-  line-height: 1.7;
-  color: #4a4036;
-}
-
-.page-order .order-notice strong{
-  display: inline-block;
-  margin-bottom: 4px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  color: #3f362d;
-}
-
-/* 手機：字級與 padding 稍微放大，提升可讀性 */
-@media (max-width: 768px){
-  .page-order .order-notice{
-    font-size: 16px;
-    padding: 16px 18px;
-  }
-}
+/* 舊版下單頁版面與重要提醒樣式：下單頁 2026-11 改版後改由 assets/css/order.css 負責，舊規則已移除 */
 /* ======================================================
    MOBILE Product List Layout (momo-like)
    - Only affects <= 860px
@@ -2517,7 +2251,7 @@ html.show-announce body .header-wrap {
 ================================ */
 
 body {
-  padding-bottom: 42px;
+  padding-bottom: 46px; /* 桌面警語列實際約 45px */
 }
 
 .alcohol-bar {
@@ -3071,7 +2805,7 @@ body.age-overlay-active{ overflow:hidden; }
   font-size: 15px;
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 4px 12px rgba(180, 138, 99, 0.2);
+  box-shadow: var(--btn-shadow);
   margin: 8px 0;
   border: none;
   cursor: pointer;
@@ -3079,7 +2813,7 @@ body.age-overlay-active{ overflow:hidden; }
 
 .btn-inline-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(180, 138, 99, 0.3);
+  box-shadow: var(--btn-shadow-hover);
   background: var(--accent);
 }
 
@@ -3109,13 +2843,6 @@ body.age-overlay-active{ overflow:hidden; }
     linear-gradient(180deg, #fbf7f1 0%, #f4ece1 100%);
   box-shadow: var(--shadow2);
   border:1px solid rgba(180,138,99,.18);
-}
-.cat-hero::before{
-  content:"";
-  position:absolute;
-  top:0; left:0;
-  width:6px; height:100%;
-  background:linear-gradient(180deg, var(--accent), var(--accent2));
 }
 .cat-hero-title{
   margin:0 0 16px;
@@ -3707,7 +3434,7 @@ body.age-overlay-active{ overflow:hidden; }
   background:#fbf6ea;
   color:#7a5217;
   border:1px solid #c9a87a;
-  border-radius:3px;
+  border-radius:var(--r-pill);
   box-shadow:inset 0 0 0 2px #fbf6ea, inset 0 0 0 3px #e3cda4; /* 內層第二道金細線 */
   padding:3px 10px;
   cursor:pointer;
@@ -3726,7 +3453,7 @@ body.age-overlay-active{ overflow:hidden; }
   width:210px;
   background:#fdfaf5;
   border:1px solid #c9a87a;
-  border-radius:3px;
+  border-radius:var(--r-sm);
   padding:12px 14px;
   box-shadow:0 16px 40px rgba(17,12,8,.14);
   z-index:9;
@@ -3817,7 +3544,7 @@ body.age-overlay-active{ overflow:hidden; }
 .pdp-promo-banner{
   background:#fbf6ea;
   border:1px solid #c9a87a;
-  border-radius:3px;
+  border-radius:var(--r-sm);
   box-shadow:inset 0 0 0 2px #fbf6ea, inset 0 0 0 3px #e3cda4; /* 內層第二道金細線 */
   padding:12px 16px;
 }
@@ -3843,3 +3570,593 @@ body.age-overlay-active{ overflow:hidden; }
   margin-top:6px;
 }
 .pdp-promo-banner-link:hover{ text-decoration:underline; }
+
+/* =========================================================
+   ✅ 2026-11 統一購買元件（與新版商品頁、首頁同一套「金縁和紙」語彙）
+   焦茶實色按鈕、3px 小圓角；放在檔尾，覆蓋前面 .btn-add / .sticky-cta 的舊漸層膠囊
+========================================================= */
+
+/* 商品卡「加入購物車」 */
+.btn-add{
+  background:#5c4a32;
+  color:#fbf6ea;
+  border:1px solid #5c4a32;
+  border-radius:var(--r-pill);
+  letter-spacing:.04em;
+  box-shadow:var(--btn-shadow);
+  transition:background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s var(--ease-soft);
+}
+.btn-add:hover{ background:var(--ink); border-color:var(--ink); box-shadow:var(--btn-shadow-hover); transform:translateY(-1px); }
+.btn-add:active{ transform:translateY(0) scale(.97); box-shadow:var(--btn-shadow); }
+.btn-add:focus-visible{ outline:2px solid #5c4a32; outline-offset:2px; }
+
+/* 商品卡口味短語（資料：catalog.js flavor／build.js flavorPhrase） */
+.card-flavor{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:6px;
+  font-size:12px;
+  line-height:1.5;
+  color:#7a5a35;
+}
+.card-flavor::before{
+  content:"";
+  flex-shrink:0;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#5c4a32;
+  box-shadow:0 0 0 1.5px #fbf6ea, 0 0 0 2.5px #c9a87a;
+}
+
+/* 手機底部列：焦茶按鈕；空車時只留 LINE 按鈕 */
+.sticky-cart{ border-radius:var(--r-md); }
+.sticky-cart-bottom:empty{ display:none; }
+.sticky-cta{
+  background:#5c4a32;
+  border-radius:var(--r-pill);
+  color:#fbf6ea;
+  box-shadow:var(--btn-shadow);
+}
+.sticky-bar.is-empty .sticky-cart{ display:none; }
+.sticky-bar.is-empty .sticky-cta{ flex:1 1 auto; padding:14px; }
+
+/* 購物車抽屜：免運進度 */
+.mini-cart-ship{
+  padding:12px 14px 4px;
+  border-top:1px solid var(--line);
+}
+.mini-cart-ship[hidden]{ display:none; }
+.mini-cart-ship-text{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:2px 10px;
+  font-size:13px;
+}
+.mini-cart-ship-text strong{ color:#5c4a32; font-weight:700; }
+.mini-cart-ship-text span{ font-size:11px; color:var(--muted); }
+.mini-cart-ship-bar{
+  margin-top:8px;
+  height:4px;
+  border-radius:2px;
+  background:#efe6d6;
+  overflow:hidden;
+}
+.mini-cart-ship-bar span{
+  display:block;
+  height:100%;
+  background:#c9a87a;
+  transition:width .3s ease;
+}
+.mini-cart-ship.is-done .mini-cart-ship-bar span{ background:#5c4a32; }
+.mini-cart-checkout.btn-primary{
+  background:#5c4a32;
+  border-radius:var(--r-pill);
+  box-shadow:var(--btn-shadow);
+  color:#fbf6ea;
+}
+.mini-cart-checkout.btn-primary:hover{ background:var(--ink); }
+@media (prefers-reduced-motion: reduce){
+  .mini-cart-ship-bar span, .btn-add{ transition:none; }
+  .btn-add:hover, .btn-add:active{ transform:none; }
+}
+
+/* =========================================================
+   ✅ 2026-11 手機瀏覽修正（全站）
+   - 防止任何元素把頁面撐寬：iPhone 會因此整頁縮小、右側出現空白
+     html 用 hidden（轉給視窗本身，不影響 sticky 頁首）；body 用 clip（不會變成捲動容器）
+   - 關閉 iPhone 橫向時自動放大字體
+   - 取消「連點兩下放大」（雙指縮放保留，方便需要放大閱讀的人）
+   - 漢堡選單：沒指定顏色時 iPhone 會畫成系統藍
+========================================================= */
+html{ overflow-x:hidden; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body{ overflow-x:clip; }
+a, button, [role="button"], input[type="submit"]{ touch-action:manipulation; }
+.menu-toggle{ color:var(--ink); }
+::selection{ background:rgba(201,168,122,.35); color:var(--ink); }
+
+/* =========================================================
+   ✅ 2026-11 購物車動線（底部列／抽屜／加入購物車提示）
+========================================================= */
+
+/* 手機底部列
+   - 空車：只有「LINE 詢問推薦」一顆大按鈕（沿用上方 .sticky-bar.is-empty 規則）
+   - 有酒款：購物車摘要＋焦茶「填寫詢問單」主按鈕＋縮小的 LINE 次要按鈕 */
+.sticky-order{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 16px;
+  border-radius:var(--r-pill);
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:.04em;
+  white-space:nowrap;
+  color:#fbf6ea;
+  background:#5c4a32;
+  box-shadow:var(--btn-shadow);
+  transition:background-color .2s ease, transform .2s var(--ease-soft);
+}
+.sticky-order:active{ transform:scale(.97); }
+.sticky-order:focus-visible{ outline:2px solid #5c4a32; outline-offset:2px; }
+.sticky-cta-short{ display:none; }
+.sticky-bar:not(.is-empty) .sticky-cta{
+  padding:12px 12px;
+  color:#5c4a32;
+  background:#fff;
+  border:1px solid #c9a87a;
+  box-shadow:none;
+}
+.sticky-bar:not(.is-empty) .sticky-cta-full{ display:none; }
+.sticky-bar:not(.is-empty) .sticky-cta-short{ display:inline; }
+.sticky-bar.is-empty .sticky-order{ display:none; }
+.sticky-cart{ min-width:0; }
+.sticky-cart-top, .sticky-cart-bottom{ max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* 購物車抽屜：按鈕下方說明「接下來會發生什麼」 */
+.mini-cart-footer{ flex-wrap:wrap; }
+.mini-cart-note{
+  flex-basis:100%;
+  margin:0;
+  font-size:12px;
+  line-height:1.6;
+  color:var(--muted);
+}
+
+/* 不可併用而被較優惠方案取代的活動：不是「沒達成」 */
+.promo-text{ display:flex; flex-direction:column; gap:1px; }
+.promo-note{ font-size:11.5px; font-weight:400; color:#7a5a35; }
+.promo-item.superseded{ opacity:.9; color:#6b5030; }
+.promo-item.superseded .promo-check-box{ border-color:#c9a87a; background:#fbf6ea; }
+.promo-item.superseded .promo-check-box::after{
+  content:"";
+  position:absolute;
+  left:3px; right:3px; top:50%;
+  height:1.5px;
+  margin-top:-.75px;
+  background:#c9a87a;
+}
+
+/* 加入購物車提示：暖色陰影、可點「查看購物車」、避開警語列與底部列 */
+.cart-toast{ bottom:58px; }
+.cart-toast.show{ pointer-events:auto; }
+.cart-toast-inner{
+  background:rgba(35,26,18,.94);
+  box-shadow:0 12px 30px rgba(92,74,50,.32);
+}
+.cart-toast-img{
+  width:40px; height:40px;
+  flex-shrink:0;
+  background:#fff;
+  border-radius:8px;
+  overflow:hidden;
+}
+.cart-toast-img img{ width:100%; height:100%; object-fit:contain; }
+.cart-toast-text .desc{ margin-top:2px; }
+.cart-toast-view{
+  flex-shrink:0;
+  padding:7px 12px;
+  font-family:inherit;
+  font-size:12.5px;
+  font-weight:700;
+  color:#231a12;
+  background:#fbf6ea;
+  border:none;
+  border-radius:var(--r-pill);
+  cursor:pointer;
+}
+.cart-toast-view:hover{ background:#fff; }
+.cart-toast-view:focus-visible{ outline:2px solid #c9a87a; outline-offset:2px; }
+@media (max-width: 768px){
+  .cart-toast{ bottom:126px; } /* 底部列(~80px)＋警語列(38px)之上 */
+  .cart-toast-inner{ padding:10px 10px 10px 12px; gap:10px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .sticky-order{ transition:none; }
+  .sticky-order:active{ transform:none; }
+}
+
+/* =========================================================
+   ✅ 2026-11 年齡驗證：套用「黃昏酒桌」設計系統（只改 CSS）
+   ⚠️ 結構由 main.js 的 _showAgeOverlay() 產生（禁止修改區），這裡只覆蓋外觀
+   - 確認鈕：焦茶實色＋和紙色字（原本白字配琥珀漸層，對比只有 1.9–3.1:1）
+   - 按鈕字型改回 Noto Sans TC（原本 button 沒繼承字型，顯示成 Arial）
+   - 拿掉標題上方的「年齡確認」小字（標題本身已說明）
+========================================================= */
+#age-overlay{
+  background:
+    radial-gradient(70% 55% at 78% 22%, rgba(201,168,122,.20), transparent 62%),
+    radial-gradient(60% 50% at 18% 85%, rgba(220,179,124,.16), transparent 60%),
+    #faf7f4;
+}
+#age-overlay .age-overlay-box{
+  max-width:480px;
+  padding:32px 28px 24px;
+  background:#fffdf9;
+  border:1px solid rgba(201,168,122,.35);
+  border-radius:20px;
+  box-shadow:0 18px 44px rgba(92,74,50,.12), 0 2px 8px rgba(92,74,50,.06);
+  text-align:center;
+}
+#age-overlay .kicker{ display:none; }
+/* 標題維持黑體：明朝體只下載各頁用到的字（build.js 子集），年齡驗證出現在每一頁，用明朝體會退回系統字型 */
+#age-overlay h1{
+  font-weight:700;
+  letter-spacing:.06em;
+  line-height:1.45;
+  color:#231a12;
+  margin:0 0 10px !important;
+}
+#age-overlay .age-overlay-box > p:not(.mono){
+  font-size:15px;
+  line-height:1.8;
+  color:#4a3f35;
+  margin:0;
+}
+#age-overlay .age-overlay-actions{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin-top:24px;
+}
+#age-overlay .btn{
+  min-height:48px;
+  padding:0 20px;
+  font-family:inherit;
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:.04em;
+  border-radius:var(--r-pill);
+  touch-action:manipulation;
+  transition:background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s var(--ease-soft);
+}
+#age-overlay .btn-primary{
+  color:#fbf6ea;
+  background:#5c4a32;
+  border:1px solid #5c4a32;
+  box-shadow:var(--btn-shadow);
+}
+#age-overlay .btn-primary:hover{ background:#231a12; border-color:#231a12; box-shadow:var(--btn-shadow-hover); transform:translateY(-1px); }
+#age-overlay .btn:not(.btn-primary){
+  color:#5c4a32;
+  background:#fff;
+  border:1px solid #c9a87a;
+  box-shadow:none;
+}
+#age-overlay .btn:not(.btn-primary):hover{ background:#fbf6ea; border-color:#5c4a32; transform:none; }
+#age-overlay .btn:active{ transform:scale(.98); }
+#age-overlay .btn:focus-visible{ outline:2px solid #5c4a32; outline-offset:3px; }
+#age-overlay .mono{
+  margin:20px 0 0 !important;
+  padding-top:16px;
+  border-top:1px solid rgba(201,168,122,.3);
+  font-size:12px;
+  line-height:1.7;
+  color:#7a6f66;
+}
+@media (min-width: 560px){
+  #age-overlay .age-overlay-actions{ grid-template-columns:1.4fr 1fr; }
+}
+@media (max-width: 559px){
+  #age-overlay .age-overlay-box{ padding:28px 20px 20px; }
+  #age-overlay h1{ font-size:22px !important; }
+}
+@media (prefers-reduced-motion: reduce){
+  #age-overlay .btn{ transition:none; }
+  #age-overlay .btn:hover, #age-overlay .btn:active{ transform:none; }
+}
+
+/* =========================================================
+   ✅ 2026-11 對比與小字（WCAG AA：一般文字至少 4.5:1）
+   - 淺灰 #999（2.85:1）、#a39a91（2.72:1）、#aaa197（2.5:1）、#888（3.54:1）→ 灰褐 #7a6f66（白底 4.89:1、暖白底 4.81:1）
+   - 10px 徽章字 → 11.5px
+   - 焦點框統一為 2px 焦茶（原本部分元件沿用瀏覽器預設的藍框）
+========================================================= */
+.price-origin,
+.scale-axis,
+.scale-note,
+.promo-card .promo-meta,
+.promo-card.is-ended h3{ color:#7a6f66; }
+
+.name-tag{ font-size:11.5px; }
+.card-promo-badge{ font-size:11.5px; }
+@media (max-width:860px){
+  .card-promo-badge{ font-size:11.5px; }
+}
+
+.hero-carousel-arrow:focus-visible,
+.hero-carousel-dot:focus-visible,
+.hero-slide-link:focus-visible,
+.cart-float:focus-visible,
+.menu-toggle:focus-visible,
+nav a:focus-visible,
+.sticky-cart:focus-visible,
+.sticky-cta:focus-visible,
+.mini-cart-close:focus-visible,
+.mini-qty-btn:focus-visible,
+.mini-qty-input:focus-visible,
+.mini-remove:focus-visible,
+.mini-cart-checkout:focus-visible{
+  outline:2px solid #5c4a32;
+  outline-offset:2px;
+}
+.hero-slide-link:focus-visible{ outline-offset:-4px; }
+
+/* =========================================================
+   ✅ 2026-11 手機固定列瘦身＋促銷輪播可用性
+   手機原本固定佔用：公告列 32＋頁首 63＋底部列 ~80＋警語列 38 ≈ 213px（約畫面 27%）
+   - 手機公告列不再黏在頂端：在頁面最上方看得到，往下捲就跟著捲走，頁首改貼齊頂端
+   - 警語列變薄（38 → 約 30px），文字照常完整顯示
+   - 底部列內距縮小
+========================================================= */
+@media (max-width: 768px){
+  .announce-bar{ position:relative; }
+  html.show-announce body .header-wrap{ top:0; }
+
+  body{ padding-bottom:30px; }
+  /* 父層改 flex：否則外層沿用 16px 的行高，整條會撐到 35px、壓到底部列 */
+  .alcohol-bar{ display:flex; justify-content:center; align-items:center; padding:5px 12px; border-top-width:1.5px; }
+  .alcohol-bar-text{ font-size:11.5px; line-height:1.55; }
+
+  .sticky-bar{ bottom:29px; padding:8px 12px; }
+  .has-sticky-bar{ padding-bottom:110px; } /* 底部列有酒款時約 77px＋警語列 29px */
+  .cart-toast{ bottom:108px; }
+  .promo-toast{ bottom:166px; }
+}
+
+/* 促銷輪播
+   - 圓點：看起來一樣小，但可點範圍放大到 24×24
+   - 右下角暫停鍵（自動播放時才出現）
+   - 箭頭改用 SVG 圖示
+   - 手指左右滑動換張，上下捲動照常 */
+.hero-carousel-track{ touch-action:pan-y; }
+.hero-carousel-arrow svg{ width:18px; height:18px; }
+.hero-carousel-dots{ gap:0; }
+.hero-carousel-dot{
+  position:relative;
+  width:24px;
+  height:24px;
+  background:transparent;
+  border-radius:var(--r-pill);
+}
+.hero-carousel-dot::before{
+  content:"";
+  position:absolute;
+  left:50%; top:50%;
+  width:9px; height:9px;
+  margin:-4.5px 0 0 -4.5px;
+  border-radius:50%;
+  background:rgba(255,255,255,.6);
+  box-shadow:0 1px 3px rgba(35,26,18,.25);
+  transition:background .2s, width .2s, margin .2s;
+}
+.hero-carousel-dot.active{ width:32px; background:transparent; }
+.hero-carousel-dot.active::before{ width:20px; margin-left:-10px; border-radius:5px; background:#fff; }
+.hero-carousel-pause{
+  position:absolute;
+  right:14px;
+  bottom:10px;
+  z-index:6;
+  display:grid;
+  place-items:center;
+  width:32px;
+  height:32px;
+  padding:0;
+  color:#5c4a32;
+  background:rgba(255,255,255,.75);
+  border:none;
+  border-radius:50%;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+.hero-carousel-pause:hover{ background:rgba(255,255,255,.95); }
+.hero-carousel-pause:focus-visible{ outline:2px solid #5c4a32; outline-offset:2px; }
+.hero-carousel-pause svg{ width:14px; height:14px; }
+.hero-carousel-pause .i-play{ display:none; }
+.hero-carousel-pause[aria-pressed="true"] .i-pause{ display:none; }
+.hero-carousel-pause[aria-pressed="true"] .i-play{ display:block; }
+@media (max-width:640px){
+  .hero-carousel-dots{ bottom:2px; }
+  .hero-carousel-pause{ right:8px; bottom:6px; width:30px; height:30px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-carousel-dot::before{ transition:none; }
+}
+
+/* =========================================================
+   ✅ 2026-11 購物車「優惠」清單（第二次 critique）
+   - 拿掉像核取方塊的方框與 55% 透明度（未達成的字只剩 2.6:1）
+   - 狀態一律寫成文字：已套用／不可併用…／活動酒款再加 N 件即可套用
+   - 圓點標記：已套用＝焦茶實心打勾、被取代＝金色橫線、未達成＝金色空心圈
+========================================================= */
+.promo-item,
+.promo-item.achieved{
+  align-items:flex-start;
+  opacity:1;
+  font-weight:400;
+  color:#4a3826;
+}
+.promo-check-box{ display:none; }
+.promo-mark{
+  position:relative;
+  flex-shrink:0;
+  width:14px;
+  height:14px;
+  margin-top:3px;
+  border-radius:50%;
+  border:1.5px solid #c9a87a;
+  background:transparent;
+}
+.promo-item.is-applied .promo-mark{ background:#5c4a32; border-color:#5c4a32; }
+.promo-item.is-applied .promo-mark::after{
+  content:"";
+  position:absolute;
+  left:3.5px; top:1px;
+  width:3.5px; height:7px;
+  border:1.8px solid #fbf6ea;
+  border-top:none; border-left:none;
+  transform:rotate(45deg);
+}
+.promo-item.is-superseded .promo-mark::after{
+  content:"";
+  position:absolute;
+  left:2px; right:2px; top:50%;
+  height:1.5px;
+  margin-top:-.75px;
+  background:#c9a87a;
+}
+.promo-label{ font-size:13px; line-height:1.5; }
+.promo-item.is-applied .promo-label{ font-weight:700; color:#231a12; }
+.promo-text{ display:flex; flex-direction:column; gap:1px; min-width:0; }
+.promo-note{ font-size:12px; font-weight:400; line-height:1.5; color:#7a5a35; }
+.promo-item.superseded{ opacity:1; }
+
+/* 剩餘的對比與焦點框 */
+.card-promo-badge:focus-visible{ outline:2px solid #5c4a32; }
+.cart-toast-view:focus-visible{ outline:2px solid #fbf6ea; } /* 提示框是深色底，用和紙色外框 */
+@media (max-width: 768px){
+  .alcohol-bar-text{ font-size:12px; letter-spacing:.04em; } /* 手機警語至少 12px */
+}
+
+/* =========================================================
+   ✅ 2026-11 手機好不好按（第三次 critique）
+   觸控目標至少 44×44：外觀不變的小按鈕，用透明的 ::after 把可點範圍向外撐開
+========================================================= */
+.dusk-reel-pause,
+.dusk-reel-btn,
+.dusk-cap-add,
+.hero-carousel-arrow,
+.hero-carousel-pause{ position:relative; }
+.dusk-reel-pause::after,
+.dusk-reel-btn::after,
+.hero-carousel-arrow::after,
+.hero-carousel-pause::after{
+  content:"";
+  position:absolute;
+  left:50%; top:50%;
+  width:44px; height:44px;
+  margin:-22px 0 0 -22px;
+  border-radius:50%;
+}
+.dusk-cap-add::after{
+  content:"";
+  position:absolute;
+  left:-4px; right:-4px;
+  top:50%;
+  height:44px;
+  margin-top:-22px;
+}
+/* 促銷輪播圓點：外觀一樣，每顆可點範圍 32×44 */
+.dusk-promo .hero-carousel-dot{ width:32px; height:44px; }
+.dusk-promo .hero-carousel-dot.active{ width:40px; }
+/* 未選中的圓點加深到 3:1 以上（原本 #d9c7a6 只有 1.5:1） */
+.dusk-promo .hero-carousel-dot::before{ background:#a8895c; }
+.dusk-promo .hero-carousel-dot:hover::before{ background:#8f744d; }
+
+/* 購物車抽屜：數量改成一顆膠囊步進器（− 數量 ＋），每格 44px；套焦茶與品牌字型 */
+.mini-cart-close{
+  width:44px;
+  height:44px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  font-family:inherit;
+  font-size:16px;
+  color:#5c4a32;
+  border-radius:50%;
+  border-color:#ece3d3;
+}
+.mini-cart-close:hover{ background:#fbf6ea; }
+.mini-cart-actions{ gap:4px; }
+.mini-cart-qty{
+  gap:0;
+  border:1px solid #e4d9c6;
+  border-radius:var(--r-pill);
+  background:#fffdf9;
+  overflow:hidden;
+}
+.mini-qty-btn{
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:0;
+  background:transparent;
+  font-family:inherit;
+  font-size:20px;
+  font-weight:600;
+  line-height:1;
+  color:#5c4a32;
+  touch-action:manipulation;
+}
+.mini-qty-btn:hover{ background:#fbf6ea; }
+.mini-qty-btn:active{ background:#f3e7cf; }
+.mini-qty-input{
+  width:44px;
+  height:44px;
+  padding:0;
+  border:none;
+  border-radius:0;
+  background:transparent;
+  font-family:inherit;
+  font-size:16px; /* ≥16px：iPhone 聚焦時不會放大頁面 */
+  font-weight:700;
+  text-align:center;
+  color:#231a12;
+  -moz-appearance:textfield;
+  appearance:textfield;
+}
+.mini-qty-input::-webkit-outer-spin-button,
+.mini-qty-input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+.mini-qty-btn:focus-visible,
+.mini-qty-input:focus-visible{ outline:2px solid #5c4a32; outline-offset:-3px; }
+.mini-remove{
+  min-height:44px;
+  min-width:44px;
+  padding:0 6px;
+  border:none;
+  background:transparent;
+  font-family:inherit;
+  font-size:13px;
+  color:#7a6f66;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  text-decoration-color:rgba(122,111,102,.4);
+}
+.mini-remove:hover{ color:#5c4a32; text-decoration-color:#5c4a32; }
+
+/* =========================================================
+   ✅ 2026-11 一個焦茶（第三次 critique）
+   購物車是空的時候，手機底部的「LINE 詢問推薦」改成白底金框的次要按鈕：
+   焦茶實色只留給「加入購物車」與「填寫詢問單」，不讓最大聲的按鈕先叫入門者離站
+========================================================= */
+.sticky-bar.is-empty .sticky-cta{
+  color:#5c4a32;
+  background:#fff;
+  border:1px solid #c9a87a;
+  box-shadow:var(--soft-shadow-sm);
+}
+.sticky-bar.is-empty .sticky-cta:active{ background:#fbf6ea; }

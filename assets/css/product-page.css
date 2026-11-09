@@ -1,13 +1,36 @@
 /* ============================================
-   Product Detail Page – Premium E-commerce
+   Product Detail Page
    /assets/css/product-page.css
+
+   設計語彙：延用全站「金縁和紙」—— 米白和紙底＋金棕雙細線框、3px 小圓角
+   品名與段落標題用明朝體（Noto Serif TC），呼應酒標；內文維持 Noto Sans TC
+   唯一的視覺重點是「風味座標」，其餘保持安靜
    ============================================ */
 
+:root {
+  --pdp-paper: #fbf6ea;      /* 和紙 */
+  --pdp-gold: #c9a87a;       /* 金框外線 */
+  --pdp-gold-soft: #e3cda4;  /* 金框內線 */
+  --pdp-umber: #5c4a32;      /* 焦茶：主按鈕、本款圓點 */
+  --pdp-ink-soft: #4a3f35;   /* 內文 */
+  --pdp-gold-text: #7a5a35;  /* 座標軸文字（和紙底上對比 ≥ 4.5） */
+  --pdp-serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+}
+
+.pdp-sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* --- Breadcrumb --- */
+/* header 與公告列都是 sticky（佔文件流），所以這裡只需要正常留白 */
 .pdp-breadcrumb {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 76px 18px 0; /* 62px sticky header + spacing */
+  padding: 28px 18px 0;
   font-size: 13px;
   color: var(--muted);
   display: flex !important;
@@ -28,62 +51,48 @@
   padding: 0 !important;
   font-size: 13px !important;
 }
-.pdp-breadcrumb a:hover { color: var(--accent); }
+.pdp-breadcrumb a:hover { color: var(--pdp-umber); }
 .pdp-breadcrumb .sep {
   margin: 0 6px;
   color: #ccc;
   display: inline-flex;
   align-items: center;
-  vertical-align: middle;
 }
-.pdp-breadcrumb .sep svg {
-  display: block;
-}
+.pdp-breadcrumb .sep svg { display: block; }
 .pdp-breadcrumb .current {
   color: var(--ink);
   font-weight: 600;
-}
-/* 有公告條時多推 36px */
-html.show-announce .pdp-breadcrumb {
-  padding-top: 112px; /* 62px header + 36px announce + 14px */
-}
-@media (max-width: 768px) {
-  html.show-announce .pdp-breadcrumb {
-    padding-top: 106px; /* 62px header + 32px announce + 12px */
-  }
 }
 
 /* --- Main Layout --- */
 .pdp-main {
   max-width: 1200px;
-  margin: 24px auto 0;
+  margin: 20px auto 0;
   padding: 0 18px;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
 }
-@media (min-width: 860px) {
+@media (min-width: 900px) {
   .pdp-main {
-    grid-template-columns: 40% 60%;
-    gap: 48px;
-    margin-top: 32px;
+    grid-template-columns: minmax(0, 44fr) minmax(0, 56fr);
+    gap: 56px;
+    margin-top: 28px;
   }
 }
 
-/* --- Gallery (Left) --- */
-.pdp-gallery {
-  position: relative;
-}
-@media (min-width: 860px) {
-  .pdp-gallery { position: sticky; top: 90px; align-self: start; }
+/* --- Gallery --- */
+.pdp-gallery { position: relative; }
+@media (min-width: 900px) {
+  .pdp-gallery { position: sticky; top: 96px; align-self: start; }
+  html.show-announce .pdp-gallery { top: 132px; }
 }
 
 .pdp-img-main {
   width: 100%;
-  /* aspect-ratio: 1 / 1; */
-  background: radial-gradient(circle at center, #fff 0%, #f9f7f4 100%);
-  border-radius: 20px;
-  border: 1px solid rgba(0,0,0,.04);
+  background: var(--pdp-paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -95,361 +104,515 @@ html.show-announce .pdp-breadcrumb {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform .5s cubic-bezier(.16,1,.3,1);
-}
-.pdp-img-main:hover img {
-  transform: scale(1.06);
 }
 
-/* 圖片切換箭頭 */
 .pdp-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  border: 1px solid rgba(180,138,99,.15);
-  background: rgba(255,255,255,.92);
-  color: var(--accent);
-  font-size: 24px;
+  border: 1px solid var(--pdp-gold);
+  background: rgba(251, 246, 234, .94);
+  color: var(--pdp-umber);
+  font-size: 22px;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,.08);
-  transition: all .25s cubic-bezier(.16,1,.3,1);
+  transition: background .2s ease, color .2s ease;
   z-index: 5;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
 }
-.pdp-arrow:hover {
-  background: var(--accent);
-  color: #fff;
-  transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 8px 20px rgba(180,138,99,.25);
-}
-.pdp-arrow.left { left: 14px; }
-.pdp-arrow.right { right: 14px; }
+.pdp-arrow:hover { background: var(--pdp-umber); color: var(--pdp-paper); }
+.pdp-arrow:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: 2px; }
+.pdp-arrow.left { left: 12px; }
+.pdp-arrow.right { right: 12px; }
 
-/* 縮圖列 */
 .pdp-thumbs {
   display: flex;
-  gap: 10px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 12px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .pdp-thumb {
-  width: 72px;
-  height: 90px;
-  border-radius: 12px;
-  border: 2px solid transparent;
+  width: 64px;
+  height: 80px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line);
   overflow: hidden;
   cursor: pointer;
-  background: #f9f7f4;
-  transition: all .25s ease;
+  background: var(--pdp-paper);
+  transition: border-color .2s ease;
   flex-shrink: 0;
 }
-.pdp-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-.pdp-thumb:hover {
-  border-color: var(--accent2);
-  transform: translateY(-2px);
-}
-.pdp-thumb.active {
-  border-color: var(--accent);
-  box-shadow: 0 4px 12px rgba(180,138,99,.2);
-}
+.pdp-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.pdp-thumb:hover { border-color: var(--pdp-gold); }
+.pdp-thumb.active { border-color: var(--pdp-umber); box-shadow: 0 0 0 1px var(--pdp-umber); }
 
-/* --- Info (Right) --- */
-.pdp-info {
-  padding: 8px 0 40px;
-}
-@media (min-width: 860px) {
-  .pdp-info { padding: 0 0 40px; }
-}
+/* --- Info --- */
+.pdp-info { padding: 0 0 48px; min-width: 0; }
 
-/* 標籤列 */
 .pdp-badges {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 .pdp-badge {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 5px 12px;
-  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
   letter-spacing: .04em;
 }
+/* 得獎：金縁和紙雙線框 */
 .pdp-badge--award {
-  background: linear-gradient(135deg, #fdf6ec, #f9ead4);
-  color: #8a5e16;
-  border: 1px solid #e8d2a8;
+  background: var(--pdp-paper);
+  color: #6b4e1c;
+  border: 1px solid var(--pdp-gold);
+  box-shadow: inset 0 0 0 2px var(--pdp-paper), inset 0 0 0 3px var(--pdp-gold-soft);
+  padding: 4px 11px;
 }
 .pdp-badge--category {
+  color: var(--muted);
+  border: 1px solid var(--line);
   background: transparent;
-  color: var(--accent);
-  border: 1.5px solid var(--accent2);
 }
 .pdp-badge--recommend {
   background: #2d1f0e;
   color: #f5e0c0;
-  border: 1.5px solid #c9a87a;
+  border: 1px solid #c9a87a;
 }
 
-/* 品名 */
 .pdp-title {
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: .02em;
-  line-height: 1.35;
-  margin: 0 0 6px;
+  font-family: var(--pdp-serif);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1.45;
+  margin: 0 0 10px;
+  color: var(--ink);
 }
-@media (min-width: 860px) {
-  .pdp-title { font-size: 32px; }
+@media (min-width: 900px) {
+  .pdp-title { font-size: 34px; }
 }
 
 .pdp-subtitle {
-  font-size: 15px;
+  font-size: 16px;
+  color: var(--pdp-ink-soft);
+  line-height: 1.8;
+  margin: 0 0 4px;
+}
+.pdp-facts {
+  font-size: 13px;
   color: var(--muted);
-  line-height: 1.7;
-  margin: 0 0 20px;
+  letter-spacing: .04em;
+  margin: 0 0 22px;
 }
 
-/* 價格區 */
 .pdp-price-box {
   display: flex;
   align-items: baseline;
   gap: 12px;
-  margin-bottom: 6px;
   flex-wrap: wrap;
+  margin: 0 0 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
 }
 .pdp-price-now {
-  font-size: 32px;
-  font-weight: 900;
+  font-size: 30px;
+  font-weight: 700;
   color: var(--ink);
-  letter-spacing: -.02em;
+  letter-spacing: -.01em;
+  font-variant-numeric: tabular-nums;
 }
 .pdp-price-origin {
-  font-size: 16px;
-  color: #bbb;
+  font-size: 15px;
+  color: #7a6f66; /* 2026-11：原 #a39a91 只有 2.7:1 */
   text-decoration: line-through;
 }
 .pdp-price-save {
   font-size: 12px;
   font-weight: 700;
-  color: #c0392b;
-  background: #fdecea;
-  padding: 3px 10px;
-  border-radius: 999px;
+  color: #a1372b;
+  border: 1px solid #e9c4bd;
+  background: #fdf3f1;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
 }
 
-/* 分隔線 */
-.pdp-divider {
-  border: none;
-  border-top: 1px solid var(--line);
-  margin: 20px 0;
-}
-
-/* CTA 按鈕區 */
+/* --- CTA --- */
 .pdp-cta {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 24px;
+  margin: 0;
 }
-
-.pdp-btn-cart {
+.pdp-btn-cart,
+.pdp-btn-line {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 16px 24px;
-  border-radius: 14px;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: var(--r-pill);
+  font-family: inherit;
   font-size: 15px;
   font-weight: 700;
-  border: 1.5px solid var(--line);
-  background: #fff;
-  color: var(--ink);
+  letter-spacing: .04em;
   cursor: pointer;
-  transition: all .25s ease;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
-.pdp-btn-cart:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow2);
+.pdp-btn-cart {
+  flex: 1 1 220px;
+  background: var(--pdp-umber);
+  color: var(--pdp-paper);
+  border: 1px solid var(--pdp-umber);
+}
+.pdp-btn-cart:hover { background: var(--ink); border-color: var(--ink); }
+.pdp-btn-line {
+  flex: 0 1 auto;
+  background: transparent;
+  color: var(--pdp-umber);
+  border: 1px solid var(--pdp-gold);
+}
+.pdp-btn-line:hover { background: var(--pdp-paper); border-color: var(--pdp-umber); }
+.pdp-btn-cart:focus-visible,
+.pdp-btn-line:focus-visible {
+  outline: 2px solid var(--pdp-umber);
+  outline-offset: 3px;
 }
 
-/* 信任指標條（同系列推薦上方） */
-.pdp-trust-strip {
-  max-width: 1200px;
-  margin: 32px auto 0;
-  padding: 0 18px;
+.pdp-notice {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #6b4e1c;
+  background: var(--pdp-paper);
+  border-left: 2px solid var(--pdp-gold);
 }
-.pdp-trust-strip-inner {
+
+.pdp-service {
+  list-style: none;
   display: flex;
-  justify-content: center;
-  gap: 12px;
   flex-wrap: wrap;
-}
-.pdp-trust-chip {
-  font-size: 12px;
-  font-weight: 600;
+  gap: 4px 18px;
+  margin: 16px 0 0;
+  padding: 0;
+  font-size: 13px;
   color: var(--muted);
-  background: #f9f7f4;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 6px 14px;
-  letter-spacing: .03em;
+}
+.pdp-service li { position: relative; }
+.pdp-service li + li::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  width: 1px;
+  height: 11px;
+  transform: translateY(-50%);
+  background: var(--pdp-gold-soft);
+}
+
+/* --- 段落 --- */
+.pdp-section {
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.pdp-section-title {
+  font-family: var(--pdp-serif);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1.4;
+  margin: 0 0 20px;
+  color: var(--ink);
+}
+
+/* ============================================
+   風味座標
+   ============================================ */
+.pdp-flavor-body {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+@media (max-width: 640px) {
+  .pdp-flavor-body { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .pdp-map { max-width: 360px; width: 100%; margin: 0 auto; }
+}
+
+.pdp-map {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--pdp-paper);
+  border: 1px solid var(--pdp-gold);
+  border-radius: var(--r-lg);
+  box-shadow: inset 0 0 0 3px var(--pdp-paper), inset 0 0 0 4px var(--pdp-gold-soft);
+}
+
+/* 座標軸文字：左右直書、上下橫書 */
+.pdp-map-ax {
+  position: absolute;
+  font-family: var(--pdp-serif);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pdp-gold-text);
+  letter-spacing: .12em;
+  line-height: 1;
   white-space: nowrap;
 }
-
-/* --- Tabs --- */
-.pdp-tabs {
-  display: flex;
-  border-bottom: 2px solid var(--line);
-  margin-bottom: 0;
-  gap: 0;
+.pdp-map-ax--left,
+.pdp-map-ax--right {
+  top: 50%;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%);
 }
-.pdp-tab {
-  flex: 1;
-  padding: 14px 12px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--muted);
-  cursor: pointer;
-  border-bottom: 3px solid transparent;
-  margin-bottom: -2px;
-  transition: all .2s ease;
-  background: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
+.pdp-map-ax--left { left: 11px; }
+.pdp-map-ax--right { right: 11px; }
+.pdp-map-ax--top,
+.pdp-map-ax--bottom {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.pdp-map-ax--top { top: 13px; }
+.pdp-map-ax--bottom { bottom: 13px; }
+
+/* 繪圖區：25 個格心淡點＋中央十字虛線 */
+.pdp-map-plot {
+  position: absolute;
+  inset: 38px;
+  background: radial-gradient(circle at center, #d9c39c 0 1.5px, transparent 2px) 0 0 / 20% 20%;
+}
+.pdp-map-plot::before,
+.pdp-map-plot::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.pdp-map-plot::before {
+  left: 50%; top: 0; bottom: 0;
+  border-left: 1px dashed #dcc8a2;
+}
+.pdp-map-plot::after {
+  top: 50%; left: 0; right: 0;
+  border-top: 1px dashed #dcc8a2;
+}
+
+/* 其他酒款：空心金點 */
+.pdp-map-dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  border: 1.5px solid #b48a63;
+  background: var(--pdp-paper);
+  z-index: 1;
+  transition: background-color .15s ease;
+}
+.pdp-map-dot::before { /* 加大點擊範圍 */
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+}
+.pdp-map-dot:hover,
+.pdp-map-dot:focus-visible {
+  background: #b48a63;
+  z-index: 5;
+  outline: none;
+}
+.pdp-map-dot:focus-visible { box-shadow: 0 0 0 2px var(--pdp-paper), 0 0 0 3.5px var(--pdp-umber); }
+
+.pdp-map-tip {
+  position: absolute;
+  bottom: calc(100% + 9px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 9px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ink);
+  white-space: nowrap;
+  background: #fff;
+  border: 1px solid var(--pdp-gold);
+  border-radius: var(--r-xs);
+  box-shadow: 0 6px 18px rgba(35, 26, 18, .12);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease, visibility .15s ease;
+}
+.pdp-map-dot:hover .pdp-map-tip,
+.pdp-map-dot:focus-visible .pdp-map-tip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 本款：焦茶實心點，載入時一圈墨暈擴散一次 */
+.pdp-map-self {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: var(--pdp-umber);
+  border: 3px solid var(--pdp-paper);
+  box-shadow: 0 0 0 1px var(--pdp-umber);
+  z-index: 4;
+  pointer-events: none;
+}
+.pdp-map-self::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--pdp-umber);
+  opacity: 0;
+  animation: pdp-ink-ring 1.6s cubic-bezier(.2, .7, .3, 1) .5s 1 both;
+}
+@keyframes pdp-ink-ring {
+  0%   { transform: scale(1);   opacity: .7; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pdp-map-self::after { animation: none; }
+  .pdp-map-dot, .pdp-map-tip { transition: none; }
+}
+
+.pdp-flavor-reading {
+  text-wrap: pretty; /* 避免最後只剩兩個字落單一行 */
+  font-family: var(--pdp-serif);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.6;
   letter-spacing: .06em;
-  font-family: inherit;
+  color: var(--ink);
+  margin: 0 0 12px;
 }
-.pdp-tab:hover { color: var(--ink); }
-.pdp-tab.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
+.pdp-flavor-part { display: inline-block; } /* 要換行就從逗號換，不會只剩兩個字落單 */
+.pdp-flavor-help {
+  font-size: 13px;
+  line-height: 2;
+  color: var(--muted);
+  margin: 0;
 }
+.pdp-legend {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: -.5px;
+}
+.pdp-legend--self { background: var(--pdp-umber); box-shadow: 0 0 0 1px var(--pdp-paper), 0 0 0 2px var(--pdp-umber); }
+.pdp-legend--peer { border: 1.5px solid #b48a63; background: var(--pdp-paper); }
 
-.pdp-tab-panel {
-  display: none;
-  padding: 24px 0;
-}
-.pdp-tab-panel.active {
-  display: block;
-}
-
-/* Tab: 酒款特色 */
-.pdp-feature-text {
-  white-space: pre-line;
-  line-height: 1.95;
-  color: #555;
+/* --- 酒款介紹 --- */
+.pdp-story { max-width: 36em; }
+.pdp-story p {
+  margin: 0 0 .9em;
   font-size: 15px;
+  line-height: 2;
+  color: var(--pdp-ink-soft);
 }
+.pdp-story p:last-child { margin-bottom: 0; }
 
-/* Tab: 風味刻度 */
-.pdp-scales {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.pdp-serve {
+  margin: 24px 0 0;
+  max-width: 36em;
+  display: grid;
+  gap: 10px;
 }
-.pdp-scale-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.pdp-serve > div {
+  display: grid;
+  grid-template-columns: 7.5em minmax(0, 1fr);
+  gap: 12px;
 }
-.pdp-scale-label {
-  width: 48px;
-  flex-shrink: 0;
-  font-weight: 800;
+.pdp-serve dt {
+  font-size: 13px;
+  color: var(--pdp-gold-text);
+  font-weight: 600;
+  line-height: 1.9;
+}
+.pdp-serve dd {
+  margin: 0;
   font-size: 14px;
+  line-height: 1.9;
   color: var(--ink);
 }
-.pdp-scale-track {
-  flex: 1;
-}
-.pdp-scale-bars {
-  display: flex;
-  gap: 6px;
-}
-.pdp-scale-bars span {
-  flex: 1;
-  height: 10px;
-  border-radius: 999px;
-  background: #eee;
-  transition: background .3s;
-}
-.pdp-scale-bars span.on {
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-}
-.pdp-scale-axis {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: #aaa;
-  margin-top: 6px;
+@media (max-width: 520px) {
+  .pdp-serve > div { grid-template-columns: minmax(0, 1fr); gap: 0; }
 }
 
-/* Tab: 產品規格 */
+/* --- 規格表 --- */
 .pdp-spec-table {
   width: 100%;
+  max-width: 36em;
   border-collapse: collapse;
 }
+.pdp-spec-table tr + tr th,
 .pdp-spec-table tr + tr td {
   border-top: 1px solid var(--line);
 }
+.pdp-spec-table th,
 .pdp-spec-table td {
-  padding: 12px 0;
+  padding: 11px 0;
   font-size: 14px;
+  line-height: 1.7;
   vertical-align: top;
+  text-align: left;
 }
-.pdp-spec-table td:first-child {
-  width: 100px;
+.pdp-spec-table th,
+.pdp-spec-table td:first-child:not(:last-child) {
+  width: 7.5em;
   color: var(--muted);
-  font-weight: 500;
+  font-weight: 400;
   padding-right: 16px;
 }
-.pdp-spec-table td:last-child {
-  color: var(--ink);
-  font-weight: 600;
-}
+.pdp-spec-table td:last-child { color: var(--ink); font-weight: 600; }
 
-/* --- 推薦商品區 --- */
+/* --- 相關商品 --- */
 .pdp-related {
   max-width: 1200px;
-  margin: 48px auto 32px;
-  padding: 0 18px;
+  margin: 32px auto 40px;
+  padding: 32px 18px 0;
 }
 .pdp-related-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  gap: 12px;
   margin-bottom: 20px;
 }
 .pdp-related-title {
+  font-family: var(--pdp-serif);
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: .04em;
+  margin: 0;
 }
 .pdp-related-link {
   font-size: 13px;
-  color: var(--accent);
+  color: var(--pdp-umber);
   font-weight: 600;
-  transition: color .2s;
+  border-bottom: 1px solid var(--pdp-gold-soft);
+  padding-bottom: 1px;
+  transition: border-color .2s;
 }
-.pdp-related-link:hover { color: var(--ink); }
+.pdp-related-link:hover { border-bottom-color: var(--pdp-umber); }
 
 /* 覆蓋 style.css 的 .grid 預設 repeat(5, minmax(220px,1fr)) 以防溢出 */
 .pdp-related-grid,
@@ -461,27 +624,19 @@ html.show-announce .pdp-breadcrumb {
   overflow: hidden;
 }
 
-/* Responsive */
-@media (max-width: 860px) {
-  .pdp-breadcrumb { padding-top: 72px; font-size: 12px; }
-  html.show-announce .pdp-breadcrumb { padding-top: 104px; }
-  .pdp-main { gap: 24px; margin-top: 16px; }
+/* --- Responsive --- */
+@media (max-width: 899px) {
   .pdp-gallery { position: static; }
-  .pdp-img-main { border-radius: 16px; height: 40vh; }
-  .pdp-title { font-size: 24px; }
+  .pdp-img-main { height: 46vh; min-height: 300px; }
+  .pdp-thumb { width: 56px; height: 70px; }
+}
+@media (max-width: 860px) {
+  .pdp-breadcrumb { padding-top: 16px; font-size: 12px; }
   .pdp-price-now { font-size: 26px; }
-  .pdp-thumb { width: 60px; height: 75px; border-radius: 10px; }
-  .pdp-cta { flex-direction: column; }
-  .pdp-btn-cart { justify-content: center; }
-
-  /* 信任指標條手機 */
-  .pdp-trust-strip { margin-top: 20px; }
-  .pdp-trust-chip { font-size: 11px; padding: 5px 10px; }
+  .pdp-section { margin-top: 36px; padding-top: 24px; }
 
   /* 推薦商品：手機改單欄，配合 style.css 的水平卡片佈局 */
-  .pdp-related {
-    overflow: hidden;
-  }
+  .pdp-related { overflow: hidden; }
   .pdp-related-grid,
   .pdp-related-grid.grid,
   #pdpRelatedGrid,
@@ -492,17 +647,98 @@ html.show-announce .pdp-breadcrumb {
   }
 }
 @media (max-width: 520px) {
-  .pdp-breadcrumb { padding-top: 68px; font-size: 11px; }
+  .pdp-breadcrumb { padding-top: 14px; font-size: 11px; }
   .pdp-breadcrumb a { font-size: 11px !important; }
-  html.show-announce .pdp-breadcrumb { padding-top: 60px; }
   .pdp-arrow { width: 36px; height: 36px; font-size: 20px; }
   .pdp-arrow.left { left: 8px; }
   .pdp-arrow.right { right: 8px; }
-  .pdp-badges { gap: 6px; }
-  .pdp-badge { font-size: 10px; padding: 4px 10px; }
-  .pdp-tab { font-size: 13px; padding: 12px 8px; }
-  .pdp-related-grid,
-  .pdp-related-grid.grid {
-    grid-template-columns: 1fr !important;
-  }
+  .pdp-cta { flex-direction: column; }
+  .pdp-btn-cart, .pdp-btn-line { flex: 0 0 auto; width: 100%; }
+  .pdp-map-plot { inset: 34px; }
+}
+
+/* ============================================
+   舊版版型（尚未重新 build 的頁面仍使用分頁與長條刻度）
+   ============================================ */
+.pdp-divider { border: none; border-top: 1px solid var(--line); margin: 20px 0; }
+
+.pdp-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  margin-top: 28px;
+}
+.pdp-tab {
+  flex: 1;
+  padding: 14px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.pdp-tab:hover { color: var(--ink); }
+.pdp-tab.active { color: var(--pdp-umber); border-bottom-color: var(--pdp-umber); }
+.pdp-tab-panel { display: none; padding: 24px 0; }
+.pdp-tab-panel.active { display: block; }
+
+.pdp-feature-text {
+  white-space: pre-line;
+  line-height: 1.95;
+  color: var(--pdp-ink-soft);
+  font-size: 15px;
+}
+
+.pdp-scales { display: flex; flex-direction: column; gap: 24px; }
+.pdp-scale-row { display: flex; align-items: center; gap: 16px; }
+.pdp-scale-label { width: 48px; flex-shrink: 0; font-weight: 700; font-size: 14px; }
+.pdp-scale-track { flex: 1; }
+.pdp-scale-bars { display: flex; gap: 6px; }
+.pdp-scale-bars span { flex: 1; height: 8px; border-radius: 2px; background: #ece6df; }
+.pdp-scale-bars span.on { background: var(--pdp-umber); }
+.pdp-scale-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.pdp-trust-strip { max-width: 1200px; margin: 32px auto 0; padding: 0 18px; }
+.pdp-trust-strip-inner { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.pdp-trust-chip {
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+
+/* ============================================
+   柔和版（2026-11）：圓角、陰影取代硬線、按鈕回饋
+   ============================================ */
+.pdp-img-main { border: none; box-shadow: var(--soft-shadow); }
+.pdp-thumb { border-color: transparent; box-shadow: var(--soft-shadow-sm); transition: box-shadow .2s ease, transform .2s var(--ease-soft); }
+.pdp-thumb:hover { transform: translateY(-2px); }
+.pdp-thumb.active { border-color: transparent; box-shadow: 0 0 0 2px var(--pdp-umber); }
+
+.pdp-btn-cart { box-shadow: var(--btn-shadow); transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s var(--ease-soft); }
+.pdp-btn-cart:hover { box-shadow: var(--btn-shadow-hover); transform: translateY(-1px); }
+.pdp-btn-line { background: #fff; transition: background-color .2s ease, border-color .2s ease, transform .2s var(--ease-soft); }
+.pdp-btn-cart:active,
+.pdp-btn-line:active { transform: scale(.98); }
+
+.pdp-notice { border-left: none; border-radius: var(--r-sm); padding: 12px 16px; }
+.pdp-map { box-shadow: inset 0 0 0 3px var(--pdp-paper), inset 0 0 0 4px var(--pdp-gold-soft), var(--soft-shadow); }
+.pdp-map-tip { box-shadow: var(--soft-shadow); }
+.pdp-arrow { box-shadow: var(--soft-shadow-sm); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pdp-thumb, .pdp-btn-cart, .pdp-btn-line { transition: none; }
+  .pdp-thumb:hover, .pdp-btn-cart:hover, .pdp-btn-cart:active, .pdp-btn-line:active { transform: none; }
 }

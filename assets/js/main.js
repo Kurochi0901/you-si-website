@@ -85,7 +85,17 @@ function setNavActive(){
 
 /** 手機漢堡選單開關 */
 function toggleMenu(){
-  document.querySelector("nav")?.classList.toggle("open");
+  const open = document.querySelector("nav")?.classList.toggle("open");
+  syncMenuToggle(!!open);
+}
+
+/** 漢堡選單的報讀名稱與開合狀態（各頁 HTML 手寫的 ☰ 按鈕沒有文字標籤，這裡統一補上） */
+function syncMenuToggle(open){
+  document.querySelectorAll(".menu-toggle").forEach(btn => {
+    btn.setAttribute("aria-label", open ? "關閉選單" : "開啟選單");
+    btn.setAttribute("aria-expanded", String(open));
+    btn.textContent = open ? "✕" : "☰"; // 打開時顯示關閉圖示，看得出再按一次會收起
+  });
 }
 
 /** 全站公告條初始化與輪播邏輯 (全站統一版) */
@@ -113,15 +123,33 @@ function renderAnnouncements() {
 
   // 3. 啟動多則輪播
   if (announcements.length === 1) return;
+  // 多則輪播時不當成即時通知：否則螢幕報讀每 5 秒就唸一次新公告（HTML 上的 role="status" aria-live 是給單則公告用的）
+  bar.removeAttribute("role");
+  bar.setAttribute("aria-live", "off");
   let current = 0;
+  const items = [...track.querySelectorAll(".announce-item")];
+  // 看不到的公告設為 inert：淡出的連結不再是看不見的 Tab 停點
+  const sync = () => items.forEach((el, i) => { el.inert = i !== current; });
+  sync();
+
+  // 系統開啟「減少動態效果」：只顯示第一則，不輪播
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  // 滑鼠停在公告列上、或鍵盤焦點在公告連結上時暫停（WCAG 2.2.2：自動更新的內容要能暫停）
+  let hold = false;
+  bar.addEventListener("mouseenter", () => { hold = true; });
+  bar.addEventListener("mouseleave", () => { hold = false; });
+  bar.addEventListener("focusin", () => { hold = true; });
+  bar.addEventListener("focusout", (e) => { if (!bar.contains(e.relatedTarget)) hold = false; });
+
   // 記錄間隔 ID 以防重複執行
   if (window.announceTimer) clearInterval(window.announceTimer);
   window.announceTimer = setInterval(function () {
-    const items = track.querySelectorAll(".announce-item");
-    if (!items.length) return;
+    if (hold || document.hidden) return;
     items[current].classList.remove("is-active");
     current = (current + 1) % items.length;
     items[current].classList.add("is-active");
+    sync();
   }, 5000);
 }
 
@@ -225,6 +253,7 @@ document.addEventListener("click", (e) => {
   if(nav && nav.classList.contains("open")){
     if(!nav.contains(e.target) && (!toggle || !toggle.contains(e.target))){
       nav.classList.remove("open");
+      syncMenuToggle(false);
     }
   }
 });
@@ -257,6 +286,27 @@ function calcShippingFee(pickup, itemsTotal, shipTemp){
   if(pickup !== "郵寄") return 0;
   if(parseInt(itemsTotal, 10) >= SHIPPING_FREE_THRESHOLD) return 0;
   return shipTemp === "冷藏" ? SHIPPING_FEE_COLD : SHIPPING_FEE_ROOM;
+}
+
+/** 免運進度文字：門檻以「折扣後金額」計算，與 calcShippingFee 一致；自取本來就不收運費 */
+function freeShipText(total){
+  const need = SHIPPING_FREE_THRESHOLD - (parseInt(total, 10) || 0);
+  return need > 0
+    ? `宅配再買 NT$${need.toLocaleString()} 免運`
+    : "已達宅配免運";
+}
+
+/** 購物車抽屜內的免運進度條；total 為 null 時隱藏（空車） */
+function renderFreeShipProgress(el, total){
+  if(!el) return;
+  if(total == null){ el.innerHTML = ""; el.hidden = true; return; }
+  const amount = parseInt(total, 10) || 0;
+  const ratio  = Math.min(1, amount / SHIPPING_FREE_THRESHOLD);
+  el.hidden = false;
+  el.classList.toggle("is-done", ratio >= 1);
+  el.innerHTML = `
+    <div class="mini-cart-ship-text"><strong>${freeShipText(amount)}</strong><span>滿 NT$${SHIPPING_FREE_THRESHOLD.toLocaleString()} 宅配免運，自取不收運費</span></div>
+    <div class="mini-cart-ship-bar" role="progressbar" aria-label="免運進度" aria-valuemin="0" aria-valuemax="${SHIPPING_FREE_THRESHOLD}" aria-valuenow="${Math.min(amount, SHIPPING_FREE_THRESHOLD)}"><span style="width:${(ratio * 100).toFixed(1)}%"></span></div>`;
 }
 
 
@@ -316,11 +366,17 @@ function _showAgeOverlay(){
 
   const overlay = document.createElement('div');
   overlay.id = 'age-overlay';
+  // 無障礙（2026-11，經使用者同意）：標成對話框、讓報讀唸出標題與說明、打開時焦點移到確認鈕
+  // 只加屬性與焦點，年齡判斷與紀錄方式不變
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-labelledby', 'ageOverlayTitle');
+  overlay.setAttribute('aria-describedby', 'ageOverlayDesc');
   overlay.innerHTML = `
     <div class="age-overlay-box">
       <div class="kicker">年齡確認</div>
-      <h1 style="margin:8px 0 10px; font-size:24px;">請確認你已滿 18 歲</h1>
-      <p>依法律規定，未滿法定飲酒年齡者請勿瀏覽本網站。</p>
+      <h1 id="ageOverlayTitle" style="margin:8px 0 10px; font-size:24px;">請確認你已滿 18 歲</h1>
+      <p id="ageOverlayDesc">依法律規定，未滿法定飲酒年齡者請勿瀏覽本網站。</p>
       <div class="age-overlay-actions">
         <button class="btn btn-primary" onclick="_confirmAge()">我已滿 18 歲，進入網站</button>
         <button class="btn" onclick="_denyAge()">我未滿 18 歲</button>
@@ -330,6 +386,20 @@ function _showAgeOverlay(){
   `;
   document.body.appendChild(overlay);
   document.body.classList.add('age-overlay-active');
+  overlay.querySelector('.btn-primary')?.focus();
+
+  // 焦點鎖定（2026-11，經使用者同意）：只處理焦點與背景 inert，年齡判斷與 _confirmAge/_denyAge 不變
+  setPageInert(overlay, true);
+  overlay.addEventListener('keydown', (e) => trapTab(overlay, e));
+  // 按「未滿 18 歲」後內容被替換，焦點移到新的「返回上一頁」
+  new MutationObserver(() => {
+    if(!overlay.contains(document.activeElement)) overlay.querySelector('button')?.focus();
+  }).observe(overlay, { childList: true, subtree: true });
+  // 按「已滿 18 歲」後 overlay 被移除 → 解除背景 inert
+  const releaseObs = new MutationObserver(() => {
+    if(!document.body.contains(overlay)){ setPageInert(null, false); releaseObs.disconnect(); }
+  });
+  releaseObs.observe(document.body, { childList: true });
 }
 
 /** 年齡驗證通過：移除覆蓋層 */
@@ -420,7 +490,8 @@ function applyFilters(){
   const list = products.filter(p => {
     if(cat !== "all" && groupOf(p) !== cat) return false;
     if(p.price < minp || p.price > maxp)    return false;
-    if(q && !`${p.name} ${p.spec} ${p.type}`.toLowerCase().includes(q)) return false;
+    // 口味短語也納入搜尋，例如搜「甘口」「果香」「酒體清爽」
+    if(q && !`${p.name} ${p.spec} ${p.type} ${flavorReading(p)}`.toLowerCase().includes(q)) return false;
     return true;
   });
 
@@ -435,6 +506,8 @@ function applyFilters(){
  * 將商品陣列渲染成卡片 Grid
  * @param {Array}  list - 商品陣列
  * @param {string} id   - 目標容器的 element id
+ * @param {{allLazy?: boolean}} [opts] - allLazy：容器在首屏以下時用（例如首頁「用口味找酒」），
+ *        全部圖片延遲載入，不搶首屏主視覺（LCP）的頻寬
  */
 /**
  * 依商品 priority 產生推薦 badge HTML
@@ -567,7 +640,21 @@ function injectPdpPromoBanner(){
   cta.insertAdjacentElement("afterend", box);
 }
 
-function renderGrid(list, id){
+/**
+ * 口味短語（商品卡、首頁「用口味找酒」共用）
+ * 資料：catalog.js 的 p.flavor = [家族, X(1–5), Y(1–5)]；文字表 FLAVOR_WORDS 也由 catalog.js 提供，
+ *       唯一來源是 build.js 的 FLAVOR_FAMILIES（改文字請改那裡再跑 node build.js）
+ */
+function flavorReading(p){
+  // FLAVOR_WORDS 由 catalog.js 提供；沒載入 catalog.js 的頁面（例如 /wineries/）就不顯示
+  if(typeof FLAVOR_WORDS === "undefined") return "";
+  const f = p && p.flavor;
+  const w = f && FLAVOR_WORDS[f[0]];
+  if(!w) return "";
+  return w.x[f[1] - 1] + "，" + w.y[f[2] - 1];
+}
+
+function renderGrid(list, id, opts){
   const box = document.getElementById(id);
   if(!box) return;
 
@@ -587,7 +674,7 @@ function renderGrid(list, id){
     let cover = Array.isArray(p.imgs) ? p.imgs[0] : "";
     
     // 效能優化核心：首屏 (前 5 名) 搶先下載，非首屏則延遲載入
-    const isAboveFold = index < 5;
+    const isAboveFold = !(opts && opts.allLazy) && index < 5;
     const loading = isAboveFold ? "eager" : "lazy";
     const decoding = isAboveFold ? "sync" : "async";
     const priority = isAboveFold ? 'fetchpriority="high"' : '';
@@ -613,9 +700,10 @@ function renderGrid(list, id){
           ${renderPromoBadge(p, promoBadgeMap)}
           <a href="${productUrl}" class="name">${p.name}</a>
           <div class="spec">${p.spec || ""}</div>
+          ${flavorReading(p) ? `<div class="card-flavor">${flavorReading(p)}</div>` : ""}
           <div class="card-meta">
             <div class="price-wrap">${renderPrice(p)}</div>
-            <button class="btn-add" onclick="addToCart(${p.id})">加入購物車</button>
+            <button class="btn-add" onclick="addToCart(${p.id})" aria-label="加入購物車：${p.name}">加入購物車</button>
           </div>
         </div>
       </div>
@@ -667,10 +755,12 @@ function filtersAreDefault(){
 
 /** 渲染商品價格，有原價則同時顯示劃線原價 */
 function renderPrice(p){
+  // 金額依文案規範加千分位：NT$1,500
+  const fmt = n => Number(n).toLocaleString("en-US");
   if(p.originPrice && p.originPrice > p.price){
-    return `<div class="price-now">NT$${p.price}</div><div class="price-origin">NT$${p.originPrice}</div>`;
+    return `<div class="price-now">NT$${fmt(p.price)}</div><div class="price-origin">NT$${fmt(p.originPrice)}</div>`;
   }
-  return `<div class="price-now">NT$${p.price}</div>`;
+  return `<div class="price-now">NT$${fmt(p.price)}</div>`;
 }
 
 
@@ -859,7 +949,11 @@ function updateCartUI(){
   const stickyCount = document.getElementById("stickyCount");
   const stickyTotal = document.getElementById("stickyTotal");
   if(stickyCount) stickyCount.textContent = String(itemCount);
-  if(stickyTotal) stickyTotal.textContent = "NT$" + promo.finalTotal;
+  if(stickyTotal) stickyTotal.textContent = "NT$" + Number(promo.finalTotal).toLocaleString();
+  const stickyShip = document.getElementById("stickyShip");
+  if(stickyShip) stickyShip.textContent = itemCount > 0 ? freeShipText(promo.finalTotal) : "";
+  // 空車時只留「LINE 詢問推薦」，不顯示「0 項 NT$0」
+  document.getElementById("stickyBar")?.classList.toggle("is-empty", itemCount === 0);
 
   const overlay = document.getElementById("miniCartOverlay");
   if(overlay && overlay.style.display === "flex") renderMiniCart();
@@ -901,36 +995,38 @@ function renderCartMini(){
       <div class="cart-item-main">
         <div class="cart-item-name">${p.name}</div>
         <div class="cart-item-spec">${p.spec || ""}</div>
-        <div class="cart-item-price">NT$${p.price}</div>
+        <div class="cart-item-price">NT$${Number(p.price).toLocaleString("en-US")}</div>
       </div>
       <div class="cart-item-side">
         <div class="cart-item-qty-wrap">
           <div class="qty-pill">
-            <button class="qty-btn" onclick="setQty(${p.id}, ${Math.max(1,(p.qty||1)-1)})">−</button>
-            <span class="qty-num">${p.qty}</span>
-            <button class="qty-btn" onclick="setQty(${p.id}, ${(p.qty||1)+1})">＋</button>
+            <button class="qty-btn" type="button" aria-label="減少 ${p.name} 數量" onclick="setQty(${p.id}, ${Math.max(1,(p.qty||1)-1)})">−</button>
+            <span class="qty-num" aria-label="數量">${p.qty}</span>
+            <button class="qty-btn" type="button" aria-label="增加 ${p.name} 數量" onclick="setQty(${p.id}, ${(p.qty||1)+1})">＋</button>
           </div>
-          <button class="cart-item-remove" onclick="removeFromCart(${p.id})">移除</button>
+          <button class="cart-item-remove" type="button" onclick="removeFromCart(${p.id})">移除</button>
         </div>
       </div>
     </div>
   `).join("");
 
+  const fmt = n => Number(n).toLocaleString("en-US"); // 文案規範：NT$1,500
+
   // 運費列：只在 order 頁且選擇郵寄時顯示
   const shippingRowHtml = (isOrderPage && pickup === "郵寄") ? `
     <div class="cart-total-row cart-total-shipping">
       <span>運費（${shipTemp}${itemsTotal >= SHIPPING_FREE_THRESHOLD ? "｜滿額免運" : ""}）</span>
-      <span>${shippingFee > 0 ? `NT$${shippingFee}` : "NT$0"}</span>
+      <span>${shippingFee > 0 ? `NT$${fmt(shippingFee)}` : "NT$0"}</span>
     </div>` : "";
 
   wrap.innerHTML = `
     <div class="cart-items">${itemsHtml}</div>
     <div class="cart-total">
-      <div class="cart-total-row cart-total-subtotal"><span>小計</span><span>NT$${subtotal}</span></div>
+      <div class="cart-total-row cart-total-subtotal"><span>小計</span><span>NT$${fmt(subtotal)}</span></div>
       <div id="promotionBlock" class="promotion-block"></div>
-      ${promo.discount > 0 ? `<div class="cart-total-row cart-total-discount"><span>優惠折抵</span><span>- NT$${promo.discount}</span></div>` : ""}
+      ${promo.discount > 0 ? `<div class="cart-total-row cart-total-discount"><span>優惠折抵</span><span>- NT$${fmt(promo.discount)}</span></div>` : ""}
       ${shippingRowHtml}
-      <div class="cart-total-row cart-total-final"><strong>總金額</strong><strong>NT$${grandTotal}</strong></div>
+      <div class="cart-total-row cart-total-final"><strong>總金額</strong><strong>NT$${fmt(grandTotal)}</strong></div>
     </div>
   `;
   renderPromotionBlock();
@@ -958,6 +1054,7 @@ function ensureStickyUI(){
       wrap.className = "cart-float";
       wrap.setAttribute("role", "button");
       wrap.setAttribute("tabindex", "0");
+      wrap.setAttribute("aria-label", "查看購物車");
       wrap.innerHTML = `
         <span class="cart-float-icon" aria-hidden="true">🛒</span>
         <span class="cart-float-badge" id="cartBadge" aria-label="購物車品項數">0</span>
@@ -977,19 +1074,25 @@ function ensureStickyUI(){
     const bar = document.createElement("div");
     bar.id = "stickyBar";
     bar.className = "sticky-bar";
+    // 空車：只有「LINE 詢問推薦」一顆大按鈕
+    // 有酒款：主按鈕改成「填寫詢問單」（帶著購物車去下單頁），LINE 縮成旁邊的小按鈕
+    //         —— 避免客人挑好酒後被主按鈕帶去空白的 LINE 對話、購物車就斷在這裡
     bar.innerHTML = `
-      <button class="sticky-cart" id="stickyCartBtn" type="button" aria-label="查看已選酒款">
-        <div class="sticky-cart-top">🛒 <span id="stickyCount">0</span> 項</div>
-        <div class="sticky-cart-bottom">NT$ <span id="stickyTotal">0</span></div>
+      <button class="sticky-cart" id="stickyCartBtn" type="button">
+        <span class="visually-hidden">查看購物車：</span>
+        <div class="sticky-cart-top">🛒 <span id="stickyCount">0</span> 項　<span id="stickyTotal">NT$0</span></div>
+        <div class="sticky-cart-bottom" id="stickyShip"></div>
       </button>
-      <a class="sticky-cta" id="stickyLineBtn" href="${BRAND.lineUrl}" target="_blank" rel="noopener">LINE 詢問推薦</a>
+      <a class="sticky-order" id="stickyOrderBtn" href="/order/">填寫詢問單</a>
+      <a class="sticky-cta" id="stickyLineBtn" href="${BRAND.lineUrl}" target="_blank" rel="noopener" aria-label="LINE 詢問推薦">
+        <span class="sticky-cta-full">LINE 詢問推薦</span><span class="sticky-cta-short" aria-hidden="true">LINE</span>
+      </a>
     `;
     document.body.appendChild(bar);
     bar.querySelector("#stickyCartBtn")?.addEventListener("click", openMiniCart);
-    // LINE 按鈕直接綁定（動態注入後無法靠 data-line-link 統一處理）
+    // LINE 按鈕：連結本身就會開新分頁，這裡只記錄事件（之前另外 window.open 會開出兩個分頁）
     bar.querySelector("#stickyLineBtn")?.addEventListener("click", () => {
       trackEvent('click_line', { method: 'LINE', source: 'sticky_bar' });
-      window.open(BRAND.lineUrl, "_blank", "noopener");
     });
     document.body.classList.add("has-sticky-bar");
   }
@@ -1001,15 +1104,17 @@ function ensureStickyUI(){
     overlay.className = "mini-cart-overlay";
     overlay.setAttribute("aria-hidden", "true");
     overlay.innerHTML = `
-      <div class="mini-cart-sheet" role="dialog" aria-modal="true" aria-label="已選酒款">
+      <div class="mini-cart-sheet" role="dialog" aria-modal="true" aria-labelledby="miniCartTitle">
         <div class="mini-cart-header">
-          <div class="mini-cart-title">已選酒款（<span id="miniCartCount">0</span> 項）</div>
+          <div class="mini-cart-title" id="miniCartTitle">購物車（<span id="miniCartCount">0</span> 項）</div>
           <button class="mini-cart-close" id="miniCartClose" type="button" aria-label="關閉">✕</button>
         </div>
         <div class="mini-cart-body" id="miniCartList"></div>
+        <div class="mini-cart-ship" id="miniCartShip" aria-live="polite" hidden></div>
         <div class="mini-cart-footer">
           <div class="mini-cart-total">總金額 <span id="miniCartTotal">0</span></div>
-          <a class="btn btn-primary mini-cart-checkout" href="/order/">送出詢問單</a>
+          <a class="btn btn-primary mini-cart-checkout" href="/order/">填寫詢問單</a>
+          <p class="mini-cart-note">送出後由專人透過 LINE 確認品項與金額，確認前不需付款。</p>
         </div>
       </div>
     `;
@@ -1027,13 +1132,60 @@ function ensureStickyUI(){
   }
 }
 
+/* ===== 對話框焦點管理（購物車抽屜、年齡驗證共用）=====
+ * 打開時：背後頁面設為 inert（不能點、不能 Tab、報讀也略過），焦點移進對話框，Tab 只在裡面循環
+ * 關閉時：解除 inert，焦點還給打開它的那顆按鈕
+ */
+function setPageInert(except, on){
+  [...document.body.children].forEach(el => {
+    if(el.tagName === "SCRIPT") return;
+    if(on){
+      if(el === except || (except && el.contains(except))) return;
+      if(!el.inert){ el.inert = true; el.dataset.dlgInert = "1"; }
+    }else if(el.dataset.dlgInert){
+      // 加入購物車提示若在對話框開著時已收起，維持 inert，不要還原成看不見的 Tab 停點
+      el.inert = el.id === "cartToast" && !el.classList.contains("show");
+      delete el.dataset.dlgInert;
+    }
+  });
+}
+function dialogFocusables(root){
+  return [...root.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+    .filter(el => el.getClientRects().length > 0);
+}
+function trapTab(root, e){
+  if(e.key !== "Tab") return;
+  const f = dialogFocusables(root);
+  if(!f.length){ e.preventDefault(); return; }
+  const first = f[0], last = f[f.length - 1];
+  if(!root.contains(document.activeElement)){ e.preventDefault(); first.focus(); }
+  else if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+}
+
+let _miniCartReturnFocus = null;
+
 /** 開啟 mini cart overlay */
 function openMiniCart(){
   const overlay = document.getElementById("miniCartOverlay");
   if(!overlay) return;
+  const wasOpen = overlay.style.display === "flex";
   renderMiniCart();
   overlay.style.display = "flex";
   overlay.setAttribute("aria-hidden", "false");
+  if(!wasOpen){
+    _miniCartReturnFocus = document.activeElement;
+    // 抽屜打開時收起浮在上面的提示，避免蓋住購物車內容
+    const toast = document.getElementById("cartToast");
+    if(toast){ toast.classList.remove("show"); toast.inert = true; }
+    document.querySelectorAll(".promo-toast").forEach(t => t.remove());
+    setPageInert(overlay, true);
+    if(!overlay.dataset.trap){
+      overlay.dataset.trap = "1";
+      overlay.addEventListener("keydown", (e) => trapTab(overlay.querySelector(".mini-cart-sheet") || overlay, e));
+    }
+    overlay.querySelector("#miniCartClose")?.focus();
+  }
 
   const cart = readCart();
   if (cart.length > 0) {
@@ -1055,8 +1207,16 @@ function openMiniCart(){
 function closeMiniCart(){
   const overlay = document.getElementById("miniCartOverlay");
   if(!overlay) return;
+  const wasOpen = overlay.style.display === "flex";
   overlay.style.display = "none";
   overlay.setAttribute("aria-hidden", "true");
+  if(!wasOpen) return; // 全站 Esc 監聽也會呼叫這裡：沒開著就不動焦點
+  setPageInert(overlay, false);
+  // 焦點還給打開它的按鈕；若那顆按鈕已看不見（例如加入購物車提示已收起），改還給購物車按鈕
+  const back = _miniCartReturnFocus;
+  _miniCartReturnFocus = null;
+  if(back && back !== document.body && document.contains(back) && back.getClientRects().length && !back.closest("[inert]")) back.focus();
+  else (document.getElementById("cartFloat")?.getClientRects().length ? document.getElementById("cartFloat") : document.getElementById("stickyCartBtn"))?.focus();
 }
 
 /**
@@ -1074,7 +1234,8 @@ function renderMiniCart(){
   const promo     = applyPromotions(getCartContext());
 
   countEl.textContent = String(itemCount);
-  totalEl.textContent = "NT$" + promo.finalTotal;
+  totalEl.textContent = "NT$" + Number(promo.finalTotal).toLocaleString();
+  renderFreeShipProgress(document.getElementById("miniCartShip"), itemCount > 0 ? promo.finalTotal : null);
 
   if(cart.length === 0){
     listEl.innerHTML = `<div class="mono">購物車目前沒有商品。</div><div id="promotionBlock" class="promotion-block"></div>`;
@@ -1090,11 +1251,11 @@ function renderMiniCart(){
       </div>
       <div class="mini-cart-actions">
         <div class="mini-cart-qty">
-          <button type="button" class="mini-qty-btn" aria-label="減少數量"
+          <button type="button" class="mini-qty-btn" aria-label="減少 ${p.name} 數量"
             onclick="setQty(${p.id}, ${Math.max(1,(p.qty||1)-1)})">−</button>
-          <input class="mini-qty-input" type="number" min="1" value="${p.qty||1}"
+          <input class="mini-qty-input" type="number" min="1" value="${p.qty||1}" aria-label="${p.name} 數量"
             onchange="setQty(${p.id}, this.value)">
-          <button type="button" class="mini-qty-btn" aria-label="增加數量"
+          <button type="button" class="mini-qty-btn" aria-label="增加 ${p.name} 數量"
             onclick="setQty(${p.id}, ${(p.qty||1)+1})">＋</button>
         </div>
         <button type="button" class="mini-remove" onclick="removeFromCart(${p.id})">移除</button>
@@ -1334,14 +1495,45 @@ function renderPromotionBlock(){
   const livePromos = window.PROMOTIONS.filter(isPromoLive);
   if(livePromos.length === 0){ box.innerHTML = ""; return; }
 
-  const res = applyPromotions(getCartContext());
+  const ctx = getCartContext();
+  const res = applyPromotions(ctx);
+  const cart = readCart();
+
+  // 購物車有酒時，只列跟購物車內酒款有關的活動（指定酒款活動要有任一支在車內；全館活動一律列出）
+  // 購物車是空的：列出所有進行中的活動，當成資訊
+  const inCart = id => cart.some(item => item.id === id);
+  const shown = cart.length
+    ? livePromos.filter(p => !Array.isArray(p.targetIds) || p.targetIds.some(inCart))
+    : livePromos;
+  if(shown.length === 0){ box.innerHTML = ""; return; }
+
+  // 每個活動的狀態都寫成文字（不只靠打勾或顏色），報讀也聽得到
+  const itemHtml = p => {
+    if(!cart.length){
+      return `<li class="promo-item"><span class="promo-mark" aria-hidden="true"></span><span class="promo-text"><span class="promo-label">${p.label}</span></span></li>`;
+    }
+    const ok = res.applied.some(a => a.id === p.id);
+    let state = "pending", note = "";
+    if(ok){
+      state = "applied"; note = "已套用";
+    }else{
+      let met = false;
+      try { met = !!p.condition(ctx); } catch(e){ met = false; }
+      if(met && !p.stackable){
+        state = "superseded"; note = "不可併用，已自動套用較優惠的方案";
+      }else if(p.hint && typeof p.hint.minQty === "number" && Array.isArray(p.targetIds)){
+        const qty = cart.filter(item => p.targetIds.includes(item.id)).reduce((s, item) => s + (item.qty || 0), 0);
+        const need = p.hint.minQty - qty;
+        if(need > 0) note = `活動酒款再加 ${need} 件即可套用`;
+      }
+    }
+    return `<li class="promo-item is-${state}"><span class="promo-mark" aria-hidden="true"></span><span class="promo-text"><span class="promo-label">${p.label}</span>${note ? `<span class="promo-note">${note}</span>` : ""}</span></li>`;
+  };
+
   box.innerHTML = `
-    <div class="promo-title">目前優惠</div>
+    <div class="promo-title">${cart.length ? "這些酒款的優惠" : "目前優惠"}</div>
     <ul class="promo-list">
-      ${livePromos.map(p => {
-        const ok = res.applied.some(a => a.id === p.id);
-        return `<li class="promo-item${ok ? ' achieved' : ''}"><span class="promo-check-box"></span>${p.label}</li>`;
-      }).join("")}
+      ${shown.map(itemHtml).join("")}
     </ul>
     ${res.discount > 0 ? `<div class="promo-discount">已折抵 NT$${res.discount}</div>` : `<div class="promo-hint"></div>`}
   `;
@@ -1487,25 +1679,41 @@ function showCartToast(product, currentQty){
     document.body.appendChild(toast);
   }
   
-  // 萃取第一張圖做縮圖
-  const cover = (Array.isArray(product.imgs) && product.imgs.length > 0) ? product.imgs[0] : "";
-  
+  // 萃取第一張圖做縮圖（小尺寸，避免手機上縮圖還沒載完提示就消失）
+  const cover = (Array.isArray(product.imgs) && product.imgs.length > 0) ? optimizeImgUrl(product.imgs[0], "w_96,h_96,c_limit") : "";
+
+  toast.setAttribute("role", "status");
   toast.innerHTML = `
-    <div class="cart-toast-inner" style="display:flex; align-items:center; gap:12px;">
-      ${cover ? `<div class="cart-toast-img" style="width:40px; height:40px; flex-shrink:0; background:#fff; border-radius:8px; overflow:hidden;"><img src="${cover}" alt="${product.name}" style="width:100%; height:100%; object-fit:contain;"></div>` : ""}
+    <div class="cart-toast-inner">
+      ${cover ? `<div class="cart-toast-img"><img src="${cover}" alt=""></div>` : ""}
       <div class="cart-toast-text">
-        <div class="title" style="font-size:14px; font-weight:600;">已加入購物車</div>
-        <div class="desc" style="font-size:12px; opacity:0.85; margin-top:2px;">
-          ${product.name} (共 ${currentQty} 件)
-        </div>
+        <div class="title">已加入購物車</div>
+        <div class="desc">${product.name}（共 ${currentQty} 件）</div>
       </div>
+      <button type="button" class="cart-toast-view">查看購物車</button>
     </div>
   `;
-  
+  toast.querySelector(".cart-toast-view")?.addEventListener("click", () => {
+    toast.classList.remove("show");
+    toast.inert = true; // 提示收起；關閉抽屜時焦點改還給購物車按鈕
+    openMiniCart();
+  });
+
   toast.classList.add("show");
-  
+  toast.inert = false;
+
+  // 3.5 秒後淡出；滑鼠停在上面或鍵盤聚焦時先不收
+  // 收起後設為 inert：透明的「查看購物車」不再是看不見的 Tab 停點
+  const hide = () => {
+    if(toast.matches(":hover") || toast.contains(document.activeElement)){
+      toastTimer = setTimeout(hide, 1200);
+      return;
+    }
+    toast.classList.remove("show");
+    toast.inert = true;
+  };
   if(toastTimer) clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 2000);
+  toastTimer = setTimeout(hide, 3500);
 }
 
 /** 促銷引導 Toast（顯示距下一折扣還差幾件），2.6 秒後自動移除 */
@@ -1872,6 +2080,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* 全站通用 */
   renderAnnouncements(); // 全站統一公告邏輯 (置於最前以確保佈局計算正確)
+  syncMenuToggle(false); // 漢堡選單補上報讀名稱與 aria-expanded
   setNavActive();        // nav active 狀態
   ageCheck();            // 年齡驗證
 
@@ -1916,12 +2125,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* 商品總覽頁 */
   if(key === "products"){
-    // ✅ 支援 ?q= URL 參數（讓 Google SearchAction 實際運作）
-    const urlQ = new URLSearchParams(window.location.search).get("q");
-    if(urlQ){
-      const qInput = document.getElementById("q");
-      if(qInput) qInput.value = urlQ;
-    }
+    // ✅ 支援 URL 參數：?q=（Google SearchAction、首頁搜尋框）、?minp= / ?maxp=（首頁「依預算找酒」）、?cat=
+    const urlParams = new URLSearchParams(window.location.search);
+    const fillFromUrl = (param, id) => {
+      const v = urlParams.get(param);
+      const el = document.getElementById(id);
+      if(v && el) el.value = v;
+    };
+    fillFromUrl("q", "q");
+    fillFromUrl("minp", "minp");
+    fillFromUrl("maxp", "maxp");
+    const urlCat = urlParams.get("cat");
+    const catSel = document.getElementById("cat");
+    if(urlCat && catSel && [...catSel.options].some(o => o.value === urlCat)) catSel.value = urlCat;
     document.getElementById("q")?.addEventListener("input", applyFilters);
     document.getElementById("cat")?.addEventListener("change", applyFilters);
     document.getElementById("minp")?.addEventListener("input", applyFilters);

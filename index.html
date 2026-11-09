@@ -48,17 +48,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-<!-- 只 preload 第一張 hero slide，桌機/手機依視窗各下載一張，加速 LCP -->
-<link rel="preload" as="image" href="/assets/images/home/三大保證1920.webp?v=2" media="(min-width:641px)" fetchpriority="high">
-<link rel="preload" as="image" href="/assets/images/home/三大保證750.webp?v=2" media="(max-width:640px)" fetchpriority="high">
+<!-- 首屏最大的圖＝本月精選輪盤中間那支，提早下載加速 LCP。href 由 node build.js 依輪盤第一支自動更新，請勿手改 -->
+<link rel="preload" as="image" data-reel-preload href="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/5抹茶梅酒1.webp" fetchpriority="high">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/home.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E3%80%82%E3%80%8C%E3%80%8D%E3%80%90%E3%80%91%E4%B8%80%E4%B8%8A%E4%B8%8B%E4%B8%8D%E4%B8%AD%E4%BB%80%E4%BB%8A%E4%BC%81%E4%BE%86%E4%BE%8B%E5%81%8F%E5%85%A8%E5%86%B7%E5%88%B0%E5%88%BB%E5%8B%95%E5%8D%80%E5%8D%97%E5%8D%B8%E5%8E%9A%E5%8F%A3%E5%90%A7%E5%90%B9%E5%91%B3%E5%92%96%E5%93%81%E5%93%AA%E5%95%A1%E5%96%9D%E5%96%AE%E5%9C%96%E5%9C%A8%E5%9D%87%E5%A4%9C%E5%A4%A9%E5%A5%BD%E5%AD%90%E5%AD%A3%E5%AE%9A%E5%AE%B6%E5%AF%86%E5%AF%A6%E5%AF%A7%E5%B0%87%E5%B0%88%E5%B0%8D%E5%B0%8F%E5%B7%AE%E5%B9%95%E5%BA%95%E5%BA%A6%E5%BC%B7%E5%BE%9E%E5%BE%AE%E6%80%8E%E6%83%B3%E6%84%9F%E6%85%A2%E6%89%BE%E6%8C%87%E6%8E%A7%E6%90%AD%E6%97%A5%E6%97%A8%E6%98%8E%E6%98%AF%E6%99%82%E6%99%9A%E6%9B%B4%E6%9B%B8%E6%9C%88%E6%9C%AC%E6%9D%AF%E6%9E%9C%E6%A2%85%E6%A5%AD%E6%AF%94%E6%B0%A3%E6%B0%B4%E6%B3%A1%E6%B4%BB%E6%B7%B1%E6%B8%85%E6%BA%AB%E6%BB%BF%E6%BF%83%E7%83%88%E7%88%BD%E7%94%98%E7%94%9C%E7%94%A8%E7%95%A5%E7%95%B6%E7%9A%84%E7%9B%88%E7%A7%8B%E7%A8%8B%E7%A8%AE%E7%AF%80%E7%B1%B3%E7%B2%BE%E7%BD%90%E8%87%A8%E8%88%87%E8%8C%B6%E8%8F%AF%E8%90%84%E8%91%A1%E8%96%84%E8%A1%8C%E8%A1%A1%E8%A7%A3%E8%AA%BF%E8%B2%B7%E8%B5%B7%E8%BC%95%E8%BE%9B%E9%81%A9%E9%81%B8%E9%83%81%E9%85%89%E9%85%8D%E9%85%92%E9%85%B8%E9%86%BA%E9%99%90%E9%A2%A8%E9%A3%B2%E9%A3%BD%E9%A4%A8%E9%A6%99%E9%AB%94%E9%AE%AE%E9%BA%97%E9%BA%BC%EF%BC%81%EF%BC%8C%EF%BC%9A%EF%BC%9F">
 <script defer src="/assets/js/catalog.js"></script>
 
 
 <script defer src="/assets/js/main.js"></script>
+<script defer src="/assets/js/home-taste.js"></script>
+<script defer src="/assets/js/home-reel.js"></script>
 <script defer src="/assets/js/announcement_data.js"></script>
 
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
@@ -256,11 +260,117 @@
   <!-- ✅ SEO 用 H1（視覺隱藏，搜尋引擎讀得到） -->
   <h1 class="visually-hidden">酉時喝酒 YOU-SI｜日系清酒・果實酒・葡萄酒選酒品牌：新竹自取推薦</h1>
 
-  <section class="hero-carousel" id="heroCarousel" aria-label="主視覺輪播">
-    <div class="hero-carousel-track" id="heroTrack"></div>
-    <button class="hero-carousel-arrow prev" id="heroPrev" aria-label="上一張">‹</button>
-    <button class="hero-carousel-arrow next" id="heroNext" aria-label="下一張">›</button>
+
+
+  <main id="main">
+
+  <!-- ✅ 首屏「黃昏酒桌」：品牌句＋快速選口味＋本月精選輪盤
+       口味入口點了會帶到下方「用口味找酒」並選好格子；輪盤互動在 /assets/js/home-reel.js
+       輪盤酒款（#duskStage）與「N 支」由 node build.js 依 priority 5 自動寫入，請勿手改 -->
+  <section class="dusk" aria-labelledby="duskTitle">
+    <div class="dusk-inner">
+      <div class="dusk-copy">
+        <h2 class="dusk-title" id="duskTitle">酉時，是夜幕將臨、<br>一天慢下來的時刻。</h2>
+        <p class="dusk-note">每一支酒，都由品鑑師試飲認可後才上架。<span class="dusk-note-more"><br>替你把今晚的那一瓶，先挑好了。</span></p>
+        <h3 class="dusk-q" id="duskQ">今晚想喝什麼口味？</h3>
+        <ul class="dusk-picks" aria-labelledby="duskQ">
+          <li><a class="dusk-pick" href="/products/sake/" data-fam="sake" data-x="3" data-y="4">
+            <span class="dusk-pick-name">果香明亮的清酒</span>
+            <span class="dusk-pick-read">甘辛適中・偏果香</span>
+            <span class="dusk-pick-count" data-pick-count></span>
+            <svg class="dusk-pick-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></li>
+          <li><a class="dusk-pick" href="/products/sake/" data-fam="sake" data-x="3" data-y="2">
+            <span class="dusk-pick-name">米旨醇厚的清酒</span>
+            <span class="dusk-pick-read">甘辛適中・偏米旨</span>
+            <span class="dusk-pick-count" data-pick-count></span>
+            <svg class="dusk-pick-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></li>
+          <li><a class="dusk-pick" href="/products/fruit-tea/" data-fam="ft" data-x="3" data-y="3">
+            <span class="dusk-pick-name">酸甜好入口的果實酒</span>
+            <span class="dusk-pick-read">酸甜均衡・厚薄適中</span>
+            <span class="dusk-pick-count" data-pick-count></span>
+            <svg class="dusk-pick-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></li>
+          <li><a class="dusk-pick" href="/products/wine/" data-fam="wine" data-x="1" data-y="2">
+            <span class="dusk-pick-name">清爽輕盈的葡萄酒</span>
+            <span class="dusk-pick-read">單寧輕盈・酒體偏輕</span>
+            <span class="dusk-pick-count" data-pick-count></span>
+            <svg class="dusk-pick-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a></li>
+        </ul>
+        <a class="dusk-all" href="#homeTasteTitle">打開完整口味座標</a>
+      </div>
+      <div class="dusk-reel" role="region" aria-roledescription="輪播" aria-labelledby="homePicksTitle">
+        <div class="dusk-reel-head">
+          <h2 class="dusk-reel-title" id="homePicksTitle">本月精選</h2>
+          <span class="dusk-reel-count">29 支</span>
+        </div>
+        <div class="dusk-stage" id="duskStage">
+          <a class="dusk-item" href="/products/fruit-tea/天吹-抹茶梅酒/" data-i="0" data-id="5" draggable="false"><img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/5抹茶梅酒1.webp" loading="eager" fetchpriority="high" alt="天吹 抹茶梅酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/fruit-tea/天吹-伯爵紅茶梅酒/" data-i="1" data-id="6" draggable="false"><img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/6伯爵紅茶梅酒1.webp" loading="eager" alt="天吹 伯爵紅茶梅酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/fruit-tea/天吹-京都千年抹茶酒/" data-i="2" data-id="7" draggable="false"><img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/7千年抹茶酒1.webp" loading="eager" alt="天吹 京都千年抹茶酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/萩之鶴-純米吟釀-生原酒-櫻花貓/" data-i="3" data-id="32" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/32萩之鶴_純米吟釀_櫻花貓1.webp" loading="lazy" alt="萩之鶴 純米吟釀 生原酒 櫻花貓" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/鳳凰美田-純米吟釀-冷卸-山田錦/" data-i="4" data-id="39" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/39鳳凰美田_純米吟釀冷卸1.webp" loading="lazy" alt="鳳凰美田 純米吟釀 冷卸 山田錦" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/純米大吟釀-初花-金魚台輪/" data-i="5" data-id="45" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/45初花_金魚台輪純米大吟釀1.webp" loading="lazy" alt="純米大吟釀 初花 金魚台輪" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/wine/奧野田-La-Florette-粉紅酒/" data-i="6" data-id="64" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/64奧野田_LaFlorette1.webp" loading="lazy" alt="奧野田 La Florette 粉紅酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/fruit-tea/梅侍-紅烏龍梅酒/" data-i="7" data-id="81" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/81梅侍 紅烏龍梅酒1.webp" loading="lazy" alt="梅侍 紅烏龍梅酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/fruit-tea/蓬萊泉-徐耀良-東方美人茶梅酒/" data-i="8" data-id="82" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/82蓬萊泉_東方美人1.webp" loading="lazy" alt="蓬萊泉 徐耀良 東方美人茶梅酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/fruit-tea/蓬萊泉-烹雪韻-生普洱茶梅酒/" data-i="9" data-id="83" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/83蓬萊泉_生普洱茶1.webp" loading="lazy" alt="蓬萊泉 烹雪韻 生普洱茶梅酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/spirits/六代目百合-芋燒酎/" data-i="10" data-id="95" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/95六代目百合1.webp" loading="lazy" alt="六代目百合 芋燒酎" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/spirits/山櫻威士忌-PRECIOUS/" data-i="11" data-id="96" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/96山櫻PRECIOUS1.webp" loading="lazy" alt="山櫻威士忌 PRECIOUS" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/wine/聖母之乳-金凱勒精選優質白葡萄酒/" data-i="12" data-id="97" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/97聖母之乳1.webp" loading="lazy" alt="聖母之乳 金凱勒精選優質白葡萄酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/wine/巧克力鹿-精選混釀紅葡萄酒/" data-i="13" data-id="98" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/98巧克力鹿1.webp" loading="lazy" alt="巧克力鹿 精選混釀紅葡萄酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/wine/雙魚-DUO-白葡萄酒/" data-i="14" data-id="99" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/99雙魚DUO1.webp" loading="lazy" alt="雙魚 DUO 白葡萄酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/日日-玉榮-2026/" data-i="15" data-id="103" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/103日日玉榮1.webp" loading="lazy" alt="日日 玉榮 2026" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/spirits/渡邊-Infusion-Spirits-Hidama-Green/" data-i="16" data-id="121" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/121渡邊green1.webp" loading="lazy" alt="渡邊 Infusion Spirits Hidama Green" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/fruit-tea/蓬萊泉-乘興院-包種茶柚子酒/" data-i="17" data-id="127" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/127包種茶柚子1.webp" loading="lazy" alt="蓬萊泉 乘興院 包種茶柚子酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/mini/初龜-純米吟釀-300ml/" data-i="18" data-id="132" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/132初龜純米吟釀300_1.webp" loading="lazy" alt="初龜 純米吟釀 300ml" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/wine/喬治穆勒酒莊-麗絲玲白葡萄酒-2022/" data-i="19" data-id="133" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/133喬治穆勒麗絲玲1.webp" loading="lazy" alt="喬治穆勒酒莊 麗絲玲白葡萄酒 2022" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/光榮菊-黃昏-Orange-火入/" data-i="20" data-id="134" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/134光榮菊黃昏1.webp" loading="lazy" alt="光榮菊 黃昏 Orange 火入" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/林本店-原始衝動-純米大吟釀-無濾過生原酒/" data-i="21" data-id="135" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/135林本店原始衝動1.webp" loading="lazy" alt="林本店 原始衝動 純米大吟釀 無濾過生原酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/林本店-月詠ARIA-純米大吟釀-無濾過生原酒/" data-i="22" data-id="136" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/136林本店月詠1.webp" loading="lazy" alt="林本店 月詠ARIA 純米大吟釀 無濾過生原酒" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/鳳凰美田-純米吟釀-五百萬石-冷卸/" data-i="23" data-id="137" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/137鳳凰美田五百萬石_冷卸1.webp" loading="lazy" alt="鳳凰美田 純米吟釀 五百萬石 冷卸" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/萩之鶴-別仕込-萬聖貓/" data-i="24" data-id="138" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/138萩之鶴萬聖貓1.webp" loading="lazy" alt="萩之鶴 別仕込 萬聖貓" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/谷川岳-純米酒-冷卸/" data-i="25" data-id="139" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/139谷川岳冷卸1.webp" loading="lazy" alt="谷川岳 純米酒 冷卸" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/wine/［羊年酒預購］塔巴利特級卡本內蘇維翁2025（附紙袋）/" data-i="26" data-id="140" draggable="false"><img data-src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/140羊年酒塔巴利1.webp" loading="lazy" alt="［羊年酒預購］塔巴利特級卡本內蘇維翁2025（附紙袋）" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/［羊年酒預購］水芭蕉-羊年限定-純米大吟釀/" data-i="27" data-id="141" draggable="false"><img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/141羊年酒水芭蕉1.webp" loading="eager" alt="［羊年酒預購］水芭蕉 羊年限定 純米大吟釀" width="400" height="500" decoding="async" draggable="false"></a>
+          <a class="dusk-item" href="/products/sake/［羊年酒預購］飛良泉-羊羊勢得｜純米大吟釀・純米吟釀-組合/" data-i="28" data-id="142" draggable="false"><img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/142羊年酒飛良泉1.webp" loading="eager" alt="［羊年酒預購］飛良泉 羊羊勢得｜純米大吟釀・純米吟釀 組合" width="400" height="500" decoding="async" draggable="false"></a>
+    </div>
+        <div class="dusk-reel-bar" hidden>
+          <button type="button" class="dusk-reel-btn" data-reel="prev" aria-label="上一支">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8 10 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="dusk-cap" id="duskCap">
+            <a class="dusk-cap-name" href="/products/"></a>
+            <div class="dusk-cap-meta">
+              <span class="dusk-cap-flavor"></span>
+              <span class="dusk-cap-price"></span>
+              <button type="button" class="dusk-cap-add">加入購物車</button>
+            </div>
+          </div>
+          <button type="button" class="dusk-reel-btn" data-reel="next" aria-label="下一支">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <button type="button" class="dusk-reel-pause" aria-pressed="false" aria-label="暫停輪播" hidden>
+          <svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3.5v9M10.5 3.5v9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3.6v8.8L12.2 8z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ 當期促銷輪播（2026-11 放在首屏與找酒帶之間；banner 轉檔流程不變：scripts/build-banner.js） -->
+  <div class="dusk-promo">
+    <section class="hero-carousel" id="heroCarousel" aria-roledescription="輪播" aria-label="當期優惠">
+    <!-- 圖片視窗：只有這層裁切；箭頭、圓點、暫停鍵放在圖片下方的控制列，不再壓到 banner 上的文字 -->
+    <div class="hero-carousel-viewport">
+      <div class="hero-carousel-track" id="heroTrack"></div>
+    </div>
+    <button type="button" class="hero-carousel-arrow prev" id="heroPrev" aria-label="上一張"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5 5.5 8 10 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <div class="hero-carousel-dots" id="heroDots"></div>
+    <button type="button" class="hero-carousel-arrow next" id="heroNext" aria-label="下一張"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </section>
 
   <script>
@@ -273,16 +383,11 @@
          link:        點擊跳轉網址（選填）— 留空字串 "" 或刪掉這行 = 不可點擊
     ============================================================= */
     const SLIDES = [
-    {
-      image:       "/assets/images/home/三大保證1920.webp?v=2",
-      imageMobile: "/assets/images/home/三大保證750.webp?v=2",
-      alt:   "酉時三大保證:專家選品，全程控溫，深度品飲",
-      link:  ''
-    },
+    // 第一張放「有酒款畫面、長期有效」的活動，第一眼就看到商品；三大保證移到最後
       {
         image:       "/assets/images/home/貓咪系列1920.webp?v=2",
         imageMobile: "/assets/images/home/貓咪系列750.webp?v=2",
-        alt:   "萩之鶴 貓咪系列",
+        alt:   "萩之鶴 慵懶貓系列 純米吟釀：任選兩支 87 折（原價 3,000 元）",
         link:  "/promotions/"
       },
       {
@@ -290,14 +395,22 @@
         imageMobile: "/assets/images/home/11月雙十一750.webp",
         alt:   "雙11・茶酒選物祭 — 茶酒系列 2 件 92 折",
         link:  "/promotions/"
+      },
+      {
+        image:       "/assets/images/home/三大保證1920.webp?v=2",
+        imageMobile: "/assets/images/home/三大保證750.webp?v=2",
+        alt:   "酉時三大保證:專家選品，全程控溫，深度品飲",
+        link:  ''
       }
     ];
 
     // 自動播放秒數（毫秒）。設為 0 = 不自動播放
-    const HERO_AUTOPLAY_MS = 5000;
+    // 2026-11：改為 0（手動切換）——首頁只讓「本月精選輪盤」自動轉，避免多個區塊同時在動、搶走注意力
+    const HERO_AUTOPLAY_MS = 0;
 
     // ---------- 以下為輪播引擎，一般不用改 ----------
     (function initHeroCarousel() {
+      const root  = document.getElementById('heroCarousel');
       const track = document.getElementById('heroTrack');
       const dots  = document.getElementById('heroDots');
       const prev  = document.getElementById('heroPrev');
@@ -305,13 +418,16 @@
       if (!track) return;
       let idx = 0;
       let timer = null;
+      let hovering = false, focused = false, userPaused = false;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const slides = [];
 
       SLIDES.forEach((s, i) => {
         const slide = document.createElement('div');
         slide.className = 'hero-slide';
 
         if (i === 0) {
-          // 第一張：用真實 <picture>/<img>，搭配 <link rel="preload"> 加速 LCP
+          // 第一張：用真實 <picture>/<img>（輪播已移到首屏下方，改為 lazy，不搶首屏頻寬）
           slide.classList.add('hero-slide--first');
           const pic = document.createElement('picture');
           if (s.imageMobile) {
@@ -327,7 +443,8 @@
           img.width = 1920;
           img.height = 550;
           img.decoding = 'async';
-          img.setAttribute('fetchpriority', 'high');
+          img.loading = 'lazy';
+          img.draggable = false;
           pic.appendChild(img);
           slide.appendChild(pic);
         } else {
@@ -345,13 +462,17 @@
           a.className = 'hero-slide-link';
           a.href = s.link;
           a.textContent = s.alt;
+          a.draggable = false;
           slide.appendChild(a);
         }
+
         track.appendChild(slide);
+        slides.push(slide);
 
         const dot = document.createElement('button');
+        dot.type = 'button';
         dot.className = 'hero-carousel-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', `第 ${i + 1} 張`);
+        dot.setAttribute('aria-label', `第 ${i + 1} 張，共 ${SLIDES.length} 張`);
         dot.addEventListener('click', () => go(i));
         dots.appendChild(dot);
       });
@@ -363,501 +484,248 @@
         return;
       }
 
+      // 暫停／繼續（自動播放時才出現）
+      const pauseBtn = document.createElement('button');
+      pauseBtn.type = 'button';
+      pauseBtn.className = 'hero-carousel-pause';
+      pauseBtn.setAttribute('aria-pressed', 'false');
+      pauseBtn.setAttribute('aria-label', '暫停輪播');
+      pauseBtn.innerHTML = '<svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3.5v9M10.5 3.5v9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>' +
+        '<svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3.6v8.8L12.2 8z" fill="currentColor"/></svg>';
+      if (HERO_AUTOPLAY_MS && !reduce) root.appendChild(pauseBtn);
+      pauseBtn.addEventListener('click', () => {
+        userPaused = !userPaused;
+        pauseBtn.setAttribute('aria-pressed', String(userPaused));
+        pauseBtn.setAttribute('aria-label', userPaused ? '繼續輪播' : '暫停輪播');
+        restart();
+      });
+
       function go(n) {
         idx = (n + SLIDES.length) % SLIDES.length;
-        track.style.transform = `translateX(-${idx * 100}%)`;
-        [...dots.children].forEach((d, i) => d.classList.toggle('active', i === idx));
+        track.style.transform = `translate3d(-${idx * 100}%,0,0)`;
+        [...dots.children].forEach((d, i) => {
+          d.classList.toggle('active', i === idx);
+          if (i === idx) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+        });
+        // 看不到的投影片：連結不能被 Tab 到、報讀也略過
+        slides.forEach((s, i) => { s.inert = i !== idx; });
         restart();
       }
       function restart() {
-        if (!HERO_AUTOPLAY_MS) return;
         clearInterval(timer);
+        // 系統設定「減少動態效果」時不自動輪播，改由使用者手動切換
+        if (!HERO_AUTOPLAY_MS || reduce || userPaused || hovering || focused || document.hidden) return;
         timer = setInterval(() => go(idx + 1), HERO_AUTOPLAY_MS);
       }
 
       prev.addEventListener('click', () => go(idx - 1));
       next.addEventListener('click', () => go(idx + 1));
+      root.addEventListener('mouseenter', () => { hovering = true; restart(); });
+      root.addEventListener('mouseleave', () => { hovering = false; restart(); });
+      root.addEventListener('focusin', () => { focused = true; restart(); });
+      root.addEventListener('focusout', (e) => { if (!root.contains(e.relatedTarget)) { focused = false; restart(); } });
+      document.addEventListener('visibilitychange', restart);
 
-      const root = document.getElementById('heroCarousel');
-      root.addEventListener('mouseenter', () => clearInterval(timer));
-      root.addEventListener('mouseleave', restart);
+      // 手指左右滑動：畫面跟著手指移動，放開後吸附到上一張／下一張（上下捲動照常）
+      // 滑過之後吃掉那一下點擊，避免誤開活動頁
+      let sx = 0, sy = 0, dx = 0, vx = 0, lastX = 0, lastT = 0;
+      let touching = false, horizontal = false, swiped = false, raf = 0;
+      const width = () => root.getBoundingClientRect().width || 1;
+      function paint() {
+        raf = 0;
+        // 第一張往右、最後一張往左時加阻尼，提示已經到底
+        const edge = (idx === 0 && dx > 0) || (idx === SLIDES.length - 1 && dx < 0);
+        const offset = edge ? dx * 0.35 : dx;
+        track.style.transform = `translate3d(calc(-${idx * 100}% + ${offset.toFixed(1)}px),0,0)`;
+      }
+      track.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse') return;
+        sx = lastX = e.clientX; sy = e.clientY; lastT = performance.now();
+        dx = 0; vx = 0; touching = true; horizontal = false; swiped = false;
+        clearInterval(timer);
+      });
+      track.addEventListener('pointermove', (e) => {
+        if (!touching) return;
+        const ddx = e.clientX - sx, ddy = e.clientY - sy;
+        if (!horizontal) {
+          if (Math.abs(ddy) > 10 && Math.abs(ddy) > Math.abs(ddx)) { touching = false; restart(); return; } // 使用者在上下捲
+          if (Math.abs(ddx) < 8) return;
+          horizontal = true;
+          track.style.transition = 'none';
+          try { track.setPointerCapture(e.pointerId); } catch (err) {}
+        }
+        const now = performance.now();
+        if (now > lastT) { vx = (e.clientX - lastX) / (now - lastT); lastX = e.clientX; lastT = now; }
+        dx = ddx;
+        if (!raf) raf = requestAnimationFrame(paint);
+      });
+      function release() {
+        if (!touching) return;
+        touching = false;
+        if (raf) { cancelAnimationFrame(raf); raf = 0; }
+        track.style.transition = '';
+        if (!horizontal) { restart(); return; }
+        const far = Math.abs(dx) > width() * 0.2;  // 拖超過 2 成寬
+        const flick = Math.abs(vx) > 0.4;          // 或快速撥一下
+        swiped = true;
+        if ((far || flick) && dx !== 0) {
+          const dir = dx < 0 ? 1 : -1;
+          const target = idx + dir;
+          // 到底就彈回，不繞回第一張（拖曳時繞回會很突兀）
+          go(target < 0 || target >= SLIDES.length ? idx : target);
+        } else {
+          go(idx);
+        }
+      }
+      track.addEventListener('pointerup', release);
+      // 方向鎖定：判定為左右滑之後，擋掉這次觸控的頁面上下捲動，避免斜滑時輪播和整頁一起動
+      track.addEventListener('touchmove', (e) => { if (touching && horizontal && e.cancelable) e.preventDefault(); }, { passive: false });
+      track.addEventListener('pointercancel', release);
+      track.addEventListener('click', (e) => { if (swiped) { e.preventDefault(); swiped = false; } }, true);
 
-      restart();
+      go(0);
     })();
   </script>
+  </div>
 
+  <!-- ✅ 找酒帶：酒類快捷列＋搜尋，「直接找」的方式收在同一條和紙底的帶子裡 -->
+  <div class="home-browse">
+  <!-- ✅ 酒類快捷列：款數由 home-taste.js 依 catalog.js 即時填入 -->
+  <section class="home-cats" aria-labelledby="homeCatsTitle">
+    <h2 class="visually-hidden" id="homeCatsTitle">依酒類探索</h2>
+    <ul class="home-cats-list">
+      <li><a href="/products/sake/"><span class="home-cats-name">清酒</span><span class="home-cats-count" data-count="sake"></span><span class="home-cats-desc">純米吟釀到季節限定</span></a></li>
+      <li><a href="/products/fruit-tea/"><span class="home-cats-name">果實酒與茶酒</span><span class="home-cats-count" data-count="fruit-tea"></span><span class="home-cats-desc">梅酒、柚子酒、茶酒，酒感溫和</span></a></li>
+      <li><a href="/products/wine/"><span class="home-cats-name">葡萄酒</span><span class="home-cats-count" data-count="wine"></span><span class="home-cats-desc">白酒、紅酒與氣泡酒，好搭餐</span></a></li>
+      <li><a href="/products/spirits/"><span class="home-cats-name">烈酒</span><span class="home-cats-count" data-count="spirits"></span><span class="home-cats-desc">燒酎、威士忌，適合慢慢品飲</span></a></li>
+      <li><a href="/products/mini/"><span class="home-cats-name">小罐專區</span><span class="home-cats-count" data-count="mini"></span><span class="home-cats-desc">小容量，一次試好幾種</span></a></li>
+    </ul>
+  </section>
 
-  <main class="section">
-    <div class="kicker">精選推薦</div>
-    <h2>本月精選</h2>
-    <div class="grid" id="homeGrid">
-      <div class="card" data-id="5">
-        <div class="card-media">
-          <a href="/products/fruit-tea/天吹-抹茶梅酒/" aria-label="查看 天吹 抹茶梅酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/5抹茶梅酒1.webp" alt="天吹 抹茶梅酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
+  <!-- ✅ 搜尋＋依預算找酒：導向 /products/ 的 ?q= / ?minp= / ?maxp=（不需 JS 也能用） -->
+  <section class="home-find" aria-label="搜尋酒款">
+    <form class="home-search" action="/products/" method="get" role="search">
+      <label class="visually-hidden" for="homeQ">搜尋酒款</label>
+      <input id="homeQ" name="q" type="search" placeholder="例如：梅酒、吟釀、甘口" autocomplete="off" enterkeyhint="search">
+      <button type="submit">搜尋</button>
+    </form>
+  </section>
+  </div>
+
+  <!-- ✅ 用口味找酒：資料來自 catalog.js 的 flavor 欄位，互動由 /assets/js/home-taste.js 處理 -->
+  <section class="section home-block home-taste" aria-labelledby="homeTasteTitle">
+    <div class="home-head">
+      <h2 class="home-title" id="homeTasteTitle">用口味找酒</h2>
+    </div>
+    <p class="home-lede">不確定該挑哪一支？先選酒類，再點座標上你喜歡的位置。</p>
+
+    <div class="home-taste-tabs" role="tablist" aria-label="選擇酒類">
+      <button type="button" role="tab" class="home-taste-tab" data-fam="sake" aria-controls="homeTastePanel" aria-selected="true">清酒</button>
+      <button type="button" role="tab" class="home-taste-tab" data-fam="ft" aria-controls="homeTastePanel" aria-selected="false">果實酒與茶酒</button>
+      <button type="button" role="tab" class="home-taste-tab" data-fam="wine" aria-controls="homeTastePanel" aria-selected="false">葡萄酒</button>
+    </div>
+
+    <div class="home-taste-body" id="homeTastePanel" role="tabpanel" aria-labelledby="homeTasteTitle">
+      <div class="home-taste-mapwrap">
+        <div class="home-map" id="homeTasteMap">
+          <span class="home-map-ax home-map-ax--left" data-ax="xl">辛口</span>
+          <span class="home-map-ax home-map-ax--right" data-ax="xr">甘口</span>
+          <span class="home-map-ax home-map-ax--bottom" data-ax="yl">米旨</span>
+          <span class="home-map-ax home-map-ax--top" data-ax="yr">果香</span>
+          <div class="home-map-plot" id="homeTastePlot" role="group" aria-label="口味座標"></div>
         </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/fruit-tea/天吹-抹茶梅酒/" class="name">天吹 抹茶梅酒</a>
-          <div class="spec">京都抹茶濃醇梅果清甜</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$950</div><div class="price-origin">NT$1200</div></div>
-            <button class="btn-add" onclick="addToCart(5)">加入購物車</button>
-          </div>
-        </div>
+        <p class="home-taste-note">每個圓點代表一款酒，也包含小罐專區的同類酒款。烈酒沒有口味刻度，請直接<a href="/products/spirits/">瀏覽烈酒</a>。</p>
       </div>
-      <div class="card" data-id="6">
-        <div class="card-media">
-          <a href="/products/fruit-tea/天吹-伯爵紅茶梅酒/" aria-label="查看 天吹 伯爵紅茶梅酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/6伯爵紅茶梅酒1.webp" alt="天吹 伯爵紅茶梅酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
+
+      <div class="home-taste-result">
+        <!-- 即時播報只放在「口味說明＋款數」：換格子時報讀唸一句，不會把下方 6 張商品卡全唸一遍 -->
+        <div class="home-taste-status" id="homeTasteStatus" tabindex="-1" aria-live="polite" aria-atomic="true">
+          <p class="home-taste-reading" id="homeTasteReading">甘辛適中，米旨與果香均衡</p>
+          <p class="home-taste-count" id="homeTasteCount"></p>
         </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/fruit-tea/天吹-伯爵紅茶梅酒/" class="name">天吹 伯爵紅茶梅酒</a>
-          <div class="spec">柑橘紅茶香融合酸甜梅果</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$950</div><div class="price-origin">NT$1200</div></div>
-            <button class="btn-add" onclick="addToCart(6)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="7">
-        <div class="card-media">
-          <a href="/products/fruit-tea/天吹-京都千年抹茶酒/" aria-label="查看 天吹 京都千年抹茶酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/7千年抹茶酒1.webp" alt="天吹 京都千年抹茶酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/fruit-tea/天吹-京都千年抹茶酒/" class="name">天吹 京都千年抹茶酒</a>
-          <div class="spec">世界首創 抹茶柚子清新微甜</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1150</div><div class="price-origin">NT$1350</div></div>
-            <button class="btn-add" onclick="addToCart(7)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="32">
-        <div class="card-media">
-          <a href="/products/sake/萩之鶴-純米吟釀-生原酒-櫻花貓/" aria-label="查看 萩之鶴 純米吟釀 生原酒 櫻花貓">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/32萩之鶴_純米吟釀_櫻花貓1.webp" alt="萩之鶴 純米吟釀 生原酒 櫻花貓" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/sake/萩之鶴-純米吟釀-生原酒-櫻花貓/" class="name">萩之鶴 純米吟釀 生原酒 櫻花貓</a>
-          <div class="spec">春季限定，大吟釀等級的輕盈甘甜</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1350</div><div class="price-origin">NT$1500</div></div>
-            <button class="btn-add" onclick="addToCart(32)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="39">
-        <div class="card-media">
-          <a href="/products/sake/鳳凰美田-純米吟釀-冷卸-山田錦/" aria-label="查看 鳳凰美田 純米吟釀 冷卸 山田錦">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/39鳳凰美田_純米吟釀冷卸1.webp" alt="鳳凰美田 純米吟釀 冷卸 山田錦" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/sake/鳳凰美田-純米吟釀-冷卸-山田錦/" class="name">鳳凰美田 純米吟釀 冷卸 山田錦</a>
-          <div class="spec">秋季限定熟成，山田錦圓潤旨味</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1750</div><div class="price-origin">NT$1850</div></div>
-            <button class="btn-add" onclick="addToCart(39)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="45">
-        <div class="card-media">
-          <a href="/products/sake/純米大吟釀-初花-金魚台輪/" aria-label="查看 純米大吟釀 初花 金魚台輪">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/45初花_金魚台輪純米大吟釀1.webp" alt="純米大吟釀 初花 金魚台輪" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/sake/純米大吟釀-初花-金魚台輪/" class="name">純米大吟釀 初花 金魚台輪</a>
-          <div class="spec">兩百年祭典神韻，高雅清冽</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1890</div><div class="price-origin">NT$2100</div></div>
-            <button class="btn-add" onclick="addToCart(45)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="64">
-        <div class="card-media">
-          <a href="/products/wine/奧野田-La-Florette-粉紅酒/" aria-label="查看 奧野田 La Florette 粉紅酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/64奧野田_LaFlorette1.webp" alt="奧野田 La Florette 粉紅酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/wine/奧野田-La-Florette-粉紅酒/" class="name">奧野田 La Florette 粉紅酒</a>
-          <div class="spec">稀有品種，玫瑰荔枝香甜奔放</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1350</div><div class="price-origin">NT$1400</div></div>
-            <button class="btn-add" onclick="addToCart(64)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="81">
-        <div class="card-media">
-          <a href="/products/fruit-tea/梅侍-紅烏龍梅酒/" aria-label="查看 梅侍 紅烏龍梅酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/81梅侍 紅烏龍梅酒1.webp" alt="梅侍 紅烏龍梅酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/fruit-tea/梅侍-紅烏龍梅酒/" class="name">梅侍 紅烏龍梅酒</a>
-          <div class="spec">鮮明的蜜香與茶澀風味，交織梅果酸甜</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1018</div><div class="price-origin">NT$1198</div></div>
-            <button class="btn-add" onclick="addToCart(81)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="82">
-        <div class="card-media">
-          <a href="/products/fruit-tea/蓬萊泉-徐耀良-東方美人茶梅酒/" aria-label="查看 蓬萊泉 徐耀良 東方美人茶梅酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/82蓬萊泉_東方美人1.webp" alt="蓬萊泉 徐耀良 東方美人茶梅酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/fruit-tea/蓬萊泉-徐耀良-東方美人茶梅酒/" class="name">蓬萊泉 徐耀良 東方美人茶梅酒</a>
-          <div class="spec">台日職人結晶，蜜香茶韻梅酒</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1500</div></div>
-            <button class="btn-add" onclick="addToCart(82)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="83">
-        <div class="card-media">
-          <a href="/products/fruit-tea/蓬萊泉-烹雪韻-生普洱茶梅酒/" aria-label="查看 蓬萊泉 烹雪韻 生普洱茶梅酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/83蓬萊泉_生普洱茶1.webp" alt="蓬萊泉 烹雪韻 生普洱茶梅酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/fruit-tea/蓬萊泉-烹雪韻-生普洱茶梅酒/" class="name">蓬萊泉 烹雪韻 生普洱茶梅酒</a>
-          <div class="spec">生普洱醇厚，映襯梅果餘韻</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1500</div></div>
-            <button class="btn-add" onclick="addToCart(83)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="95">
-        <div class="card-media">
-          <a href="/products/spirits/六代目百合-芋燒酎/" aria-label="查看 六代目百合 芋燒酎">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/95六代目百合1.webp" alt="六代目百合 芋燒酎" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/spirits/六代目百合-芋燒酎/" class="name">六代目百合 芋燒酎</a>
-          <div class="spec">黑麴無濾過工藝，展現濃郁地瓜香與悠長回甘</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1410</div><div class="price-origin">NT$1500</div></div>
-            <button class="btn-add" onclick="addToCart(95)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="96">
-        <div class="card-media">
-          <a href="/products/spirits/山櫻威士忌-PRECIOUS/" aria-label="查看 山櫻威士忌 PRECIOUS">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/96山櫻PRECIOUS1.webp" alt="山櫻威士忌 PRECIOUS" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/spirits/山櫻威士忌-PRECIOUS/" class="name">山櫻威士忌 PRECIOUS</a>
-          <div class="spec">雪莉桶熟成，交織煙燻堅果與香草層次風味</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1750</div></div>
-            <button class="btn-add" onclick="addToCart(96)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="97">
-        <div class="card-media">
-          <a href="/products/wine/聖母之乳-金凱勒精選優質白葡萄酒/" aria-label="查看 聖母之乳 金凱勒精選優質白葡萄酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/97聖母之乳1.webp" alt="聖母之乳 金凱勒精選優質白葡萄酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/wine/聖母之乳-金凱勒精選優質白葡萄酒/" class="name">聖母之乳 金凱勒精選優質白葡萄酒</a>
-          <div class="spec">柑橘果香清新爽口，酸甜平衡易飲白酒</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$540</div></div>
-            <button class="btn-add" onclick="addToCart(97)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="98">
-        <div class="card-media">
-          <a href="/products/wine/巧克力鹿-精選混釀紅葡萄酒/" aria-label="查看 巧克力鹿 精選混釀紅葡萄酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/98巧克力鹿1.webp" alt="巧克力鹿 精選混釀紅葡萄酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/wine/巧克力鹿-精選混釀紅葡萄酒/" class="name">巧克力鹿 精選混釀紅葡萄酒</a>
-          <div class="spec">深色果香濃郁飽滿，圓潤優雅法國紅酒</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$680</div></div>
-            <button class="btn-add" onclick="addToCart(98)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="99">
-        <div class="card-media">
-          <a href="/products/wine/雙魚-DUO-白葡萄酒/" aria-label="查看 雙魚 DUO 白葡萄酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/99雙魚DUO1.webp" alt="雙魚 DUO 白葡萄酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/wine/雙魚-DUO-白葡萄酒/" class="name">雙魚 DUO 白葡萄酒</a>
-          <div class="spec">熱帶果香與柑橘交織，搭餐與否都完美的白酒</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$750</div></div>
-            <button class="btn-add" onclick="addToCart(99)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="103">
-        <div class="card-media">
-          <a href="/products/sake/日日-玉榮-2026/" aria-label="查看 日日 玉榮 2026">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/103日日玉榮1.webp" alt="日日 玉榮 2026" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/sake/日日-玉榮-2026/" class="name">日日 玉榮 2026</a>
-          <div class="spec">蒸米般輕潤甘甜，純淨旨味與細緻清爽交織</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$2250</div><div class="price-origin">NT$2500</div></div>
-            <button class="btn-add" onclick="addToCart(103)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="121">
-        <div class="card-media">
-          <a href="/products/spirits/渡邊-Infusion-Spirits-Hidama-Green/" aria-label="查看 渡邊 Infusion Spirits Hidama Green">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/121渡邊green1.webp" alt="渡邊 Infusion Spirits Hidama Green" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/spirits/渡邊-Infusion-Spirits-Hidama-Green/" class="name">渡邊 Infusion Spirits Hidama Green</a>
-          <div class="spec">【極限量】大人口味的綠茶，極致搭餐的選擇</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1450</div><div class="price-origin">NT$1650</div></div>
-            <button class="btn-add" onclick="addToCart(121)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="127">
-        <div class="card-media">
-          <a href="/products/fruit-tea/蓬萊泉-乘興院-包種茶柚子酒/" aria-label="查看 蓬萊泉 乘興院 包種茶柚子酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/127包種茶柚子1.webp" alt="蓬萊泉 乘興院 包種茶柚子酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/fruit-tea/蓬萊泉-乘興院-包種茶柚子酒/" class="name">蓬萊泉 乘興院 包種茶柚子酒</a>
-          <div class="spec">柚香新鮮明亮，茶韻悠長回甘</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1500</div></div>
-            <button class="btn-add" onclick="addToCart(127)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="132">
-        <div class="card-media">
-          <a href="/products/mini/初龜-純米吟釀-300ml/" aria-label="查看 初龜 純米吟釀 300ml">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/132初龜純米吟釀300_1.webp" alt="初龜 純米吟釀 300ml" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/mini/初龜-純米吟釀-300ml/" class="name">初龜 純米吟釀 300ml</a>
-          <div class="spec">優雅吟香輕盈滑順，冷熱皆宜</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$550</div><div class="price-origin">NT$600</div></div>
-            <button class="btn-add" onclick="addToCart(132)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="133">
-        <div class="card-media">
-          <a href="/products/wine/喬治穆勒酒莊-麗絲玲白葡萄酒-2022/" aria-label="查看 喬治穆勒酒莊 麗絲玲白葡萄酒 2022">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/133喬治穆勒麗絲玲1.webp" alt="喬治穆勒酒莊 麗絲玲白葡萄酒 2022" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/wine/喬治穆勒酒莊-麗絲玲白葡萄酒-2022/" class="name">喬治穆勒酒莊 麗絲玲白葡萄酒 2022</a>
-          <div class="spec">德國VDP精英酒莊，7度榮獲最佳酒莊肯定</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1080</div></div>
-            <button class="btn-add" onclick="addToCart(133)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="134">
-        <div class="card-media">
-          <a href="/products/sake/光榮菊-黃昏-Orange-火入/" aria-label="查看 光榮菊 黃昏 Orange 火入">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/134光榮菊黃昏1.webp" alt="光榮菊 黃昏 Orange 火入" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/sake/光榮菊-黃昏-Orange-火入/" class="name">光榮菊 黃昏 Orange 火入</a>
-          <div class="spec">天然乳酸菌仕込，柑橘酸甜清爽俐落</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1540</div></div>
-            <button class="btn-add" onclick="addToCart(134)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="135">
-        <div class="card-media">
-          <a href="/products/sake/林本店-原始衝動-純米大吟釀-無濾過生原酒/" aria-label="查看 林本店 原始衝動 純米大吟釀 無濾過生原酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/135林本店原始衝動1.webp" alt="林本店 原始衝動 純米大吟釀 無濾過生原酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/sake/林本店-原始衝動-純米大吟釀-無濾過生原酒/" class="name">林本店 原始衝動 純米大吟釀 無濾過生原酒</a>
-          <div class="spec">喚醒藏於心底的原始衝動，溫潤旨味中迸發生命力</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1520</div><div class="price-origin">NT$1650</div></div>
-            <button class="btn-add" onclick="addToCart(135)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="136">
-        <div class="card-media">
-          <a href="/products/sake/林本店-月詠ARIA-純米大吟釀-無濾過生原酒/" aria-label="查看 林本店 月詠ARIA 純米大吟釀 無濾過生原酒">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/136林本店月詠1.webp" alt="林本店 月詠ARIA 純米大吟釀 無濾過生原酒" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/sake/林本店-月詠ARIA-純米大吟釀-無濾過生原酒/" class="name">林本店 月詠ARIA 純米大吟釀 無濾過生原酒</a>
-          <div class="spec">月夜下的一曲詠嘆調，豐潤柔和，餘韻悠長而靜謐</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1520</div><div class="price-origin">NT$1650</div></div>
-            <button class="btn-add" onclick="addToCart(136)">加入購物車</button>
-          </div>
-        </div>
-      </div>
-      <div class="card" data-id="137">
-        <div class="card-media">
-          <a href="/products/sake/鳳凰美田-純米吟釀-五百萬石-冷卸/" aria-label="查看 鳳凰美田 純米吟釀 五百萬石 冷卸">
-            <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/137鳳凰美田五百萬石_冷卸1.webp" alt="鳳凰美田 純米吟釀 五百萬石 冷卸" width="400" height="500" loading="lazy" decoding="async">
-          </a>
-        </div>
-        <div class="card-body">
-          <div class="card-tag-row"><span class="name-tag name-tag--5">✦ 店長精選</span></div>
-          <a href="/products/sake/鳳凰美田-純米吟釀-五百萬石-冷卸/" class="name">鳳凰美田 純米吟釀 五百萬石 冷卸</a>
-          <div class="spec">秋日熟成的溫柔滋味，三盆糖般細緻甘甜，餘韻悠長</div>
-          <div class="card-meta">
-            <div class="price-wrap"><div class="price-now">NT$1750</div></div>
-            <button class="btn-add" onclick="addToCart(137)">加入購物車</button>
-          </div>
-        </div>
+        <div class="grid home-taste-grid" id="homeTasteGrid"></div>
+        <button type="button" class="home-taste-more" id="homeTasteMore" hidden></button>
       </div>
     </div>
-    <script>
-    /* 首頁精選洗牌：必須是同步 inline script 且緊接 #homeGrid —— 搬到 main.js
-       會在繪製後才執行而產生閃爍。詳見 ARCHITECTURE.md 第八節。 */
-    (function () {
-      var g = document.getElementById("homeGrid");
-      if (!g) return;
-      var c = [].slice.call(g.children);
-      for (var i = c.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1)), t = c[i]; c[i] = c[j]; c[j] = t;
-      }
-      for (var k = 0; k < c.length; k++) g.appendChild(c[k]);
-    })();
-    </script>
-  </main>
+  </section>
 
-  <main class="section">
-    <div class="kicker">分類入口</div>
-    <h2>依酒類探索</h2>
-    <div class="grid">
-      <a class="panel" href="/products/sake/">
-        <h3>清酒</h3>
-        <p>純米吟釀到限定酒款 ，
-          從日常小酌到值得收藏的清酒選品。</p>
-        <span class="btn">查看清酒</span>
-      </a>
-      <a class="panel" href="/products/fruit-tea/">
-        <h3>果實酒&茶酒</h3>
-        <p>梅酒、柚子酒與各式茶酒，
-          香甜平衡、酒感溫和，輕鬆享受微醺時光。</p>
-        <span class="btn">查看果實酒&茶酒</span>
-      </a>
-      <a class="panel" href="/products/wine/">
-        <h3>葡萄酒</h3>
-        <p>白酒、紅酒與氣泡酒，
-          清爽易搭餐，適合聚會與日常分享。</p>
-        <span class="btn">查看葡萄酒</span>
-      </a>
-      <a class="panel" href="/products/spirits/">
-        <h3>烈酒</h3>
-        <p>燒酎與威士忌選品，
-          酒體紮實、風味純粹，適合慢慢品飲。</p>
-        <span class="btn">查看烈酒</span>
-      </a>
-      <a class="panel" href="/products/mini/">
-        <h3>小罐專區</h3>
-        <p>想試試不同酒款，卻不想一次買大瓶？
-          小罐專區，讓探索變得輕鬆無壓力。</p>
-        <span class="btn">查看小罐專區</span>
-      </a>
-    </div>
-  </main>
-
-  <main class="section">
-    <div class="kicker">你的購物車</div>
-    <h2>已選酒款</h2>
-    <div class="split">
-      <div class="panel">
-        <h3>購物車內容</h3>
-        <div id="cartMini"></div>
-        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-          <!-- <a class="btn btn-primary" href="/order/">送出詢問單</a> -->
-          <a class="btn" href="/products/">繼續選購</a>
-        </div>
+  <!-- ✅ 怎麼買：與 /order/ 實際流程一致（轉帳付款、LINE 實名確認、自取或宅配） -->
+  <section class="home-band" aria-labelledby="homeHowTitle">
+    <div class="section home-block">
+      <ul class="home-promise" aria-label="酉時三大保證">
+        <li><strong class="home-promise-title">專家選品</strong><span>每一支酒都由品鑑師試飲認可後才上架，只選我們願意長期飲用、真心推薦的酒。</span></li>
+        <li><strong class="home-promise-title">全程控溫</strong><span>清酒全程冷鏈運送，其他酒類適溫存放，讓每一支酒到你手上都在最好的狀態。</span></li>
+        <li><strong class="home-promise-title">深度品飲</strong><span>你喝的每一支酒，都歡迎私訊我們聊聊它的故事；酉時圖書館也整理了清酒知識與品飲指南。</span></li>
+      </ul>
+      <div class="home-head">
+        <h2 class="home-title" id="homeHowTitle">怎麼買</h2>
+        <a class="home-more" href="/order/">前往下單頁</a>
       </div>
-          <!-- 保留：服務項目 + 追蹤 IG（你的截圖區塊） -->
-      <section class="about-block">
-        <div class="about-service card">
-          <div class="about-service-inner">
-            <div class="about-service-main">
-              <h2 style="margin:0 0 8px 0;">服務項目</h2>
-              <ul class="about-bullets">
-                <li>線上商品目錄與下單服務</li>
-                <li>企業福委、公機關活動</li>
-                <li>品酒會／講師分享會</li>
-                <li>企業／活動酒水規劃</li>
-              </ul>
-            </div>          
-          </div>
-        </div>
-      </section>
+      <ol class="home-steps">
+        <li><span class="home-step-n" aria-hidden="true">1</span><strong>加入購物車</strong><span>在商品卡或商品頁挑好酒款。</span></li>
+        <li><span class="home-step-n" aria-hidden="true">2</span><strong>送出詢問單</strong><span>到下單頁填寫聯絡資料與取貨方式。</span></li>
+        <li><span class="home-step-n" aria-hidden="true">3</span><strong>LINE 專人確認</strong><span>在 LINE 貼上詢問單，由專人確認品項、金額與取貨方式，並完成年滿 18 歲實名確認。</span></li>
+        <li><span class="home-step-n" aria-hidden="true">4</span><strong>轉帳付款</strong><span>專人確認後以銀行轉帳付款。</span></li>
+        <li><span class="home-step-n" aria-hidden="true">5</span><strong>取貨</strong><span>新竹竹北預約自取，或宅配到府。</span></li>
+      </ol>
+      <dl class="home-ship">
+        <div><dt>常溫宅配</dt><dd>NT$170</dd></div>
+        <div><dt>冷藏宅配</dt><dd>NT$230</dd></div>
+        <div><dt>免運門檻</dt><dd>滿 NT$2,800</dd></div>
+        <div><dt>預約自取</dt><dd>新竹竹北，時間由 LINE 確認</dd></div>
+      </dl>
     </div>
-    
+  </section>
+
+  <!-- ✅ 酉時圖書館：build.js 的 updateHomeArticles() 會把最新 3 篇寫進 #homeArticles，不要手動編輯裡面 -->
+  <section class="section home-block" aria-labelledby="homeArticlesTitle">
+    <div class="home-head">
+      <h2 class="home-title" id="homeArticlesTitle">酉時圖書館</h2>
+      <a class="home-more" href="/blog/">看全部文章</a>
+    </div>
+    <div class="home-articles" id="homeArticles">
+      <a class="home-article" href="/blog/how-to-drink-umeshu-5easy-mixes/">
+        <img src="/assets/images/blog/id9封面.webp" alt="" width="800" height="540" loading="lazy" decoding="async">
+        <span class="home-article-text">
+          <span class="home-article-title">【微醺解密】梅酒怎麼喝？從氣泡水到咖啡，5種梅酒調飲比例與搭配指南</span>
+          <span class="home-article-excerpt">在家也能輕鬆調！5種梅酒搭配，喝出新花樣</span>
+          <time datetime="2026-10-28">2026/10/28</time>
+        </span>
+      </a>
+      <a class="home-article" href="/blog/autumn-sake-guide-akiagari-vs-hiyaoroshi/">
+        <img src="/assets/images/blog/id8封面.webp" alt="" width="800" height="540" loading="lazy" decoding="async">
+        <span class="home-article-text">
+          <span class="home-article-title">【微醺秋日】當秋風吹起，來喝一杯季節限定的「秋酒」吧！秋上、冷卸到底差在哪？</span>
+          <span class="home-article-excerpt">從秋上到冷卸，帶你認識秋酒的釀造特色、風味變化，以及最適合搭配的秋季料理。</span>
+          <time datetime="2026-10-14">2026/10/14</time>
+        </span>
+      </a>
+      <a class="home-article" href="/blog/choose-the-right-glass-for-better-taste/">
+        <img src="/assets/images/blog/id7封面.webp" alt="" width="800" height="540" loading="lazy" decoding="async">
+        <span class="home-article-text">
+          <span class="home-article-title">【微醺解密】選對杯子，酒更好喝？一杯到底，行不行？</span>
+          <span class="home-article-excerpt">選對杯子，可以喝出酒的深層層次與靈魂風味</span>
+          <time datetime="2026-10-02">2026/10/02</time>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ✅ 企業與活動（原「服務項目」） -->
+  <section class="section home-block home-biz" aria-labelledby="homeBizTitle">
+    <div class="home-biz-text">
+      <h2 class="home-title" id="homeBizTitle">企業與活動酒水</h2>
+      <p class="home-lede">福委採購、公機關活動、品酒會或尾牙春酒，我們可以依預算與人數幫你配酒。</p>
+    </div>
+    <ul class="home-biz-list">
+      <li>線上商品目錄與下單服務</li>
+      <li>企業福委、公機關活動</li>
+      <li>品酒會／講師分享會</li>
+      <li>企業／活動酒水規劃</li>
+    </ul>
+    <a class="home-biz-btn" data-line-link href="https://line.me/ti/p/@008jcfgc" target="_blank" rel="noopener">用 LINE 洽詢合作</a>
+  </section>
+
   </main>
 
   <footer class="footer">

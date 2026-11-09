@@ -50,7 +50,9 @@
 <link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/product-page.css">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E4%B8%AD%E4%BB%8B%E5%81%8F%E5%85%8B%E5%8A%9B%E5%8E%9A%E5%91%B3%E5%93%81%E5%95%86%E5%96%AE%E5%AF%A6%E5%AF%A7%E5%B7%A7%E5%BA%A7%E5%BC%B7%E6%A0%BC%E6%A8%99%E6%AC%BE%E6%B7%B7%E6%B8%85%E7%83%88%E7%88%BD%E7%9B%88%E7%9B%B8%E7%B2%BE%E7%B4%85%E7%B4%B9%E8%90%84%E8%91%A1%E8%A6%8F%E8%BC%95%E9%81%A9%E9%81%B8%E9%85%92%E9%87%80%E9%97%9C%E9%A2%A8%E9%AB%94%E9%B9%BF%EF%BC%8C%EF%BC%9A">
 
 <script defer src="/assets/js/catalog.js"></script>
 <script defer src="/assets/js/main.js"></script>
@@ -81,7 +83,7 @@
     "url": "https://www.yousi-drink.com/products/wine/巧克力鹿-精選混釀紅葡萄酒/",
     "priceCurrency": "TWD",
     "price": 680,
-    "priceValidUntil": "2027-10-31",
+    "priceValidUntil": "2027-11-06",
     "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/NewCondition",
     "eligibleRegion": { "@type": "Country", "name": "TW" },
@@ -216,96 +218,102 @@
 
       <div class="pdp-badges">
         <span class="pdp-badge pdp-badge--recommend">✦ 店長精選</span>
-        <span class="pdp-badge pdp-badge--award">🏆 2021 柏林葡萄酒大賽 金牌獎</span>
+        <span class="pdp-badge pdp-badge--award">2021 柏林葡萄酒大賽 金牌獎</span>
         <span class="pdp-badge pdp-badge--category">葡萄酒</span>
       </div>
 
       <h1 class="pdp-title">巧克力鹿 精選混釀紅葡萄酒</h1>
-      <p class="pdp-subtitle">深色果香濃郁飽滿，圓潤優雅法國紅酒｜750ml｜酒精 13.5%</p>
+      <p class="pdp-subtitle">深色果香濃郁飽滿，圓潤優雅法國紅酒</p>
+      <p class="pdp-facts">750ml｜酒精 13.5%｜法國</p>
 
       <div class="pdp-price-box">
         <span class="pdp-price-now">NT$680</span>
       </div>
-      <hr class="pdp-divider">
 
       <div class="pdp-cta">
         <button class="pdp-btn-cart" onclick="addToCart(98)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           加入購物車
         </button>
+        <a class="pdp-btn-line" data-line-link href="https://line.me/ti/p/@008jcfgc" target="_blank" rel="noopener">用 LINE 詢問這款酒</a>
       </div>
+      
+      <ul class="pdp-service">
+        <li>新竹竹北預約自取</li>
+        <li>全台宅配</li>
+        <li>LINE 線上客服</li>
+      </ul>
 
-      <div class="pdp-tabs">
-        <button class="pdp-tab active" onclick="switchTab(0)">酒款特色</button>
-        <button class="pdp-tab" onclick="switchTab(1)">風味圖譜</button>
-        <button class="pdp-tab" onclick="switchTab(2)">產品規格</button>
-      </div>
-
-      <div class="pdp-tab-panel active" id="tab-0">
-        <p class="pdp-feature-text">🏆2021 柏林葡萄酒大賽 金牌獎
-	
-	由南法知名酒廠LGI精選釀製，產自法國南部歷史悠久——2600年歷史的葡萄園，在地中海海風與充足日照孕育下，釀造出層次豐富的紅酒。
-	散發藍莓、紫羅蘭與橡木香氣，入口柔順濃郁，深色果實風味飽滿且富有層次，尾韻圓潤悠長，展現法國紅酒的經典魅力。
-	
-	搭餐推薦：牛排、燉肉、烤肉及各式蔬菜料理
-
-	建議適飲溫度：14-18°C</p>
-      </div>
-
-      <div class="pdp-tab-panel" id="tab-1">
-        <div class="pdp-scales">
-          
-          <div class="pdp-scale-row">
-            <span class="pdp-scale-label">單寧</span>
-            <div class="pdp-scale-track">
-              <div class="pdp-scale-bars" aria-label="單寧：單寧輕盈 到 單寧強烈">
-                <span></span><span></span><span class="on"></span><span></span><span></span>
-              </div>
-              <div class="pdp-scale-axis">
-                <span>單寧輕盈</span><span>單寧強烈</span>
-              </div>
+      <section class="pdp-section pdp-flavor" aria-labelledby="pdpFlavorTitle">
+        <h2 class="pdp-section-title" id="pdpFlavorTitle">風味座標</h2>
+        <div class="pdp-flavor-body">
+          <div class="pdp-map">
+            <span class="pdp-map-ax pdp-map-ax--left">單寧輕盈</span>
+            <span class="pdp-map-ax pdp-map-ax--right">單寧強烈</span>
+            <span class="pdp-map-ax pdp-map-ax--bottom">清爽</span>
+            <span class="pdp-map-ax pdp-map-ax--top">厚實</span>
+            <div class="pdp-map-plot">
+            <a class="pdp-map-dot" href="/products/wine/奧野田-La-Florette-粉紅酒/" style="left:8.00%;top:48.00%" aria-label="奧野田 La Florette 粉紅酒：單寧輕盈，酒體適中"><span class="pdp-map-tip" aria-hidden="true">奧野田 La Florette 粉紅酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/美亞老藤-夏多內白葡萄酒-2024/" style="left:12.00%;top:48.00%" aria-label="美亞老藤 夏多內白葡萄酒 2024：單寧輕盈，酒體適中"><span class="pdp-map-tip" aria-hidden="true">美亞老藤 夏多內白葡萄酒 2024</span></a>
+            <a class="pdp-map-dot" href="/products/wine/雙魚-DUO-白葡萄酒/" style="left:8.00%;top:52.00%" aria-label="雙魚 DUO 白葡萄酒：單寧輕盈，酒體適中"><span class="pdp-map-tip" aria-hidden="true">雙魚 DUO 白葡萄酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/奧野田-花水木-甲州白葡萄酒-2024/" style="left:10.00%;top:70.00%" aria-label="奧野田 花水木 甲州白葡萄酒 2024：單寧輕盈，酒體偏輕"><span class="pdp-map-tip" aria-hidden="true">奧野田 花水木 甲州白葡萄酒 2024</span></a>
+            <a class="pdp-map-dot" href="/products/wine/奧野田-DOLCE-白葡萄酒-2024/" style="left:10.00%;top:66.00%" aria-label="奧野田 DOLCE 白葡萄酒 2024：單寧輕盈，酒體偏輕"><span class="pdp-map-tip" aria-hidden="true">奧野田 DOLCE 白葡萄酒 2024</span></a>
+            <a class="pdp-map-dot" href="/products/wine/瑪爾維西亞-氣泡甜白酒/" style="left:6.00%;top:70.00%" aria-label="瑪爾維西亞 氣泡甜白酒：單寧輕盈，酒體偏輕"><span class="pdp-map-tip" aria-hidden="true">瑪爾維西亞 氣泡甜白酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/安提利亞-白葡萄酒/" style="left:14.00%;top:70.00%" aria-label="安提利亞 白葡萄酒：單寧輕盈，酒體偏輕"><span class="pdp-map-tip" aria-hidden="true">安提利亞 白葡萄酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/TOSO-微甜氣泡酒/" style="left:10.00%;top:74.00%" aria-label="TOSO 微甜氣泡酒：單寧輕盈，酒體偏輕"><span class="pdp-map-tip" aria-hidden="true">TOSO 微甜氣泡酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/聖母之乳-金凱勒精選優質白葡萄酒/" style="left:6.00%;top:66.00%" aria-label="聖母之乳 金凱勒精選優質白葡萄酒：單寧輕盈，酒體偏輕"><span class="pdp-map-tip" aria-hidden="true">聖母之乳 金凱勒精選優質白葡萄酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/喬治穆勒酒莊-麗絲玲白葡萄酒-2022/" style="left:14.00%;top:66.00%" aria-label="喬治穆勒酒莊 麗絲玲白葡萄酒 2022：單寧輕盈，酒體偏輕"><span class="pdp-map-tip" aria-hidden="true">喬治穆勒酒莊 麗絲玲白葡萄酒 2022</span></a>
+            <a class="pdp-map-dot" href="/products/wine/進化系薰衣草-白葡萄酒/" style="left:10.00%;top:90.00%" aria-label="進化系薰衣草 白葡萄酒：單寧輕盈，酒體清爽"><span class="pdp-map-tip" aria-hidden="true">進化系薰衣草 白葡萄酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/卡本內之父-桶香紅/" style="left:50.00%;top:50.00%" aria-label="卡本內之父 桶香紅：單寧適中，酒體適中"><span class="pdp-map-tip" aria-hidden="true">卡本內之父 桶香紅</span></a>
+            <a class="pdp-map-dot" href="/products/wine/馬瑟蘭-花果香紅酒/" style="left:50.00%;top:26.00%" aria-label="馬瑟蘭 花果香紅酒：單寧適中，酒體偏厚"><span class="pdp-map-tip" aria-hidden="true">馬瑟蘭 花果香紅酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/酒神-桶陳紅酒/" style="left:46.00%;top:30.00%" aria-label="酒神 桶陳紅酒：單寧適中，酒體偏厚"><span class="pdp-map-tip" aria-hidden="true">酒神 桶陳紅酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/美亞老藤-卡蜜尼耶紅葡萄酒-2023/" style="left:54.00%;top:30.00%" aria-label="美亞老藤 卡蜜尼耶紅葡萄酒 2023：單寧適中，酒體偏厚"><span class="pdp-map-tip" aria-hidden="true">美亞老藤 卡蜜尼耶紅葡萄酒 2023</span></a>
+            <a class="pdp-map-dot" href="/products/wine/［羊年酒預購］塔巴利特級卡本內蘇維翁2025（附紙袋）/" style="left:50.00%;top:34.00%" aria-label="［羊年酒預購］塔巴利特級卡本內蘇維翁2025（附紙袋）：單寧適中，酒體偏厚"><span class="pdp-map-tip" aria-hidden="true">［羊年酒預購］塔巴利特級卡本內蘇維翁2025（附紙袋）</span></a>
+            <a class="pdp-map-dot" href="/products/wine/飛機-手工紅酒/" style="left:30.00%;top:50.00%" aria-label="飛機 手工紅酒：單寧偏輕，酒體適中"><span class="pdp-map-tip" aria-hidden="true">飛機 手工紅酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/我們的經典熱紅酒/" style="left:8.00%;top:8.00%" aria-label="我們的經典熱紅酒：單寧輕盈，酒體厚實"><span class="pdp-map-tip" aria-hidden="true">我們的經典熱紅酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/我們的德國烤蘋果熱酒/" style="left:12.00%;top:8.00%" aria-label="我們的德國烤蘋果熱酒：單寧輕盈，酒體厚實"><span class="pdp-map-tip" aria-hidden="true">我們的德國烤蘋果熱酒</span></a>
+            <a class="pdp-map-dot" href="/products/wine/美亞老藤-卡本內蘇維濃紅葡萄酒-2022/" style="left:70.00%;top:30.00%" aria-label="美亞老藤 卡本內蘇維濃紅葡萄酒 2022：單寧偏強，酒體偏厚"><span class="pdp-map-tip" aria-hidden="true">美亞老藤 卡本內蘇維濃紅葡萄酒 2022</span></a>
+              <span class="pdp-map-self" style="left:50%;top:30%" role="img" aria-label="本款位置：單寧適中，酒體偏厚"></span>
             </div>
           </div>
-          <div class="pdp-scale-row">
-            <span class="pdp-scale-label">酒體</span>
-            <div class="pdp-scale-track">
-              <div class="pdp-scale-bars" aria-label="酒體：清爽 到 厚實">
-                <span></span><span></span><span></span><span class="on"></span><span></span>
-              </div>
-              <div class="pdp-scale-axis">
-                <span>清爽</span><span>厚實</span>
-              </div>
-            </div>
+          <div class="pdp-flavor-text">
+            <p class="pdp-flavor-reading"><span class="pdp-flavor-part">單寧適中，</span><span class="pdp-flavor-part">酒體偏厚</span></p>
+            <p class="pdp-flavor-help"><span class="pdp-legend pdp-legend--self" aria-hidden="true"></span>深色圓點是這一款。<br><span class="pdp-legend pdp-legend--peer" aria-hidden="true"></span>空心圓點是店內其他葡萄酒，共 20 款，點一下可前往比較。</p>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="pdp-tab-panel" id="tab-2">
+      <section class="pdp-section" aria-labelledby="pdpStoryTitle">
+        <h2 class="pdp-section-title" id="pdpStoryTitle">酒款介紹</h2>
+        <div class="pdp-story">
+          <p>由南法知名酒廠LGI精選釀製，產自法國南部歷史悠久——2600年歷史的葡萄園，在地中海海風與充足日照孕育下，釀造出層次豐富的紅酒。</p>
+          <p>散發藍莓、紫羅蘭與橡木香氣，入口柔順濃郁，深色果實風味飽滿且富有層次，尾韻圓潤悠長，展現法國紅酒的經典魅力。</p>
+        </div>
+        <dl class="pdp-serve">
+          <div><dt>搭餐推薦</dt><dd>牛排、燉肉、烤肉及各式蔬菜料理</dd></div>
+          <div><dt>建議適飲溫度</dt><dd>14-18°C</dd></div>
+        </dl>
+      </section>
+
+      <section class="pdp-section" aria-labelledby="pdpSpecTitle">
+        <h2 class="pdp-section-title" id="pdpSpecTitle">規格</h2>
         <table class="pdp-spec-table">
-            <tr><td>品牌</td><td>LGI</td></tr>
-            <tr><td>產地</td><td>法國</td></tr>
-            <tr><td>葡萄品種</td><td>50% Cabernet Sauvignon, 50% Syrah</td></tr>
-            <tr><td>酒精濃度</td><td>13.5%</td></tr>
-            <tr><td>容量</td><td>750ml</td></tr>
-            <tr><td>類型</td><td>葡萄酒</td></tr>
+            <tr><th scope="row">品牌</th><td>LGI</td></tr>
+            <tr><th scope="row">產地</th><td>法國</td></tr>
+            <tr><th scope="row">葡萄品種</th><td>50% Cabernet Sauvignon, 50% Syrah</td></tr>
+            <tr><th scope="row">酒精濃度</th><td>13.5%</td></tr>
+            <tr><th scope="row">容量</th><td>750ml</td></tr>
+            <tr><th scope="row">類型</th><td>葡萄酒</td></tr>
         </table>
-      </div>
+      </section>
 
-    </div>
-  </div>
-
-  <div class="pdp-trust-strip">
-    <div class="pdp-trust-strip-inner">
-      <span class="pdp-trust-chip">📦 新竹 預約自取</span>
-      <span class="pdp-trust-chip">💬 LINE 即時客服</span>
-      <span class="pdp-trust-chip">🍶 嚴選品質保障</span>
     </div>
   </div>
 
   <section class="pdp-related">
     <div class="pdp-related-header">
       <h2 class="pdp-related-title">相關商品</h2>
-      <a href="/products/wine/" class="pdp-related-link">查看全部葡萄酒 →</a>
+      <a href="/products/wine/" class="pdp-related-link">查看全部葡萄酒</a>
     </div>
     <div class="pdp-related-grid" id="pdpRelatedGrid"></div>
   </section>
@@ -360,11 +368,6 @@
   window.pdpNext = function() { idx = (idx + 1) % imgs.length; update(); };
   window.pdpGo = function(i) { idx = i; update(); };
 })();
-
-function switchTab(n) {
-  document.querySelectorAll(".pdp-tab").forEach(function(t, i) { t.classList.toggle("active", i === n); });
-  document.querySelectorAll(".pdp-tab-panel").forEach(function(p, i) { p.classList.toggle("active", i === n); });
-}
 
 function openZoom() {
   var img = document.getElementById("pdpMainImg");
