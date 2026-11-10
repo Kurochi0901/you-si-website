@@ -1,0 +1,489 @@
+/* ============================================
+   商品列表頁 /assets/css/catalog.css
+   由 /products/ 與五個分類頁（body.page-catalog）載入；互動在 /assets/js/catalog-page.js。
+
+   2026-11 改版：分類分頁＋工具列 → 店主挑好的兩排（店長精選、活動中）→ 依酒造分章，
+   左欄酒造目錄 sticky，捲動時標示目前章節。拿掉原本的漸層大框導言與陽春輸入框。
+   顏色一律用 style.css :root 的品牌色變數。
+   ============================================ */
+
+.page-catalog { --ct-serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif; }
+
+.page-catalog .catalog { max-width: 1200px; padding-top: 4px; }
+.page-catalog .catalog [hidden] { display: none !important; }
+/* 工具列、款數只在 JS 接手後出現（沒有 JS 時仍看得到靜態卡） */
+.page-catalog .catalog:not(.is-enhanced) .catalog-js-only { display: none; }
+
+/* ---------- 麵包屑（與 BreadcrumbList 同名；也是 <nav>，蓋掉全域 nav 樣式） ---------- */
+.catalog-crumb {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.catalog-crumb a,
+.catalog-crumb a.active {
+  padding: 0;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--jiaocha);
+  background: none;
+  border-radius: 0;
+}
+.catalog-crumb a:hover { background: none; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.catalog-crumb a:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; border-radius: 4px; }
+.catalog-crumb [aria-current="page"] { color: var(--ink-soft); }
+.catalog-crumb > span[aria-hidden] { color: var(--yousi-gold); }
+
+/* ---------- 開頭：拿掉漸層大框，標題＋一句導言 ---------- */
+.page-catalog .cat-hero {
+  margin: 20px 0 22px;
+  padding: 0;
+  overflow: visible;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+.page-catalog .cat-hero-title {
+  margin: 0 0 8px;
+  font-family: var(--ct-serif);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: .04em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.page-catalog .cat-hero-title::after { display: none; }
+.page-catalog .cat-hero-lead {
+  max-width: 44em;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+.page-catalog .cat-hero-lead a {
+  color: var(--jiaocha);
+  font-weight: 600;
+  border-bottom: 1px solid var(--yousi-gold-soft);
+}
+.page-catalog .cat-hero-lead a:hover { color: var(--ink); border-bottom-color: var(--jiaocha); }
+.cat-hero-more { margin-top: 6px; }
+.cat-hero-more > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--jiaocha);
+}
+.cat-hero-more > summary::-webkit-details-marker { display: none; }
+.cat-hero-more > summary::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform .2s ease;
+}
+.cat-hero-more[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
+.cat-hero-more > summary:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; border-radius: var(--r-xs); }
+.cat-hero-more .cat-hero-lead { margin-top: 8px; font-size: 14px; }
+
+/* ---------- 分類分頁 ----------
+   分頁與目錄都是 <nav>：要蓋掉全域 nav 的靠右、換行、間距，以及 setNavActive() 加上的 a.active 底色 */
+.catalog-tabs {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.catalog-tabs::-webkit-scrollbar { display: none; }
+.catalog-tabs a {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: 40px;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: var(--card);
+  border: 1px solid var(--field-line);
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+.catalog-tabs a:hover { border-color: var(--yousi-gold); }
+.catalog-tabs a[aria-current="page"] { color: var(--washi); background: var(--jiaocha); border-color: var(--jiaocha); }
+.catalog-tabs a:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
+.catalog-tabs a.active:not([aria-current]) { color: var(--ink-soft); background: var(--card); font-weight: 600; }
+.catalog-toc a.active:not([aria-current]) { background: none; font-weight: 400; }
+.catalog-tab-count { font-size: 12px; font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
+.catalog-tabs a[aria-current="page"] .catalog-tab-count { color: var(--yousi-gold-soft); }
+
+/* ---------- 工具列 ---------- */
+.catalog-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  margin: 16px 0 0;
+}
+.catalog-search { flex: 1 1 300px; min-width: 0; }
+.catalog-search input,
+.catalog-select select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  font-family: inherit;
+  font-size: 16px; /* ≥16px：iPhone 聚焦不放大 */
+  color: var(--ink);
+  background: var(--warm-white);
+  border: 1px solid var(--field-edge);
+  border-radius: var(--r-sm);
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+.catalog-search input::placeholder { color: var(--muted); opacity: 1; }
+.catalog-select select {
+  padding-right: 36px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--jiaocha) 50%), linear-gradient(135deg, var(--jiaocha) 50%, transparent 50%);
+  background-position: calc(100% - 19px) 50%, calc(100% - 14px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.catalog-search input:focus,
+.catalog-select select:focus {
+  outline: none;
+  border-color: var(--jiaocha);
+  box-shadow: 0 0 0 1px var(--jiaocha), var(--focus-glow);
+  background-color: var(--card);
+}
+.catalog-select { flex: 0 0 auto; min-width: 170px; }
+
+/* 口味兩軸：分段膠囊（原生 radio，鍵盤左右鍵可切換） */
+.catalog-flavor { display: flex; flex-wrap: wrap; gap: 8px 16px; flex: 1 1 100%; order: 3; }
+.catalog-flavor:empty { display: none; }
+.catalog-seg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  min-width: 0;
+}
+.catalog-seg-legend {
+  float: left;
+  margin-right: 4px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--gold-text);
+}
+.catalog-seg-opt { position: relative; cursor: pointer; }
+.catalog-seg-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.catalog-seg-opt span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  background: var(--card);
+  border: 1px solid var(--field-line);
+  border-radius: var(--r-pill);
+  transition: border-color .15s ease, background-color .15s ease, color .15s ease;
+}
+.catalog-seg-opt:hover span { border-color: var(--yousi-gold); }
+.catalog-seg-opt input:checked + span { color: var(--washi); background: var(--jiaocha); border-color: var(--jiaocha); }
+.catalog-seg-opt input:focus-visible + span { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
+
+.catalog-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 32px;
+  margin: 12px 0 0;
+}
+.catalog-count { margin: 0; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.catalog-reset,
+.catalog-empty-reset {
+  min-height: 32px;
+  padding: 0 14px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--jiaocha);
+  background: var(--card);
+  border: 1px solid var(--yousi-gold);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+}
+.catalog-reset:hover,
+.catalog-empty-reset:hover { border-color: var(--jiaocha); }
+.catalog-reset:focus-visible,
+.catalog-empty-reset:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
+
+/* ---------- 店主挑好的兩排 ---------- */
+.catalog-shelves { margin-bottom: 20px; }
+.catalog-shelf { margin: 0 0 24px; }
+.catalog-shelf-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  margin-bottom: 12px;
+}
+.catalog-shelf-title {
+  margin: 0;
+  font-family: var(--ct-serif);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+.catalog-shelf-note { margin: 0; font-size: 13px; color: var(--muted); }
+.catalog-shelf-more {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--jiaocha);
+  border-bottom: 1px solid var(--yousi-gold-soft);
+}
+.catalog-shelf-more:hover { border-bottom-color: var(--jiaocha); }
+/* 每張卡都在「店長精選」排裡，卡上的同名標籤就重複了 */
+#catalogShelfPick .name-tag--5 { display: none; }
+/* 這排全是 priority 5，標籤列只剩空的 22px：整列收起，內文從頂端排起 */
+#catalogShelfPick .card-tag-row { display: none; }
+/* 橫向一排：可捲動，右緣淡出提示後面還有（桌機在右欄裡，左緣對齊章節不外推） */
+.catalog-shelf-track {
+  margin: 0 -18px 0 0;
+  padding: 6px 18px 18px 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 18px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--yousi-gold-soft) transparent;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent);
+}
+.catalog-shelf-track:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: -2px; border-radius: var(--r-md); }
+.page-catalog .catalog-shelf-grid {
+  grid-auto-flow: column;
+  grid-template-columns: none;
+  grid-auto-columns: 216px;
+  gap: 18px;
+  padding-right: 48px;
+}
+.catalog-shelf-grid > .card { scroll-snap-align: start; }
+
+/* ---------- 章節（左欄目錄＋右側酒造章） ---------- */
+.catalog-body {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.catalog-toc { display: block; position: sticky; top: 100px; }
+html.show-announce .catalog-toc { top: 136px; }
+.catalog-toc:empty { display: none; }
+.catalog-toc-title {
+  margin: 0 0 8px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--gold-text);
+}
+.catalog-toc ol { list-style: none; margin: 0; padding: 0; max-height: calc(100vh - 180px); overflow-y: auto; }
+.catalog-toc a {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  border-radius: var(--r-sm);
+  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.catalog-toc a:hover { background: var(--washi); color: var(--ink); }
+.catalog-toc a[aria-current="true"] { background: var(--card); color: var(--ink); font-weight: 700; box-shadow: var(--soft-shadow-sm); }
+.catalog-toc a:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: -2px; }
+.catalog-toc-sep { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--yousi-gold-soft); }
+.catalog-toc-n { flex-shrink: 0; font-size: 12px; font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.catalog-anchor { scroll-margin-top: 110px; }
+html.show-announce .catalog-anchor { scroll-margin-top: 146px; }
+/* 章：左側直書明朝體酒造名（像酒標的名字欄），一道酉時金細線隔開，右側是全名・產地・款數與酒卡 */
+.catalog-ch {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  column-gap: 22px;
+  margin-bottom: 52px;
+}
+.catalog-ch-name {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+  margin: 0;
+  padding: 2px 14px 2px 0;
+  writing-mode: vertical-rl;
+  font-family: var(--ct-serif);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  line-height: 1.2;
+  color: var(--ink);
+  border-right: 1px solid var(--yousi-gold);
+  min-height: 7em;
+}
+html.show-announce .catalog-ch-name { top: 146px; }
+.catalog-ch-body { min-width: 0; }
+.catalog-ch-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  min-height: 24px;
+  margin-bottom: 12px;
+}
+.catalog-ch-meta { margin: 0; font-size: 13px; color: var(--gold-text); font-variant-numeric: tabular-nums; }
+.catalog-ch-link {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--jiaocha);
+  border-bottom: 1px solid var(--yousi-gold-soft);
+}
+.catalog-ch-link:hover { border-bottom-color: var(--jiaocha); }
+
+.page-catalog .catalog-ch-grid,
+.page-catalog #catalogResultsGrid,
+.page-catalog .catalog-static {
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 22px;
+}
+.catalog-card-brand { margin: 0 0 4px; font-size: 12px; font-weight: 700; color: var(--gold-text); letter-spacing: .02em; }
+
+/* ---------- 篩選結果 ---------- */
+.catalog-results { margin-top: 20px; }
+.catalog-empty {
+  grid-column: 1 / -1;
+  padding: 40px 20px;
+  text-align: center;
+  background: var(--washi);
+  border-radius: var(--r-lg);
+}
+.catalog-empty p { margin: 0 0 14px; font-size: 15px; color: var(--ink-soft); }
+
+/* ---------- FAQ：跟上柔和版 ---------- */
+.page-catalog .cat-faq-title { font-family: var(--ct-serif); font-weight: 600; letter-spacing: .04em; color: var(--ink); }
+.page-catalog .cat-faq-title::before { display: none; }
+.page-catalog .cat-faq-item { border-color: var(--line); border-radius: var(--r-md); }
+.page-catalog .cat-faq-item summary { color: var(--ink); }
+.page-catalog .cat-faq-item summary::after { background: var(--washi); color: var(--jiaocha); border-radius: var(--r-pill); }
+.page-catalog .cat-faq-item[open] summary::after { background: var(--jiaocha); color: var(--washi); }
+.page-catalog .cat-faq-item > p { color: var(--ink-soft); }
+
+/* ---------- 平板：目錄改到上方橫排，捲動時仍黏在 header 下方（簽名動作在手機也看得到） ---------- */
+@media (max-width: 1023px) {
+  .catalog-body { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  /* top 由 catalog-page.js 量 header 黏住時的下緣（--ct-toc-top，已減 1px 重疊，不留縫讓卡片透出來）；
+     header 高度隨寬度在 62–65px 之間，公告列有時跟著黏、有時捲走，所以不寫死。63px 是 JS 失效時的備援。
+     膠囊列本身約 60px 高：章節跳轉落點與直書酒造名都排在它下面 */
+  .catalog-toc,
+  html.show-announce .catalog-toc {
+    position: sticky;
+    top: var(--ct-toc-top, 63px);
+    z-index: 20;
+    margin: 0 -18px;
+    padding: 10px 18px;
+    background: var(--bg);
+    box-shadow: 0 6px 12px -8px rgba(92, 74, 50, .18);
+  }
+  .catalog-anchor,
+  html.show-announce .catalog-anchor { scroll-margin-top: calc(var(--ct-toc-top, 63px) + 76px); }
+  .catalog-ch-name,
+  html.show-announce .catalog-ch-name { top: calc(var(--ct-toc-top, 63px) + 76px); }
+  .catalog-toc-title { display: none; }
+  .catalog-toc ol {
+    display: flex;
+    gap: 8px;
+    max-height: none;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent);
+  }
+  .catalog-toc ol::-webkit-scrollbar { display: none; }
+  .catalog-toc li { flex-shrink: 0; }
+  .catalog-toc-sep { margin: 0 0 0 4px; padding: 0 0 0 12px; border-top: none; border-left: 1px solid var(--yousi-gold-soft); }
+  .catalog-toc a { min-height: 36px; align-items: center; background: var(--card); border: 1px solid var(--field-line); border-radius: var(--r-pill); white-space: nowrap; }
+  .catalog-toc a[aria-current="true"] { box-shadow: none; border-color: var(--jiaocha); }
+}
+
+/* ---------- 手機 ---------- */
+@media (max-width: 860px) {
+  .page-catalog .cat-hero { margin: 14px 0 16px; }
+  .page-catalog .cat-hero-title { font-size: 26px; }
+  .catalog-select { flex: 1 1 calc(50% - 6px); min-width: 0; }
+  .catalog-flavor { gap: 10px; }
+  .catalog-seg { flex: 1 1 100%; overflow-x: auto; scrollbar-width: none; }
+  .catalog-seg::-webkit-scrollbar { display: none; }
+  .catalog-seg-legend { flex-shrink: 0; min-width: 2.6em; }
+  .catalog-seg-opt { flex-shrink: 0; }
+  /* 手機商品卡是「左圖右文」橫卡：精選排一次露出一張多一點 */
+  .page-catalog .catalog-shelf-grid { grid-auto-columns: 84%; gap: 12px; padding-right: 24px; }
+  /* 精選排的橫卡比整欄窄：價格在上、按鈕在下撐滿，價格不會被按鈕蓋住 */
+  .page-catalog .catalog-shelf-grid .card-meta { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+  .page-catalog .catalog-shelf-grid .btn-add { width: 100%; text-align: center; }
+  /* 手機寬度不夠排直書：酒造名改橫書，上方一道 32px 酉時金短線 */
+  .catalog-ch { display: block; margin-bottom: 40px; }
+  .catalog-ch-name {
+    position: relative;
+    top: auto;
+    min-height: 0;
+    padding: 14px 0 0;
+    margin-bottom: 4px;
+    writing-mode: horizontal-tb;
+    font-size: 21px;
+    letter-spacing: .04em;
+    border-right: none;
+  }
+  html.show-announce .catalog-ch-name { top: auto; }
+  .catalog-ch-name::before { content: ""; position: absolute; left: 0; top: 0; width: 32px; height: 1.5px; background: var(--yousi-gold); }
+  .catalog-ch-link { margin-left: 0; flex-basis: 100%; }
+  .catalog-shelf-track { margin: 0 -18px; padding: 6px 18px 18px; }
+  .page-catalog .catalog-ch-grid,
+  .page-catalog #catalogResultsGrid,
+  .page-catalog .catalog-static { grid-template-columns: 1fr; gap: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-tabs a, .catalog-seg-opt span, .catalog-toc a, .cat-hero-more > summary::after,
+  .catalog-search input, .catalog-select select { transition: none; }
+}

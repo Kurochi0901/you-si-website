@@ -37,7 +37,10 @@
 
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/blog.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁標題用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E4%BA%8B%E4%BA%AB%E4%BF%A1%E5%80%BC%E5%81%A5%E5%88%86%E5%89%8D%E5%89%B5%E5%8C%96%E5%8C%97%E5%8F%97%E5%93%81%E5%95%86%E5%95%9F%E5%9B%9E%E5%A4%9A%E5%A4%A2%E5%AF%A6%E5%B1%80%E5%B1%95%E5%B8%82%E5%B9%B4%E5%BB%BA%E5%BE%97%E6%8E%A8%E6%95%85%E6%96%87%E6%9B%B4%E6%9C%9B%E6%A5%AD%E6%AC%BE%E6%AD%A4%E6%B7%B1%E7%87%9F%E7%89%8C%E7%93%B6%E7%94%A2%E7%94%A8%E7%99%BC%E7%9A%84%E7%9B%B8%E7%9C%9F%E7%A9%A9%E7%AB%8B%E7%AB%A0%E7%B6%93%E8%87%BA%E8%88%87%E8%96%A6%E8%A1%8C%E8%AB%96%E8%B3%87%E8%B3%B4%E8%B5%B7%E8%B6%8A%E8%B7%A8%E8%B8%90%E8%BF%B0%E8%BF%BD%E9%82%80%E9%85%92%E9%97%9C%E9%9D%92%E9%A0%B8%E9%A3%B2%E9%A6%96%E9%BB%9E%EF%BC%8C%EF%BC%9A">
 <script defer src="/assets/js/articles.data.js"></script>
 <script defer src="/assets/js/catalog.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
@@ -102,7 +105,7 @@
 }
 </script>
 </head>
-<body>
+<body class="page-article">
   <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
   <div class="announce-bar" id="announceBar" role="status" aria-live="polite">
     <div class="announce-track" id="announceTrack"></div>
@@ -126,6 +129,7 @@
     </div>
   </div>
 
+  <main id="main">
   <div class="article-hero">
     <!-- fallback background will show if image fails to load -->
     <!-- <img src="/assets/images/blog/id3封面.webp" alt="受邀臺北市青年局分享：回首創業起點，用真實故事啟發更多追夢青年" class="article-hero-bg" fetchpriority="high" decoding="async" onerror="this.style.display='none'"> -->
@@ -171,7 +175,7 @@
         <p>沒有大集團繁複的利益角力與商業包袱，取代而之的，是我們為了解決每一個風味細節、內容品質，而不分日夜投入的努力。這條路沒有捷徑，我們選擇最踏實的方式，一步一腳印地將專業知識轉化為實體服務。這種對專業的純粹追求，反而成了我們最堅固的基石。</p>
 
         <figure class="article-figure">
-            <img src="/assets/images/blog/id3內文圖一.webp" alt="酉時喝酒受邀臺北市青年局《斜槓自由市》分享現場" loading="lazy" decoding="async">
+            <img width="800" height="533" src="/assets/images/blog/id3內文圖一.webp" alt="酉時喝酒受邀臺北市青年局《斜槓自由市》分享現場" loading="eager" fetchpriority="high" decoding="async">
         </figure>
 
         <h2>建立值得信賴的品牌資產</h2>
@@ -188,6 +192,7 @@
         <a href="/products/sake/" class="btn btn-primary" style="font-size: 15px; padding: 14px 28px; width: auto; display: inline-flex;">查看相關酒款</a>
     </div>
   </article>
+  </main>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -214,7 +219,7 @@
     </div>
   </footer>
 
-  <div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+  <div class="alcohol-bar" role="note" aria-label="飲酒警語">
     <span class="alcohol-bar-text">
         🍶 未滿十八歲請勿飲酒
         <span class="alcohol-bar-divider" aria-hidden="true"></span>

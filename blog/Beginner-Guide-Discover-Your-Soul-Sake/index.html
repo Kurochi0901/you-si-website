@@ -37,7 +37,10 @@
 
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/blog.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁標題用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E2%80%94%E3%80%81%E3%80%8C%E3%80%8D%E3%83%BB%E4%B8%80%E4%B8%89%E4%BA%8C%E4%BA%94%E4%BD%A0%E5%85%A5%E5%88%86%E5%88%A4%E5%8D%97%E5%8F%A3%E5%90%88%E5%90%91%E5%91%B3%E5%91%BD%E5%A4%A7%E5%AD%97%E5%AE%9A%E5%BA%A6%E5%BF%85%E6%80%8E%E6%89%8B%E6%89%BE%E6%8C%87%E6%8C%91%E6%8E%A8%E6%96%87%E6%96%B0%E6%96%B9%E6%97%A5%E6%9C%89%E6%9C%AC%E6%AC%BE%E6%AD%A4%E6%AD%A5%E6%B1%BA%E6%B2%92%E6%B8%85%E7%93%B6%E7%94%9C%E7%9A%84%E7%9B%B8%E7%9C%8B%E7%A8%8B%E7%AB%A0%E7%AC%AC%E7%B1%B3%E7%B2%BE%E7%B5%90%E7%B8%BD%E8%88%87%E8%96%A6%E8%BE%9B%E9%81%B8%E9%85%92%E9%8D%B5%E9%90%98%E9%96%80%E9%97%9C%E9%A0%90%E9%A2%A8%E9%BA%BC%EF%BC%8C%EF%BC%9A%EF%BC%9F%EF%BD%9C">
 <script defer src="/assets/js/articles.data.js"></script>
 <script defer src="/assets/js/catalog.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
@@ -102,7 +105,7 @@
 }
 </script>
 </head>
-<body>
+<body class="page-article">
   <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
   <div class="announce-bar" id="announceBar" role="status" aria-live="polite">
     <div class="announce-track" id="announceTrack"></div>
@@ -126,6 +129,7 @@
     </div>
   </div>
 
+  <main id="main">
   <div class="article-hero">
     <!-- fallback background will show if image fails to load -->
     <!-- <img src="/assets/images/blog/五分鐘挑選你的本命酒.webp" alt="新手必看・清酒入門指南｜五分鐘挑選你的本命酒" class="article-hero-bg" fetchpriority="high" decoding="async" onerror="this.style.display='none'"> -->
@@ -153,7 +157,7 @@
 
         <h2>第一步：看「精米步合」——決定風味的大方向</h2>
         <figure class="article-figure">
-          <img src="/assets/images/blog/精米步合圖表.webp" alt="精米步合圖表——不同精米步合對應的清酒等級" loading="lazy" decoding="async">
+          <img width="800" height="539" src="/assets/images/blog/精米步合圖表.webp" alt="精米步合圖表——不同精米步合對應的清酒等級" loading="eager" fetchpriority="high" decoding="async">
         </figure>
         <p>精米步合指的是米被磨掉後剩下的百分比。</p>
         <p>因米粒中含有脂質、蛋白質等成分，於釀酒時會使風味產生雜味，因此清酒的製程都必須經過「磨米」的這一關。</p>
@@ -177,7 +181,7 @@
 
         <h2>第三步：找找看有沒有「風味關鍵字」</h2>
         <figure class="article-figure">
-          <img src="/assets/images/blog/酒標特殊標示.webp" alt="酒標特殊標示——辛口酒、冷卸、汲取、生原酒的標示方式" loading="lazy" decoding="async">
+          <img width="800" height="539" src="/assets/images/blog/酒標特殊標示.webp" alt="酒標特殊標示——辛口酒、冷卸、汲取、生原酒的標示方式" loading="lazy" decoding="async">
         </figure>
         <p>除了數字，酒標上若出現這些字眼，也能幫你更了解它的個性：</p>
         <ul>
@@ -200,6 +204,7 @@
         <a href="/products/sake/" class="btn btn-primary" style="font-size: 15px; padding: 14px 28px; width: auto; display: inline-flex;">查看相關酒款</a>
     </div>
   </article>
+  </main>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -226,7 +231,7 @@
     </div>
   </footer>
 
-  <div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+  <div class="alcohol-bar" role="note" aria-label="飲酒警語">
     <span class="alcohol-bar-text">
         🍶 未滿十八歲請勿飲酒
         <span class="alcohol-bar-divider" aria-hidden="true"></span>

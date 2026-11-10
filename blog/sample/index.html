@@ -37,7 +37,10 @@
 
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/blog.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁標題用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E5%8D%97%E6%8C%87%E6%8E%A8%E6%90%AD%E6%96%87%E6%96%99%E6%A8%99%E6%AC%BE%E6%AD%A4%E6%AE%B5%E6%B8%85%E7%90%86%E7%9A%84%E7%9B%B8%E7%AB%A0%E8%88%87%E8%90%BD%E8%96%A6%E9%85%8D%E9%85%92%E9%97%9C%E9%A1%8C%EF%BC%8C%EF%BC%9A">
 <script defer src="/assets/js/articles.data.js"></script>
 <script defer src="/assets/js/catalog.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
@@ -88,7 +91,7 @@
 }
 </script>
 </head>
-<body>
+<body class="page-article">
   <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
   <div class="announce-bar" id="announceBar" role="status" aria-live="polite">
     <div class="announce-track" id="announceTrack"></div>
@@ -112,6 +115,7 @@
     </div>
   </div>
 
+  <main id="main">
   <div class="article-hero">
     <!-- fallback background will show if image fails to load -->
     <!-- <img src="/assets/images/blog/部落文封面.webp" alt="清酒與料理的搭配指南" class="article-hero-bg" fetchpriority="high" decoding="async" onerror="this.style.display='none'"> -->
@@ -142,6 +146,7 @@
         <a href="/products/sake/" class="btn btn-primary" style="font-size: 15px; padding: 14px 28px; width: auto; display: inline-flex;">查看相關酒款</a>
     </div>
   </article>
+  </main>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -168,7 +173,7 @@
     </div>
   </footer>
 
-  <div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+  <div class="alcohol-bar" role="note" aria-label="飲酒警語">
     <span class="alcohol-bar-text">
         🍶 未滿十八歲請勿飲酒
         <span class="alcohol-bar-divider" aria-hidden="true"></span>

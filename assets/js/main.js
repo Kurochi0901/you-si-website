@@ -83,6 +83,17 @@ function setNavActive(){
   });
 }
 
+/**
+ * LINE 官方帳號對話連結，預填訊息（https://line.me/R/oaMessage/@帳號/?訊息）
+ * ⚠️ 只在手機／平板（觸控）有效：桌面瀏覽器開 line.me/R/ 會被轉到 LINE 官網首頁（2026-11 實測），
+ *    所以桌面一律回到加好友頁（有 QR code，客人用手機掃了再聊）
+ */
+function lineMessageUrl(text){
+  if(!matchMedia("(pointer: coarse)").matches) return BRAND.lineUrl;
+  const id = BRAND.lineUrl.split("/").pop(); // "@008jcfgc"
+  return `https://line.me/R/oaMessage/${id}/?${encodeURIComponent(text)}`;
+}
+
 /** 手機漢堡選單開關 */
 function toggleMenu(){
   const open = document.querySelector("nav")?.classList.toggle("open");
@@ -170,20 +181,45 @@ function renderBlogGrid(tagMain = "All", tagSub = "All") {
   if (comingSoon) comingSoon.style.display = "none";
   if (filters)    filters.style.display = "";
 
+  // 「從這裡開始」：未篩選時，把 startHere 的入門文章排在最前面（依數字），下方列表就不再重複
+  const unfiltered = tagMain === "All" && tagSub === "All";
+  const startBox  = document.getElementById("blogStart");
+  const startList = document.getElementById("blogStartList");
+  const starters  = articles.filter(a => a.startHere).sort((a, b) => a.startHere - b.startHere);
+  const showStart = !!(unfiltered && startBox && startList && starters.length);
+  if (startBox) startBox.hidden = !showStart;
+  if (showStart) {
+    startList.innerHTML = starters.map(a => `
+      <li>
+        <a class="blog-start-card" href="/blog/${a.slug}/">
+          <img src="${a.cover}" alt="" width="96" height="64" loading="lazy" decoding="async">
+          <span>
+            <span class="blog-start-step" aria-hidden="true"></span>
+            <span class="blog-start-name">${a.title}</span>
+          </span>
+        </a>
+      </li>`).join("");
+  }
+
   const filtered = articles.filter(a => {
+    if (showStart && a.startHere) return false;
     const matchMain = tagMain === "All" || (a.mainTags && a.mainTags.includes(tagMain));
     const matchSub  = tagSub  === "All" || (a.subTags && a.subTags.includes(tagSub));
     return matchMain && matchSub;
   }).sort((a, b) => new Date(b.date.replace(/\//g,"-")) - new Date(a.date.replace(/\//g,"-")));
 
   if (!filtered.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding: 60px 0; color: #999;">目前沒有符合條件的文章。</div>';
+    grid.innerHTML = `
+      <div class="blog-empty-state">
+        <p>這個組合目前還沒有文章。</p>
+        <button type="button" class="blog-reset-btn" data-blog-reset>看全部文章</button>
+      </div>`;
     return;
   }
 
   grid.innerHTML = filtered.map((a, i) => {
     // 第一篇設為特選大卡 (Featured)
-    const isFeatured = i === 0 && tagMain === "All" && tagSub === "All";
+    const isFeatured = i === 0 && unfiltered;
     const badgeMap = {
       "酉時圖書館": "badge-library",
       "酒界新聞": "badge-news",
@@ -196,7 +232,7 @@ function renderBlogGrid(tagMain = "All", tagSub = "All") {
       <a class="card blog-card-link ${isFeatured ? 'featured-card' : ''}" href="/blog/${a.slug}/">
         <div class="blog-cover card-media">
           <div class="blog-badge ${bClass}">${a.mainTags?.[0] || '酉時圖書館'}</div>
-          <img src="${a.cover}" alt="${a.title}" loading="lazy" decoding="async">
+          <img src="${a.cover}" alt="${a.title}" width="800" height="540" ${i === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
         </div>
         <div class="blog-card-body">
           <h2 class="blog-card-title">${a.title}</h2>
@@ -223,22 +259,50 @@ function initBlogList() {
   let currentMain = "All";
   let currentSub  = "All";
 
+  // 0 篇的類別不顯示：點了才發現是空的很掃興（之後有文章就會自動出現）
+  if (typeof articles !== "undefined") {
+    pills.forEach(pill => {
+      const tag = pill.getAttribute("data-tag");
+      if (tag === "All") return;
+      const key = pill.classList.contains("filter-main") ? "mainTags" : "subTags";
+      pill.hidden = !articles.some(a => (a[key] || []).includes(tag));
+    });
+  }
+
+  // 選中狀態同時寫進 class 與 aria-pressed（篩選鈕是 <button>，報讀得到「已按下」）
+  const setActive = (group, tag) => {
+    document.querySelectorAll(group).forEach(p => {
+      const on = p.getAttribute("data-tag") === tag;
+      p.classList.toggle("active", on);
+      p.setAttribute("aria-pressed", String(on));
+    });
+  };
+
   pills.forEach(pill => {
     pill.addEventListener("click", function() {
       const tag = this.getAttribute("data-tag");
-      const isMain = this.classList.contains("filter-main");
-
-      if (isMain) {
+      if (this.classList.contains("filter-main")) {
         currentMain = tag;
-        document.querySelectorAll(".filter-main").forEach(p => p.classList.remove("active"));
+        setActive(".filter-main", tag);
       } else {
         currentSub = tag;
-        document.querySelectorAll(".filter-sub").forEach(p => p.classList.remove("active"));
+        setActive(".filter-sub", tag);
       }
-      
-      this.classList.add("active");
       renderBlogGrid(currentMain, currentSub);
     });
+  });
+
+  // 篩選無結果時的「看全部文章」
+  const gridEl = document.getElementById("blogGrid");
+  if (gridEl) gridEl.addEventListener("click", (e) => {
+    if (!e.target.closest("[data-blog-reset]")) return;
+    currentMain = "All";
+    currentSub  = "All";
+    setActive(".filter-main", "All");
+    setActive(".filter-sub", "All");
+    renderBlogGrid();
+    const all = document.querySelector('.filter-main[data-tag="All"]');
+    if (all) all.focus();
   });
 
   // 初始渲染
@@ -247,16 +311,43 @@ function initBlogList() {
 
 
 // 點擊選單外部時自動關閉選單
+// 捕獲階段＋擋下這一下：選單開著時點外面（遮罩區）只負責關選單，不會順手點到底下的連結
 document.addEventListener("click", (e) => {
   const nav = document.querySelector("nav");
   const toggle = document.querySelector(".menu-toggle");
   if(nav && nav.classList.contains("open")){
     if(!nav.contains(e.target) && (!toggle || !toggle.contains(e.target))){
+      e.preventDefault();
+      e.stopPropagation();
       nav.classList.remove("open");
       syncMenuToggle(false);
     }
   }
+}, true);
+
+// Esc 關閉手機選單，焦點回到漢堡按鈕
+document.addEventListener("keydown", (e) => {
+  if(e.key !== "Escape") return;
+  const nav = document.querySelector("nav");
+  if(!nav || !nav.classList.contains("open")) return;
+  nav.classList.remove("open");
+  syncMenuToggle(false);
+  document.querySelector(".menu-toggle")?.focus();
 });
+
+/** 「跳到主要內容」：只在有 <main id="main"> 的頁面注入，鍵盤第一個 Tab 停點 */
+function ensureSkipLink(){
+  const main = document.getElementById("main");
+  if(!main || document.querySelector(".skip-link")) return;
+  if(!main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
+  const a = document.createElement("a");
+  a.className = "skip-link";
+  a.href = "#main";
+  a.textContent = "跳到主要內容";
+  document.body.prepend(a);
+}
+if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", ensureSkipLink);
+else ensureSkipLink();
 
 /** Hero 區域固定背景圖（單張，不輪播） */
 function initHeroBackground(){
@@ -610,14 +701,16 @@ document.addEventListener("keydown", (e) => {
 });
 
 /**
- * 商品詳情頁：於加入購物車按鈕下方注入活動橫幅
+ * 商品詳情頁：進行中的活動做成一枚精簡徽章，放在徽章列最前面（商品資訊最上方）
+ * 例：「活動中　雙11 茶酒2件92折・至 11/12 →」，點了到 /promotions/；完整說明放在 title／報讀名稱
+ * 插進既有的徽章列（同一行），幾乎不推動下方版面；原本在加入購物車下方的三行大方塊已移除
  * 商品 id 從 .pdp-btn-cart 的 onclick="addToCart(N)" 解析，靜態頁不需重新生成
  */
 function injectPdpPromoBanner(){
-  const cta = document.querySelector(".pdp-cta");
-  if(!cta) return;
-  const btn = cta.querySelector(".pdp-btn-cart");
-  const m = btn && btn.getAttribute("onclick") ? btn.getAttribute("onclick").match(/addToCart\((\d+)\)/) : null;
+  const btn = document.querySelector(".pdp-btn-cart");
+  const badges = document.querySelector(".pdp-badges");
+  if(!btn || !badges || badges.querySelector(".pdp-badge--promo")) return;
+  const m = btn.getAttribute("onclick") ? btn.getAttribute("onclick").match(/addToCart\((\d+)\)/) : null;
   const id = m ? parseInt(m[1], 10) : NaN;
   if(Number.isNaN(id)) return;
 
@@ -628,16 +721,15 @@ function injectPdpPromoBanner(){
   );
   if(!promos.length) return;
 
-  const box = document.createElement("div");
-  box.className = "pdp-promo-banners";
-  box.innerHTML = promos.map(promo => `
-    <div class="pdp-promo-banner">
-      <div class="pdp-promo-banner-title">活動中：${promo.display.title || promo.label}</div>
-      <div class="pdp-promo-banner-desc">${promo.display.cardBadgeDetail || promo.description}</div>
-      <a class="pdp-promo-banner-link" href="/promotions/">查看所有活動 →</a>
-    </div>
-  `).join("");
-  cta.insertAdjacentElement("afterend", box);
+  const html = promos.map(promo => {
+    // 徽章文字去掉開頭的 emoji，維持商品頁安靜；加上截止日（月/日）
+    const short = String(promo.display.cardBadge).replace(/^[^\p{L}\p{N}]+/u, "").trim();
+    const end = promo.endAt ? `・至 ${Number(promo.endAt.slice(5, 7))}/${Number(promo.endAt.slice(8, 10))}` : "";
+    const detail = String(promo.display.cardBadgeDetail || promo.description || "").replace(/"/g, "&quot;");
+    return `<a class="pdp-badge pdp-badge--promo" href="/promotions/" title="${detail}" aria-label="活動中：${short}。${detail}看所有活動">
+      <span class="pdp-promo-tag">活動中</span>${short}${end}<span class="pdp-promo-go" aria-hidden="true">→</span></a>`;
+  }).join("");
+  badges.insertAdjacentHTML("afterbegin", html);
 }
 
 /**
@@ -828,7 +920,7 @@ function renderBlogRelatedProducts(retryCount = 0) {
           `;
           ctaContainer.style.display = "block";
           
-          renderGrid(list, 'blog-related-grid');
+          renderGrid(list, 'blog-related-grid', { allLazy: true }); // 在文末：不跟文章封面（LCP）搶頻寬
           return;
       }
   }
@@ -960,6 +1052,7 @@ function updateCartUI(){
 
   if(document.getElementById("cartMini")) renderCartMini();
   renderPromotionBlock();
+  document.dispatchEvent(new CustomEvent("cart:updated")); // 商品頁「已加入 N 件」等頁面元件用
 }
 
 /**
@@ -1004,7 +1097,7 @@ function renderCartMini(){
             <span class="qty-num" aria-label="數量">${p.qty}</span>
             <button class="qty-btn" type="button" aria-label="增加 ${p.name} 數量" onclick="setQty(${p.id}, ${(p.qty||1)+1})">＋</button>
           </div>
-          <button class="cart-item-remove" type="button" onclick="removeFromCart(${p.id})">移除</button>
+          <button class="cart-item-remove" type="button" aria-label="移除 ${p.name}" onclick="removeFromCart(${p.id})">移除</button>
         </div>
       </div>
     </div>
@@ -1090,6 +1183,39 @@ function ensureStickyUI(){
     `;
     document.body.appendChild(bar);
     bar.querySelector("#stickyCartBtn")?.addEventListener("click", openMiniCart);
+
+    // 商品頁：空車時底部列固定是「加入購物車 NT$…」＋右側小 LINE，版型不再變形（同一個拇指位置不會一下買、一下 LINE）
+    // 頁內「加入購物車」與「用 LINE 詢問這款酒」都在畫面上時，整條底部列淡出讓位（.is-buy-away 被拿掉）
+    const pdpBtn = document.querySelector(".pdp-btn-cart[data-pid]");
+    if(pdpBtn){
+      const buy = document.createElement("button");
+      buy.type = "button";
+      buy.className = "sticky-buy";
+      buy.innerHTML = `<span>${pdpBtn.dataset.label || "加入購物車"}</span><span class="sticky-buy-price">NT$${Number(pdpBtn.dataset.price).toLocaleString("en-US")}</span>`;
+      buy.addEventListener("click", () => addToCart(Number(pdpBtn.dataset.pid)));
+      bar.insertBefore(buy, bar.querySelector("#stickyLineBtn"));
+      bar.classList.add("has-buy");
+      const lineText = document.querySelector(".pdp-btn-line[data-line-text]")?.dataset.lineText;
+      const lineBtn = bar.querySelector("#stickyLineBtn");
+      if(lineText) lineBtn.href = lineMessageUrl(lineText);
+      lineBtn.setAttribute("aria-label", "LINE 詢問這款酒"); // 與頁內按鈕同名
+      if("IntersectionObserver" in window){
+        // 底部列約 110px 高：按鈕被它蓋住也算「看不到」
+        new IntersectionObserver(([e]) => bar.classList.toggle("is-buy-away", !e.isIntersecting), { rootMargin: "0px 0px -110px 0px" }).observe(pdpBtn);
+      }else{
+        bar.classList.add("is-buy-away"); // 舊瀏覽器：底部列一直顯示
+      }
+      // 這一支已在購物車裡（.has-mine）：同一個位置的「加入購物車」原地換成「填寫詢問單」，並在摘要寫「本款 N 件」
+      // 還沒加這一支：就算購物車已有別的酒，這個位置仍是「加入購物車」（熟客湊免運的情境）
+      const syncMine = () => {
+        const mine = readCart().find(x => x.id === Number(pdpBtn.dataset.pid));
+        bar.classList.toggle("has-mine", !!mine);
+        const ship = document.getElementById("stickyShip");
+        if(mine && ship) ship.textContent = `本款 ${mine.qty} 件・${ship.textContent}`;
+      };
+      document.addEventListener("cart:updated", syncMine);
+      syncMine();
+    }
     // LINE 按鈕：連結本身就會開新分頁，這裡只記錄事件（之前另外 window.open 會開出兩個分頁）
     bar.querySelector("#stickyLineBtn")?.addEventListener("click", () => {
       trackEvent('click_line', { method: 'LINE', source: 'sticky_bar' });
@@ -1112,6 +1238,7 @@ function ensureStickyUI(){
         <div class="mini-cart-body" id="miniCartList"></div>
         <div class="mini-cart-ship" id="miniCartShip" aria-live="polite" hidden></div>
         <div class="mini-cart-footer">
+          <div class="mini-cart-sum" id="miniCartSum" hidden></div>
           <div class="mini-cart-total">總金額 <span id="miniCartTotal">0</span></div>
           <a class="btn btn-primary mini-cart-checkout" href="/order/">填寫詢問單</a>
           <p class="mini-cart-note">送出後由專人透過 LINE 確認品項與金額，確認前不需付款。</p>
@@ -1233,38 +1360,69 @@ function renderMiniCart(){
   const itemCount = cart.reduce((s, p) => s + (p.qty || 0), 0);
   const promo     = applyPromotions(getCartContext());
 
+  const fmt = n => "NT$" + Number(n).toLocaleString("en-US"); // 文案規範：NT$1,500
+
   countEl.textContent = String(itemCount);
-  totalEl.textContent = "NT$" + Number(promo.finalTotal).toLocaleString();
+  totalEl.textContent = fmt(promo.finalTotal);
   renderFreeShipProgress(document.getElementById("miniCartShip"), itemCount > 0 ? promo.finalTotal : null);
+
+  // 有折扣時，總金額上方先列「小計」與「優惠折抵」，客人才對得上每一列的金額
+  const sumEl = document.getElementById("miniCartSum");
+  if(sumEl){
+    sumEl.hidden = !(cart.length && promo.discount > 0);
+    sumEl.innerHTML = sumEl.hidden ? "" : `
+      <div class="mini-cart-sum-row"><span>小計</span><span>${fmt(cartTotal())}</span></div>
+      <div class="mini-cart-sum-row is-discount"><span>優惠折抵</span><span>− ${fmt(promo.discount)}</span></div>`;
+  }
+
+  // 重畫前記住焦點在哪一顆（步進器、數量欄、移除），重畫後還原，鍵盤使用者不會被丟回頁首
+  const active = document.activeElement;
+  const focusKey = listEl.contains(active) ? active.dataset.focus : null;
+  const focusRow = focusKey ? [...listEl.querySelectorAll(".mini-cart-item")].indexOf(active.closest(".mini-cart-item")) : -1;
 
   if(cart.length === 0){
     listEl.innerHTML = `<div class="mono">購物車目前沒有商品。</div><div id="promotionBlock" class="promotion-block"></div>`;
     renderPromotionBlock();
+    if(focusKey) document.getElementById("miniCartClose")?.focus();
     return;
   }
 
-  listEl.innerHTML = cart.map(p => `
+  listEl.innerHTML = cart.map(p => {
+    const qty = p.qty || 1;
+    return `
     <div class="mini-cart-item">
       <div class="mini-cart-info">
         <div class="mini-cart-name">${p.name}</div>
         <div class="mini-cart-spec">${p.spec || ""}</div>
+        <div class="mini-cart-line">
+          <span class="mini-cart-unit">${fmt(p.price)}${qty > 1 ? ` × ${qty}` : ""}</span>
+          ${qty > 1 ? `<span class="mini-cart-subtotal">${fmt(p.price * qty)}</span>` : ""}
+        </div>
       </div>
       <div class="mini-cart-actions">
         <div class="mini-cart-qty">
-          <button type="button" class="mini-qty-btn" aria-label="減少 ${p.name} 數量"
-            onclick="setQty(${p.id}, ${Math.max(1,(p.qty||1)-1)})">−</button>
-          <input class="mini-qty-input" type="number" min="1" value="${p.qty||1}" aria-label="${p.name} 數量"
+          <button type="button" class="mini-qty-btn" data-focus="dec-${p.id}" aria-label="減少 ${p.name} 數量"
+            onclick="setQty(${p.id}, ${Math.max(1, qty - 1)})">−</button>
+          <input class="mini-qty-input" type="number" min="1" value="${qty}" data-focus="qty-${p.id}" aria-label="${p.name} 數量"
             onchange="setQty(${p.id}, this.value)">
-          <button type="button" class="mini-qty-btn" aria-label="增加 ${p.name} 數量"
-            onclick="setQty(${p.id}, ${(p.qty||1)+1})">＋</button>
+          <button type="button" class="mini-qty-btn" data-focus="inc-${p.id}" aria-label="增加 ${p.name} 數量"
+            onclick="setQty(${p.id}, ${qty + 1})">＋</button>
         </div>
-        <button type="button" class="mini-remove" onclick="removeFromCart(${p.id})">移除</button>
+        <button type="button" class="mini-remove" data-focus="rm-${p.id}" aria-label="移除 ${p.name}" onclick="removeFromCart(${p.id})">移除</button>
       </div>
-    </div>
-  `).join("");
+    </div>`;
+  }).join("");
 
   listEl.insertAdjacentHTML("beforeend", `<div id="promotionBlock" class="promotion-block"></div>`);
   renderPromotionBlock();
+
+  if(focusKey){
+    // 同一顆還在就回到同一顆；整列被移除了，就移到原位置（或上一列）的「移除」
+    const rows = listEl.querySelectorAll(".mini-cart-item");
+    const same = listEl.querySelector(`[data-focus="${focusKey}"]`);
+    const near = rows[Math.min(focusRow, rows.length - 1)]?.querySelector(".mini-remove");
+    (same || near || document.getElementById("miniCartClose"))?.focus();
+  }
 }
 
 
@@ -1687,7 +1845,7 @@ function showCartToast(product, currentQty){
     <div class="cart-toast-inner">
       ${cover ? `<div class="cart-toast-img"><img src="${cover}" alt=""></div>` : ""}
       <div class="cart-toast-text">
-        <div class="title">已加入購物車</div>
+        <div class="title">${document.querySelector(`.pdp-btn-cart[data-pid="${product.id}"]`)?.dataset.label === "加入預購" ? "已加入預購" : "已加入購物車"}</div>
         <div class="desc">${product.name}（共 ${currentQty} 件）</div>
       </div>
       <button type="button" class="cart-toast-view">查看購物車</button>
@@ -2085,8 +2243,9 @@ document.addEventListener("DOMContentLoaded", () => {
   ageCheck();            // 年齡驗證
 
   // 填入所有 data-line-link / data-ig-link 元素的連結
-  document.querySelectorAll("[data-line-link]").forEach(a => { 
-    a.href = BRAND.lineUrl; 
+  // 有 data-line-text（商品頁「用 LINE 詢問這款酒」）：開啟對話並預填酒名，客人不用再打一次是哪一支
+  document.querySelectorAll("[data-line-link]").forEach(a => {
+    a.href = a.dataset.lineText ? lineMessageUrl(a.dataset.lineText) : BRAND.lineUrl;
     a.target = "_blank"; 
     a.rel = "noopener"; 
     a.addEventListener("click", () => trackEvent('click_line', { method: 'LINE', source: 'global_link' }));
@@ -2243,3 +2402,74 @@ function toggleEventNote(btn){
     btn.textContent = "收起 ▴";
   }
 }
+
+/* 商品列表與商品詳情：長頁面回到頂端 */
+document.addEventListener("DOMContentLoaded", function () {
+  if (!document.querySelector("[data-catalog], #pdpMainImg")) return;
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "product-back-top";
+  button.hidden = true;
+  button.setAttribute("aria-label", "回到頁首");
+  button.title = "回到頁首";
+  button.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M6 11l6-6 6 6M12 5v14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.body.appendChild(button);
+
+  let pending = false;
+  const mobileBackTop = matchMedia("(max-width: 768px)");
+  let scrollIdle;
+  function sync() {
+    pending = false;
+    button.hidden = window.scrollY < window.innerHeight;
+    let bottom = 16;
+    document.querySelectorAll(".alcohol-bar, #stickyBar, #pdpDock").forEach(function (bar) {
+      const style = getComputedStyle(bar);
+      if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") return;
+      const rect = bar.getBoundingClientRect();
+      if (rect.height && rect.top < window.innerHeight && rect.bottom > 0) {
+        bottom = Math.max(bottom, window.innerHeight - rect.top + 12);
+      }
+    });
+    button.style.bottom = bottom + "px";
+  }
+  function schedule() {
+    if (!pending) { pending = true; requestAnimationFrame(sync); }
+  }
+  window.addEventListener("scroll", function () {
+    if (mobileBackTop.matches) {
+      button.classList.add("is-scrolling");
+      clearTimeout(scrollIdle);
+      scrollIdle = setTimeout(function () {
+        button.classList.remove("is-scrolling");
+        schedule();
+      }, 450);
+    }
+    schedule();
+  }, { passive: true });
+  mobileBackTop.addEventListener("change", function () {
+    clearTimeout(scrollIdle);
+    button.classList.remove("is-scrolling");
+    schedule();
+  });
+  window.addEventListener("resize", schedule);
+  const bars = document.querySelectorAll(".alcohol-bar, #stickyBar, #pdpDock");
+  const observer = new MutationObserver(schedule);
+  bars.forEach(function (bar) {
+    observer.observe(bar, { attributes: true, childList: true, subtree: true });
+    if (window.ResizeObserver) new ResizeObserver(schedule).observe(bar);
+  });
+  button.addEventListener("click", function () {
+    const heading = document.querySelector("main h1");
+    if (heading) {
+      const previous = heading.getAttribute("tabindex");
+      heading.setAttribute("tabindex", "-1");
+      heading.focus({ preventScroll: true });
+      heading.addEventListener("blur", function () {
+        if (previous === null) heading.removeAttribute("tabindex");
+        else heading.setAttribute("tabindex", previous);
+      }, { once: true });
+    }
+    window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  });
+  sync();
+});

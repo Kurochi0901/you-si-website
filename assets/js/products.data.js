@@ -1661,7 +1661,7 @@ const products = [
 	原料：米、米麴`,
     },
     info: {
-      brand: "関谷・一念不動",
+      brand: "關谷・蓬萊泉",
       origin: "日本",
       rice: "夢山水",
       yeast: "未公開",

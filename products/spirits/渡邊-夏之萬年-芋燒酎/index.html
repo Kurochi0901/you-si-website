@@ -83,7 +83,7 @@
     "url": "https://www.yousi-drink.com/products/spirits/渡邊-夏之萬年-芋燒酎/",
     "priceCurrency": "TWD",
     "price": 1200,
-    "priceValidUntil": "2027-11-06",
+    "priceValidUntil": "2027-11-09",
     "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/NewCondition",
     "eligibleRegion": { "@type": "Country", "name": "TW" },
@@ -186,31 +186,34 @@
     <span class="current">渡邊 夏之萬年 芋燒酎</span>
   </div>
 
+  <main id="main">
   <div class="pdp-main">
 
     <div class="pdp-gallery">
-      <div class="pdp-img-main" onclick="openZoom()">
+      <div class="pdp-img-main">
+        <button type="button" class="pdp-zoom" aria-label="放大檢視圖片"></button>
         
-        <button class="pdp-arrow left" aria-label="上一張" onclick="event.stopPropagation(); pdpPrev()">&#8249;</button>
-        <button class="pdp-arrow right" aria-label="下一張" onclick="event.stopPropagation(); pdpNext()">&#8250;</button>
+        <button type="button" class="pdp-arrow left" data-gallery="prev" aria-label="上一張"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path d="M10 3.5 5.5 8 10 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button type="button" class="pdp-arrow right" data-gallery="next" aria-label="下一張"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span class="pdp-img-count" aria-hidden="true">1 / 4</span>
         <img id="pdpMainImg"
              src="https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/122渡邊夏之萬年1.webp"
              alt="渡邊 夏之萬年 芋燒酎"
              width="500" height="600">
       </div>
       <div class="pdp-thumbs">
-        <div class="pdp-thumb active" onclick="pdpGo(0)">
-          <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_150,h_188,c_limit,f_auto,q_auto/122渡邊夏之萬年1.webp" alt="渡邊 夏之萬年 芋燒酎 圖片1" width="72" height="90" loading="lazy">
-        </div>
-        <div class="pdp-thumb" onclick="pdpGo(1)">
-          <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_150,h_188,c_limit,f_auto,q_auto/122渡邊夏之萬年2.webp" alt="渡邊 夏之萬年 芋燒酎 圖片2" width="72" height="90" loading="lazy">
-        </div>
-        <div class="pdp-thumb" onclick="pdpGo(2)">
-          <img src="/assets/images/home/會員好禮.webp" alt="渡邊 夏之萬年 芋燒酎 會員好禮" width="72" height="90" loading="lazy">
-        </div>
-        <div class="pdp-thumb" onclick="pdpGo(3)">
-          <img src="/assets/images/home/出貨保證.webp" alt="渡邊 夏之萬年 芋燒酎 出貨保證" width="72" height="90" loading="lazy">
-        </div>
+        <button type="button" class="pdp-thumb active" data-i="0" aria-label="看第 1 張：渡邊 夏之萬年 芋燒酎" aria-current="true">
+          <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_150,h_188,c_limit,f_auto,q_auto/122渡邊夏之萬年1.webp" alt="" width="72" height="90">
+        </button>
+        <button type="button" class="pdp-thumb" data-i="1" aria-label="看第 2 張：渡邊 夏之萬年 芋燒酎">
+          <img src="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_150,h_188,c_limit,f_auto,q_auto/122渡邊夏之萬年2.webp" alt="" width="72" height="90" loading="lazy">
+        </button>
+        <button type="button" class="pdp-thumb" data-i="2" aria-label="看第 3 張：會員好禮">
+          <img src="/assets/images/home/會員好禮.webp" alt="" width="72" height="90" loading="lazy">
+        </button>
+        <button type="button" class="pdp-thumb" data-i="3" aria-label="看第 4 張：出貨保證">
+          <img src="/assets/images/home/出貨保證.webp" alt="" width="72" height="90" loading="lazy">
+        </button>
       </div>
     </div>
 
@@ -224,27 +227,10 @@
       <h1 class="pdp-title">渡邊 夏之萬年 芋燒酎</h1>
       <p class="pdp-subtitle">水藍企鵝限定夏燒酎，甘甜冰鎮最暢快</p>
       <p class="pdp-facts">720ml｜酒精 20%｜日本</p>
-
-      <div class="pdp-price-box">
-        <span class="pdp-price-now">NT$1,200</span>
-      </div>
-
-      <div class="pdp-cta">
-        <button class="pdp-btn-cart" onclick="addToCart(122)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          加入購物車
-        </button>
-        <a class="pdp-btn-line" data-line-link href="https://line.me/ti/p/@008jcfgc" target="_blank" rel="noopener">用 LINE 詢問這款酒</a>
-      </div>
       
-      <ul class="pdp-service">
-        <li>新竹竹北預約自取</li>
-        <li>全台宅配</li>
-        <li>LINE 線上客服</li>
-      </ul>
+      <!-- 酒款介紹（含搭餐、適飲溫度）：放在口味結論下方、價格上方，先讀故事再決定 -->
 
-
-      <section class="pdp-section" aria-labelledby="pdpStoryTitle">
+      <section class="pdp-section pdp-section--story" aria-labelledby="pdpStoryTitle">
         <h2 class="pdp-section-title" id="pdpStoryTitle">酒款介紹</h2>
         <div class="pdp-story">
           <p>水藍色瓶身印上可愛企鵝，這款限定夏燒酎渾身散發清涼感！</p>
@@ -252,6 +238,34 @@
           <p>極度推薦加入冰塊或兌氣泡水飲用，是消解暑氣的夏季暢快首選！</p>
         </div>
       </section>
+
+      <div class="pdp-price-box">
+        <span class="pdp-price-now">NT$1,200</span>
+      </div>
+
+      
+      <div class="pdp-cta">
+        <button type="button" class="pdp-btn-cart" data-pid="122" data-price="1200" data-label="加入購物車" onclick="addToCart(122)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          加入購物車
+        </button>
+        <a class="pdp-btn-line" data-line-link data-line-text="你好，我想詢問這款酒：
+渡邊 夏之萬年 芋燒酎（NT$1,200）
+https://www.yousi-drink.com/products/spirits/渡邊-夏之萬年-芋燒酎/" href="https://line.me/ti/p/@008jcfgc" target="_blank" rel="noopener">用 LINE 詢問這款酒</a>
+      </div>
+      <p class="pdp-added" id="pdpAdded" aria-live="polite" hidden></p>
+      
+      <!-- 怎麼買：安心句留在按鈕下方一行，三步驟與運費點開才看（不擋住風味座標） -->
+      <details class="pdp-howto">
+        <summary><span class="pdp-howto-sum">LINE 確認後才付款・滿 NT$2,800 免運</span><span class="pdp-howto-more">怎麼買？</span></summary>
+        <ol class="pdp-steps">
+          <li>加入購物車，填寫詢問單</li>
+          <li>專人以 LINE 確認品項與金額，確認前不需付款</li>
+          <li>銀行轉帳後宅配出貨，或到新竹竹北預約自取</li>
+        </ol>
+        <p class="pdp-ship">宅配常溫 NT$170、冷藏 NT$230，單筆滿 NT$2,800 免運。</p>
+      </details>
+
 
       <section class="pdp-section" aria-labelledby="pdpSpecTitle">
         <h2 class="pdp-section-title" id="pdpSpecTitle">規格</h2>
@@ -274,6 +288,7 @@
     </div>
     <div class="pdp-related-grid" id="pdpRelatedGrid"></div>
   </section>
+  </main>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -297,7 +312,7 @@
     </div>
   </footer>
 
-<div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+<div class="alcohol-bar" role="note" aria-label="飲酒警語">
   <span class="alcohol-bar-text">
     🍶 未滿十八歲請勿飲酒
     <span class="alcohol-bar-divider" aria-hidden="true"></span>
@@ -305,39 +320,25 @@
   </span>
 </div>
 
-<div id="lightbox" class="lightbox">
-  <img id="lightbox-img">
-  <div id="lightbox-note"></div>
+<!-- 桌面精簡購買列：頁內「加入購物車」捲出畫面後才出現（手機由底部列負責；product-page.js） -->
+<div class="pdp-dock" id="pdpDock" hidden>
+  <div class="pdp-dock-inner">
+    <span class="pdp-dock-name">渡邊 夏之萬年 芋燒酎</span>
+    <span class="pdp-dock-price">NT$1,200</span>
+    <span class="pdp-dock-state" aria-live="polite"></span>
+    <button type="button" class="pdp-dock-btn" onclick="addToCart(122)">加入購物車</button>
+  </div>
 </div>
 
+<dialog id="pdpZoom" class="pdp-zoom-dialog" aria-label="渡邊 夏之萬年 芋燒酎 放大圖片">
+  <button type="button" class="pdp-zoom-close" aria-label="關閉放大圖片"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+  <img id="pdpZoomImg" alt="渡邊 夏之萬年 芋燒酎">
+</dialog>
+
+<!-- 相簿、放大、風味座標互動：/assets/js/product-page.js（圖片清單由這裡帶入） -->
+<script type="application/json" id="pdpImgs">["https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/122渡邊夏之萬年1.webp","https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/122渡邊夏之萬年2.webp","/assets/images/home/會員好禮.webp","/assets/images/home/出貨保證.webp"]</script>
+<script defer src="/assets/js/product-page.js"></script>
 <script>
-(function() {
-  var imgs = ["https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/122渡邊夏之萬年1.webp","https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/122渡邊夏之萬年2.webp","/assets/images/home/會員好禮.webp","/assets/images/home/出貨保證.webp"];
-  var idx = 0;
-  function update() {
-    var main = document.getElementById("pdpMainImg");
-    if (main) main.src = imgs[idx];
-    document.querySelectorAll(".pdp-thumb").forEach(function(t, i) {
-      t.classList.toggle("active", i === idx);
-    });
-  }
-  window.pdpPrev = function() { idx = (idx - 1 + imgs.length) % imgs.length; update(); };
-  window.pdpNext = function() { idx = (idx + 1) % imgs.length; update(); };
-  window.pdpGo = function(i) { idx = i; update(); };
-})();
-
-function openZoom() {
-  var img = document.getElementById("pdpMainImg");
-  var box = document.getElementById("lightbox");
-  var lbImg = document.getElementById("lightbox-img");
-  var note = document.getElementById("lightbox-note");
-  if (!box || !lbImg || !img) return;
-  note.style.display = "none";
-  lbImg.style.display = "block";
-  lbImg.src = img.src;
-  box.style.display = "flex";
-}
-
 document.addEventListener("DOMContentLoaded", function() {
   if (typeof products === "undefined" || typeof renderGrid === "undefined") return;
   var currentId = 122;

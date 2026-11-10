@@ -37,7 +37,10 @@
 
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/blog.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁標題用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=.0123456789GHISadefimnoprstuv%E3%80%81%E3%80%8A%E3%80%8B%E3%80%8C%E3%80%8D%E4%B8%8A%E4%B8%8D%E4%B8%B9%E4%BB%80%E4%BC%8A%E4%BD%A0%E5%82%B3%E5%86%8D%E5%8B%95%E5%8D%87%E5%90%88%E5%90%8C%E5%91%B3%E5%92%8C%E5%93%81%E5%93%B2%E5%9C%B0%E5%A4%A7%E5%A5%87%E5%A7%BF%E5%AD%A4%E5%AD%B8%E5%AF%86%E5%B0%8B%E5%B7%AE%E5%B9%B4%E5%BE%AE%E5%BF%83%E5%BF%AB%E6%85%8B%E6%87%82%E6%89%80%E6%89%BE%E6%8E%A8%E6%96%87%E6%98%AF%E6%9C%89%E6%A5%B5%E6%AC%B2%E6%AC%BE%E6%AD%A4%E6%B3%95%E6%B8%85%E6%B8%A1%E6%BC%AB%E7%87%92%E7%89%A1%E7%8D%A8%E7%93%9C%E7%95%B0%E7%95%B6%E7%99%BE%E7%9A%84%E7%9B%B8%E7%A7%92%E7%A7%98%E7%AB%A0%E7%B4%9A%E7%B5%82%E8%87%B4%E8%88%87%E8%8C%B6%E8%96%A6%E8%A3%A1%E8%AA%BF%E8%B5%B0%E9%80%9F%E9%80%B2%E9%81%87%E9%82%8A%E9%82%A3%E9%85%8D%E9%85%8E%E9%85%92%E9%86%BA%E9%97%9C%E9%9A%A8%E9%A6%99%E9%AD%94%E9%BA%A5%E9%BA%BC%EF%BC%8C%EF%BC%9A%EF%BC%9F">
 <script defer src="/assets/js/articles.data.js"></script>
 <script defer src="/assets/js/catalog.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
@@ -102,7 +105,7 @@
 }
 </script>
 </head>
-<body>
+<body class="page-article">
   <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
   <div class="announce-bar" id="announceBar" role="status" aria-live="polite">
     <div class="announce-track" id="announceTrack"></div>
@@ -126,6 +129,7 @@
     </div>
   </div>
 
+  <main id="main">
   <div class="article-hero">
     <!-- fallback background will show if image fails to load -->
     <!-- <img src="/assets/images/blog/id5封面.webp" alt="燒酎是什麼？和清酒有什麼不同？上伊那牡丹裡的微醺秘密" class="article-hero-bg" fetchpriority="high" decoding="async" onerror="this.style.display='none'"> -->
@@ -159,7 +163,7 @@
         </ul>
 
         <figure class="article-figure">
-          <img src="/assets/images/blog/id5內文圖一.webp" alt="清酒與燒酎的差異——釀造酒與蒸餾酒對照" loading="lazy" decoding="async">
+          <img width="800" height="450" src="/assets/images/blog/id5內文圖一.webp" alt="清酒與燒酎的差異——釀造酒與蒸餾酒對照" loading="eager" fetchpriority="high" decoding="async">
         </figure>
 
         <h2>走進動漫《上伊那牡丹》：傳奇麥燒酎「百年孤獨」</h2>
@@ -167,10 +171,10 @@
         <p>這款由宮崎縣黑木本店釀造的麥燒酎，之所以被稱為傳奇，是因為它打破了傳統燒酎直接裝瓶的限制，而是將蒸餾後的麥燒酎放進<strong>白橡木桶中進行長期熟成</strong>。</p>
         <p>時間賦予了它迷人的琥珀色澤，入口時，大麥的奔放香氣與橡木桶帶來的巧克力、椰子、高雅木質調完美融合。它擁有高達 40% 的酒精度，卻溫潤如玉。</p>
         <p>因為黑木本店對品質的堅持，這款酒每年都是採取限量配額釋出。幸運的是，在我們的店內一直都有為各位品味藏家引進並默默準備著。想親自體驗牡丹與伊吹學姐口中那份寂寞卻極致高雅的滋味，隨時歡迎聯絡我們。</p>
-        <p><a href="/products/spirits/黑木本店-百年孤獨-麥燒酎/" class="btn-inline-cta" target="_blank" rel="noopener">黑木本店 百年孤獨 麥燒酎</a></p>
+        <p><a href="/products/spirits/黑木本店-百年孤獨-麥燒酎/" class="btn-inline-cta">黑木本店 百年孤獨 麥燒酎</a></p>
 
         <figure class="article-figure">
-          <img src="/assets/images/blog/id5內文圖二.webp" alt="黑木本店 百年孤獨 麥燒酎" loading="lazy" decoding="async">
+          <img width="800" height="450" src="/assets/images/blog/id5內文圖二.webp" alt="黑木本店 百年孤獨 麥燒酎" loading="lazy" decoding="async">
         </figure>
 
         <h2>燒酎的大魔法：隨心所欲的「調配哲學」</h2>
@@ -198,6 +202,7 @@
         <a href="/products/sake/" class="btn btn-primary" style="font-size: 15px; padding: 14px 28px; width: auto; display: inline-flex;">查看相關酒款</a>
     </div>
   </article>
+  </main>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -224,7 +229,7 @@
     </div>
   </footer>
 
-  <div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+  <div class="alcohol-bar" role="note" aria-label="飲酒警語">
     <span class="alcohol-bar-text">
         🍶 未滿十八歲請勿飲酒
         <span class="alcohol-bar-divider" aria-hidden="true"></span>

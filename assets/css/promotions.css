@@ -1,0 +1,312 @@
+/* ============================================
+   優惠活動頁 /assets/css/promotions.css（只由 promotions/index.html 載入）
+
+   2026-11 改版：接上「黃昏酒桌」語彙——明朝體標題、暖色狀態徽章、柔和卡片、
+   焦茶只給「查看活動酒款」這類消費者的主要動作，B2B 洽詢改成白底膠囊（第二動作）。
+   已結束的活動收進頁尾的「過去的活動」，只列名稱與期間。
+   顏色一律用 style.css :root 的品牌色變數。
+   ============================================ */
+
+.page-promotions {
+  --pr-serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+}
+
+/* ---------- 開頭 ---------- */
+.page-promotions .promo-page {
+  max-width: 1120px;
+  padding-top: 8px;
+}
+.promo-page-title {
+  margin: 24px 0 12px;
+  font-family: var(--pr-serif);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+.promo-lede {
+  max-width: 40em;
+  margin: 0 0 6px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+.promo-lede a {
+  color: var(--jiaocha);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--yousi-gold-soft);
+  text-underline-offset: 4px;
+}
+.promo-lede a:hover { text-decoration-color: var(--jiaocha); }
+
+.promo-section { margin-top: 48px; }
+.promo-section-title {
+  margin: 0 0 14px;
+  font-family: var(--pr-serif);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+.promo-section-lede {
+  max-width: 44em;
+  margin: 0 0 20px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+/* ---------- 怎麼享優惠（三步） ---------- */
+/* 不用項目符號：三段之間只用一道淡金細線分隔（手機改成上下排、橫線分隔） */
+.promo-howto {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 14px 4px;
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--washi);
+  border-radius: var(--r-md);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+.promo-howto li { padding: 0 18px; }
+.promo-howto li + li { border-left: 1px solid var(--yousi-gold-soft); }
+.promo-howto strong { color: var(--ink); font-weight: 700; }
+
+/* ---------- 活動卡片 ---------- */
+.page-promotions .promo-card {
+  background: var(--card);
+  border: 1px solid rgba(92, 74, 50, .06);
+  border-radius: var(--radius); /* 18px，同商品卡 */
+  box-shadow: var(--soft-shadow);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.page-promotions .promo-card-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-bottom: 6px;
+}
+/* 活動名稱由資料而來，維持黑體（明朝體字型只載入頁面固定文字） */
+.page-promotions .promo-card h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.page-promotions .promo-card .promo-meta {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.page-promotions .promo-card p {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+}
+.page-promotions .promo-banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 4px;
+  border-radius: var(--r-sm);
+}
+.page-promotions .promo-card > a { display: block; border-radius: var(--r-sm); }
+.page-promotions .promo-card > a:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 3px; }
+
+/* 狀態徽章：暖色語彙（取代原本的 Bootstrap 綠／黃／灰） */
+.page-promotions .promo-badge {
+  padding: 3px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.5;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.page-promotions .badge-active   { color: var(--jiaocha); background: var(--washi); border: 1.5px solid var(--yousi-gold); }
+.page-promotions .badge-always   { color: var(--gold-text); background: var(--washi); border: 1px solid var(--yousi-gold-soft); }
+.page-promotions .badge-upcoming { color: var(--ink-soft); background: var(--card); border: 1px dashed var(--yousi-gold); }
+
+/* 活動酒款摺疊 */
+.page-promotions .promo-products-toggle {
+  margin-top: 18px;
+  padding-top: 0;
+  border-top: none;
+}
+.page-promotions .promo-products-toggle > summary {
+  min-height: 48px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--washi);
+  background: var(--jiaocha);
+  border: 1px solid var(--jiaocha);
+  border-radius: var(--r-pill);
+  box-shadow: var(--btn-shadow);
+  transition: background-color .2s ease, box-shadow .2s ease, transform .2s var(--ease-soft);
+}
+.page-promotions .promo-products-toggle > summary:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  box-shadow: var(--btn-shadow-hover);
+  transform: translateY(-1px);
+}
+.page-promotions .promo-products-toggle > summary:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 3px; }
+/* 展開後收合鈕退成白底膠囊，讓視線回到酒款 */
+.page-promotions .promo-products-toggle[open] > summary {
+  color: var(--jiaocha);
+  background: var(--card);
+  border-color: var(--yousi-gold);
+  border-radius: var(--r-pill);
+  box-shadow: none;
+}
+.page-promotions .promo-products-toggle[open] > summary:hover { border-color: var(--jiaocha); transform: none; }
+.page-promotions .promo-products-summary-icon { font-size: 14px; }
+
+/* 活動卡內的商品卡比商品列表窄（卡片內距吃掉寬度，桌機約 190px），
+   價格＋「加入購物車」並排會擠出卡片 → 一律上下排、按鈕撐滿 */
+.page-promotions .promo-card .card-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+.page-promotions .promo-card .btn-add { width: 100%; text-align: center; }
+
+.promo-empty-note {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+.promo-empty-note a { color: var(--jiaocha); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- 過去的活動 ---------- */
+.promo-archive {
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.promo-archive > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 0 4px;
+  list-style: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.promo-archive > summary::-webkit-details-marker { display: none; }
+.promo-archive > summary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-right: 1.5px solid var(--jiaocha);
+  border-bottom: 1.5px solid var(--jiaocha);
+  transform: translateY(-3px) rotate(45deg);
+  transition: transform .2s ease;
+}
+.promo-archive[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
+.promo-archive > summary:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; border-radius: var(--r-xs); }
+.promo-archive-list {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+}
+.promo-archive-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 16px;
+  padding: 12px 4px;
+  border-top: 1px dashed var(--line);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.promo-archive-name { color: var(--ink-soft); }
+.promo-archive-date { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ---------- B2B 企業合作 ---------- */
+.page-promotions .b2b-grid { gap: 20px; }
+.page-promotions .b2b-card {
+  border: 1px solid rgba(92, 74, 50, .06);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow-sm);
+  padding: 28px;
+}
+.page-promotions .b2b-card:hover { transform: translateY(-2px); box-shadow: var(--soft-shadow); }
+.page-promotions .b2b-card h3 {
+  margin: 0 0 8px;
+  font-family: var(--pr-serif);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+.page-promotions .b2b-tagline { color: var(--gold-text); }
+.page-promotions .b2b-bullets li { color: var(--ink-soft); border-bottom-color: var(--line); }
+.page-promotions .b2b-bullets li::before { color: var(--jiaocha); }
+/* 洽詢是第二動作：白底膠囊＋酉時金框（取代舊琥珀漸層，白字對比原本只有 1.9–3.1:1） */
+.page-promotions .b2b-cta .btn {
+  min-height: 48px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--jiaocha);
+  background: var(--card);
+  border: 1px solid var(--yousi-gold);
+  border-radius: var(--r-pill);
+  box-shadow: none;
+}
+.page-promotions .b2b-cta .btn:hover { background: var(--washi); border-color: var(--jiaocha); transform: none; box-shadow: none; }
+.page-promotions .b2b-cta .btn:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
+
+.b2b-note {
+  margin: 24px 0 0;
+  padding: 18px 22px;
+  background: var(--washi);
+  border-radius: var(--r-md);
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+.b2b-note strong { color: var(--ink); }
+
+/* ---------- 手機 ---------- */
+@media (max-width: 860px) {
+  .promo-page-title { font-size: 28px; margin-top: 16px; }
+  .promo-section { margin-top: 40px; }
+  .promo-section-title { font-size: 21px; }
+  .promo-howto { flex-direction: column; padding: 4px 16px; }
+  .promo-howto li { padding: 10px 0; }
+  .promo-howto li + li { border-left: none; border-top: 1px solid var(--yousi-gold-soft); }
+  .page-promotions .b2b-card { padding: 22px; }
+  .page-promotions .b2b-card h3 { font-size: 19px; }
+  .page-promotions .promo-card .card-meta { gap: 8px; }
+}
+@media (max-width: 640px) {
+  .page-promotions .promo-card { padding: 16px; }
+  .page-promotions .promo-card h3 { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-promotions .promo-products-toggle > summary,
+  .promo-archive > summary::after { transition: none; }
+  .page-promotions .promo-products-toggle > summary:hover,
+  .page-promotions .b2b-card:hover { transform: none; }
+}

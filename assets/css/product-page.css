@@ -2,7 +2,7 @@
    Product Detail Page
    /assets/css/product-page.css
 
-   設計語彙：延用全站「金縁和紙」—— 米白和紙底＋金棕雙細線框、3px 小圓角
+   設計語彙：DESIGN.md「黃昏酒桌」柔和版——和紙底、暖影、膠囊按鈕；金縁雙細線框只留給風味座標
    品名與段落標題用明朝體（Noto Serif TC），呼應酒標；內文維持 Noto Sans TC
    唯一的視覺重點是「風味座標」，其餘保持安靜
    ============================================ */
@@ -54,7 +54,7 @@
 .pdp-breadcrumb a:hover { color: var(--pdp-umber); }
 .pdp-breadcrumb .sep {
   margin: 0 6px;
-  color: #ccc;
+  color: #cdb995; /* 原 #ccc 冷灰；改暖金（無冷色 Rule） */
   display: inline-flex;
   align-items: center;
 }
@@ -125,7 +125,47 @@
   transition: background .2s ease, color .2s ease;
   z-index: 5;
 }
-.pdp-arrow:hover { background: var(--pdp-umber); color: var(--pdp-paper); }
+/* 懸停只給有滑鼠的裝置：iPhone 點過之後會一直停在懸停的實心焦茶 */
+@media (hover: hover) {
+  .pdp-arrow:hover { background: var(--pdp-umber); color: var(--pdp-paper); }
+}
+/* 箭頭圖示改用 CSS 畫（iPhone Safari 上按鈕裡的 SVG 箭頭曾經畫不出來，只剩空圓） */
+.pdp-arrow svg { display: none !important; }
+/* 絕對定位畫在正中央：iPhone Safari 不一定把 <button> 當 flex 容器，用 flex 置中的話箭頭會變成一條「/」 */
+.pdp-arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  box-sizing: border-box;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  border-radius: 1px;
+}
+.pdp-arrow.left::after { transform: translateX(1.5px) rotate(45deg); }
+.pdp-arrow.right::after { transform: translateX(-1.5px) rotate(-135deg); }
+/* 觸控裝置：小一點、和紙半透明圓、沒有金框，不搶酒標；點擊範圍仍是 44px */
+@media (hover: none) and (pointer: coarse) {
+  .pdp-arrow {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    background: rgba(251, 246, 234, .86);
+    box-shadow: 0 2px 10px rgba(92, 74, 50, .16);
+    transition: transform .15s var(--ease-soft), background-color .15s ease;
+  }
+  .pdp-arrow::before { content: ""; position: absolute; inset: -4px; border-radius: 50%; }
+  .pdp-arrow.left { left: 10px; }
+  .pdp-arrow.right { right: 10px; }
+  .pdp-arrow:active { transform: translateY(-50%) scale(.92); background: #fff; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pdp-arrow, .pdp-arrow:active { transition: none; }
+}
 .pdp-arrow:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: 2px; }
 .pdp-arrow.left { left: 12px; }
 .pdp-arrow.right { right: 12px; }
@@ -301,28 +341,6 @@
   border-left: 2px solid var(--pdp-gold);
 }
 
-.pdp-service {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 18px;
-  margin: 16px 0 0;
-  padding: 0;
-  font-size: 13px;
-  color: var(--muted);
-}
-.pdp-service li { position: relative; }
-.pdp-service li + li::before {
-  content: "";
-  position: absolute;
-  left: -10px;
-  top: 50%;
-  width: 1px;
-  height: 11px;
-  transform: translateY(-50%);
-  background: var(--pdp-gold-soft);
-}
-
 /* --- 段落 --- */
 .pdp-section {
   margin-top: 44px;
@@ -410,55 +428,17 @@
   border-top: 1px dashed #dcc8a2;
 }
 
-/* 其他酒款：空心金點 */
+/* 其他酒款：空心金點（裝飾；互動單位是格子 .pdp-map-cell） */
 .pdp-map-dot {
   position: absolute;
   width: 9px;
   height: 9px;
   margin: -4.5px 0 0 -4.5px;
   border-radius: 50%;
-  border: 1.5px solid #b48a63;
+  border: 1.5px solid var(--pdp-gold-text); /* 原 #b48a63 在和紙上只有 2.6:1 */
   background: var(--pdp-paper);
   z-index: 1;
-  transition: background-color .15s ease;
-}
-.pdp-map-dot::before { /* 加大點擊範圍 */
-  content: "";
-  position: absolute;
-  inset: -5px;
-  border-radius: 50%;
-}
-.pdp-map-dot:hover,
-.pdp-map-dot:focus-visible {
-  background: #b48a63;
-  z-index: 5;
-  outline: none;
-}
-.pdp-map-dot:focus-visible { box-shadow: 0 0 0 2px var(--pdp-paper), 0 0 0 3.5px var(--pdp-umber); }
-
-.pdp-map-tip {
-  position: absolute;
-  bottom: calc(100% + 9px);
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 5px 9px;
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--ink);
-  white-space: nowrap;
-  background: #fff;
-  border: 1px solid var(--pdp-gold);
-  border-radius: var(--r-xs);
-  box-shadow: 0 6px 18px rgba(35, 26, 18, .12);
-  visibility: hidden;
-  opacity: 0;
   pointer-events: none;
-  transition: opacity .15s ease, visibility .15s ease;
-}
-.pdp-map-dot:hover .pdp-map-tip,
-.pdp-map-dot:focus-visible .pdp-map-tip {
-  visibility: visible;
-  opacity: 1;
 }
 
 /* 本款：焦茶實心點，載入時一圈墨暈擴散一次 */
@@ -481,15 +461,18 @@
   border-radius: 50%;
   border: 1px solid var(--pdp-umber);
   opacity: 0;
-  animation: pdp-ink-ring 1.6s cubic-bezier(.2, .7, .3, 1) .5s 1 both;
+}
+/* 座標捲進畫面才播一次（product-page.js 加 .is-seen） */
+.pdp-map.is-seen .pdp-map-self::after {
+  animation: pdp-ink-ring 1.6s cubic-bezier(.2, .7, .3, 1) .2s 1 both;
 }
 @keyframes pdp-ink-ring {
   0%   { transform: scale(1);   opacity: .7; }
   100% { transform: scale(3.2); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pdp-map-self::after { animation: none; }
-  .pdp-map-dot, .pdp-map-tip { transition: none; }
+  .pdp-map-self::after,
+  .pdp-map.is-seen .pdp-map-self::after { animation: none; }
 }
 
 .pdp-flavor-reading {
@@ -647,9 +630,8 @@
   }
 }
 @media (max-width: 520px) {
-  .pdp-breadcrumb { padding-top: 14px; font-size: 11px; }
-  .pdp-breadcrumb a { font-size: 11px !important; }
-  .pdp-arrow { width: 36px; height: 36px; font-size: 20px; }
+  .pdp-breadcrumb { padding-top: 14px; font-size: 12px; }
+  .pdp-breadcrumb a { font-size: 12px !important; }
   .pdp-arrow.left { left: 8px; }
   .pdp-arrow.right { right: 8px; }
   .pdp-cta { flex-direction: column; }
@@ -735,10 +717,479 @@
 
 .pdp-notice { border-left: none; border-radius: var(--r-sm); padding: 12px 16px; }
 .pdp-map { box-shadow: inset 0 0 0 3px var(--pdp-paper), inset 0 0 0 4px var(--pdp-gold-soft), var(--soft-shadow); }
-.pdp-map-tip { box-shadow: var(--soft-shadow); }
 .pdp-arrow { box-shadow: var(--soft-shadow-sm); }
 
 @media (prefers-reduced-motion: reduce) {
   .pdp-thumb, .pdp-btn-cart, .pdp-btn-line { transition: none; }
   .pdp-thumb:hover, .pdp-btn-cart:hover, .pdp-btn-cart:active, .pdp-btn-line:active { transform: none; }
+}
+
+/* ============================================
+   第一次商品頁 critique 修正（2026-11-09）
+   ============================================ */
+
+/* 品名：兩行時平均斷開，不會只剩「田錦」落單 */
+/* 只在空格處斷行（keep-all），太長的單一詞才強制斷開 */
+.pdp-title { text-wrap: balance; word-break: keep-all; overflow-wrap: anywhere; }
+
+/* --- 相簿：縮圖是按鈕、主圖整塊是「放大」按鈕 --- */
+.pdp-img-main { cursor: default; }
+.pdp-zoom {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: zoom-in;
+}
+.pdp-zoom:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: -4px; }
+.pdp-arrow { width: 44px; height: 44px; }
+.pdp-arrow svg { width: 18px; height: 18px; display: block; flex: none; }
+.pdp-thumb {
+  appearance: none;
+  padding: 0;
+  font: inherit;
+  display: block;
+}
+.pdp-thumb:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: 3px; }
+/* 張數：只在手機出現（手機收起縮圖列，靠滑動與 ‹ ›） */
+.pdp-img-count {
+  display: none;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(251, 246, 234, .94);
+  box-shadow: var(--soft-shadow-sm);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pdp-gold-text);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+/* 放大：<dialog>，Esc／關閉鈕／點背景都能關 */
+html.pdp-zoom-open { overflow: hidden; }
+.pdp-zoom-dialog {
+  width: min(92vw, 720px);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-lg);
+  background: var(--pdp-paper);
+  box-shadow: 0 24px 60px rgba(35, 26, 18, .35);
+  overflow: hidden;
+}
+.pdp-zoom-dialog::backdrop { background: rgba(35, 26, 18, .72); }
+.pdp-zoom-dialog img {
+  display: block;
+  width: 100%;
+  max-height: 92vh;
+  object-fit: contain;
+}
+.pdp-zoom-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--pdp-gold);
+  border-radius: 50%;
+  background: rgba(251, 246, 234, .94);
+  color: var(--pdp-umber);
+  box-shadow: var(--soft-shadow-sm);
+  cursor: pointer;
+}
+.pdp-zoom-close svg { width: 16px; height: 16px; }
+.pdp-zoom-close:hover { background: var(--pdp-umber); color: var(--pdp-paper); }
+.pdp-zoom-close:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: 2px; }
+
+/* --- 預購：說明在價格與按鈕之間 --- */
+.pdp-price-box + .pdp-notice { margin: 0 0 16px; }
+
+/* --- 怎麼買：取代原本一行小字的服務列 --- */
+/* <details>：收合時只有一行安心句＋「怎麼買？」，點開才看三步驟與運費 */
+.pdp-howto {
+  margin: 14px 0 0;
+  border-radius: var(--r-md);
+  background: var(--pdp-paper);
+}
+.pdp-howto summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px 12px;
+  min-height: 48px;
+  padding: 8px 16px;
+  list-style: none;
+  cursor: pointer;
+  border-radius: var(--r-md);
+}
+.pdp-howto summary::-webkit-details-marker { display: none; }
+.pdp-howto summary:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: 2px; }
+.pdp-howto-sum { font-size: 13px; color: var(--pdp-ink-soft); }
+.pdp-howto-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pdp-umber);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--pdp-gold);
+}
+.pdp-howto-more::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform .2s var(--ease-soft);
+}
+.pdp-howto[open] .pdp-howto-more::after { transform: translateY(1px) rotate(-135deg); }
+.pdp-howto > .pdp-steps,
+.pdp-howto > .pdp-ship { margin-left: 16px; margin-right: 16px; }
+.pdp-howto > .pdp-steps { margin-top: 4px; }
+.pdp-howto > .pdp-ship { margin-bottom: 16px; }
+.pdp-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  counter-reset: pdp-step;
+}
+.pdp-steps li {
+  counter-increment: pdp-step;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  align-items: baseline;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.pdp-steps li::before {
+  content: counter(pdp-step);
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--pdp-gold);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pdp-gold-text);
+  background: #fff;
+  transform: translateY(-1px);
+}
+.pdp-ship {
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--pdp-gold-soft);
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--pdp-ink-soft);
+  text-wrap: pretty;
+}
+.pdp-ship span { display: block; }
+.pdp-steps li { text-wrap: pretty; }
+
+/* --- 風味座標：格子互動（一格 20%，手機約 54px）＋該格酒款清單 --- */
+.pdp-map-wrap { min-width: 0; }
+.pdp-legend--peer { border-color: var(--pdp-gold-text); }
+.pdp-map-cell {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-xs);
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color .15s ease, box-shadow .15s ease;
+}
+.pdp-map-cell:hover { background: rgba(201, 168, 122, .14); }
+.pdp-map-cell:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: -2px; }
+/* 選中的格子：1.5px 焦茶內框（與首頁「用口味找酒」同一個語彙），點本身不變色，不和「本款」深點混淆 */
+.pdp-map-cell.is-picked { background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1.5px var(--pdp-umber); }
+
+.pdp-map-list {
+  margin: 12px 0 0;
+  padding: 14px 16px 6px;
+  border-radius: var(--r-md);
+  background: #fff;
+  box-shadow: var(--soft-shadow-sm);
+  scroll-margin: 90px 0 130px; /* 讓出 sticky 頁首與手機底部列 */
+}
+.pdp-map-list[hidden] { display: none; }
+.pdp-map-list-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 12px;
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--pdp-gold-text);
+}
+.pdp-map-list-head strong { font-size: 15px; font-weight: 700; color: var(--ink); }
+.pdp-map-list ul { list-style: none; margin: 0; padding: 0; }
+.pdp-map-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+}
+.pdp-map-list li:first-child { border-top: 0; }
+.pdp-map-list li:nth-child(n+5) { display: none; } /* 先列 4 支，「還有 N 支」展開 */
+.pdp-map-list.is-all li:nth-child(n+5) { display: flex; }
+.pdp-map-list li a {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--pdp-gold-soft);
+}
+.pdp-map-list li a:hover { color: var(--pdp-umber); text-decoration-color: var(--pdp-umber); }
+.pdp-map-list li a:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: 2px; border-radius: 4px; }
+.pdp-map-list-price { flex-shrink: 0; font-size: 13px; color: var(--pdp-ink-soft); font-variant-numeric: tabular-nums; }
+.pdp-map-more {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pdp-umber);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--pdp-gold);
+}
+.pdp-map-more:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: 2px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) { .pdp-map-cell { transition: none; } }
+.pdp-flavor-axes {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--pdp-ink-soft);
+}
+
+/* --- 手機 --- */
+@media (max-width: 899px) {
+  /* 第一屏要看得到品名與價格：主圖縮短、縮圖列收起（改張數＋滑動） */
+  .pdp-img-main { height: 36vh; min-height: 240px; }
+  .pdp-thumbs { display: none; }
+  .pdp-img-count { display: block; }
+}
+@media (max-width: 860px) {
+  /* 底部列已有 LINE：頁內的 LINE 改成文字連結，不再是第二顆大按鈕 */
+  .pdp-btn-line,
+  .pdp-btn-line:hover {
+    flex: 0 0 auto;
+    width: auto;
+    min-height: 44px;
+    padding: 0 4px;
+    align-self: center;
+    background: none;
+    border: none;
+    box-shadow: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--pdp-gold);
+  }
+}
+@media (max-width: 640px) {
+  /* 先讀結論「甘辛適中，偏果香」，再看圖 */
+  .pdp-flavor-text { order: -1; }
+  .pdp-map { max-width: none; }
+  .pdp-map-wrap { max-width: 360px; width: 100%; margin: 0 auto; }
+}
+@media (max-width: 520px) {
+  .pdp-btn-line { width: auto; }
+}
+/* ============================================
+   第二次商品頁 critique 修正（2026-11-09）
+   ============================================ */
+
+/* 品名下方一行口味結論：第一屏就回答「適不適合我」，點了跳到風味座標 */
+.pdp-taste {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  min-height: 44px;
+  margin: -14px 0 8px;
+  color: var(--ink);
+}
+/* 2026-11-09：口味結論前的雙圈圓點拿掉（已產生的商品頁仍有這個 span，先隱藏；build.js 模板已移除） */
+.pdp-taste-dot { display: none; }
+.pdp-taste-text { font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+.pdp-taste-go {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pdp-umber);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--pdp-gold);
+}
+.pdp-taste-go::after { content: " ↓"; }
+.pdp-taste:hover .pdp-taste-go { text-decoration-color: var(--pdp-umber); }
+.pdp-taste:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: 3px; border-radius: 6px; }
+.pdp-flavor { scroll-margin-top: 112px; }
+html.show-announce .pdp-flavor { scroll-margin-top: 148px; }
+
+/* 加入購物車後的常駐狀態（桌面；手機由底部列顯示件數與金額） */
+.pdp-added {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 12px;
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--pdp-ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.pdp-added[hidden] { display: none; }
+.pdp-added span::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--pdp-umber);
+  vertical-align: 1px;
+}
+.pdp-added a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+  color: var(--pdp-umber);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--pdp-gold);
+}
+.pdp-added a::after { content: " →"; white-space: pre; }
+.pdp-added a:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: 2px; border-radius: 4px; }
+@media (max-width: 860px) { .pdp-added { display: none !important; } }
+
+/* 桌面矮螢幕（例如 1024×768）：主圖依視窗高度縮，縮圖列不會掉到畫面外 */
+@media (min-width: 900px) {
+  .pdp-img-main img { max-height: max(360px, calc(100vh - 320px)); width: auto; }
+}
+
+/* 座標酒名提示：觸控選取後由說明列顯示酒名，不再重複；長品名不超出畫面 */
+
+@media (prefers-reduced-motion: reduce) {
+  .pdp-howto-more::after { transition: none; }
+}
+/* ============================================
+   第三次商品頁 critique 修正（2026-11-09）
+   ============================================ */
+
+
+/* 桌面精簡購買列：頁內按鈕捲到上方看不到時，在飲酒警語列上方滑出一條（與手機底部列同一個位置語彙）
+   body 已有 .has-sticky-bar 的 106px 底部留白，頁尾不會被蓋住 */
+.pdp-dock { display: none; }
+@media (min-width: 861px) {
+  .pdp-dock {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 45px; /* 讓出底部飲酒警語列 */
+    z-index: 900;
+    background: rgba(255, 253, 249, .97);
+    box-shadow: 0 -8px 24px rgba(92, 74, 50, .08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity .2s ease, transform .25s var(--ease-soft), visibility .2s ease;
+  }
+  .pdp-dock.is-on { opacity: 1; visibility: visible; transform: none; }
+}
+.pdp-dock-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 8px 18px;
+}
+.pdp-dock-name {
+  margin-right: auto;
+  max-width: 50%;
+  font-family: var(--pdp-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.pdp-dock-price { font-size: 15px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+.pdp-dock-state { font-size: 13px; color: var(--pdp-gold-text); }
+.pdp-dock-state:empty { display: none; }
+.pdp-dock-btn {
+  min-height: 44px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--pdp-umber);
+  color: var(--pdp-paper);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  box-shadow: var(--btn-shadow);
+  cursor: pointer;
+  transition: background-color .2s ease, transform .2s var(--ease-soft);
+}
+.pdp-dock-btn:hover { background: var(--ink); }
+.pdp-dock-btn:active { transform: scale(.97); }
+.pdp-dock-btn:focus-visible { outline: 2px solid var(--pdp-umber); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .pdp-dock, .pdp-dock-btn { transition: none; }
+  .pdp-dock, .pdp-dock.is-on, .pdp-dock-btn:active { transform: none; }
+}
+
+/* 手機第一屏：價格要落在底部固定列上方（812 高的手機實測） */
+@media (max-width: 899px) {
+  .pdp-img-main { height: 30vh; min-height: 220px; }
+  .pdp-badges { margin-bottom: 10px; }
+}
+@media (max-width: 520px) {
+  /* 麵包屑一行：最後的品名截斷，不再換成兩行 */
+  .pdp-breadcrumb { flex-wrap: nowrap !important; white-space: nowrap; }
+  .pdp-breadcrumb a, .pdp-breadcrumb .sep { flex-shrink: 0; }
+  .pdp-breadcrumb .current { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+}
+/* 酒款介紹移到口味結論下方、價格上方（2026-11-09 業主決定）：間距收緊一點，和價格區用細線分開 */
+.pdp-section--story { margin: 16px 0 24px; padding-top: 22px; }
+.pdp-section--story .pdp-section-title { margin-bottom: 12px; }
+.pdp-section--story .pdp-serve { margin-top: 18px; }
+@media (max-width: 860px) {
+  .pdp-section--story { margin: 12px 0 20px; padding-top: 20px; }
 }

@@ -2,6 +2,7 @@ const articles = [
   {
     id: 1,
     slug: "Beginner-Guide-Discover-Your-Soul-Sake",
+    startHere: 1, // 列表頁「從這裡開始」第 1 篇（只放 3 篇；改這裡要一併改 blog/index.html 的導言）
     title: "新手必看・清酒入門指南｜五分鐘挑選你的本命酒",
     excerpt: "從精米步合到風味密碼，帶你拆解清酒標籤。5 分鐘學會自選本命酒！",
     cover: "/assets/images/blog/五分鐘挑選你的本命酒.webp",
@@ -50,6 +51,7 @@ const articles = [
   {
     id: 5,
     slug: "what-is-shochu",
+    startHere: 2, // 列表頁「從這裡開始」第 2 篇（只放 3 篇；改這裡要一併改 blog/index.html 的導言）
     title: "燒酎是什麼？和清酒有什麼不同？上伊那牡丹裡的微醺秘密",
     excerpt: "一次看懂日本國民酒！加氣泡水、熱飲、茶割，隨心所欲的自由調配哲學",
     cover: "/assets/images/blog/id5封面.webp",
@@ -74,6 +76,7 @@ const articles = [
   {
     id: 7,
     slug: "choose-the-right-glass-for-better-taste",
+    startHere: 3, // 列表頁「從這裡開始」第 3 篇（只放 3 篇；改這裡要一併改 blog/index.html 的導言）
     title: "【微醺解密】選對杯子，酒更好喝？一杯到底，行不行？",
     excerpt: "選對杯子，可以喝出酒的深層層次與靈魂風味",
     cover: "/assets/images/blog/id7封面.webp",

@@ -37,7 +37,10 @@
 
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/blog.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁標題用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=.0123456789IPV%E3%80%81%E3%80%90%E3%80%91%E4%B8%80%E4%B8%8D%E4%BA%86%E4%BD%A0%E5%80%91%E5%88%B0%E5%8D%87%E5%96%9D%E5%9B%9E%E5%A5%BD%E5%AD%90%E5%AE%B6%E5%AF%86%E5%AF%A6%E5%B0%88%E5%B0%8D%E5%B1%AC%E5%B8%B6%E5%B9%AB%E5%BA%95%E5%BE%AE%E5%BF%83%E6%83%B3%E6%88%91%E6%8A%8A%E6%8E%A8%E6%96%87%E6%97%A5%E6%9B%B4%E6%9C%AC%E6%9D%AF%E6%9E%9C%E6%AC%BE%E6%AD%A4%E6%AF%8F%E6%B8%85%E7%93%B6%E7%9A%84%E7%9B%B8%E7%A6%AE%E7%AB%A0%E7%B2%BE%E7%B4%9A%E7%B7%BB%E8%88%87%E8%90%84%E8%91%A1%E8%96%A6%E8%97%9D%E8%A1%8C%E8%A7%A3%E8%A8%88%E8%A8%AD%E8%B2%BC%E9%81%87%E9%81%B8%E9%83%BD%E9%85%92%E9%86%BA%E9%97%9C%EF%BC%81%EF%BC%8C%EF%BC%9A%EF%BC%9F">
 <script defer src="/assets/js/articles.data.js"></script>
 <script defer src="/assets/js/catalog.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
@@ -102,7 +105,7 @@
 }
 </script>
 </head>
-<body>
+<body class="page-article">
   <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
   <div class="announce-bar" id="announceBar" role="status" aria-live="polite">
     <div class="announce-track" id="announceTrack"></div>
@@ -126,6 +129,7 @@
     </div>
   </div>
 
+  <main id="main">
   <div class="article-hero">
     <!-- fallback background will show if image fails to load -->
     <!-- <img src="/assets/images/blog/id7封面.webp" alt="【微醺解密】選對杯子，酒更好喝？一杯到底，行不行？" class="article-hero-bg" fetchpriority="high" decoding="async" onerror="this.style.display='none'"> -->
@@ -149,7 +153,7 @@
 
     <div class="article-content">
         <figure class="article-figure">
-          <img src="/assets/images/blog/id7封面.webp" alt="選對杯子，酒更好喝——各式酒杯與酒款" loading="lazy" decoding="async">
+          <img width="800" height="540" src="/assets/images/blog/id7封面.webp" alt="選對杯子，酒更好喝——各式酒杯與酒款" loading="eager" fetchpriority="high" decoding="async">
         </figure>
 
         <p>你是不是也曾有過這個疑問：「喝酒真的有必要換這麼多種杯子嗎？不是在假掰？」</p>
@@ -165,7 +169,7 @@
         </ul>
 
         <figure class="article-figure">
-          <img src="/assets/images/blog/id7內文圖一.webp" alt="勃根地杯與白酒杯的葡萄酒杯型對照" loading="lazy" decoding="async">
+          <img width="800" height="540" src="/assets/images/blog/id7內文圖一.webp" alt="勃根地杯與白酒杯的葡萄酒杯型對照" loading="lazy" decoding="async">
         </figure>
 
         <h2>2. 清酒</h2>
@@ -175,7 +179,7 @@
         </ul>
 
         <figure class="article-figure">
-          <img src="/assets/images/blog/id7內文圖二.webp" alt="清酒適用的白酒杯與豬口杯" loading="lazy" decoding="async">
+          <img width="800" height="540" src="/assets/images/blog/id7內文圖二.webp" alt="清酒適用的白酒杯與豬口杯" loading="lazy" decoding="async">
         </figure>
 
         <h2>3. 果實酒</h2>
@@ -187,7 +191,7 @@
         <h2>貼心設計：你的每一瓶酒，我們都幫你想好了！</h2>
 
         <figure class="article-figure">
-          <img src="/assets/images/blog/id7內文圖三.webp" alt="出貨小卡附上適合杯型與品飲方法指南" loading="lazy" decoding="async">
+          <img width="800" height="540" src="/assets/images/blog/id7內文圖三.webp" alt="出貨小卡附上適合杯型與品飲方法指南" loading="lazy" decoding="async">
         </figure>
 
         <p>知道了杯型的重要性，是不是開始擔心家裡的杯子不夠用，或是買了酒卻不知道該用哪種杯子喝？</p>
@@ -199,7 +203,7 @@
         <h2>專屬微醺禮遇：升級 VIP，把日本精緻杯藝帶回家</h2>
 
         <figure class="article-figure">
-          <img src="/assets/images/blog/id7內文圖四.webp" alt="VIP 會員贈品——日本石塚硝子干支杯" loading="lazy" decoding="async">
+          <img width="800" height="540" src="/assets/images/blog/id7內文圖四.webp" alt="VIP 會員贈品——日本石塚硝子干支杯" loading="lazy" decoding="async">
         </figure>
 
         <p>好的品味值得更好的對待。為了感謝一路支持我們的朋友，我們特別準備了 VIP 會員專屬優惠：</p>
@@ -220,6 +224,7 @@
         <a href="/products/sake/" class="btn btn-primary" style="font-size: 15px; padding: 14px 28px; width: auto; display: inline-flex;">查看相關酒款</a>
     </div>
   </article>
+  </main>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -246,7 +251,7 @@
     </div>
   </footer>
 
-  <div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+  <div class="alcohol-bar" role="note" aria-label="飲酒警語">
     <span class="alcohol-bar-text">
         🍶 未滿十八歲請勿飲酒
         <span class="alcohol-bar-divider" aria-hidden="true"></span>

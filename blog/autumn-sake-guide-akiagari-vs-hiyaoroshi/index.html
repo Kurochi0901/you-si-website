@@ -37,7 +37,10 @@
 
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/blog.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁標題用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E3%80%8C%E3%80%8D%E3%80%90%E3%80%91%E4%B8%80%E4%B8%8A%E4%B9%8B%E4%B9%9F%E4%BB%80%E4%BB%A5%E4%BE%86%E5%86%B7%E5%88%B0%E5%8D%B8%E5%8F%AF%E5%90%A7%E5%90%B9%E5%91%B3%E5%93%AA%E5%96%9D%E5%9C%A8%E5%A4%A9%E5%AD%A3%E5%AE%9A%E5%B7%AE%E5%BA%95%E5%BE%88%E5%BE%AE%E6%84%9B%E6%8E%A8%E6%90%AD%E6%96%87%E6%97%A5%E6%98%AF%E6%9D%AF%E6%AC%B2%E6%AC%BE%E6%AD%A4%E7%89%B9%E7%8D%A8%E7%95%B6%E7%9A%84%E7%9B%B8%E7%A7%8B%E7%AB%A0%E7%AF%80%E7%B5%95%E8%88%87%E8%96%A6%E8%B3%AA%E8%B5%B7%E9%85%8D%E9%85%92%E9%86%BA%E9%97%9C%E9%99%90%E9%A2%A8%E9%A3%9F%E9%A4%90%E9%BA%BC%EF%BC%81%EF%BC%8C%EF%BC%9A%EF%BC%9F">
 <script defer src="/assets/js/articles.data.js"></script>
 <script defer src="/assets/js/catalog.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
@@ -102,7 +105,7 @@
 }
 </script>
 </head>
-<body>
+<body class="page-article">
   <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
   <div class="announce-bar" id="announceBar" role="status" aria-live="polite">
     <div class="announce-track" id="announceTrack"></div>
@@ -126,6 +129,7 @@
     </div>
   </div>
 
+  <main id="main">
   <div class="article-hero">
     <!-- fallback background will show if image fails to load -->
     <!-- <img src="/assets/images/blog/id8封面.webp" alt="【微醺秋日】當秋風吹起，來喝一杯季節限定的「秋酒」吧！秋上、冷卸到底差在哪？" class="article-hero-bg" fetchpriority="high" decoding="async" onerror="this.style.display='none'"> -->
@@ -149,7 +153,7 @@
 
     <div class="article-content">
         <figure class="article-figure">
-          <img src="/assets/images/blog/id8封面.webp" alt="當秋風吹起，來喝一杯季節限定的秋酒" loading="lazy" decoding="async">
+          <img width="800" height="540" src="/assets/images/blog/id8封面.webp" alt="當秋風吹起，來喝一杯季節限定的秋酒" loading="eager" fetchpriority="high" decoding="async">
         </figure>
 
         <p>隨著空氣中的涼意越發明顯，餐桌上的食材也悄悄換了季節。在這個豐收的食欲之秋，懂喝的人早已默默開始尋找那一瓶只屬於這個季節的<strong>「秋酒」</strong>。</p>
@@ -166,7 +170,7 @@
         <p>簡而言之，<strong>「冷卸」是工藝過程，而「秋上」是美味的結果</strong>。</p>
 
         <figure class="article-figure">
-          <img src="/assets/images/blog/id8內文圖一.webp" alt="秋上與冷卸的差異圖解" loading="lazy" decoding="async">
+          <img width="800" height="540" src="/assets/images/blog/id8內文圖一.webp" alt="秋上與冷卸的差異圖解" loading="lazy" decoding="async">
         </figure>
 
         <h2>秋酒的獨特風味特質</h2>
@@ -176,8 +180,8 @@
           <li><strong>豐富厚實的旨味（Umami）：</strong>米香與甘甜感更加凝聚濃郁，尾韻綿長，很適合在不同溫度帶品飲。</li>
           <li><strong>沉穩的香氣：</strong>少了一點奔放的果香，多了一份蒸熟米飯、堅果甚至是淡淡蕈菇般的溫和香氣。</li>
         </ul>
-        <p><a href="/products/sake/鳳凰美田-純米吟釀-冷卸-山田錦/" class="btn-inline-cta" target="_blank" rel="noopener">鳳凰美田 純米吟釀 冷卸 山田錦</a></p>
-        <p><a href="/products/sake/谷川岳-純米酒-冷卸/" class="btn-inline-cta" target="_blank" rel="noopener">谷川岳 純米酒 冷卸</a></p>
+        <p><a href="/products/sake/鳳凰美田-純米吟釀-冷卸-山田錦/" class="btn-inline-cta">鳳凰美田 純米吟釀 冷卸 山田錦</a></p>
+        <p><a href="/products/sake/谷川岳-純米酒-冷卸/" class="btn-inline-cta">谷川岳 純米酒 冷卸</a></p>
 
         <h2>秋酒與「食欲之秋」的絕配餐搭</h2>
         <p>秋酒之所以迷人，是因為它簡直是為了秋天的豐收食材量身打造的！其厚實的旨味能完美包覆油脂與濃郁的料理，試試看以下這幾種經典搭法：</p>
@@ -191,7 +195,7 @@
         <h2>秋天限定，也可以很可愛！</h2>
         <p>不過，別以為秋天的酒只會死板板地標上「秋上」或「冷卸」！現在許多酒造在取名時都別於傳統，越來越可愛了！</p>
         <p>例如萩野酒造超夯的「四季貓」銘柄，他們的秋限定款就叫<strong>「萬聖貓」</strong>！超萌的酒標配上專屬秋天的溫潤口感，簡直是把貓奴們心臟擊碎的罪惡組合！</p>
-        <p><a href="/products/sake/萩之鶴-別仕込-萬聖貓/" class="btn-inline-cta" target="_blank" rel="noopener">萩之鶴 別仕込 萬聖貓</a></p>
+        <p><a href="/products/sake/萩之鶴-別仕込-萬聖貓/" class="btn-inline-cta">萩之鶴 別仕込 萬聖貓</a></p>
 
         <blockquote>
           <strong>這些季節限定的美味錯過可就要再等一整年。</strong><br>
@@ -203,6 +207,7 @@
         <a href="/products/sake/" class="btn btn-primary" style="font-size: 15px; padding: 14px 28px; width: auto; display: inline-flex;">查看相關酒款</a>
     </div>
   </article>
+  </main>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -229,7 +234,7 @@
     </div>
   </footer>
 
-  <div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+  <div class="alcohol-bar" role="note" aria-label="飲酒警語">
     <span class="alcohol-bar-text">
         🍶 未滿十八歲請勿飲酒
         <span class="alcohol-bar-divider" aria-hidden="true"></span>

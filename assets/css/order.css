@@ -1,27 +1,21 @@
 /* ============================================
    下單頁 /assets/css/order.css（只由 order/index.html 載入）
 
-   延用「金縁和紙」語彙；本頁唯一的視覺重點是右側「你的酒款」摘要——
-   像酒屋開給客人的傳票：和紙底＋金棕雙細線框。表單本身保持安靜、清楚。
+   柔和版（2026-11）：大圓角、暖棕柔和陰影、膠囊按鈕。
+   本頁唯一的視覺重點是右側「你的酒款」摘要——像酒屋開給客人的傳票：
+   和紙底＋金棕雙細線框。表單本身保持安靜、清楚。
+
+   顏色一律用 style.css :root 的品牌色變數（--jiaocha、--yousi-gold…），不在本檔重新定義。
+   2026-11-09 稽核後：合併原本的「柔和版」覆寫層；欄位外框與未選取圓圈改用 --field-edge（≥3:1）。
    ============================================ */
 
-.page-order {
-  --od-paper: #fbf6ea;
-  --od-gold: #c9a87a;
-  --od-gold-soft: #e3cda4;
-  --od-umber: #5c4a32;
-  --od-ink-soft: #4a3f35;
-  --od-gold-text: #7a5a35;
-  --od-error: #a1372b;
-  --od-field: #d9cdb8;
-  --od-serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
-}
+.page-order { --od-serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif; }
 
 .order-page [hidden] { display: none !important; }
 
 .page-order .nav-cta .btn-primary {
-  background: var(--od-umber);
-  color: var(--od-paper);
+  background: var(--jiaocha);
+  color: var(--washi);
 }
 
 .order-page {
@@ -46,7 +40,7 @@
   margin: 0 0 22px;
   font-size: 15px;
   line-height: 1.9;
-  color: var(--od-ink-soft);
+  color: var(--ink-soft);
 }
 
 .order-progress {
@@ -69,7 +63,7 @@
   width: 32px;
   height: 1px;
   margin: 0 12px;
-  background: var(--od-gold-soft);
+  background: var(--yousi-gold-soft);
 }
 .order-progress li span {
   width: 24px;
@@ -81,13 +75,13 @@
   font-family: var(--od-serif);
   font-size: 13px;
   font-weight: 600;
-  border: 1px solid var(--od-gold);
-  color: var(--od-gold-text);
-  background: var(--od-paper);
+  border: 1px solid var(--yousi-gold);
+  color: var(--gold-text);
+  background: var(--washi);
 }
 .order-progress li.is-current { color: var(--ink); font-weight: 700; }
-.order-progress li.is-current span { background: var(--od-umber); border-color: var(--od-umber); color: var(--od-paper); }
-.order-progress li.is-done span { background: var(--od-gold-soft); border-color: var(--od-gold-soft); color: var(--od-umber); }
+.order-progress li.is-current span { background: var(--jiaocha); border-color: var(--jiaocha); color: var(--washi); }
+.order-progress li.is-done span { background: var(--yousi-gold-soft); border-color: var(--yousi-gold-soft); color: var(--jiaocha); }
 
 /* ---------- 版面 ---------- */
 .order-layout {
@@ -108,10 +102,10 @@ html.show-announce .order-summary { top: 132px; }
 
 /* ---------- 摘要（傳票） ---------- */
 .order-summary-box {
-  background: var(--od-paper);
-  border: 1px solid var(--od-gold);
+  background: var(--washi);
+  border: 1px solid var(--yousi-gold);
   border-radius: var(--r-lg);
-  box-shadow: inset 0 0 0 3px var(--od-paper), inset 0 0 0 4px var(--od-gold-soft);
+  box-shadow: inset 0 0 0 3px var(--washi), inset 0 0 0 4px var(--yousi-gold-soft), var(--soft-shadow);
   padding: 22px 22px 18px;
 }
 .order-summary-head {
@@ -122,7 +116,7 @@ html.show-announce .order-summary { top: 132px; }
   list-style: none;
   cursor: default;
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--od-gold-soft);
+  border-bottom: 1px solid var(--yousi-gold-soft);
 }
 .order-summary-head::-webkit-details-marker { display: none; }
 .order-summary-title {
@@ -135,12 +129,13 @@ html.show-announce .order-summary { top: 132px; }
 .order-summary-peek {
   font-size: 14px;
   font-weight: 700;
-  color: var(--od-umber);
+  color: var(--jiaocha);
   font-variant-numeric: tabular-nums;
 }
 @media (min-width: 861px) {
   .order-summary-peek { display: none; }
 }
+.order-summary-head:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 4px; border-radius: var(--r-xs); }
 
 /* 購物車列（main.js renderCartMini 產生） */
 .order-summary #cartMini .cart-items { margin: 0; }
@@ -149,14 +144,14 @@ html.show-announce .order-summary { top: 132px; }
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 6px 12px;
   padding: 14px 0;
-  border-bottom: 1px dashed var(--od-gold-soft);
+  border-bottom: 1px solid rgba(201, 168, 122, .28);
 }
 .order-summary #cartMini .cart-item-name { font-size: 15px; font-weight: 700; line-height: 1.5; color: var(--ink); }
 .order-summary #cartMini .cart-item-spec { font-size: 12px; line-height: 1.6; color: var(--muted); margin-top: 2px; }
 .order-summary #cartMini .cart-item-price {
   font-size: 14px;
   margin-top: 6px;
-  color: var(--od-ink-soft);
+  color: var(--ink-soft);
   font-variant-numeric: tabular-nums;
 }
 .order-summary #cartMini .cart-item-side { align-self: center; }
@@ -169,23 +164,24 @@ html.show-announce .order-summary { top: 132px; }
 .order-summary #cartMini .qty-pill {
   display: inline-flex;
   align-items: center;
-  border: 1px solid var(--od-gold);
+  border: 1px solid var(--field-line);
   border-radius: var(--r-pill);
-  background: #fff;
+  background: var(--card);
   height: 34px;
 }
 .order-summary #cartMini .qty-btn {
   width: 34px;
   height: 32px;
   border: none;
+  border-radius: var(--r-pill);
   background: transparent;
+  font-family: inherit;
   font-size: 16px;
-  color: var(--od-umber);
+  color: var(--jiaocha);
   cursor: pointer;
-  border-radius: 0;
 }
-.order-summary #cartMini .qty-btn:hover { background: var(--od-paper); }
-.order-summary #cartMini .qty-btn:focus-visible { outline: 2px solid var(--od-umber); outline-offset: -2px; }
+.order-summary #cartMini .qty-btn:hover { background: var(--washi); }
+.order-summary #cartMini .qty-btn:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: -2px; }
 .order-summary #cartMini .qty-num {
   min-width: 26px;
   text-align: center;
@@ -193,16 +189,21 @@ html.show-announce .order-summary { top: 132px; }
   font-variant-numeric: tabular-nums;
 }
 .order-summary #cartMini .cart-item-remove {
+  min-height: 28px;
   border: none;
   background: none;
-  padding: 2px 0;
+  padding: 2px 8px;
+  margin-right: -8px; /* 可點範圍往外擴，文字仍對齊右緣 */
+  font-family: inherit;
   font-size: 12px;
   color: var(--muted);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
+  border-radius: var(--r-xs);
 }
-.order-summary #cartMini .cart-item-remove:hover { color: var(--od-error); }
+.order-summary #cartMini .cart-item-remove:hover { color: var(--error-red); }
+.order-summary #cartMini .cart-item-remove:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 0; }
 
 .order-summary #cartMini .cart-total { padding-top: 14px; }
 .order-summary #cartMini .cart-total-row {
@@ -211,14 +212,14 @@ html.show-announce .order-summary { top: 132px; }
   gap: 12px;
   padding: 4px 0;
   font-size: 14px;
-  color: var(--od-ink-soft);
+  color: var(--ink-soft);
   font-variant-numeric: tabular-nums;
 }
-.order-summary #cartMini .cart-total-discount { color: var(--od-error); }
+.order-summary #cartMini .cart-total-discount { color: var(--error-red); }
 .order-summary #cartMini .cart-total-final {
   margin-top: 8px;
   padding-top: 12px;
-  border-top: 1px solid var(--od-gold-soft);
+  border-top: 1px solid var(--yousi-gold-soft);
   font-size: 17px;
   color: var(--ink);
 }
@@ -234,24 +235,83 @@ html.show-announce .order-summary { top: 132px; }
   gap: 2px 10px;
   font-size: 13px;
 }
-.order-ship-progress .mini-cart-ship-text strong { color: var(--od-umber); }
-.order-ship-progress .mini-cart-ship-text span { font-size: 11px; color: var(--muted); }
-.order-ship-progress .mini-cart-ship-bar { margin-top: 8px; height: 4px; border-radius: 2px; background: #efe6d6; overflow: hidden; }
-.order-ship-progress .mini-cart-ship-bar span { display: block; height: 100%; background: var(--od-gold); }
-.order-ship-progress.is-done .mini-cart-ship-bar span { background: var(--od-umber); }
+.order-ship-progress .mini-cart-ship-text strong { color: var(--jiaocha); }
+.order-ship-progress .mini-cart-ship-text span { font-size: 12px; color: var(--muted); }
+.order-ship-progress .mini-cart-ship-bar { margin-top: 8px; height: 4px; border-radius: var(--r-pill); background: var(--line); overflow: hidden; }
+.order-ship-progress .mini-cart-ship-bar span { display: block; height: 100%; background: var(--yousi-gold); }
+.order-ship-progress.is-done .mini-cart-ship-bar span { background: var(--jiaocha); }
 
-.order-summary .coupon-block { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--od-gold-soft); }
+/* 折扣碼（main.js renderCouponBlock 產生；只出現在本頁）
+   欄位與本頁表單一致：16px 字（iPhone 不放大）、48px 高、12px 圓角 */
+.order-summary .coupon-block { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--yousi-gold-soft); }
+.order-summary .coupon-title { display: block; color: var(--jiaocha); }
+.order-summary .coupon-form { gap: 8px; }
+.order-summary .coupon-input {
+  min-height: 48px;
+  padding: 11px 14px;
+  font-size: 16px;
+  letter-spacing: .04em;
+  color: var(--ink);
+  background: var(--warm-white);
+  border: 1px solid var(--field-edge);
+  border-radius: var(--r-sm);
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+.order-summary .coupon-input::placeholder { color: var(--muted); opacity: 1; }
+.order-summary .coupon-input:focus {
+  outline: none;
+  border-color: var(--jiaocha);
+  box-shadow: 0 0 0 1px var(--jiaocha), var(--focus-glow);
+  background: var(--card);
+}
+.order-summary .coupon-apply-btn {
+  min-height: 48px;
+  padding: 0 20px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--washi);
+  background: var(--jiaocha);
+  border-radius: var(--r-pill);
+  box-shadow: var(--btn-shadow);
+}
+.order-summary .coupon-apply-btn:hover { background: var(--ink); }
+.order-summary .coupon-apply-btn:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
+.order-summary .coupon-msg { font-weight: 600; }
+.order-summary .coupon-msg.is-ok { color: var(--jiaocha); }
+.order-summary .coupon-msg.is-err { color: var(--error-red); }
+.order-summary .coupon-applied {
+  padding: 10px 12px;
+  background: var(--card);
+  border: 1px solid var(--yousi-gold-soft);
+  border-radius: var(--r-sm);
+}
+.order-summary .coupon-applied-tag { color: var(--jiaocha); }
+.order-summary .coupon-applied-name { color: var(--ink); }
+.order-summary .coupon-remove-btn {
+  min-height: 32px;
+  padding: 0 12px;
+  font-family: inherit;
+  color: var(--error-red);
+  border: 1px solid rgba(161, 55, 43, .4);
+  border-radius: var(--r-pill);
+}
+.order-summary .coupon-remove-btn:hover { background: var(--error-red); color: var(--card); }
+.order-summary .coupon-remove-btn:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
+
 .order-summary .promotion-block:empty { display: none; }
 
 .order-summary-more {
   display: inline-block;
   margin-top: 16px;
+  padding: 4px 0;
   font-size: 13px;
   font-weight: 600;
-  color: var(--od-umber);
-  border-bottom: 1px solid var(--od-gold-soft);
+  color: var(--jiaocha);
+  border-bottom: 1px solid var(--yousi-gold-soft);
 }
-.order-summary-more:hover { border-bottom-color: var(--od-umber); }
+.order-summary-more:hover { border-bottom-color: var(--jiaocha); }
 
 /* ---------- 表單 ---------- */
 .order-section {
@@ -288,6 +348,8 @@ html.show-announce .order-summary { top: 132px; }
   font-weight: 700;
   color: var(--ink);
 }
+/* 欄位：暖白底＋ --field-edge 外框（對比 ≥3:1，看得出欄位在哪）；
+   聚焦時焦茶框＋金色光暈——光暈是氛圍，焦茶框才是看得清的焦點指示 */
 .order-form input[type="text"],
 .order-form input[type="tel"],
 .order-form input[type="email"],
@@ -301,33 +363,35 @@ html.show-announce .order-summary { top: 132px; }
   font-size: 16px; /* ≥16px：iOS 聚焦時不會自動放大頁面 */
   line-height: 1.5;
   color: var(--ink);
-  background: #fff;
-  border: 1px solid var(--od-field);
+  background: var(--warm-white);
+  border: 1px solid var(--field-edge);
   border-radius: var(--r-sm);
   box-shadow: none;
-  transition: border-color .15s ease, box-shadow .15s ease;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
 }
 .order-form textarea { max-width: none; resize: vertical; }
 /* 地址欄有 id，額外鎖定 16px，避免任何 #order-address 規則把字級壓到 16px 以下（iPhone 會自動放大） */
 .order-form #order-address { font-size: 16px; }
 .order-form input::placeholder,
-.order-form textarea::placeholder { color: #7a6f66; opacity: 1; } /* 2026-11：原 #aaa197 只有 2.5:1 */
+.order-form textarea::placeholder { color: var(--muted); opacity: 1; }
 .order-form input:focus,
 .order-form textarea:focus {
   outline: none;
-  border-color: var(--od-umber);
-  box-shadow: 0 0 0 1px var(--od-umber);
+  border-color: var(--jiaocha);
+  box-shadow: 0 0 0 1px var(--jiaocha), var(--focus-glow);
+  background: var(--card);
 }
-.order-field.is-invalid input { border-color: var(--od-error); box-shadow: 0 0 0 1px var(--od-error); }
+/* 選擇器要比上面的 .order-form input[type=…] 更具體，否則紅框會被蓋掉 */
+.order-form .order-field.is-invalid input { border-color: var(--error-red); box-shadow: 0 0 0 1px var(--error-red), 0 0 0 4px rgba(161, 55, 43, .12); }
 
 .order-hint { margin-top: 6px; font-size: 13px; line-height: 1.7; color: var(--muted); }
-.order-hint--warn { color: var(--od-gold-text); }
+.order-hint--warn { color: var(--gold-text); }
 .order-error {
   margin-top: 6px;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.6;
-  color: var(--od-error);
+  color: var(--error-red);
 }
 .order-error:empty { display: none; }
 
@@ -357,16 +421,19 @@ html.show-announce .order-summary { top: 132px; }
   width: 1px;
   height: 1px;
 }
+/* 取貨卡片：陰影代替粗框，選中時才出現焦茶外框 */
 .order-choice-body {
   position: relative;
   display: block;
   height: 100%;
   padding: 16px 16px 16px 46px;
-  background: #fff;
-  border: 1px solid var(--od-field);
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: var(--r-md);
-  transition: border-color .15s ease, background-color .15s ease;
+  box-shadow: var(--soft-shadow-sm);
+  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease, transform .2s var(--ease-soft);
 }
+/* 圓圈是「可選」的主要指示，用 --field-edge 才有 3:1 */
 .order-choice-body::before {
   content: "";
   position: absolute;
@@ -375,22 +442,22 @@ html.show-announce .order-summary { top: 132px; }
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 1.5px solid var(--od-gold);
-  background: #fff;
+  border: 1.5px solid var(--field-edge);
+  background: var(--card);
 }
-.order-choice:hover .order-choice-body { border-color: var(--od-gold); }
+.order-choice:hover .order-choice-body { border-color: var(--yousi-gold); transform: translateY(-1px); box-shadow: var(--soft-shadow); }
 .order-choice input:checked + .order-choice-body {
-  background: var(--od-paper);
-  border-color: var(--od-umber);
-  box-shadow: inset 0 0 0 1px var(--od-umber);
+  background: var(--washi);
+  border-color: var(--jiaocha);
+  box-shadow: inset 0 0 0 1px var(--jiaocha), var(--soft-shadow);
 }
 .order-choice input:checked + .order-choice-body::before {
-  border-color: var(--od-umber);
-  background: radial-gradient(circle, var(--od-umber) 0 5px, #fff 5.5px);
+  border-color: var(--jiaocha);
+  background: radial-gradient(circle, var(--jiaocha) 0 5px, var(--card) 5.5px);
 }
 .order-choice input:focus-visible + .order-choice-body,
 .order-temp input:focus-visible + span {
-  outline: 2px solid var(--od-umber);
+  outline: 2px solid var(--jiaocha);
   outline-offset: 2px;
 }
 .order-choice-title {
@@ -407,15 +474,15 @@ html.show-announce .order-summary { top: 132px; }
   font-weight: 600;
   padding: 1px 7px;
   border-radius: var(--r-pill);
-  color: var(--od-umber);
-  border: 1px solid var(--od-gold);
+  color: var(--jiaocha);
+  border: 1px solid var(--yousi-gold);
 }
 .order-choice-desc {
   display: block;
   margin-top: 6px;
   font-size: 13px;
   line-height: 1.7;
-  color: var(--od-ink-soft);
+  color: var(--ink-soft);
 }
 
 /* 宅配展開區（選宅配時由 main.js bindOrderPickup 顯示） */
@@ -424,8 +491,8 @@ html.show-announce .order-summary { top: 132px; }
   margin-top: 14px;
   margin-bottom: 0;
   padding: 16px;
-  background: var(--od-paper);
-  border: 1px solid var(--od-gold-soft);
+  background: var(--washi);
+  border: 1px solid transparent;
   border-radius: var(--r-md);
   box-shadow: none;
 }
@@ -446,23 +513,25 @@ html.show-announce .order-summary { top: 132px; }
   gap: 8px;
   padding: 11px 12px;
   font-size: 14px;
-  color: var(--od-ink-soft);
-  background: #fff;
-  border: 1px solid var(--od-field);
+  color: var(--ink-soft);
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: var(--r-pill);
+  box-shadow: var(--soft-shadow-sm);
   font-variant-numeric: tabular-nums;
+  transition: border-color .2s ease, box-shadow .2s ease;
 }
 .order-temp span strong { font-size: 15px; color: var(--ink); }
-.order-temp:hover span { border-color: var(--od-gold); }
+.order-temp:hover span { border-color: var(--yousi-gold); }
 .order-temp input:checked + span {
-  border-color: var(--od-umber);
-  box-shadow: inset 0 0 0 1px var(--od-umber);
+  border-color: var(--jiaocha);
+  box-shadow: inset 0 0 0 1px var(--jiaocha), var(--soft-shadow-sm);
 }
 
 /* ---------- 送出 ---------- */
 .order-submit {
   padding-top: 24px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(201, 168, 122, .3);
 }
 .order-submit-total {
   display: flex;
@@ -471,7 +540,7 @@ html.show-announce .order-summary { top: 132px; }
   gap: 12px;
   margin-bottom: 14px;
 }
-.order-submit-total span { font-size: 15px; color: var(--od-ink-soft); }
+.order-submit-total span { font-size: 15px; color: var(--ink-soft); }
 .order-submit-total strong {
   font-size: 28px;
   font-weight: 700;
@@ -487,15 +556,14 @@ html.show-announce .order-summary { top: 132px; }
   font-size: 17px;
   font-weight: 700;
   letter-spacing: .06em;
-  color: var(--od-paper);
-  background: var(--od-umber);
-  border: 1px solid var(--od-umber);
+  color: var(--washi);
+  background: var(--jiaocha);
+  border: 1px solid var(--jiaocha);
   border-radius: var(--r-pill);
   cursor: pointer;
-  transition: background-color .2s ease;
 }
 .order-submit-btn:hover { background: var(--ink); border-color: var(--ink); }
-.order-submit-btn:focus-visible { outline: 2px solid var(--od-umber); outline-offset: 3px; }
+.order-submit-btn:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 3px; }
 .order-submit-btn[aria-busy="true"],
 .order-submit-btn:disabled { opacity: .7; cursor: progress; }
 .order-submit-note {
@@ -509,10 +577,10 @@ html.show-announce .order-summary { top: 132px; }
 .order-empty {
   max-width: 560px;
   padding: 32px 28px;
-  background: var(--od-paper);
-  border: 1px solid var(--od-gold);
+  background: var(--washi);
+  border: 1px solid var(--yousi-gold);
   border-radius: var(--r-lg);
-  box-shadow: inset 0 0 0 3px var(--od-paper), inset 0 0 0 4px var(--od-gold-soft);
+  box-shadow: inset 0 0 0 3px var(--washi), inset 0 0 0 4px var(--yousi-gold-soft), var(--soft-shadow);
 }
 .order-empty-title {
   font-family: var(--od-serif);
@@ -521,7 +589,10 @@ html.show-announce .order-summary { top: 132px; }
   letter-spacing: .06em;
   margin: 0 0 8px;
 }
-.order-empty p { margin: 0 0 20px; font-size: 15px; line-height: 1.9; color: var(--od-ink-soft); }
+/* 彈窗關閉後焦點會移到這個標題（tabindex=-1），鍵盤使用者看得到落點 */
+.order-empty-title:focus { outline: none; }
+.order-empty-title:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 4px; border-radius: var(--r-xs); }
+.order-empty p { margin: 0 0 20px; font-size: 15px; line-height: 1.9; color: var(--ink-soft); }
 .order-empty-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .order-btn {
   display: inline-flex;
@@ -529,28 +600,39 @@ html.show-announce .order-summary { top: 132px; }
   justify-content: center;
   min-height: 46px;
   padding: 0 20px;
+  font-family: inherit;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: .06em;
-  color: var(--od-umber);
-  background: #fff;
-  border: 1px solid var(--od-gold);
+  color: var(--jiaocha);
+  background: var(--card);
+  border: 1px solid var(--yousi-gold);
   border-radius: var(--r-pill);
+  cursor: pointer;
 }
-.order-btn:hover { border-color: var(--od-umber); }
-.order-btn--primary { color: var(--od-paper); background: var(--od-umber); border-color: var(--od-umber); }
+.order-btn:hover { border-color: var(--jiaocha); }
+.order-btn--primary { color: var(--washi); background: var(--jiaocha); border-color: var(--jiaocha); }
 .order-btn--primary:hover { background: var(--ink); border-color: var(--ink); }
 .order-btn--quiet { border-color: transparent; background: transparent; text-decoration: underline; text-underline-offset: 4px; }
-.order-btn:focus-visible { outline: 2px solid var(--od-umber); outline-offset: 2px; }
+.order-btn:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
 
 /* ---------- 送出後 Modal ---------- */
+/* 彈窗由 order-page.js 移到 <body> 最後；層級高於固定的飲酒警語列（9999），手機上不會被蓋住底部 */
+.page-order .ys-modal-mask { z-index: 10000; }
 .page-order .ys-modal.order-done {
   width: min(560px, 100%);
   border-radius: var(--r-lg);
-  border: 1px solid var(--od-gold);
+  border: 1px solid var(--yousi-gold);
   padding: 24px 24px 18px;
+  box-shadow: 0 24px 60px rgba(92, 74, 50, .22);
+  animation: od-pop .28s var(--ease-soft) both;
+}
+@keyframes od-pop {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+  to   { opacity: 1; transform: none; }
 }
 .page-order .order-done .ys-modal-title {
+  margin: 0;
   font-family: var(--od-serif);
   font-size: 21px;
   font-weight: 600;
@@ -558,8 +640,22 @@ html.show-announce .order-summary { top: 132px; }
   line-height: 1.45;
   color: var(--ink);
 }
-.page-order .order-done .ys-modal-sub { font-size: 14px; line-height: 1.8; color: var(--od-ink-soft); margin-top: 8px; }
-.page-order .order-done .ys-modal-close { border-radius: 50%; font-size: 24px; }
+.page-order .order-done .ys-modal-title:focus { outline: none; }
+.page-order .order-done .ys-modal-title:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 4px; border-radius: var(--r-xs); }
+.page-order .order-done .ys-modal-sub { font-size: 14px; line-height: 1.8; color: var(--ink-soft); margin-top: 8px; }
+.page-order .order-done .ys-modal-close {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  margin: -8px -8px 0 0;
+  padding: 0;
+  border-radius: 50%;
+  font-family: inherit;
+  font-size: 24px;
+  color: var(--muted);
+}
+.page-order .order-done .ys-modal-close:hover { background: var(--washi); color: var(--ink); }
+.page-order .order-done .ys-modal-close:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: -2px; }
 
 .order-done-nowrap { display: inline-block; }
 /* 提示文字寫「請點下方『再次複製』」（main.js），所以按鈕固定放在文字下方 */
@@ -570,24 +666,24 @@ html.show-announce .order-summary { top: 132px; }
   gap: 10px;
   margin: 18px 0 16px;
   padding: 12px 14px;
-  background: var(--od-paper);
-  border: 1px solid var(--od-gold-soft);
+  background: var(--washi);
   border-radius: var(--r-sm);
 }
 .order-done-recopy {
   flex-shrink: 0;
-  min-height: 38px;
-  padding: 0 14px;
+  min-height: 44px;
+  padding: 0 16px;
   font-family: inherit;
   font-size: 13px;
   font-weight: 700;
-  color: var(--od-umber);
-  background: #fff;
-  border: 1px solid var(--od-gold);
+  color: var(--jiaocha);
+  background: var(--card);
+  border: 1px solid var(--yousi-gold);
   border-radius: var(--r-pill);
   cursor: pointer;
 }
-.order-done-recopy:hover { border-color: var(--od-umber); }
+.order-done-recopy:hover { border-color: var(--jiaocha); }
+.order-done-recopy:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
 
 .order-done-steps {
   list-style: none;
@@ -604,7 +700,7 @@ html.show-announce .order-summary { top: 132px; }
   align-items: center;
   gap: 12px;
   padding: 14px;
-  border: 1px solid var(--line);
+  background: var(--washi);
   border-radius: var(--r-md);
 }
 .order-done-steps li::before {
@@ -617,9 +713,9 @@ html.show-announce .order-summary { top: 132px; }
   justify-content: center;
   font-family: var(--od-serif);
   font-weight: 600;
-  color: var(--od-umber);
-  border: 1px solid var(--od-gold);
-  background: var(--od-paper);
+  color: var(--jiaocha);
+  border: 1px solid var(--yousi-gold);
+  background: var(--card);
 }
 .order-done-step-text { display: flex; flex-direction: column; gap: 2px; }
 .order-done-step-text strong { font-size: 15px; color: var(--ink); }
@@ -633,36 +729,64 @@ html.show-announce .order-summary { top: 132px; }
   font-size: 14px;
   font-weight: 700;
   white-space: nowrap;
-  color: var(--od-umber);
-  background: #fff;
-  border: 1px solid var(--od-gold);
+  color: var(--jiaocha);
+  background: var(--card);
+  border: 1px solid var(--yousi-gold);
   border-radius: var(--r-pill);
 }
-.order-done-btn:hover { border-color: var(--od-umber); }
-.order-done-btn--primary { color: var(--od-paper); background: var(--od-umber); border-color: var(--od-umber); }
+.order-done-btn:hover { border-color: var(--jiaocha); }
+.order-done-btn--primary { color: var(--washi); background: var(--jiaocha); border-color: var(--jiaocha); }
 .order-done-btn--primary:hover { background: var(--ink); border-color: var(--ink); }
+.order-done-btn:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
 
 .order-done-detail { margin-top: 14px; }
 .order-done-detail summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
   cursor: pointer;
   font-size: 13px;
-  color: var(--od-umber);
+  color: var(--jiaocha);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+.order-done-detail summary:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; border-radius: var(--r-xs); }
 .order-done-detail .ys-summary { margin-top: 10px; border-radius: var(--r-sm); min-height: 160px; }
 
 .order-done-foot { display: flex; justify-content: flex-end; margin-top: 14px; }
 .order-done-home {
+  min-height: 44px;
   border: none;
   background: none;
-  padding: 8px 4px;
+  padding: 0 8px;
   font-family: inherit;
   font-size: 14px;
   color: var(--muted);
   cursor: pointer;
+  border-radius: var(--r-pill);
 }
 .order-done-home:hover { color: var(--ink); }
+.order-done-home:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
+
+/* ---------- 按鈕回饋：浮起一點、按下沉一點 ---------- */
+.order-submit-btn,
+.order-btn--primary,
+.order-done-btn--primary { box-shadow: var(--btn-shadow); }
+.order-submit-btn,
+.order-btn,
+.order-done-btn,
+.order-done-recopy { transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s var(--ease-soft); }
+.order-submit-btn:hover,
+.order-btn--primary:hover,
+.order-done-btn--primary:hover { box-shadow: var(--btn-shadow-hover); transform: translateY(-1px); }
+.order-submit-btn:active,
+.order-btn:active,
+.order-done-btn:active,
+.order-done-recopy:active { transform: scale(.98); }
+
+/* 手機摘要展開時內容淡入 */
+.order-summary-box[open] .order-summary-body { animation: od-fade .22s ease both; }
+@keyframes od-fade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 
 /* ---------- 手機 ---------- */
 @media (max-width: 860px) {
@@ -687,19 +811,24 @@ html.show-announce .order-summary { top: 132px; }
   .order-summary { position: static; }
   .order-summary-box { padding: 16px 16px 14px; }
   .order-summary-head { cursor: pointer; padding-bottom: 0; border-bottom: none; }
-  .order-summary-box[open] .order-summary-head { padding-bottom: 12px; border-bottom: 1px solid var(--od-gold-soft); }
+  .order-summary-box[open] .order-summary-head { padding-bottom: 12px; border-bottom: 1px solid var(--yousi-gold-soft); }
   .order-summary-head::after {
     content: "";
     width: 8px;
     height: 8px;
     margin-left: 4px;
-    border-right: 1.5px solid var(--od-umber);
-    border-bottom: 1.5px solid var(--od-umber);
+    border-right: 1.5px solid var(--jiaocha);
+    border-bottom: 1.5px solid var(--jiaocha);
     transform: translateY(-3px) rotate(45deg);
     transition: transform .2s ease;
   }
   .order-summary-box[open] .order-summary-head::after { transform: translateY(1px) rotate(-135deg); }
   .order-summary-title { margin-right: auto; font-size: 17px; }
+
+  /* 手指操作：數量鈕與「移除」放大可點範圍 */
+  .order-summary #cartMini .qty-pill { height: 42px; }
+  .order-summary #cartMini .qty-btn { width: 42px; height: 40px; }
+  .order-summary #cartMini .cart-item-remove { min-height: 36px; padding: 0 10px; margin-right: -10px; }
 
   .order-choices { grid-template-columns: minmax(0, 1fr); }
   .order-form input[type="text"],
@@ -716,78 +845,12 @@ html.show-announce .order-summary { top: 132px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .order-form input, .order-form textarea, .order-choice-body, .order-submit-btn,
-  .order-summary-head::after { transition: none; }
-}
-
-/* ============================================
-   柔和版（2026-11）：圓角、陰影取代硬線、聚焦光暈、按鈕與彈窗回饋
-   ============================================ */
-
-/* 欄位：淡邊框＋暖白底，聚焦時金色光暈（取代硬的雙線框） */
-.order-form input[type="text"],
-.order-form input[type="tel"],
-.order-form input[type="email"],
-.order-form textarea { border-color: #e4d9c6; background: #fffdf9; }
-.order-form input:focus,
-.order-form textarea:focus { border-color: var(--od-gold); box-shadow: var(--focus-glow); background: #fff; }
-/* 選擇器要比上面的 .order-form input[type=…] 更具體，否則紅框會被淡邊框蓋掉 */
-.order-form .order-field.is-invalid input { border-color: var(--od-error); box-shadow: 0 0 0 4px rgba(161, 55, 43, .12); }
-
-/* 取貨卡片與溫層：陰影代替粗框，選中時才出現焦茶外框 */
-.order-choice-body {
-  border-color: #ece3d3;
-  box-shadow: var(--soft-shadow-sm);
-  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease, transform .2s var(--ease-soft);
-}
-.order-choice:hover .order-choice-body { transform: translateY(-1px); box-shadow: var(--soft-shadow); }
-.order-choice input:checked + .order-choice-body { box-shadow: inset 0 0 0 1px var(--od-umber), var(--soft-shadow); }
-.order-temp span { border-color: #ece3d3; box-shadow: var(--soft-shadow-sm); transition: border-color .2s ease, box-shadow .2s ease; }
-.order-temp input:checked + span { box-shadow: inset 0 0 0 1px var(--od-umber), var(--soft-shadow-sm); }
-.order-form #addrWrap,
-.order-form #shipWrap { border-color: transparent; }
-
-/* 摘要（傳票）：圓角＋柔和陰影，分隔線變淡 */
-.order-summary-box { box-shadow: inset 0 0 0 3px var(--od-paper), inset 0 0 0 4px var(--od-gold-soft), var(--soft-shadow); }
-.order-summary #cartMini .cart-item { border-bottom: 1px solid rgba(201, 168, 122, .28); }
-.order-summary #cartMini .qty-btn { border-radius: var(--r-pill); }
-.order-summary #cartMini .qty-pill { border-color: #e4d9c6; }
-
-/* 主要按鈕：浮起一點、按下沉一點 */
-.order-submit { border-top-color: rgba(201, 168, 122, .3); }
-.order-submit-btn,
-.order-btn--primary,
-.order-done-btn--primary { box-shadow: var(--btn-shadow); }
-.order-submit-btn,
-.order-btn,
-.order-done-btn,
-.order-done-recopy { transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s var(--ease-soft); }
-.order-submit-btn:hover,
-.order-btn--primary:hover,
-.order-done-btn--primary:hover { box-shadow: var(--btn-shadow-hover); transform: translateY(-1px); }
-.order-submit-btn:active,
-.order-btn:active,
-.order-done-btn:active,
-.order-done-recopy:active { transform: scale(.98); }
-
-/* 送出後彈窗：淡入＋輕微上浮，步驟改成柔和底色 */
-.page-order .order-done { animation: od-pop .28s var(--ease-soft) both; box-shadow: 0 24px 60px rgba(35, 26, 18, .18); }
-@keyframes od-pop {
-  from { opacity: 0; transform: translateY(10px) scale(.98); }
-  to   { opacity: 1; transform: none; }
-}
-.order-done-steps li { border: none; background: #fdfaf4; }
-.order-done-copy { border-color: transparent; }
-
-/* 手機摘要展開時內容淡入 */
-.order-summary-box[open] .order-summary-body { animation: od-fade .22s ease both; }
-@keyframes od-fade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-
-.order-empty { box-shadow: inset 0 0 0 3px var(--od-paper), inset 0 0 0 4px var(--od-gold-soft), var(--soft-shadow); }
-
-@media (prefers-reduced-motion: reduce) {
-  .page-order .order-done, .order-summary-box[open] .order-summary-body { animation: none; }
-  .order-choice-body, .order-temp span, .order-submit-btn, .order-btn, .order-done-btn, .order-done-recopy { transition: none; }
-  .order-choice:hover .order-choice-body, .order-submit-btn:hover, .order-btn--primary:hover, .order-done-btn--primary:hover,
+  .page-order .order-done,
+  .order-summary-box[open] .order-summary-body { animation: none; }
+  .order-form input, .order-form textarea, .order-summary .coupon-input,
+  .order-choice-body, .order-temp span, .order-summary-head::after,
+  .order-submit-btn, .order-btn, .order-done-btn, .order-done-recopy { transition: none; }
+  .order-choice:hover .order-choice-body,
+  .order-submit-btn:hover, .order-btn--primary:hover, .order-done-btn--primary:hover,
   .order-submit-btn:active, .order-btn:active, .order-done-btn:active, .order-done-recopy:active { transform: none; }
 }

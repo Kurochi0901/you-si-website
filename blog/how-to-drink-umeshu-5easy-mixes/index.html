@@ -37,7 +37,10 @@
 
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/blog.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 標題明朝體：只載入本頁標題用到的字，href 由 node build.js 自動產生，請勿手改 -->
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=.0123456789%E3%80%81%E3%80%90%E3%80%91%E4%B8%8A%E4%B8%8D%E4%B9%8B%E4%B9%9F%E4%BD%A0%E4%BE%8B%E5%85%88%E5%88%B0%E5%89%8D%E5%8D%97%E5%8F%88%E5%90%88%E5%91%B3%E5%92%96%E5%95%A1%E5%96%9D%E5%9F%BA%E5%A4%96%E5%AE%B9%E5%AF%86%E5%AF%8C%E5%B0%8D%E5%B9%AB%E5%BE%9E%E5%BE%AE%E6%80%8E%E6%82%89%E6%84%9F%E6%89%8B%E6%89%8D%E6%8C%87%E6%8E%A8%E6%90%AD%E6%96%87%E6%96%B0%E6%98%93%E6%98%AF%E6%99%82%E6%9C%89%E6%9C%AC%E6%9E%9C%E6%A1%83%E6%A2%85%E6%A5%8A%E6%AC%BE%E6%AD%A4%E6%AF%94%E6%B0%A3%E6%B0%B4%E6%B1%81%E6%B3%95%E6%B3%A1%E6%B8%85%E6%BA%AB%E6%BB%8B%E7%86%9F%E7%86%B1%E7%88%BD%E7%93%B6%E7%94%9C%E7%94%A8%E7%9A%84%E7%9B%B8%E7%9C%8B%E7%9F%A5%E7%A8%AE%E7%AB%A0%E7%B4%85%E7%B5%84%E7%B6%A0%E8%88%87%E8%8B%A6%E8%8C%B6%E8%96%A6%E8%98%8B%E8%A7%A3%E8%AA%8D%E8%AA%BF%E8%AD%98%E8%AE%93%E8%B1%90%E9%80%99%E9%81%93%E9%81%A9%E9%81%B8%E9%85%89%E9%85%8D%E9%85%92%E9%85%B8%E9%86%BA%E9%8D%B5%E9%97%9C%E9%A3%B2%E9%A6%99%E9%AE%AE%E9%B9%B9%E9%BA%BC%E9%BB%91%EF%BC%8B%EF%BC%8C%EF%BC%8F%EF%BC%9A%EF%BC%9F">
 <script defer src="/assets/js/articles.data.js"></script>
 <script defer src="/assets/js/catalog.js"></script>
 <script type="module" src="/assets/js/promotions.bridge.js"></script>
@@ -102,7 +105,7 @@
 }
 </script>
 </head>
-<body>
+<body class="page-article">
   <!-- ✅ 公告條（有資料才顯示，由 announcement_data.js 控制） -->
   <div class="announce-bar" id="announceBar" role="status" aria-live="polite">
     <div class="announce-track" id="announceTrack"></div>
@@ -126,6 +129,7 @@
     </div>
   </div>
 
+  <main id="main">
   <div class="article-hero">
     <!-- fallback background will show if image fails to load -->
     <!-- <img src="/assets/images/blog/id9封面.webp" alt="【微醺解密】梅酒怎麼喝？從氣泡水到咖啡，5種梅酒調飲比例與搭配指南" class="article-hero-bg" fetchpriority="high" decoding="async" onerror="this.style.display='none'"> -->
@@ -149,7 +153,7 @@
 
     <div class="article-content">
         <figure class="article-figure">
-          <img src="/assets/images/blog/id9封面.webp" alt="5種梅酒調飲比例與搭配指南" loading="lazy" decoding="async">
+          <img width="800" height="540" src="/assets/images/blog/id9封面.webp" alt="5種梅酒調飲比例與搭配指南" loading="eager" fetchpriority="high" decoding="async">
         </figure>
 
         <p>買了一瓶喜歡的梅酒，除了直接喝、加氣泡水，還能怎麼搭？</p>
@@ -157,7 +161,7 @@
         <p>今天就來分享5種梅酒調飲方式，以及調配前值得先知道的小學問！</p>
 
         <figure class="article-figure">
-          <img src="/assets/images/blog/id9內文圖一.webp" alt="梅酒調飲前，先認識手上的這瓶酒" loading="lazy" decoding="async">
+          <img width="800" height="540" src="/assets/images/blog/id9內文圖一.webp" alt="梅酒調飲前，先認識手上的這瓶酒" loading="lazy" decoding="async">
         </figure>
 
         <h2>梅酒調飲前，先認識手上的這瓶酒</h2>
@@ -174,7 +178,7 @@
         <p>喜歡梅香濃一點，可以從 2:1 開始；想喝得清淡一些，再增加氣泡水至濃度 1:1。</p>
         <p>調配時，先倒入梅酒，再緩緩加入冰鎮氣泡水，輕輕攪拌即可。使用無糖、無調味的款式，比較容易掌握整杯的酸甜平衡。</p>
         <p>推薦使用酒款：</p>
-        <p><a href="/products/fruit-tea/北海道十勝-白蘭地梅酒/" class="btn-inline-cta" target="_blank" rel="noopener">北海道十勝 白蘭地梅酒</a></p>
+        <p><a href="/products/fruit-tea/北海道十勝-白蘭地梅酒/" class="btn-inline-cta">北海道十勝 白蘭地梅酒</a></p>
 
         <h2>2. 梅酒＋楊桃汁：酸鹹滋味，熟悉又有新鮮感</h2>
         <p>喜歡楊桃汁酸酸鹹鹹的味道嗎？下次可以試著加一點梅酒。</p>
@@ -194,7 +198,7 @@
         <p>例如梅酒30ml，搭配蘋果汁30ml，使用冰鎮過的材料調配即可。</p>
         <p>選購時可以優先考慮無額外加糖的蘋果汁，但要注意，果汁本身仍含有糖分。若梅酒已經很甜，搭配後也可能偏甜，這時可以減少蘋果汁，或加入少量無糖氣泡水調整。</p>
         <p>推薦使用酒款（果汁類型都能搭！）：</p>
-        <p><a href="/products/fruit-tea/山形正宗-濃郁梅酒/" class="btn-inline-cta" target="_blank" rel="noopener">山形正宗 濃郁梅酒</a></p>
+        <p><a href="/products/fruit-tea/山形正宗-濃郁梅酒/" class="btn-inline-cta">山形正宗 濃郁梅酒</a></p>
 
         <h2>4. 梅酒＋黑咖啡：咖啡苦香與梅果酸甜的組合</h2>
         <p>梅酒竟然也能加咖啡？</p>
@@ -215,10 +219,10 @@
         <p>將泡好的熱茶直接加入梅酒即可。</p>
         <p>溫度改變後，香氣與酸甜感受也會跟著變化。同一個比例，不妨分別試試冷飲與溫飲，看看自己喜歡哪一種。</p>
         <p>推薦使用酒款：</p>
-        <p><a href="/products/fruit-tea/梅侍純釀-果泥梅酒/" class="btn-inline-cta" target="_blank" rel="noopener">梅侍純釀 果泥梅酒</a></p>
+        <p><a href="/products/fruit-tea/梅侍純釀-果泥梅酒/" class="btn-inline-cta">梅侍純釀 果泥梅酒</a></p>
 
         <figure class="article-figure">
-          <img src="/assets/images/blog/id9內文圖二.webp" alt="比例之外，選對梅酒才是搭配關鍵" loading="lazy" decoding="async">
+          <img width="800" height="540" src="/assets/images/blog/id9內文圖二.webp" alt="比例之外，選對梅酒才是搭配關鍵" loading="lazy" decoding="async">
         </figure>
 
         <h2>比例之外，選對梅酒才是搭配關鍵</h2>
@@ -227,7 +231,7 @@
         <p>以帶有木質調性的桶陳梅酒來說，我們通常不優先推薦搭配果汁，反而會考慮加冰品飲，或挑選能呼應其木質、焙火香氣的茶飲。至於適合哪一款茶、茶要泡多濃，仍要看酒款本身的表現。</p>
         <p><strong>也因此，跟著文章調配時，除了記下比例，也記得留意示範使用的是哪一款梅酒。同樣的配方，換一瓶酒，味道就可能不一樣。</strong></p>
         <p><strong>想找一款百搭梅酒嗎？推薦你：</strong></p>
-        <p><a href="/products/fruit-tea/山形正宗-濃郁梅酒/" class="btn-inline-cta" target="_blank" rel="noopener">山形正宗 濃郁梅酒</a></p>
+        <p><a href="/products/fruit-tea/山形正宗-濃郁梅酒/" class="btn-inline-cta">山形正宗 濃郁梅酒</a></p>
 
         <h2>不知道怎麼搭？讓酉時幫你看看</h2>
         <p>梅酒看似容易親近，其實從基酒、梅果風味到熟成方式，都有值得認識的地方。多了解一點，也就更容易找到自己喜歡的喝法。</p>
@@ -244,6 +248,7 @@
         <a href="/products/fruit-tea/" class="btn btn-primary" style="font-size: 15px; padding: 14px 28px; width: auto; display: inline-flex;">查看相關酒款</a>
     </div>
   </article>
+  </main>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -270,7 +275,7 @@
     </div>
   </footer>
 
-  <div class="alcohol-bar" role="contentinfo" aria-label="飲酒警語">
+  <div class="alcohol-bar" role="note" aria-label="飲酒警語">
     <span class="alcohol-bar-text">
         🍶 未滿十八歲請勿飲酒
         <span class="alcohol-bar-divider" aria-hidden="true"></span>

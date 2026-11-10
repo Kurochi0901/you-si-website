@@ -1,0 +1,351 @@
+/* ============================================
+   酉時圖書館 /assets/css/blog.css
+   由 blog/index.html（body.page-blog）與文章頁（body.page-article，模板 blog/sample/index.html）載入。
+
+   2026-11 改版：接上「黃昏酒桌」語彙——明朝體標題、暖色分類徽章、焦茶選中狀態、
+   文內酒款連結改成白底膠囊（舊琥珀漸層白字只有 1.9–3.1:1）、h2 拿掉 5px 實線改用圓點標記。
+   顏色一律用 style.css :root 的品牌色變數。
+   ============================================ */
+
+.page-blog,
+.page-article {
+  --bl-serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+}
+
+/* =========================================================
+   列表頁
+   ========================================================= */
+.page-blog .blog-hero .hero-title {
+  font-family: var(--bl-serif);
+  font-weight: 600;
+  letter-spacing: .08em;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+/* 漸層最深處 #ecddd0 上，灰褐只有 3.7:1 → 改墨・淡 */
+.page-blog .blog-hero-desc { color: var(--ink-soft); text-wrap: pretty; }
+.page-blog .blog-start-title,
+.page-blog .blog-card-title,
+.page-article .article-hero-title,
+.page-article .article-content h2 { text-wrap: balance; }
+@media (max-width: 860px) {
+  .page-blog .blog-hero .hero-title { font-size: 26px; letter-spacing: .06em; }
+}
+
+/* ---------- 從這裡開始 ---------- */
+.blog-start { margin: 0 0 40px; }
+.blog-start-title {
+  margin: 0 0 6px;
+  font-family: var(--bl-serif);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.blog-start-lede { margin: 0 0 16px; font-size: 14px; line-height: 1.8; color: var(--muted); }
+.blog-start-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  counter-reset: start;
+}
+.blog-start-list li { counter-increment: start; }
+.blog-start-card {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  height: 100%;
+  padding: 12px;
+  background: var(--washi);
+  border-radius: var(--r-md);
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow .2s ease, transform .2s var(--ease-soft);
+}
+.blog-start-card:hover { box-shadow: var(--soft-shadow); transform: translateY(-1px); }
+.blog-start-card:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 3px; }
+.blog-start-card img {
+  width: 96px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: var(--r-xs);
+  background: var(--line);
+}
+.blog-start-step {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--gold-text);
+}
+.blog-start-step::before { content: "第 " counter(start) " 篇"; }
+.blog-start-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* ---------- 篩選 ---------- */
+.page-blog .tag-filter-wrap {
+  border: none;
+  border-radius: var(--r-lg);
+  box-shadow: var(--soft-shadow-sm);
+}
+.page-blog .filter-label {
+  min-width: 2.5em;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--gold-text);
+}
+.page-blog .filter-pill {
+  min-height: 40px;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink-soft);
+  background: var(--card);
+  border: 1px solid var(--field-line);
+  border-radius: var(--r-pill);
+  transition: border-color .2s ease, background-color .2s ease, color .2s ease;
+}
+.page-blog .filter-pill:hover { border-color: var(--yousi-gold); }
+.page-blog .filter-pill.active,
+.page-blog .filter-pill[aria-pressed="true"] {
+  color: var(--washi);
+  background: var(--jiaocha);
+  border-color: var(--jiaocha);
+}
+.page-blog .filter-pill:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
+/* 手機橫向捲動：右側淡出，看得出後面還有 */
+@media (max-width: 860px) {
+  .page-blog .filter-scroll {
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+    mask-image: linear-gradient(90deg, #000 85%, transparent);
+    padding-right: 24px;
+  }
+}
+
+/* ---------- 文章卡 ---------- */
+.page-blog .blog-card-link {
+  border: 1px solid rgba(92, 74, 50, .06);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.page-blog .blog-card-link:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 3px; }
+/* 封面原圖 800×540（約 3:2）：用同比例框＋cover，不留色帶也不裁到手寫標題 */
+.page-blog .blog-cover.card-media { aspect-ratio: 3 / 2; background: var(--washi); }
+.page-blog .blog-cover.card-media img { object-fit: cover; }
+.page-blog .blog-badge {
+  color: var(--jiaocha);
+  background: var(--washi);
+  border: 1.5px solid var(--yousi-gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.page-blog .blog-card-title {
+  font-family: var(--bl-serif);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  line-height: 1.5;
+}
+.page-blog .blog-card-excerpt { font-size: 14px; line-height: 1.75; color: var(--ink-soft); }
+.page-blog .blog-card-meta-bottom { color: var(--muted); font-variant-numeric: tabular-nums; }
+@media (min-width: 861px) {
+  .page-blog .featured-card .blog-cover.card-media { aspect-ratio: 3 / 2; }
+  .page-blog .featured-card .blog-card-body { justify-content: center; }
+  .page-blog .featured-card .blog-card-title { font-size: 24px; }
+}
+
+/* 手機：改成直式卡（封面全寬），不再沿用商品卡的左圖右文 */
+@media (max-width: 860px) {
+  .page-blog .blog-start-title { font-size: 20px; }
+  .page-blog .blog-start-list { grid-template-columns: 1fr; gap: 10px; }
+  .page-blog .card.blog-card-link { flex-direction: column; }
+  .page-blog .blog-cover.card-media {
+    flex: none;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+  .page-blog .blog-badge { display: block; }
+  .page-blog .blog-card-title { font-size: 17px; -webkit-line-clamp: 3; line-clamp: 3; }
+}
+
+/* ---------- 篩選無結果 ---------- */
+.blog-empty-state {
+  grid-column: 1 / -1;
+  padding: 48px 20px;
+  text-align: center;
+  background: var(--washi);
+  border-radius: var(--r-lg);
+}
+.blog-empty-state p { margin: 0 0 16px; font-size: 15px; color: var(--ink-soft); }
+.blog-reset-btn {
+  min-height: 44px;
+  padding: 0 20px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--jiaocha);
+  background: var(--card);
+  border: 1px solid var(--yousi-gold);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+}
+.blog-reset-btn:hover { border-color: var(--jiaocha); }
+.blog-reset-btn:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
+
+/* =========================================================
+   文章頁
+   ========================================================= */
+.page-article .article-hero-title {
+  font-family: var(--bl-serif);
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1.45;
+}
+.page-article .article-hero-content { padding-top: 32px; }
+
+/* 麵包屑：末項（文章標題）單行截斷，不再重複整句長標題 */
+/* 麵包屑也是 <nav>：要蓋掉全域 nav 的靠右、換行、間距，以及 setNavActive() 加上的 a.active 底色 */
+.page-article .breadcrumbs {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 0;
+  min-width: 0;
+  white-space: nowrap;
+}
+.page-article .breadcrumbs a.active {
+  background: none;
+  font-weight: inherit;
+  color: var(--muted);
+}
+.page-article .breadcrumbs .current {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.page-article .breadcrumbs a { flex-shrink: 0; }
+.page-article .breadcrumbs a:hover { color: var(--jiaocha); text-decoration: underline; text-underline-offset: 3px; }
+.page-article .breadcrumbs span:not(.current) { flex-shrink: 0; color: var(--yousi-gold); }
+
+.page-article .article-meta { border-bottom-color: var(--line); }
+.page-article .meta-tag { color: var(--gold-text); }
+
+/* 內文 */
+.page-article .article-content p { color: var(--ink-soft); }
+/* 段落標題：拿掉原本 5px 實線，不加任何圖示，改在標題上方放一道短短的酉時金細線，標出段落起點 */
+.page-article .article-content h2 {
+  padding-left: 0;
+  border-left: none;
+  font-family: var(--bl-serif);
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+.page-article .article-content h2::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  margin-bottom: 14px;
+  background: var(--yousi-gold);
+}
+.page-article .article-content h3 { font-weight: 700; }
+.page-article .article-content a:not(.btn-inline-cta) {
+  color: var(--jiaocha);
+  text-decoration: underline;
+  text-decoration-color: var(--yousi-gold);
+  text-underline-offset: 4px;
+}
+
+/* 文內圖片：原本沒有任何樣式，吃到瀏覽器預設的左右 40px 邊距 */
+.page-article .article-figure { margin: 0 0 28px; }
+.page-article .article-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-sm);
+}
+
+/* 文內酒款連結：白底膠囊（第二動作），取代舊琥珀漸層 */
+.page-article .btn-inline-cta {
+  min-height: 48px;
+  padding: 0 22px;
+  color: var(--jiaocha) !important;
+  background: var(--card);
+  border: 1px solid var(--yousi-gold);
+  border-radius: var(--r-pill);
+  box-shadow: var(--soft-shadow-sm);
+  font-size: 15px;
+  letter-spacing: .03em;
+  line-height: 1.5;
+  text-align: left;
+}
+.page-article .btn-inline-cta:hover {
+  background: var(--washi);
+  border-color: var(--jiaocha);
+  box-shadow: var(--soft-shadow);
+  transform: translateY(-1px);
+}
+.page-article .btn-inline-cta:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 3px; }
+
+.page-article .article-content blockquote {
+  background: var(--washi);
+  border-radius: var(--r-lg);
+  color: var(--ink);
+}
+.page-article .article-content blockquote::before { color: var(--yousi-gold); font-family: var(--bl-serif); }
+.page-article .post-tldr { background: var(--washi); border-left: none; border-radius: var(--r-md); color: var(--ink-soft); }
+.page-article .post-tldr strong { color: var(--ink); }
+
+.page-article .article-cta { border-top-color: var(--line); }
+/* 沒有相關酒款時才會顯示的按鈕：改成焦茶主色 */
+.page-article .article-cta .btn-primary {
+  color: var(--washi);
+  background: var(--jiaocha);
+  border-radius: var(--r-pill);
+  box-shadow: var(--btn-shadow);
+}
+.page-article .article-cta .btn-primary:hover { background: var(--ink); }
+
+/* 相關酒款：橫式卡兩欄，4 款時排成 2×2，不會落單一張 */
+.page-article .blog-related-section h3 {
+  font-family: var(--bl-serif);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+@media (min-width: 861px) {
+  .page-article #blog-related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 960px; margin: 0 auto; }
+}
+
+@media (max-width: 860px) {
+  /* header 本來就是 sticky，不需要再推 68px */
+  .page-article .article-hero { margin-top: 0; }
+  .page-article .article-hero-content { padding-top: 24px; }
+  .page-article .btn-inline-cta { display: flex; width: 100%; justify-content: space-between; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-start-card, .page-blog .filter-pill, .page-article .btn-inline-cta { transition: none; }
+  .blog-start-card:hover, .page-article .btn-inline-cta:hover { transform: none; }
+}

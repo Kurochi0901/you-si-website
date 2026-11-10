@@ -172,12 +172,14 @@
       var box = $("orderEmpty");
       if (afterSubmit) {
         var lineUrl = (typeof BRAND !== "undefined" && BRAND.lineUrl) || "https://line.me/ti/p/@008jcfgc";
+        // 購物車已清空：彈窗關掉後仍要能找回詢問單（複製失敗時尤其重要）與身分驗證連結 → 提供「重新打開」
         box.innerHTML =
-          '<h2 class="order-empty-title" id="orderEmptyTitle">詢問單已送出</h2>' +
-          "<p>記得到 LINE 貼上詢問單，專人收到後才會開始確認。</p>" +
+          '<h2 class="order-empty-title" id="orderEmptyTitle" tabindex="-1">詢問單已送出</h2>' +
+          "<p>記得到 LINE 貼上詢問單，專人收到後才會開始確認。第一次下單，也請完成身分驗證。</p>" +
           '<div class="order-empty-actions">' +
           '<a class="order-btn order-btn--primary" href="' + lineUrl + '" target="_blank" rel="noopener">前往 LINE 貼上</a>' +
-          '<a class="order-btn" href="/">回首頁</a>' +
+          '<button type="button" class="order-btn" data-action="reopen-order">查看詢問單與身分驗證</button>' +
+          '<a class="order-btn order-btn--quiet" href="/">回首頁</a>' +
           "</div>";
         var steps = document.querySelectorAll(".order-progress li");
         steps.forEach(function (li, i) {
@@ -218,15 +220,70 @@
     window.addEventListener("resize", updateStickyTop);
     updateStickyTop();
 
-    /* ---------- 手機：摘要預設收合，只顯示件數與金額 ---------- */
-    function applySummaryMode() { summaryBox.open = !mobile.matches; updateStickyTop(); }
+    /* ---------- 手機：摘要預設收合，只顯示件數與金額 ----------
+       桌機永遠展開：<summary> 若維持原語意，螢幕報讀會唸成「可展開的按鈕」卻按不動，
+       所以桌機改成標題（h2 層級）並移出 Tab 順序；手機再還原成可開合的 summary */
+    var summaryEl = summaryBox.querySelector("summary");
+    function applySummaryMode() {
+      var desk = !mobile.matches;
+      summaryBox.open = desk;
+      if (desk) {
+        summaryEl.setAttribute("role", "heading");
+        summaryEl.setAttribute("aria-level", "2");
+        summaryEl.setAttribute("tabindex", "-1");
+      } else {
+        summaryEl.removeAttribute("role");
+        summaryEl.removeAttribute("aria-level");
+        summaryEl.removeAttribute("tabindex");
+      }
+      updateStickyTop();
+    }
     applySummaryMode();
     if (mobile.addEventListener) mobile.addEventListener("change", applySummaryMode);
-    summaryBox.querySelector("summary").addEventListener("click", function (e) {
+    summaryEl.addEventListener("click", function (e) {
       if (!mobile.matches) e.preventDefault(); // 桌機永遠展開
     });
 
-    /* ---------- 送出後 Modal：複製失敗時要能看到並選取詢問單文字 ---------- */
+    /* ---------- 折扣碼：補上欄位名稱與報讀 ----------
+       renderCouponBlock()（main.js）屬禁止修改，這裡在它每次重繪後補屬性：
+       - 輸入框用「折扣碼」標題當名稱（原本只有 placeholder）
+       - 錯誤訊息 #couponMsg 設為 status，打錯會被唸出來
+       - 套用／移除成功時整塊重繪、焦點會掉到 body → 移到新狀態的對應按鈕，並用常駐的報讀區說明結果 */
+    var couponBlock = $("couponBlock");
+    if (couponBlock) {
+      var couponLive = document.createElement("div");
+      couponLive.className = "visually-hidden";
+      couponLive.setAttribute("role", "status");
+      couponBlock.parentNode.insertBefore(couponLive, couponBlock.nextSibling);
+      var couponState = null;
+      var syncCoupon = function () {
+        var title = couponBlock.querySelector(".coupon-title");
+        var input = $("couponInput");
+        var msg = $("couponMsg");
+        if (title && !title.id) title.id = "couponTitle";
+        if (input && title) input.setAttribute("aria-labelledby", title.id);
+        if (msg) msg.setAttribute("role", "status");
+
+        var applied = couponBlock.querySelector(".coupon-applied");
+        var next = applied ? "applied" : input ? "form" : null;
+        var lost = document.activeElement === document.body || !document.activeElement;
+        if (couponState === "form" && next === "applied") {
+          var name = couponBlock.querySelector(".coupon-applied-name");
+          couponLive.textContent = "已套用折扣碼" + (name ? "：" + name.textContent.trim() : "");
+          if (lost) { var rm = couponBlock.querySelector(".coupon-remove-btn"); if (rm) rm.focus(); }
+        } else if (couponState === "applied" && next === "form") {
+          couponLive.textContent = "已移除折扣碼";
+          if (lost && input) input.focus();
+        }
+        if (next) couponState = next;
+      };
+      new MutationObserver(syncCoupon).observe(couponBlock, { childList: true });
+      syncCoupon();
+    }
+
+    /* ---------- 送出後 Modal ----------
+       main.js 的 openOrderSuccessModal()／closeOrderSuccessModal() 只切換 display；
+       對話框該有的行為在這裡補上：焦點移入、Tab 鎖在彈窗內、Esc 關閉、背景 inert、關閉後焦點落點。 */
     var doneDetail = document.querySelector(".order-done-detail");
     var modal = $("orderSuccessModal");
     function openDetailIfCopyFailed() {
@@ -234,10 +291,69 @@
       if (doneDetail && status && status.classList.contains("is-fail")) doneDetail.open = true;
     }
     if (modal) {
+      // 移到 <body> 最後：背景可以整批設 inert，疊層也會在固定的飲酒警語列之上（id 不變，submitOrder 照樣找得到）
+      document.body.appendChild(modal);
+      var dialog = modal.querySelector('[role="dialog"]');
+      var modalTitle = $("ysOrderModalTitle");
+      var inerted = [];
+      var modalOpen = false;
+
+      var focusables = function () {
+        return [].slice.call(dialog.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, summary, [tabindex]:not([tabindex="-1"])'
+        )).filter(function (el) { return el.getClientRects().length; });
+      };
+      var onOpen = function () {
+        modalOpen = true;
+        [].slice.call(document.body.children).forEach(function (el) {
+          if (el === modal || el.inert || el.tagName === "SCRIPT") return;
+          el.inert = true;
+          inerted.push(el);
+        });
+        dialog.scrollTop = 0;
+        if (modalTitle) modalTitle.focus();
+      };
+      var onClose = function () {
+        modalOpen = false;
+        inerted.forEach(function (el) { el.inert = false; });
+        inerted = [];
+        // 送出後原本的送出按鈕已不在畫面上 → 焦點落到「詢問單已送出」標題
+        var emptyTitle = $("orderEmptyTitle");
+        if (emptyTitle && !$("orderEmpty").hidden) emptyTitle.focus();
+        else if (submitBtn.getClientRects().length) submitBtn.focus();
+      };
+      new MutationObserver(function () {
+        var open = modal.style.display !== "none";
+        if (open && !modalOpen) onOpen();
+        else if (!open && modalOpen) onClose();
+      }).observe(modal, { attributes: true, attributeFilter: ["style"] });
+
+      modal.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          closeOrderSuccessModal();
+          return;
+        }
+        if (e.key !== "Tab") return;
+        var list = focusables();
+        if (!list.length) return;
+        var first = list[0], last = list[list.length - 1], active = document.activeElement;
+        if (e.shiftKey && (active === first || active === modalTitle)) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+      });
+
       // 捕獲階段：在「再次複製」的 inline onclick 之前展開，讓失敗時的 select() 選得到文字
       modal.addEventListener("click", function (e) {
         if (e.target.closest(".order-done-recopy") && doneDetail) doneDetail.open = true;
       }, true);
+
+      // 送出後畫面的「查看詢問單與身分驗證」：重新打開同一個彈窗（詢問單文字與連結都還在）
+      $("orderEmpty").addEventListener("click", function (e) {
+        if (!e.target.closest('[data-action="reopen-order"]')) return;
+        openDetailIfCopyFailed();
+        modal.style.display = "flex";
+        document.body.classList.add("modal-open");
+      });
     }
 
     /* ---------- 在欄位按 Enter（手機鍵盤的「前往」）＝按送出 ----------

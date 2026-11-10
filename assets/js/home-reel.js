@@ -78,6 +78,9 @@
     var addBtn = cap.querySelector(".dusk-cap-add");
     var bar = reel.querySelector(".dusk-reel-bar");
     var pauseBtn = reel.querySelector(".dusk-reel-pause");
+    // 位置感：「29 支」（靜態 HTML，給沒有 JS 與搜尋引擎）換成「3 / 29」
+    var posEl = reel.querySelector(".dusk-reel-count");
+    if (posEl) posEl.setAttribute("aria-hidden", "true"); // 報讀已由說明列品名播報，不重複念數字
 
     function flavor(p) {
       var f = p.flavor, W = typeof FLAVOR_WORDS !== "undefined" && f && FLAVOR_WORDS[f[0]];
@@ -129,7 +132,10 @@
       nameLink.textContent = p.name;
       flavorEl.textContent = flavor(p);
       priceEl.textContent = "NT$" + p.price.toLocaleString("en-US");
+      // 按鈕綁定「畫面上寫的這一支」：就算按下去的瞬間輪盤剛好轉走，加進去的仍是說明列上的酒
+      addBtn.dataset.id = p.id;
       addBtn.setAttribute("aria-label", "加入購物車：" + p.name);
+      if (posEl) posEl.textContent = (cur + 1) + " / " + n;
     }
     function go(to, byUser) {
       cur = ((to % n) + n) % n;
@@ -144,27 +150,37 @@
       timer = setInterval(function () { go(cur + 1, false); }, 3600);
     }
     function hold(on) { paused = on; if (on) clearInterval(timer); else play(); }
+    function setUserPaused(on) {
+      userPaused = on;
+      pauseBtn.setAttribute("aria-pressed", String(on));
+      pauseBtn.setAttribute("aria-label", on ? "繼續輪播" : "暫停輪播");
+      play();
+    }
+    // 客人一碰輪盤（手指、滑鼠按下、方向鍵、上一支／下一支）就代表在挑了：
+    // 自動轉從此停住，不會在按「加入購物車」的瞬間把酒換掉。想再看自動轉，按右上角的播放鍵
+    function engage() { if (!userPaused) setUserPaused(true); }
 
     addBtn.addEventListener("click", function () {
-      if (typeof addToCart === "function") addToCart(items[cur].id);
+      var id = +addBtn.dataset.id || items[cur].id;
+      if (typeof addToCart === "function") addToCart(id);
     });
+    // 捕獲階段：比按鈕自己的 click 更早，先把自動轉停下來。
+    // 酒款舞台本身例外：手指可能只是經過、要上下捲頁面，等判定成左右拖曳或點酒時才算數
+    reel.addEventListener("pointerdown", function (e) {
+      if (!pauseBtn.contains(e.target) && !stage.contains(e.target)) engage();
+    }, true);
     reel.addEventListener("mouseenter", function () { hold(true); });
     reel.addEventListener("mouseleave", function () { hold(false); });
     reel.addEventListener("focusin", function () { hold(true); });
     reel.addEventListener("focusout", function (e) { if (!reel.contains(e.relatedTarget)) hold(false); });
     document.addEventListener("visibilitychange", play);
 
-    pauseBtn.addEventListener("click", function () {
-      userPaused = !userPaused;
-      pauseBtn.setAttribute("aria-pressed", String(userPaused));
-      pauseBtn.setAttribute("aria-label", userPaused ? "繼續輪播" : "暫停輪播");
-      play();
-    });
-    reel.querySelector('[data-reel="prev"]').addEventListener("click", function () { go(cur - 1, true); });
-    reel.querySelector('[data-reel="next"]').addEventListener("click", function () { go(cur + 1, true); });
+    pauseBtn.addEventListener("click", function () { setUserPaused(!userPaused); });
+    reel.querySelector('[data-reel="prev"]').addEventListener("click", function () { engage(); go(cur - 1, true); });
+    reel.querySelector('[data-reel="next"]').addEventListener("click", function () { engage(); go(cur + 1, true); });
     reel.addEventListener("keydown", function (e) {
-      if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1, true); }
-      if (e.key === "ArrowRight") { e.preventDefault(); go(cur + 1, true); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); engage(); go(cur - 1, true); }
+      if (e.key === "ArrowRight") { e.preventDefault(); engage(); go(cur + 1, true); }
     });
 
     /* 拖曳／手指滑動：跟手移動，放開後吸附到最近的一支 */
@@ -188,6 +204,7 @@
       if (now > drag.lastT) { drag.vx = (e.clientX - drag.lastX) / (now - drag.lastT); drag.lastX = e.clientX; drag.lastT = now; }
       if (!drag.moved && Math.abs(drag.dx) > 6 && Math.abs(drag.dx) > Math.abs(dy)) {
         drag.moved = true;
+        engage();
         try { stage.setPointerCapture(e.pointerId); } catch (err) { /* 指標已不存在時略過，不中斷拖曳 */ }
         reel.classList.add("is-dragging");
       }
@@ -221,7 +238,7 @@
       var a = e.target.closest(".dusk-item");
       if (drag && drag.done) { e.preventDefault(); drag = null; return; }
       drag = null;
-      if (a && !a.classList.contains("is-center")) { e.preventDefault(); go(+a.dataset.i, true); }
+      if (a && !a.classList.contains("is-center")) { e.preventDefault(); engage(); go(+a.dataset.i, true); }
     });
     mq.addEventListener("change", function () { layout(0); });
 

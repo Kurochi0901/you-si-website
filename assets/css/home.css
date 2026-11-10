@@ -681,7 +681,7 @@
   .home-cats-list a { grid-template-columns: auto 1fr; }
   .home-cats-name,
   .home-cats-count { white-space: nowrap; }
-  .home-taste-tab { padding: 9px 14px; }
+  .home-taste-tab { padding: 9px 14px; min-height: 44px; } /* 手指點得到：44px（第四次 critique） */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -785,15 +785,7 @@
   font-size: 12.5px;
   color: var(--home-gold-text);
 }
-.dusk-pick-read::before,
-.dusk-cap-flavor::before { /* 與商品卡口味短語同一個圓點 */
-  content: "";
-  flex-shrink: 0;
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--home-umber);
-  box-shadow: 0 0 0 1.5px var(--home-paper), 0 0 0 2.5px var(--home-gold);
-}
+/* 2026-11-09：口味描述前的雙圈圓點拿掉（與商品卡口味短語一致） */
 .dusk-pick-arrow {
   position: absolute;
   right: 13px; top: 50%;
@@ -935,13 +927,11 @@
 .dusk-cap-flavor {
   position: relative;
   min-width: 0;
-  padding-left: 13px;
   color: #5a4024; /* 黃昏漸層最深處 #dcb37c 上仍有 4.9:1（原金褐字只有 4.3:1） */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.dusk-cap-flavor::before { position: absolute; left: 2px; top: 50%; margin-top: -3.5px; }
 .dusk-cap-price { flex-shrink: 0; font-weight: 700; color: #4a3826; font-variant-numeric: tabular-nums; }
 .dusk-cap-add {
   flex-shrink: 0;
