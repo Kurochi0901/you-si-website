@@ -44,20 +44,20 @@
 <link rel="alternate" hreflang="x-default" href="https://www.yousi-drink.com/products/wine/奧野田-DOLCE-白葡萄酒-2024/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
 <link rel="preload" as="image" href="https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/66奧野田_DOLCE1.webp" fetchpriority="high">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" href="/favicon.ico">
-<link rel="stylesheet" href="/assets/css/style.css">
-<link rel="stylesheet" href="/assets/css/product-page.css">
+<link rel="stylesheet" href="/assets/css/style.css?v=faa6cf4f">
+<link rel="stylesheet" href="/assets/css/product-page.css?v=5d3b1492">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
 <!-- 標題明朝體：只載入本頁用到的字，href 由 node build.js 自動產生，請勿手改 -->
 <link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789CDELO%E3%80%81%E4%BB%8B%E5%81%8F%E5%8E%9A%E5%91%B3%E5%93%81%E5%95%86%E5%96%AE%E5%A5%A7%E5%AF%A6%E5%AF%A7%E5%BA%A7%E5%BC%B7%E6%A0%BC%E6%A8%99%E6%AC%BE%E6%B8%85%E7%83%88%E7%88%BD%E7%94%B0%E7%99%BD%E7%9B%88%E7%9B%B8%E7%B4%B9%E8%90%84%E8%91%A1%E8%A6%8F%E8%BC%95%E9%85%92%E9%87%8E%E9%97%9C%E9%A2%A8%E9%AB%94%EF%BC%8C%EF%BC%9A">
 
-<script defer src="/assets/js/catalog.js"></script>
-<script defer src="/assets/js/main.js"></script>
-<script defer src="/assets/js/announcement_data.js"></script>
-<script type="module" src="/assets/js/promotions.bridge.js"></script>
+<script defer src="/assets/js/catalog.js?v=cca70a99"></script>
+<script defer src="/assets/js/main.js?v=63165689"></script>
+<script defer src="/assets/js/announcement_data.js?v=8fab7c8c"></script>
+<script type="module" src="/assets/js/promotions.bridge.js?v=08930e17"></script>
 
 <script type="application/ld+json">
 {
@@ -83,7 +83,7 @@
     "url": "https://www.yousi-drink.com/products/wine/奧野田-DOLCE-白葡萄酒-2024/",
     "priceCurrency": "TWD",
     "price": 1100,
-    "priceValidUntil": "2027-11-09",
+    "priceValidUntil": "2027-11-11",
     "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/NewCondition",
     "eligibleRegion": { "@type": "Country", "name": "TW" },
@@ -227,7 +227,7 @@
       <h1 class="pdp-title">奧野田 DOLCE 白葡萄酒 2024</h1>
       <p class="pdp-subtitle">蜜蘋果般果香，甜美清爽的德拉瓦葡萄酒</p>
       <p class="pdp-facts">750ml｜酒精 8.5%｜日本</p>
-      <a class="pdp-taste" href="#pdpFlavor"><span class="pdp-taste-dot" aria-hidden="true"></span><span class="pdp-taste-text">單寧輕盈，酒體偏輕</span><span class="pdp-taste-go">看風味座標</span></a>
+      <a class="pdp-taste" href="#pdpFlavor"><span class="pdp-taste-text">單寧輕盈，酒體偏輕</span><span class="pdp-taste-go">看風味座標</span></a>
       <!-- 酒款介紹（含搭餐、適飲溫度）：放在口味結論下方、價格上方，先讀故事再決定 -->
 
       <section class="pdp-section pdp-section--story" aria-labelledby="pdpStoryTitle">
@@ -401,7 +401,7 @@ https://www.yousi-drink.com/products/wine/奧野田-DOLCE-白葡萄酒-2024/" hr
 
 <!-- 相簿、放大、風味座標互動：/assets/js/product-page.js（圖片清單由這裡帶入） -->
 <script type="application/json" id="pdpImgs">["https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/66奧野田_DOLCE1.webp","https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/66奧野田_DOLCE2.webp","/assets/images/home/會員好禮.webp","/assets/images/home/出貨保證.webp"]</script>
-<script defer src="/assets/js/product-page.js"></script>
+<script defer src="/assets/js/product-page.js?v=19c83a78"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   if (typeof products === "undefined" || typeof renderGrid === "undefined") return;
@@ -417,7 +417,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   related = related.slice(0, 5);
   if (related.length && document.getElementById("pdpRelatedGrid")) {
-    renderGrid(related, "pdpRelatedGrid");
+    renderGrid(related, "pdpRelatedGrid", { allLazy: true }); // 在頁面下方：不跟主圖搶頻寬
   }
 });
 </script>

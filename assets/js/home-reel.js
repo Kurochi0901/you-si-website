@@ -76,6 +76,7 @@
     var flavorEl = cap.querySelector(".dusk-cap-flavor");
     var priceEl = cap.querySelector(".dusk-cap-price");
     var addBtn = cap.querySelector(".dusk-cap-add");
+    var addLabel = addBtn.textContent;
     var bar = reel.querySelector(".dusk-reel-bar");
     var pauseBtn = reel.querySelector(".dusk-reel-pause");
     // 位置感：「29 支」（靜態 HTML，給沒有 JS 與搜尋引擎）換成「3 / 29」
@@ -134,7 +135,13 @@
       priceEl.textContent = "NT$" + p.price.toLocaleString("en-US");
       // 按鈕綁定「畫面上寫的這一支」：就算按下去的瞬間輪盤剛好轉走，加進去的仍是說明列上的酒
       addBtn.dataset.id = p.id;
-      addBtn.setAttribute("aria-label", "加入購物車：" + p.name);
+      // 完售（catalog.js 的 soldOut）：按鈕停用並改字，轉到下一支再恢復
+      var sold = !!p.soldOut;
+      addBtn.disabled = sold;
+      addBtn.textContent = sold ? "完售" : addLabel;
+      addBtn.setAttribute("aria-label", sold
+        ? "完售" + (p.restockNote ? "・" + p.restockNote : "") + "：" + p.name
+        : "加入購物車：" + p.name);
       if (posEl) posEl.textContent = (cur + 1) + " / " + n;
     }
     function go(to, byUser) {
@@ -144,10 +151,19 @@
       caption();
     }
 
+    // 輪盤捲出畫面就不轉：看不到還在轉只會一直下載後面的酒款圖（最多 40 張）。
+    // 回到畫面時從目前這支接著轉，不重置位置。瀏覽器不支援時維持原本行為（一直視為在畫面上）
+    var onScreen = true;
     function play() {
       clearInterval(timer);
-      if (reduce || paused || userPaused || document.hidden) return;
+      if (reduce || paused || userPaused || document.hidden || !onScreen) return;
       timer = setInterval(function () { go(cur + 1, false); }, 3600);
+    }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[entries.length - 1].isIntersecting;
+        play();
+      }).observe(reel);
     }
     function hold(on) { paused = on; if (on) clearInterval(timer); else play(); }
     function setUserPaused(on) {

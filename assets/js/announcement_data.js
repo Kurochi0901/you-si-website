@@ -7,6 +7,10 @@
  *
  * 每則公告格式：
  *   { text: "顯示的文字", link: "點擊連結（選填，不需要可省略）" }
+ *
+ * 限時公告可加期限（選填，"YYYY-MM-DD"，含當天）：
+ *   startAt: 這天才開始顯示　　endAt: 過了這天自動不顯示
+ *   活動結束就不用記得回來刪；全部都過期時公告條會自動隱藏
  */
 
 const announcements = [
@@ -34,7 +38,8 @@ const announcements = [
 
   {
     text: "【雙11・茶酒選物祭】茶酒系列2件92折｜10/30–11/12",
-    link: "/promotions/"
+    link: "/promotions/",
+    endAt: "2026-11-12"
   },
 
   {

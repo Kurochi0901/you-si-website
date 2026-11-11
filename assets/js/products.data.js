@@ -208,6 +208,10 @@ const products = [
     id: 6,
     priority: 5,
     name: "天吹 伯爵紅茶梅酒",
+    // 完售：品名不要改（網址由品名產生，改名會換網址）。soldOut: true → 卡片與商品頁顯示「完售」並停用加入購物車；
+    // restockNote 選填，會接在「完售」後面。恢復供貨時把這兩行刪掉，再跑 node build.js
+    soldOut: true,
+    restockNote: "預計12月進貨",
     type: "果實酒",
     category: "fruit-tea",
     imgs: [`${CDN}/6伯爵紅茶梅酒1.webp`,
@@ -2014,7 +2018,6 @@ const products = [
 
     wineryId: "arimitsu" 
     },
-/* ── 已下架 2026-09-21（保留資料，恢復上架時取消註解即可）──
 {
       id: 53,
       priority: 4, 
@@ -2068,7 +2071,7 @@ const products = [
 
     wineryId: "arimitsu" 
     },
-*/
+/* ── 已下架 2026-11-10（保留資料，恢復上架時取消註解即可）──
 {
       id: 54,
       priority: 4, 
@@ -2120,6 +2123,7 @@ const products = [
 
     wineryId: "arimitsu" 
     },
+*/
 {
       id: 55,
       priority: 4, 
@@ -5593,6 +5597,7 @@ const products = [
 
     wineryId: "hombo"
     },
+/* ── 已下架 2026-11-10（保留資料，恢復上架時取消註解即可）──
     {
       id: 129,
       priority: 4, 
@@ -5639,6 +5644,7 @@ const products = [
 
     wineryId: "kobayashi"
     },
+*/
     {
       id: 130,
       priority: 4, 
@@ -5829,6 +5835,7 @@ const products = [
 
     wineryId: "kessler-zink" 
     },
+/* ── 已下架 2026-11-10（保留資料，恢復上架時取消註解即可）──
     {
       id: 134,
       priority: 5, 
@@ -5877,6 +5884,7 @@ const products = [
 
     wineryId: "koueigiku"
     },
+*/
     {
       id: 135,
       priority: 5, 
@@ -5924,6 +5932,7 @@ const products = [
 
     wineryId: "hayasihonten"
     },
+/* ── 已下架 2026-11-10（保留資料，恢復上架時取消註解即可）──
     {
       id: 136,
       priority: 5, 
@@ -5969,6 +5978,7 @@ const products = [
 
     wineryId: "hayasihonten"
     },
+*/
     {
       id: 137,
       priority: 5, 
@@ -6017,6 +6027,7 @@ const products = [
 
     wineryId: "kobayashi"
     },
+/* ── 已下架 2026-11-10（保留資料，恢復上架時取消註解即可）──
     {
       id: 138,
       priority: 5, 
@@ -6064,6 +6075,7 @@ const products = [
 
     wineryId: "hagino"
     },
+*/
     {
       id: 139,
       priority: 5, 

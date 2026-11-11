@@ -21,9 +21,6 @@ const SHIPPING_FREE_THRESHOLD = 2800; // 滿額免運門檻（NT$）
 const SHIPPING_FEE_ROOM       = 170;  // 常溫運費
 const SHIPPING_FEE_COLD       = 230;  // 冷藏運費
 
-// 商品分類顯示順序（總覽頁排序用）
-const CATEGORY_ORDER = ["fruit-tea", "sake",  "wine", "spirits", "mini"];
-
 /* ===== 1.2 GA4 事件追蹤 (Event Tracking) ===== */
 function trackEvent(eventName, params = {}) {
   try {
@@ -44,7 +41,10 @@ function trackEvent(eventName, params = {}) {
  * 用於 DOMContentLoaded 判斷要執行哪段初始化邏輯
  */
 function pathKey(){
-  const p = location.pathname.replace(/\/+/g, '/');
+  let p = location.pathname.replace(/\/+/g, '/');
+  // 沒有結尾斜線的網址（/products、/products/sake）在正式站也會回 200、不轉址：
+  // 補上斜線再判斷，否則會落到最後的 "home"（導覽列標錯、分類頁不掛活動徽章）
+  if(!p.endsWith("/") && !/\.[a-z0-9]+$/i.test(p)) p += "/";
   if(p === "/" || p === "/index.html")                 return "home";
   if(p.startsWith("/age"))                             return "age";
   if(p.startsWith("/about"))                           return "about";
@@ -114,6 +114,11 @@ function renderAnnouncements() {
   // 如果資料夾不存在或為空，則隱藏公告（不添加 show-announce class）
   if (typeof announcements === "undefined" || !announcements.length) return;
 
+  // 公告可選填 startAt / endAt（"YYYY-MM-DD"，含當天）：過期或還沒開始的自動不顯示，
+  // 活動結束後不用記得回來刪（判斷方式與促銷活動相同）
+  const list = announcements.filter(item => item && isPromoLive(item));
+  if (!list.length) return;
+
   const bar = document.getElementById("announceBar");
   const track = document.getElementById("announceTrack");
   if (!bar || !track) return;
@@ -123,7 +128,7 @@ function renderAnnouncements() {
 
   // 2. 清空現有內容並填充新公告
   track.innerHTML = "";
-  announcements.forEach(function (item, i) {
+  list.forEach(function (item, i) {
     const el = document.createElement("div");
     el.className = "announce-item" + (i === 0 ? " is-active" : "");
     el.innerHTML = item.link 
@@ -133,7 +138,7 @@ function renderAnnouncements() {
   });
 
   // 3. 啟動多則輪播
-  if (announcements.length === 1) return;
+  if (list.length === 1) return;
   // 多則輪播時不當成即時通知：否則螢幕報讀每 5 秒就唸一次新公告（HTML 上的 role="status" aria-live 是給單則公告用的）
   bar.removeAttribute("role");
   bar.setAttribute("aria-live", "off");
@@ -349,23 +354,6 @@ function ensureSkipLink(){
 if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", ensureSkipLink);
 else ensureSkipLink();
 
-/** Hero 區域固定背景圖（單張，不輪播） */
-function initHeroBackground(){
-  const el = document.querySelector(".hero-bg");
-  if(!el) return;
-  el.style.backgroundImage = `url('https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/banner.webp')`;
-}
-
-/** Fisher-Yates 隨機打亂陣列，回傳新陣列（不修改原陣列） */
-function shuffleArray(arr){
-  const a = [...arr];
-  for(let i = a.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
 /** 取得郵寄溫層選擇（常溫 / 冷藏），預設常溫 */
 function getSelectedShipTemp(){
   const checked = document.querySelector('input[name="shipTemp"]:checked');
@@ -548,47 +536,8 @@ function sortByPriorityDesc(list){
   });
 }
 
-/** 總覽頁排序：先依 CATEGORY_ORDER，再依 priority 大→小 */
-function sortAllByCategoryThenPriority(list){
-  return [...list].sort((a, b) => {
-    const ca = CATEGORY_ORDER.indexOf(a?.category);
-    const cb = CATEGORY_ORDER.indexOf(b?.category);
-    const ga = ca === -1 ? 999 : ca, gb = cb === -1 ? 999 : cb;
-    if(ga !== gb) return ga - gb;
-    const pa = getPriority(a), pb = getPriority(b);
-    if(pa !== pb) return pb - pa;
-    return (a.id || 0) - (b.id || 0);
-  });
-}
-
-/**
- * 商品總覽頁的即時篩選邏輯
- * 讀取頁面上的搜尋關鍵字、分類、最低/最高價格，
- * 過濾後排序並重新渲染 #productGrid
- */
-function applyFilters(){
-  const qEl   = document.getElementById("q");
-  const catEl = document.getElementById("cat");
-  const minpEl = document.getElementById("minp");
-  const maxpEl = document.getElementById("maxp");
-  if(!qEl && !catEl && !minpEl && !maxpEl) return;
-
-  const q    = qEl   ? qEl.value.trim().toLowerCase() : "";
-  const cat  = catEl ? catEl.value : "all";
-  const minp = minpEl && minpEl.value ? parseInt(minpEl.value, 10) : 0;
-  const maxp = maxpEl && maxpEl.value ? parseInt(maxpEl.value, 10) : 999999;
-
-  const list = products.filter(p => {
-    if(cat !== "all" && groupOf(p) !== cat) return false;
-    if(p.price < minp || p.price > maxp)    return false;
-    // 口味短語也納入搜尋，例如搜「甘口」「果香」「酒體清爽」
-    if(q && !`${p.name} ${p.spec} ${p.type} ${flavorReading(p)}`.toLowerCase().includes(q)) return false;
-    return true;
-  });
-
-  // 選定分類：該類內 priority 排序；all：先分類再 priority
-  renderGrid(cat !== "all" ? sortByPriorityDesc(list) : sortAllByCategoryThenPriority(list), "productGrid");
-}
+/* 商品列表頁（/products/ 與五個分類頁）的搜尋、篩選、排序在 catalog-page.js。
+   舊版 #q／#cat／#minp／#maxp 四個欄位已不存在，對應的 applyFilters() 等函式於 2026-11 移除 */
 
 
 /* ===== 5. 商品 Grid 與 Card 渲染 ===== */
@@ -795,7 +744,9 @@ function renderGrid(list, id, opts){
           ${flavorReading(p) ? `<div class="card-flavor">${flavorReading(p)}</div>` : ""}
           <div class="card-meta">
             <div class="price-wrap">${renderPrice(p)}</div>
-            <button class="btn-add" onclick="addToCart(${p.id})" aria-label="加入購物車：${p.name}">加入購物車</button>
+            ${p.soldOut
+              ? `<button class="btn-add is-soldout" disabled aria-label="完售${p.restockNote ? "・" + p.restockNote : ""}：${p.name}">完售</button>`
+              : `<button class="btn-add" onclick="addToCart(${p.id})" aria-label="加入購物車：${p.name}">加入<span class="btn-add-rest">購物車</span></button>`}
           </div>
         </div>
       </div>
@@ -829,19 +780,6 @@ function hydrateStaticGrid(id){
       if(row) row.insertAdjacentHTML("afterend", html);
     });
   }
-  return true;
-}
-
-/** 商品總覽頁：判斷四個篩選欄位是否都還是預設值（無條件＝可直接沿用靜態卡） */
-function filtersAreDefault(){
-  const q = document.getElementById("q");
-  const cat = document.getElementById("cat");
-  const minp = document.getElementById("minp");
-  const maxp = document.getElementById("maxp");
-  if(q && q.value.trim() !== "") return false;
-  if(cat && cat.value !== "all") return false;
-  if(minp && minp.value !== "") return false;
-  if(maxp && maxp.value !== "") return false;
   return true;
 }
 
@@ -890,7 +828,6 @@ function renderBlogRelatedProducts(retryCount = 0) {
   
   if (!allArticles || !allProducts) {
     if (retryCount < 3) {
-      console.log(`[Blog] Data not ready, retrying... (${retryCount + 1})`);
       setTimeout(() => renderBlogRelatedProducts(retryCount + 1), 150);
       return;
     }
@@ -909,8 +846,6 @@ function renderBlogRelatedProducts(retryCount = 0) {
       const list = allProducts.filter(p => article.relatedProductIds.includes(p.id));
       
       if (list.length > 0) {
-          console.log(`[Blog] Matches found for "${slug}":`, list.length);
-          
           // 改用語意化 Class 並交由 style.css 統一控制樣式
           ctaContainer.innerHTML = `
               <section class="blog-related-section">
@@ -933,10 +868,22 @@ function renderBlogRelatedProducts(retryCount = 0) {
 /* ===== 9. 購物車核心 ===== */
 
 /** 從 localStorage 讀取購物車原始資料（[{id, qty}]） */
-function getCart(){ return JSON.parse(localStorage.getItem("cart") || "[]"); }
+/*  防護：內容壞掉、不是陣列、或瀏覽器封鎖儲存空間時一律當成空車 —— 這支每一頁載入都會跑，
+    丟例外會讓整頁的初始化中斷（key 名稱與資料格式不變） */
+function getCart(){
+  try{
+    const c = JSON.parse(localStorage.getItem("cart") || "[]");
+    return Array.isArray(c) ? c.filter(x => x && typeof x === "object") : [];
+  }catch(e){
+    return [];
+  }
+}
 
 /** 儲存購物車至 localStorage */
-function saveCart(c){ localStorage.setItem("cart", JSON.stringify(c)); }
+function saveCart(c){
+  try{ localStorage.setItem("cart", JSON.stringify(c)); }
+  catch(e){ console.warn("購物車無法寫入瀏覽器儲存空間", e); }
+}
 
 /**
  * 將商品加入購物車
@@ -944,6 +891,13 @@ function saveCart(c){ localStorage.setItem("cart", JSON.stringify(c)); }
  * 加入後觸發加入成功 toast 與促銷引導 toast
  */
 function addToCart(id){
+  // 完售（products.data.js 的 soldOut）：按鈕本來就停用，這裡是最後一道防線（例如舊分頁還留著可按的按鈕）
+  const soldOut = typeof products !== "undefined" ? products.find(x => x.id === id && x.soldOut) : null;
+  if(soldOut){
+    showPromoToast(`「${soldOut.name}」目前完售${soldOut.restockNote ? "，" + soldOut.restockNote : ""}`);
+    return;
+  }
+
   const cart = getCart();
   const item = cart.find(x => x.id === id);
   if(item) item.qty++;
@@ -1646,12 +1600,25 @@ window.handleRemoveCoupon = handleRemoveCoupon;
  * 只列出活動期間內的促銷規則，已達成的打勾標示
  */
 function renderPromotionBlock(){
-  const box = document.getElementById("promotionBlock");
-  if(!box || !window.PROMOTIONS) return;
+  // 下單頁同時有兩個優惠區塊（右側摘要 #cartMini 裡、購物車抽屜 #miniCartList 裡），而且 id 相同：
+  // getElementById 只會拿到第一個，抽屜裡那個會是空的 → 兩個容器裡的都畫。
+  // ⚠️ 只認這兩個容器：order/index.html 在 #cartMini 外面還有一個同名的空區塊（從來不會被填），
+  //    若連它一起畫，優惠清單會在摘要裡出現兩次
+  let boxes = document.querySelectorAll("#cartMini .promotion-block, #miniCartList .promotion-block");
+  if(!boxes.length){
+    const first = document.getElementById("promotionBlock");
+    boxes = first ? [first] : [];
+  }
+  if(!boxes.length || !window.PROMOTIONS) return;
+  const html = promotionBlockHTML();
+  boxes.forEach(box => { box.innerHTML = html; });
+}
 
+/** 優惠區塊的內容；沒有可列的活動時回傳空字串 */
+function promotionBlockHTML(){
   // 已結束／尚未開始的活動不列出（金額計算另由各 promo 的 condition 擋掉）
   const livePromos = window.PROMOTIONS.filter(isPromoLive);
-  if(livePromos.length === 0){ box.innerHTML = ""; return; }
+  if(livePromos.length === 0) return "";
 
   const ctx = getCartContext();
   const res = applyPromotions(ctx);
@@ -1663,7 +1630,7 @@ function renderPromotionBlock(){
   const shown = cart.length
     ? livePromos.filter(p => !Array.isArray(p.targetIds) || p.targetIds.some(inCart))
     : livePromos;
-  if(shown.length === 0){ box.innerHTML = ""; return; }
+  if(shown.length === 0) return "";
 
   // 每個活動的狀態都寫成文字（不只靠打勾或顏色），報讀也聽得到
   const itemHtml = p => {
@@ -1688,24 +1655,12 @@ function renderPromotionBlock(){
     return `<li class="promo-item is-${state}"><span class="promo-mark" aria-hidden="true"></span><span class="promo-text"><span class="promo-label">${p.label}</span>${note ? `<span class="promo-note">${note}</span>` : ""}</span></li>`;
   };
 
-  box.innerHTML = `
+  return `
     <div class="promo-title">${cart.length ? "這些酒款的優惠" : "目前優惠"}</div>
     <ul class="promo-list">
       ${shown.map(itemHtml).join("")}
     </ul>
     ${res.discount > 0 ? `<div class="promo-discount">已折抵 NT$${res.discount}</div>` : `<div class="promo-hint"></div>`}
-  `;
-}
-
-/** 渲染首頁促銷橫幅（#homePromo），列出所有促銷標籤文字 */
-function renderHomePromotion(){
-  const box = document.getElementById("homePromo");
-  if(!box || !window.PROMOTIONS) return;
-  box.innerHTML = `
-    <div class="home-promo-inner">
-      <div class="home-promo-title">目前優惠</div>
-      <div class="home-promo-items">${window.PROMOTIONS.filter(isPromoLive).map(p => p.label).join(" ／ ")}</div>
-    </div>
   `;
 }
 
@@ -1791,15 +1746,6 @@ function getNextPromotionHint(cartQty, addedId){
 
   return null;
 }
-
-// 接到購物車更新後，同步更新 #totalAmount 與促銷區塊
-const _updateCartUI = window.updateCartUI;
-window.updateCartUI = function(){
-  if(typeof _updateCartUI === "function") _updateCartUI();
-  const totalEl = document.getElementById("totalAmount");
-  if(totalEl) totalEl.textContent = "NT$" + applyPromotions(getCartContext()).finalTotal;
-  renderPromotionBlock();
-};
 
 /**
  * 計算完整訂單金額（含折扣與運費）
@@ -1946,8 +1892,10 @@ ${pricing.discounts.length ? pricing.discounts.map(d => `- ${d.label}：-NT$${d.
 `;
 
   // 送至後端（fire-and-forget，不阻塞 UX）
+  // keepalive：客人送出後馬上跳去 LINE 或關掉分頁，這個請求也會送完，不會被瀏覽器取消
   fetch(GAS_ORDER_URL, {
     method: "POST",
+    keepalive: true,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, phone, email, pickup, address, summary,
       subtotal: pricing.subtotal, discount: pricing.discountTotal, total: pricing.total })
@@ -2111,17 +2059,6 @@ function isValidEmail(email){
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-/** 只允許輸入數字（含貼上防護），綁定所有 .js-only-number 元素 */
-function bindOnlyNumberInputs(){
-  document.querySelectorAll(".js-only-number").forEach(input => {
-    input.addEventListener("input", () => { input.value = input.value.replace(/\D+/g, ""); });
-    input.addEventListener("paste", e => {
-      e.preventDefault();
-      input.value += (e.clipboardData || window.clipboardData).getData("text").replace(/\D+/g, "");
-    });
-  });
-}
-
 
 /* ===== 16. 活動頁 ===== */
 
@@ -2253,57 +2190,17 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-ig-link]").forEach(a => { a.href = BRAND.igUrl; a.target = "_blank"; a.rel = "noopener"; });
 
   renderCartMini();       // 渲染購物車摘要（order 頁右側）
-  bindOnlyNumberInputs(); // 綁定數字輸入限制
-  renderHomePromotion();  // 渲染首頁促銷橫幅
   ensureStickyUI();       // 注入浮動購物車 / sticky bar
   updateCartUI();         // 更新購物車 UI 數字
 
   const key = pathKey();
 
-  /* 首頁 */
-  if(key === "home"){
-    initHeroBackground();
+  /* 首頁：首屏輪盤、口味座標、促銷輪播各自在 home-reel.js／home-taste.js／index.html 內處理，這裡不需要另外初始化
+     （舊版 #homeGrid 精選卡、.hero-bg 背景圖、#homePromo 橫幅已於 2026-11 改版移除） */
 
-    // 精選商品由 build.js 預渲染成靜態卡：整個 priority-5 池都寫在 HTML 裡，
-    // style.css 只顯示前 5 張，洗牌則由 index.html 內緊接 #homeGrid 的 inline script
-    // 在「瀏覽器繪製前」完成。這裡不要再洗一次 —— DOMContentLoaded 已在繪製之後，
-    // 再動順序會造成使用者看得到的閃爍。此處只負責掛上進行中的活動徽章。
-    if(!hydrateStaticGrid("homeGrid")){
-      // fallback：build.js 尚未執行時仍能正常顯示
-      const HOME_MAX = 5;
-      const p5 = products.filter(p => getPriority(p) === 5);
-      let featured = p5.length > HOME_MAX ? shuffleArray(p5).slice(0, HOME_MAX) : [...p5];
-      if(featured.length < HOME_MAX){
-        const used = new Set(featured.map(p => p.id));
-        const p4   = products.filter(p => getPriority(p) === 4 && !used.has(p.id));
-        featured   = [...featured, ...shuffleArray(p4).slice(0, HOME_MAX - featured.length)];
-      }
-      renderGrid(featured, "homeGrid");
-    }
-  }
-
-  /* 商品總覽頁 */
-  if(key === "products"){
-    // ✅ 支援 URL 參數：?q=（Google SearchAction、首頁搜尋框）、?minp= / ?maxp=（首頁「依預算找酒」）、?cat=
-    const urlParams = new URLSearchParams(window.location.search);
-    const fillFromUrl = (param, id) => {
-      const v = urlParams.get(param);
-      const el = document.getElementById(id);
-      if(v && el) el.value = v;
-    };
-    fillFromUrl("q", "q");
-    fillFromUrl("minp", "minp");
-    fillFromUrl("maxp", "maxp");
-    const urlCat = urlParams.get("cat");
-    const catSel = document.getElementById("cat");
-    if(urlCat && catSel && [...catSel.options].some(o => o.value === urlCat)) catSel.value = urlCat;
-    document.getElementById("q")?.addEventListener("input", applyFilters);
-    document.getElementById("cat")?.addEventListener("change", applyFilters);
-    document.getElementById("minp")?.addEventListener("input", applyFilters);
-    document.getElementById("maxp")?.addEventListener("input", applyFilters);
-    // 已有靜態卡且尚未設定任何篩選條件 → 直接沿用，不重繪（使用者一操作就會走 applyFilters）
-    if(!(hydrateStaticGrid("productGrid") && filtersAreDefault())) applyFilters();
-  }
+  /* 商品總覽頁：搜尋、篩選、?q=／?minp=／?maxp=／?cat= 網址參數都由 catalog-page.js 處理。
+     這裡只替 build.js 寫進 HTML 的靜態卡補上活動徽章（catalog-page.js 沒跑起來時，畫面上看到的就是這批靜態卡） */
+  if(key === "products") hydrateStaticGrid("productGrid");
 
   /* 商品分類頁（必須有 #productGrid 才視為分類頁，雙重保險）*/
   if(key === "products-sake" && document.getElementById("productGrid")){
@@ -2358,17 +2255,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }))
       });
     }
-  }
-
-  /* About 頁：Scroll Reveal */
-  const reveals = document.querySelectorAll(".reveal");
-  if(reveals.length){
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){ entry.target.classList.add("is-visible"); io.unobserve(entry.target); }
-      });
-    }, { threshold: 0.15 });
-    reveals.forEach(el => io.observe(el));
   }
 
   /* 舊 URL 相容：?item=N → 自動跳轉到新的靜態產品頁 */

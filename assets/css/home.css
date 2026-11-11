@@ -151,36 +151,6 @@
 .home-search button:hover { background: var(--ink); border-color: var(--ink); }
 .home-search button:focus-visible { outline: 2px solid var(--home-umber); outline-offset: 3px; }
 
-.home-budget {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.home-budget-label { font-size: 13px; color: var(--home-gold-text); }
-.home-budget ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.home-budget a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 0 14px;
-  font-size: 14px;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-  background: var(--home-paper);
-  border: 1px solid var(--home-gold-soft);
-  border-radius: var(--r-pill);
-  transition: border-color .2s ease;
-}
-.home-budget a:hover { border-color: var(--home-umber); }
-.home-budget a:focus-visible { outline: 2px solid var(--home-umber); outline-offset: 2px; }
 
 /* ============================================
    用口味找酒
@@ -596,7 +566,6 @@
 
   .home-find { margin-top: 20px; gap: 14px; }
   .home-search { flex-basis: 100%; max-width: none; }
-  .home-budget { gap: 8px 10px; }
 
   /* 文章：手機改左圖右文的緊湊列表 */
   .home-articles { grid-template-columns: minmax(0, 1fr); gap: 18px; }
@@ -632,8 +601,6 @@
 .home-search input:focus { border-color: var(--home-gold); box-shadow: var(--focus-glow); }
 .home-search button { padding: 0 26px; }
 
-.home-budget a { background: #fff; border-color: #ece3d3; box-shadow: var(--soft-shadow-sm); transition: border-color .2s ease, transform .2s var(--ease-soft), box-shadow .2s ease; }
-.home-budget a:hover { border-color: var(--home-gold); transform: translateY(-1px); box-shadow: var(--soft-shadow); }
 
 /* 口味座標：分頁改成膠囊切換，座標框圓角＋柔和陰影 */
 .home-taste-tabs {
@@ -1179,3 +1146,13 @@
 .home-taste-status { border-radius: var(--r-xs); }
 .home-taste-status:focus { outline: none; }
 .home-taste-status:focus-visible { outline: 2px solid var(--home-umber); outline-offset: 6px; }
+
+/* 輪盤轉到完售的酒：說明列的按鈕停用並改成「完售」 */
+.dusk-cap-add:disabled {
+  color: var(--muted);
+  background: transparent;
+  border-color: var(--field-line);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}

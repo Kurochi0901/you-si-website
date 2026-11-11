@@ -35,3 +35,21 @@ Thumbs.db
 ARCHITECTURE.md
 yousi_price_scraper.py
 scripts/
+
+# 內部文件
+ARCHITECTURE.md
+DESIGN.md
+PRODUCT.md
+效能優化修改計畫.md
+READE.txt
+.cursorrules
+
+# 設計與 AI 工具的工作資料夾
+.impeccable/
+.agents/
+.claude/
+
+# 雜項
+grep.exe.stackdump
+*.backup
+.vercelignore

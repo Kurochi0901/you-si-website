@@ -44,20 +44,20 @@
 <link rel="alternate" hreflang="x-default" href="https://www.yousi-drink.com/products/spirits/黑木本店-百年孤獨-麥燒酎/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
 <link rel="preload" as="image" href="https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/86百年孤獨1.webp" fetchpriority="high">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" href="/favicon.ico">
-<link rel="stylesheet" href="/assets/css/style.css">
-<link rel="stylesheet" href="/assets/css/product-page.css">
+<link rel="stylesheet" href="/assets/css/style.css?v=faa6cf4f">
+<link rel="stylesheet" href="/assets/css/product-page.css?v=5d3b1492">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
 <!-- 標題明朝體：只載入本頁用到的字，href 由 node build.js 自動產生，請勿手改 -->
 <link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E4%BB%8B%E5%93%81%E5%95%86%E5%AD%A4%E5%B9%B4%E5%BA%97%E6%9C%A8%E6%9C%AC%E6%A0%BC%E6%AC%BE%E7%87%92%E7%8D%A8%E7%99%BE%E7%9B%B8%E7%B4%B9%E8%A6%8F%E9%85%8E%E9%85%92%E9%97%9C%E9%BA%A5%E9%BB%91%EF%BC%8C%EF%BC%9A">
 
-<script defer src="/assets/js/catalog.js"></script>
-<script defer src="/assets/js/main.js"></script>
-<script defer src="/assets/js/announcement_data.js"></script>
-<script type="module" src="/assets/js/promotions.bridge.js"></script>
+<script defer src="/assets/js/catalog.js?v=cca70a99"></script>
+<script defer src="/assets/js/main.js?v=63165689"></script>
+<script defer src="/assets/js/announcement_data.js?v=8fab7c8c"></script>
+<script type="module" src="/assets/js/promotions.bridge.js?v=08930e17"></script>
 
 <script type="application/ld+json">
 {
@@ -69,7 +69,7 @@
   "sku": "86",
   "mpn": "YOUSI-86",
   "productID": "yousi:86",
-  "category": "日本燒酎・威士忌 Shochu &amp; Whisky",
+  "category": "日本燒酎・威士忌 Shochu & Whisky",
   "inLanguage": "zh-Hant",
   "audience": {
     "@type": "PeopleAudience",
@@ -83,7 +83,7 @@
     "url": "https://www.yousi-drink.com/products/spirits/黑木本店-百年孤獨-麥燒酎/",
     "priceCurrency": "TWD",
     "price": 3800,
-    "priceValidUntil": "2027-11-09",
+    "priceValidUntil": "2027-11-11",
     "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/NewCondition",
     "eligibleRegion": { "@type": "Country", "name": "TW" },
@@ -343,7 +343,7 @@ https://www.yousi-drink.com/products/spirits/黑木本店-百年孤獨-麥燒酎
 
 <!-- 相簿、放大、風味座標互動：/assets/js/product-page.js（圖片清單由這裡帶入） -->
 <script type="application/json" id="pdpImgs">["https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/86百年孤獨1.webp","https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/86百年孤獨2.webp","https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/86百年孤獨3.webp","/assets/images/home/會員好禮.webp","/assets/images/home/出貨保證.webp"]</script>
-<script defer src="/assets/js/product-page.js"></script>
+<script defer src="/assets/js/product-page.js?v=19c83a78"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   if (typeof products === "undefined" || typeof renderGrid === "undefined") return;
@@ -359,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   related = related.slice(0, 5);
   if (related.length && document.getElementById("pdpRelatedGrid")) {
-    renderGrid(related, "pdpRelatedGrid");
+    renderGrid(related, "pdpRelatedGrid", { allLazy: true }); // 在頁面下方：不跟主圖搶頻寬
   }
 });
 </script>

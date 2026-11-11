@@ -845,7 +845,8 @@ html.show-announce .order-summary { top: 132px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-order .order-done,
+  /* 權重要和上面設定動畫的 .page-order .ys-modal.order-done 一樣，否則蓋不掉 */
+  .page-order .ys-modal.order-done,
   .order-summary-box[open] .order-summary-body { animation: none; }
   .order-form input, .order-form textarea, .order-summary .coupon-input,
   .order-choice-body, .order-temp span, .order-summary-head::after,

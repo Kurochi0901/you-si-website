@@ -41,19 +41,19 @@
 <link rel="alternate" hreflang="x-default" href="https://www.yousi-drink.com/promotions/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" href="/favicon.ico">
-<link rel="stylesheet" href="/assets/css/style.css">
-<link rel="stylesheet" href="/assets/css/promotions.css">
+<link rel="stylesheet" href="/assets/css/style.css?v=faa6cf4f">
+<link rel="stylesheet" href="/assets/css/promotions.css?v=99cf368c">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
 <!-- 標題明朝體：只載入本頁用到的字，href 由 node build.js 自動產生，請勿手改 -->
 <link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E3%83%BB%E4%BC%81%E4%BD%9C%E4%BE%9B%E4%BF%83%E5%84%AA%E5%85%AC%E5%89%8D%E5%8B%95%E5%8F%AB%E5%8F%B8%E5%90%88%E5%93%A1%E5%95%86%E5%96%9D%E5%9C%98%E5%A7%94%E5%B1%85%E5%B1%8B%E5%B7%A5%E5%BB%A0%E5%BB%B3%E6%83%A0%E6%89%B9%E6%99%82%E6%9C%9F%E6%9C%AC%E6%A5%AD%E6%B4%BB%E7%95%B6%E7%99%BC%E7%A6%8F%E8%B2%A8%E8%B3%BC%E9%85%89%E9%85%92%E9%8A%B7%E9%A4%90%EF%BC%8C%EF%BC%9A">
 
-<script defer src="/assets/js/catalog.js"></script>
-<script defer src="/assets/js/main.js"></script>
-<script defer src="/assets/js/announcement_data.js"></script>
-<script type="module" src="/assets/js/promotions.bridge.js"></script>
+<script defer src="/assets/js/catalog.js?v=cca70a99"></script>
+<script defer src="/assets/js/main.js?v=63165689"></script>
+<script defer src="/assets/js/announcement_data.js?v=8fab7c8c"></script>
+<script type="module" src="/assets/js/promotions.bridge.js?v=08930e17"></script>
 
 <!-- ✅ 階層導覽 Breadcrumb Schema -->
 <script type="application/ld+json">
@@ -98,7 +98,7 @@
     "name": "本期促銷怎麼參加？折扣怎麼計算？",
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": "本期「中秋團圓慶」無需輸入優惠碼，結帳時自動套用：購物車出現任一款活動酒款，該活動酒款小計即享 95 折；另外全館消費每滿 NT$1,500 再折 NT$100（滿 3,000 折 200，依此類推，不設上限），兩項優惠可累計。95 折只計算活動酒款的原價小計；滿額折抵則以全館商品的原價小計計算，非活動商品也列入，即使購物車沒有活動酒款、只要全館滿 NT$1,500 同樣可折抵。活動期間結束後系統會自動失效。"
+      "text": "當期促銷無需輸入優惠碼：把活動酒款加入購物車、達到活動條件後，結帳時會自動套用折扣。各檔活動的適用酒款、折扣條件與活動期間，以本頁活動卡片所列為準；活動期間結束後折扣會自動失效。同一筆訂單若同時符合多個不可併用的活動或折扣碼，系統會自動套用折抵金額最高的一項。長期活動「慵懶貓咪系列」為萩之鶴 櫻花貓・暖桌貓任選 2 件 NT$2,600。"
     }
   }]
 }
@@ -272,7 +272,7 @@
     }
 
     try {
-      const mod = await import("/assets/js/promotions.data.js");
+      const mod = await import("/assets/js/promotions.data.js?v=ea0be737");
 
       // 卡片排序：進行中 → 長期活動 → 即將開始（sort 穩定，同狀態內維持 promotions.data.js 的原始順序）
       const STATUS_RANK = { active: 0, always: 1, upcoming: 2, ended: 3 };

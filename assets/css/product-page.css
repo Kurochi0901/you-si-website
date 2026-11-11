@@ -642,64 +642,10 @@
 /* ============================================
    舊版版型（尚未重新 build 的頁面仍使用分頁與長條刻度）
    ============================================ */
-.pdp-divider { border: none; border-top: 1px solid var(--line); margin: 20px 0; }
 
-.pdp-tabs {
-  display: flex;
-  border-bottom: 1px solid var(--line);
-  margin-top: 28px;
-}
-.pdp-tab {
-  flex: 1;
-  padding: 14px 12px;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: .06em;
-  color: var(--muted);
-  cursor: pointer;
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-}
-.pdp-tab:hover { color: var(--ink); }
-.pdp-tab.active { color: var(--pdp-umber); border-bottom-color: var(--pdp-umber); }
-.pdp-tab-panel { display: none; padding: 24px 0; }
-.pdp-tab-panel.active { display: block; }
 
-.pdp-feature-text {
-  white-space: pre-line;
-  line-height: 1.95;
-  color: var(--pdp-ink-soft);
-  font-size: 15px;
-}
 
-.pdp-scales { display: flex; flex-direction: column; gap: 24px; }
-.pdp-scale-row { display: flex; align-items: center; gap: 16px; }
-.pdp-scale-label { width: 48px; flex-shrink: 0; font-weight: 700; font-size: 14px; }
-.pdp-scale-track { flex: 1; }
-.pdp-scale-bars { display: flex; gap: 6px; }
-.pdp-scale-bars span { flex: 1; height: 8px; border-radius: 2px; background: #ece6df; }
-.pdp-scale-bars span.on { background: var(--pdp-umber); }
-.pdp-scale-axis {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 6px;
-}
 
-.pdp-trust-strip { max-width: 1200px; margin: 32px auto 0; padding: 0 18px; }
-.pdp-trust-strip-inner { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-.pdp-trust-chip {
-  font-size: 12px;
-  color: var(--muted);
-  border: 1px solid var(--line);
-  border-radius: var(--r-pill);
-  padding: 5px 12px;
-  white-space: nowrap;
-}
 
 /* ============================================
    柔和版（2026-11）：圓角、陰影取代硬線、按鈕回饋
@@ -1042,7 +988,6 @@ html.pdp-zoom-open { overflow: hidden; }
   color: var(--ink);
 }
 /* 2026-11-09：口味結論前的雙圈圓點拿掉（已產生的商品頁仍有這個 span，先隱藏；build.js 模板已移除） */
-.pdp-taste-dot { display: none; }
 .pdp-taste-text { font-size: 15px; font-weight: 700; letter-spacing: .04em; }
 .pdp-taste-go {
   font-size: 13px;
@@ -1192,4 +1137,14 @@ html.show-announce .pdp-flavor { scroll-margin-top: 148px; }
 .pdp-section--story .pdp-serve { margin-top: 18px; }
 @media (max-width: 860px) {
   .pdp-section--story { margin: 12px 0 20px; padding-top: 20px; }
+}
+/* 完售（products.data.js 的 soldOut）：按鈕停用，寫「完售・預計○月進貨」；LINE 詢問鈕照常可用 */
+.pdp-btn-cart:disabled,
+.pdp-btn-cart.is-soldout {
+  background: transparent;
+  color: var(--muted);
+  border-color: var(--field-line);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
 }

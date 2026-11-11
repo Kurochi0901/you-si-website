@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXRMKRX6LB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YXRMKRX6LB');
+</script>
+
+<!-- 找不到頁面時 Vercel 會回這一頁（狀態碼 404）。任何網址都可能顯示它，所以資源一律用 / 開頭的絕對路徑。
+     css／js 的 ?v= 版本參數由 node build.js 自動補上，請勿手改 -->
+<title>找不到這一頁｜酉時喝酒 YOU-SI</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<meta name="author" content="酉時喝酒 YOU-SI">
+<meta name="publisher" content="珍探吉國際股份有限公司">
+<meta name="theme-color" content="#5c4a32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/assets/css/style.css?v=faa6cf4f">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+
+<script defer src="/assets/js/catalog.js?v=cca70a99"></script>
+<script defer src="/assets/js/main.js?v=63165689"></script>
+<script defer src="/assets/js/announcement_data.js?v=8fab7c8c"></script>
+<script type="module" src="/assets/js/promotions.bridge.js?v=08930e17"></script>
+
+<style>
+  .notfound{max-width:720px;margin:64px auto 80px;padding:0 24px;text-align:center}
+  .notfound-code{display:inline-block;margin:0 0 18px;padding-bottom:6px;border-bottom:1px solid var(--yousi-gold);color:var(--gold-text);font-size:14px;letter-spacing:.18em}
+  .notfound-title{margin:0 0 12px;font-size:28px;font-weight:700;line-height:1.4;color:var(--ink)}
+  .notfound-text{margin:0 0 28px;font-size:16px;line-height:1.8;color:var(--ink-soft)}
+  .notfound-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+  /* 全站 .btn-primary 還是舊的金色漸層白字（對比不足）；這頁的主要按鈕改用現行的焦茶實色，觸控高度補到 44px */
+  .notfound-actions .btn{display:inline-flex;align-items:center;min-height:44px}
+  .notfound-actions .btn-primary{background:var(--jiaocha);border-color:var(--jiaocha);color:var(--washi)}
+  .notfound-cats{margin:36px 0 0;padding:20px 0 0;border-top:1px solid var(--line);font-size:15px;line-height:2;color:var(--muted)}
+  .notfound-cats a{margin:0 8px;color:var(--jiaocha);text-underline-offset:4px;white-space:nowrap}
+  @media (max-width:520px){
+    .notfound{margin:40px auto 56px}
+    .notfound-title{font-size:24px}
+  }
+</style>
+</head>
+<body>
+<div class="announce-bar" id="announceBar" role="status" aria-live="polite">
+  <div class="announce-track" id="announceTrack"></div>
+</div>
+
+  <div class="header-wrap">
+    <div class="header">
+      <a class="logo" href="/" aria-label="回到首頁">酉時喝酒 YOU-SI</a>
+      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <nav>
+        <a href="/">首頁</a>
+        <a href="/about/">關於</a>
+        <a href="/promotions/">優惠活動</a>
+        <a href="/products/">商品分類</a>
+        <a href="/offers/">活動分享</a>
+        <a href="/blog/">酉時圖書館</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" data-line-link href="#">聯繫我們</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="notfound" id="main">
+    <p class="notfound-code">404</p>
+    <h1 class="notfound-title">找不到這一頁</h1>
+    <p class="notfound-text">這個網址可能已經更換，或這支酒已經下架。可以從全部酒款重新找，或用 LINE 告訴我們你想找哪一支。</p>
+    <div class="notfound-actions">
+      <a class="btn btn-primary" href="/products/">看全部酒款</a>
+      <a class="btn btn-ghost" href="/">回首頁</a>
+      <a class="btn btn-ghost" data-line-link href="https://line.me/ti/p/@008jcfgc" target="_blank" rel="noopener">用 LINE 詢問</a>
+    </div>
+    <p class="notfound-cats">
+      <a href="/products/sake/">日本清酒</a>
+      <a href="/products/fruit-tea/">茶酒與果實酒</a>
+      <a href="/products/wine/">葡萄酒</a>
+      <a href="/products/spirits/">烈酒</a>
+      <a href="/products/mini/">小罐專區</a>
+    </p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-info">
+        <div>聯絡我們</div>
+        <div>珍探吉國際股份有限公司</div>
+        <div>LINE: <a href="https://line.me/ti/p/@008jcfgc" target="_blank" rel="noopener">@008jcfgc</a></div>
+        <div><a href="mailto:jotanji.2021@gmail.com">jotanji.2021@gmail.com</a></div>
+        <div>公司地址：新竹縣竹北市光明十街87號1樓（地標：深耕公園）</div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-qr">
+          <img class="line-qr-img" src="/assets/images/qr-code_line.png" alt="加入 LINE 官方帳號 QR Code" width="84" height="84" loading="lazy" decoding="async">
+          <div class="qr-label">Line <span class="qr-sub">會員集點累贈</span></div>
+        </div>
+        <div class="footer-qr">
+          <img class="ig-qr-img" src="/assets/images/qr-code_IG.png" alt="Instagram yousi1719_drink QR Code" width="84" height="84" loading="lazy" decoding="async">
+          <div class="qr-label">Instagram yousi1719_drink</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<div class="alcohol-bar" role="note" aria-label="飲酒警語">
+  <span class="alcohol-bar-text">
+    🍶 未滿十八歲請勿飲酒
+    <span class="alcohol-bar-divider" aria-hidden="true"></span>
+    酒後不開車，安心享受微醺時刻
+  </span>
+</div>
+
+</body>
+</html>

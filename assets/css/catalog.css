@@ -279,6 +279,9 @@
   margin: 0 -18px 0 0;
   padding: 6px 18px 18px 0;
   overflow-x: auto;
+  /* 只能左右滑：overflow-x:auto 會連帶讓 y 也變 auto，卡片裡隱藏的活動說明浮窗就把這排撐出上下捲動 */
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-padding: 0 18px;
   scrollbar-width: thin;
@@ -456,11 +459,12 @@ html.show-announce .catalog-ch-name { top: 146px; }
   .catalog-seg::-webkit-scrollbar { display: none; }
   .catalog-seg-legend { flex-shrink: 0; min-width: 2.6em; }
   .catalog-seg-opt { flex-shrink: 0; }
-  /* 手機商品卡是「左圖右文」橫卡：精選排一次露出一張多一點 */
-  .page-catalog .catalog-shelf-grid { grid-auto-columns: 84%; gap: 12px; padding-right: 24px; }
-  /* 精選排的橫卡比整欄窄：價格在上、按鈕在下撐滿，價格不會被按鈕蓋住 */
-  .page-catalog .catalog-shelf-grid .card-meta { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
-  .page-catalog .catalog-shelf-grid .btn-add { width: 100%; text-align: center; }
+  /* 精選排：窄直卡，一次露出兩張多一點 */
+  .page-catalog .catalog-shelf-grid { grid-auto-columns: 148px; gap: 10px; padding-right: 24px; }
+  .catalog-shelf { margin-bottom: 14px; }
+  .catalog-shelf-title { font-size: 19px; }
+  .catalog-shelf-head { margin-bottom: 6px; }
+  .catalog-shelves { margin-bottom: 8px; }
   /* 手機寬度不夠排直書：酒造名改橫書，上方一道 32px 酉時金短線 */
   .catalog-ch { display: block; margin-bottom: 40px; }
   .catalog-ch-name {
@@ -480,8 +484,170 @@ html.show-announce .catalog-ch-name { top: 146px; }
   .catalog-shelf-track { margin: 0 -18px; padding: 6px 18px 18px; }
   .page-catalog .catalog-ch-grid,
   .page-catalog #catalogResultsGrid,
-  .page-catalog .catalog-static { grid-template-columns: 1fr; gap: 10px; }
+  .page-catalog .catalog-static { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
+
+  /* ---- 商品卡：兩欄直式（蓋掉 style.css 手機版的「左圖右文」橫卡）----
+     商品圖都是 1:1：圖框也用 1:1 撐滿卡寬，不再有上下留白 */
+  .page-catalog .catalog .card { flex-direction: column; gap: 0; border-radius: var(--r-md); }
+  .page-catalog .catalog .card-media {
+    flex: 0 0 auto;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    margin: 0;
+    border: none;
+    border-radius: var(--r-md) var(--r-md) 0 0;
+  }
+  .page-catalog .catalog .card-media a { display: block; height: 100%; }
+  .page-catalog .catalog .card-media img { object-fit: cover; }
+  .page-catalog .catalog .card-body { padding: 10px 10px 12px; justify-content: flex-start; }
+  /* 標籤列與品名都固定高度：有沒有「店長精選／推薦」、品名一行或兩行，左右兩張卡的每一行都對齊 */
+  .page-catalog .catalog .card-tag-row,
+  .page-catalog .catalog .card-tag-row:empty { height: 20px; margin: 0 0 4px; }
+  .page-catalog .catalog .name-tag { font-size: 11px; padding: 1px 9px; }
+  .page-catalog .catalog .name { font-size: 14px; font-weight: 700; line-height: 1.4; min-height: 2.8em; }
+  .page-catalog .catalog .catalog-card-brand { margin: 0 0 2px; font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* 一句話規格在窄卡上只剩半句：收起，留口味短語幫忙判斷 */
+  .page-catalog .catalog .spec { display: none; }
+  .page-catalog .catalog .card-flavor { display: block; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .page-catalog .catalog .card-meta { margin-top: auto; padding-top: 8px; display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .page-catalog .catalog .price-now { font-size: 15px; }
+  .page-catalog .catalog .price-origin { font-size: 11.5px; }
+  .page-catalog .catalog .btn-add { flex-shrink: 0; min-height: 40px; padding: 0 14px; font-size: 13px; }
+  .page-catalog .catalog .btn-add-rest { display: none; } /* 按鈕只寫「加入」，完整名稱在 aria-label */
+  /* 活動徽章：手機窄卡上會折行、把卡片撐得高低不一，業主決定手機不顯示（2026-11-10）。
+     哪些酒有活動改看「活動中」那一排與公告列；桌機照舊 */
+  .page-catalog .catalog .card-promo-badge { display: none; }
+
+  /* ---- 工具列：搜尋＋「篩選・排序」一列，其餘收合 ---- */
+  /* 橫向捲動的兩排（分類分頁、目錄）都拉到貼齊螢幕邊：被切到的項目是切在螢幕邊緣，不是切在版心中間 */
+  .catalog-tabs { margin: 0 -18px; padding: 0 18px 12px; scroll-padding: 0 18px; }
+  .catalog-tools { gap: 10px; margin-top: 12px; }
+  .catalog-search { flex: 1 1 150px; } /* 攤開後兩個下拉各佔半列，搜尋列不被擠扁 */
+  .catalog-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    min-height: 48px;
+    padding: 0 14px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--jiaocha);
+    background: var(--card);
+    border: 1px solid var(--field-edge);
+    border-radius: var(--r-sm);
+    cursor: pointer;
+  }
+  .catalog-filter-btn[aria-expanded="true"] { background: var(--washi); border-color: var(--jiaocha); }
+  .catalog-filter-btn:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; }
+  .catalog-filter-n {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    color: var(--washi);
+    background: var(--jiaocha);
+    border-radius: var(--r-pill);
+  }
+  .catalog-tools:not(.is-open) .catalog-flavor,
+  .catalog-tools:not(.is-open) .catalog-select { display: none; }
+  /* 沒有條件時款數已寫在分類分頁上：整列收起 */
+  .catalog:not(.is-filtering) .catalog-status { display: none; }
+  .catalog-status { margin-top: 8px; }
+
+  /* ---- 目錄：改成文字分頁＋底線，和上面的分類膠囊分得開；列高 64 → 46px ---- */
+  .catalog-body { margin-top: 14px; padding-top: 0; border-top: none; gap: 12px; }
+  .catalog-toc,
+  html.show-announce .catalog-toc { padding: 0; border-top: 1px solid var(--line); }
+  .catalog-toc ol { gap: 20px; padding: 0 18px; }
+  .catalog-toc a,
+  .catalog-toc a[aria-current="true"] {
+    min-height: 44px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    color: var(--muted);
+  }
+  .catalog-toc a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--jiaocha); }
+  .catalog-toc-sep { margin-left: 0; padding-left: 20px; }
+  .catalog-anchor,
+  html.show-announce .catalog-anchor { scroll-margin-top: calc(var(--ct-toc-top, 63px) + 58px); }
+  .catalog-ch { margin-bottom: 28px; }
+
+  /* ---- 底部列：購物車是空的時候，整條 LINE 列縮成右下角一顆小膠囊，把畫面還給酒 ---- */
+  .page-catalog .sticky-bar.is-empty {
+    left: auto;
+    right: 12px;
+    bottom: 40px;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .page-catalog .sticky-bar.is-empty .sticky-cta { flex: 0 0 auto; min-height: 44px; padding: 0 16px; box-shadow: var(--soft-shadow); }
+  .page-catalog .sticky-bar.is-empty .sticky-cta-full { display: none; }
+  .page-catalog .sticky-bar.is-empty .sticky-cta-short { display: inline; }
+  .page-catalog .sticky-bar.is-empty .sticky-cta-short::after { content: " 詢問"; }
 }
+.catalog-filter-btn { display: none; }
+.catalog-ch-toggle { display: none; }
+@media (max-width: 860px) {
+  /* ---- 酒造章：一章一列左右滑（超過 2 款的章），「展開全部」原地變回兩欄 ----
+     往下捲是換酒造、往右滑是看同一家的酒；和上面的精選排同一種操作、同一個卡寬 */
+  .page-catalog .catalog-ch--row:not(.is-expanded) .catalog-ch-grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 156px;
+    gap: 10px;
+    margin: 0 -18px;
+    padding: 4px 18px 12px;
+    overflow-x: auto;
+    overflow-y: hidden; /* 只能左右滑 */
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scroll-padding: 0 18px;
+    scrollbar-width: none;
+  }
+  .page-catalog .catalog-ch--row:not(.is-expanded) .catalog-ch-grid::-webkit-scrollbar { display: none; }
+  .page-catalog .catalog-ch--row:not(.is-expanded) .catalog-ch-grid > .card { scroll-snap-align: start; }
+  /* 窄卡（精選排與酒造列）：四、五位數價格和「加入」排同一行要再收一點，不然會疊在一起 */
+  .page-catalog .catalog-shelf-grid { grid-auto-columns: 156px; }
+  .page-catalog .catalog-shelf-grid .price-now,
+  .page-catalog .catalog-ch--row:not(.is-expanded) .price-now { font-size: 14px; letter-spacing: 0; }
+  .page-catalog .catalog-shelf-grid .btn-add,
+  .page-catalog .catalog-ch--row:not(.is-expanded) .btn-add { padding: 0 11px; }
+  .catalog-ch-head { align-items: center; margin-bottom: 6px; }
+  .catalog-ch-toggle {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin: -10px 0 -10px auto;
+    padding: 0;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--jiaocha);
+    background: none;
+    border: none;
+    text-decoration: underline;
+    text-decoration-color: var(--yousi-gold-soft);
+    text-underline-offset: 5px;
+    cursor: pointer;
+  }
+  .catalog-ch-toggle:focus-visible { outline: 2px solid var(--jiaocha); outline-offset: 2px; border-radius: var(--r-xs); }
+  .catalog-ch--row .catalog-ch-link { flex-basis: auto; margin-left: auto; }
+  .catalog-ch--row { margin-bottom: 16px; }
+}
+@media (max-width: 860px) { .catalog-filter-btn { display: inline-flex; } }
 
 @media (prefers-reduced-motion: reduce) {
   .catalog-tabs a, .catalog-seg-opt span, .catalog-toc a, .cat-hero-more > summary::after,

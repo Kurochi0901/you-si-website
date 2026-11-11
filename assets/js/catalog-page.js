@@ -205,6 +205,8 @@
       });
       var promoIds = {};
       live.forEach(function (pr) { pr.targetIds.forEach(function (id) { promoIds[id] = true; }); });
+      // 手機卡片不顯示活動徽章（2026-11-10），「活動中」這排是唯一看得出哪些酒有活動的地方：
+      // 即使和「店長精選」重複也照列
       var onPromo = sortList(pool.filter(function (p) { return promoIds[p.id]; }));
       if (onPromo.length < 2) onPromo = [];
       var promoNames = live.filter(function (pr) {
@@ -285,11 +287,19 @@
       if (!els.chapters) return;
       // 章：桌機左側是直書明朝體酒造名（一道酉時金細線隔開），右側是全名／產地／款數與酒卡；手機改橫書
       els.chapters.innerHTML = chapters.map(function (ch, i) {
-        return '<section class="catalog-ch catalog-anchor" id="catalogCh' + i + '" data-toc-name="' + esc(ch.name) + '" data-toc-n="' + ch.items.length + '" aria-labelledby="catalogCh' + i + 'Name">' +
+        // 手機：超過 2 款的章排成一列左右滑（catalog.css .catalog-ch--row），章頭「展開全部」原地變回兩欄。
+        // 總覽頁的章本來就有「看全部 N 款」連到分類頁，不另外放展開鈕。
+        var shown = scope === "all" ? Math.min(ch.items.length, ALL_PAGE_CHAPTER_MAX) : ch.items.length;
+        var isRow = shown > 2;
+        var toggle = isRow && !ch.link
+          ? '<button type="button" class="catalog-ch-toggle" aria-expanded="false" aria-controls="catalogChGrid' + i + '" data-n="' + shown + '">展開全部 ' + shown + " 款</button>"
+          : "";
+        return '<section class="catalog-ch catalog-anchor' + (isRow ? " catalog-ch--row" : "") + '" id="catalogCh' + i + '" data-toc-name="' + esc(ch.name) + '" data-toc-n="' + ch.items.length + '" aria-labelledby="catalogCh' + i + 'Name">' +
           '<h2 class="catalog-ch-name" id="catalogCh' + i + 'Name">' + esc(ch.name) + "</h2>" +
           '<div class="catalog-ch-body">' +
           '<div class="catalog-ch-head"><p class="catalog-ch-meta">' + esc(ch.meta) + "</p>" +
           (ch.link ? '<a class="catalog-ch-link" href="' + ch.link + '">' + esc(ch.linkText) + "</a>" : "") +
+          toggle +
           "</div>" +
           '<div class="grid catalog-ch-grid" id="catalogChGrid' + i + '"></div>' +
           "</div></section>";
@@ -308,6 +318,22 @@
         }
       });
     }
+    // 「展開全部／收合」：只切換那一章；收合時把章頭捲回畫面，免得人停在一片空白
+    if (els.chapters) els.chapters.addEventListener("click", function (e) {
+      var btn = e.target.closest(".catalog-ch-toggle");
+      if (!btn) return;
+      var sec = btn.closest(".catalog-ch");
+      var open = !sec.classList.contains("is-expanded");
+      sec.classList.toggle("is-expanded", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.textContent = open ? "收合" : "展開全部 " + btn.getAttribute("data-n") + " 款";
+      if (!open) {
+        var grid = sec.querySelector(".catalog-ch-grid");
+        if (grid) grid.scrollLeft = 0;
+        if (sec.getBoundingClientRect().top < 0) sec.scrollIntoView({ block: "start" });
+      }
+    });
+
     // 目錄：精選排＋各章（順序同畫面）
     function renderToc() {
       if (!els.toc) return;
@@ -330,6 +356,8 @@
     function update() {
       var filtering = isFiltering();
       if (els.reset) els.reset.hidden = !filtering;
+      root.classList.toggle("is-filtering", filtering);
+      syncFilterBtn();
       if (filtering) {
         var list = sortList(pool.filter(matches));
         if (els.shelves) els.shelves.hidden = true;
@@ -369,6 +397,35 @@
     root.addEventListener("click", function (e) { if (e.target.closest("[data-catalog-reset]")) resetAll(); });
     var form = $("catalogTools");
     if (form) form.addEventListener("submit", function (e) { e.preventDefault(); update(); });
+
+    /* ---------- 手機：口味／預算／排序收進「篩選・排序」，第一屏留給酒 ----------
+       按鈕只在 860px 以下顯示（catalog.css）；桌機工具列照舊整排攤開。 */
+    var filterBtn = null;
+    if (form && els.q) {
+      filterBtn = document.createElement("button");
+      filterBtn.type = "button";
+      filterBtn.className = "catalog-filter-btn";
+      filterBtn.setAttribute("aria-expanded", "false");
+      filterBtn.setAttribute("aria-controls", "catalogTools");
+      filterBtn.innerHTML = '<span>篩選・排序</span><span class="catalog-filter-n" hidden></span>';
+      els.q.parentNode.insertAdjacentElement("afterend", filterBtn);
+      filterBtn.addEventListener("click", function () {
+        var open = !form.classList.contains("is-open");
+        form.classList.toggle("is-open", open);
+        filterBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      // 預設攤開（業主決定，2026-11-10）；按鈕可以收起來
+      form.classList.add("is-open");
+      filterBtn.setAttribute("aria-expanded", "true");
+    }
+    function syncFilterBtn() {
+      if (!filterBtn) return;
+      var n = (currentBudget() ? 1 : 0) + (flavorPick.x ? 1 : 0) + (flavorPick.y ? 1 : 0);
+      var badge = filterBtn.querySelector(".catalog-filter-n");
+      badge.hidden = !n;
+      badge.textContent = n || "";
+      filterBtn.setAttribute("aria-label", n ? "篩選・排序（已套用 " + n + " 個條件）" : "篩選・排序");
+    }
 
     /* ---------- 簽名動作：酒造目錄跟著捲動標示目前章節 ---------- */
     var io;
