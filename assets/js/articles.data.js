@@ -109,6 +109,18 @@ const articles = [
     mainTags: ["酉時圖書館"],
     subTags: ["果實酒"],
     relatedProductIds: [11, 10, 12, 8]
+  }, 
+  {
+    id: 10,
+    slug: "what-is-tea-liqueur1",
+    title: "茶酒是什麼？從茶香來認識茶酒｜東方美人・凍頂烏龍・紅烏龍・包種茶",
+    excerpt: "這篇介紹的茶酒，是把茶葉的香氣融入梅酒或柚子酒，讓您在同一杯裡喝到果香，也喝得到茶香",
+    cover: "/assets/images/blog/id10封面.webp",
+    date: "2026/11/11",
+    author: "酉時喝酒",
+    mainTags: ["酉時圖書館"],
+    subTags: ["果實酒"],
+    relatedProductIds: [1, 4, 13, 82, 127]
   },
 
 ];
