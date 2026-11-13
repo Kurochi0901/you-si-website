@@ -1033,6 +1033,11 @@
 .home-browse .home-cats-list a:hover { background: #fff; }
 .home-browse .home-find { margin-top: 10px; }
 
+/* 品牌介紹（三大保證上方） */
+.home-about { margin: 0 0 36px; }
+.home-about .home-lede { max-width: 44em; margin: 12px 0 0; }
+.home-about strong { font-weight: 600; color: var(--home-umber); }
+
 .home-promise {
   list-style: none;
   margin: 0 0 44px;
@@ -1096,10 +1101,15 @@
 }
 .dusk-promo .hero-carousel-viewport {
   grid-area: view;
+  /* 先預留 banner 的高度：投影片由 JS 產生，沒預留時插入瞬間會把下方內容往下推（CLS） */
+  aspect-ratio: 1920 / 550;
   overflow: hidden;
   border-radius: var(--r-lg);
   box-shadow: var(--soft-shadow-sm);
   background: #f3ede4;
+}
+@media (max-width: 640px) {
+  .dusk-promo .hero-carousel-viewport { aspect-ratio: 750 / 500; }
 }
 .dusk-promo .hero-carousel-arrow,
 .dusk-promo .hero-carousel-dots,

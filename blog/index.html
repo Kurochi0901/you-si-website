@@ -51,7 +51,7 @@
 <link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css?v=faa6cf4f">
 <link rel="stylesheet" href="/assets/css/blog.css?v=62ac1e10">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap"></noscript>
 <!-- 標題明朝體：只載入本頁用到的字（含 JS 產生的文章標題），href 由 node build.js 自動產生，請勿手改 -->
 <link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789CISW%E2%80%94%E3%80%81%E3%80%8C%E3%80%8D%E3%80%90%E3%80%91%E3%83%BB%E4%B8%80%E4%B8%89%E4%B8%8A%E4%B8%8D%E4%B8%96%E4%B8%B9%E4%BA%8B%E4%BA%94%E4%BA%AB%E4%BA%BA%E4%BB%80%E4%BC%8A%E4%BD%A0%E4%BE%86%E4%BE%8B%E5%85%A5%E5%86%B7%E5%87%8D%E5%88%86%E5%88%B0%E5%89%9B%E5%89%B5%E5%8C%85%E5%8C%97%E5%8D%97%E5%8D%B8%E5%8F%8B%E5%8F%97%E5%90%8C%E5%90%A7%E5%90%B8%E5%90%B9%E5%91%B3%E5%91%BC%E5%91%BD%E5%92%8C%E5%92%96%E5%93%81%E5%93%AA%E5%95%9F%E5%95%A1%E5%96%9D%E5%96%AE%E5%9B%9B%E5%9B%9E%E5%9C%A8%E5%A4%9A%E5%A4%9C%E5%A4%A2%E5%A4%A7%E5%A5%BD%E5%A7%8B%E5%AD%90%E5%AD%A3%E5%AE%9A%E5%AF%86%E5%AF%A6%E5%B0%8D%E5%B1%80%E5%B7%AE%E5%B8%82%E5%B9%B4%E5%BA%95%E5%BE%97%E5%BE%9E%E5%BE%AE%E5%BF%85%E6%80%8E%E6%89%8B%E6%8C%87%E6%8C%91%E6%90%AD%E6%93%8A%E6%95%85%E6%96%B0%E6%96%B9%E6%97%A5%E6%98%AF%E6%9B%B4%E6%9C%80%E6%9C%83%E6%9C%88%E6%9C%89%E6%9C%AC%E6%9D%AF%E6%9D%B1%E6%9F%94%E6%A2%85%E6%A5%AD%E6%A6%9C%E6%AF%94%E6%B0%A3%E6%B0%B4%E6%B3%A1%E6%B8%85%E6%BA%AB%E7%83%8F%E7%86%AC%E7%87%92%E7%89%A1%E7%8D%8E%E7%90%83%E7%94%A8%E7%95%B6%E7%99%BC%E7%9A%84%E7%9B%B4%E7%9C%8B%E7%9C%9F%E7%9F%A5%E7%A7%8B%E7%A7%98%E7%A8%AE%E7%AF%80%E7%AF%87%E7%B4%85%E7%B4%9A%E7%BE%8E%E8%87%BA%E8%88%87%E8%8C%B6%E8%91%97%E8%97%9D%E8%A1%8C%E8%A1%93%E8%A3%A1%E8%A7%80%E8%A7%A3%E8%A9%95%E8%AA%8D%E8%AA%BF%E8%AD%98%E8%AE%80%E8%B3%BD%E8%B5%B7%E8%B6%B3%E8%B7%9F%E8%BC%89%E8%BF%B7%E8%BF%BD%E9%80%99%E9%81%B8%E9%82%80%E9%82%A3%E9%85%8D%E9%85%8E%E9%85%92%E9%86%BA%E9%90%98%E9%91%91%E9%96%80%E9%96%8B%E9%99%90%E9%9A%8A%E9%9D%92%E9%A0%82%E9%A1%9E%E9%A2%A8%E9%A3%B2%E9%A4%90%E9%A6%96%E9%A6%99%E9%AB%94%E9%BA%BC%E9%BB%9E%E9%BE%8D%EF%BC%81%EF%BC%8C%EF%BC%9A%EF%BC%9F%EF%BD%9C">
 <script defer src="/assets/js/articles.data.js?v=131a1783"></script>
@@ -209,10 +209,38 @@
 
   <main class="section" id="main">
     <!-- 從這裡開始：articles.data.js 裡有 startHere 的文章（依數字排序），只在未篩選時顯示，由 main.js renderBlogGrid 產生 -->
-    <section class="blog-start" id="blogStart" hidden aria-labelledby="blogStartTitle">
+    <section class="blog-start" id="blogStart" aria-labelledby="blogStartTitle">
       <h2 class="blog-start-title" id="blogStartTitle">剛開始認識日本酒？從這三篇讀起</h2>
       <p class="blog-start-lede">先讀懂酒標、認識燒酎、挑對酒杯，再往下看季節與搭餐。</p>
-      <ol class="blog-start-list" id="blogStartList"></ol>
+      <ol class="blog-start-list" id="blogStartList">
+      <li>
+        <a class="blog-start-card" href="/blog/Beginner-Guide-Discover-Your-Soul-Sake/">
+          <img src="/assets/images/blog/五分鐘挑選你的本命酒.webp" alt="" width="96" height="64" loading="lazy" decoding="async">
+          <span>
+            <span class="blog-start-step" aria-hidden="true"></span>
+            <span class="blog-start-name">新手必看・清酒入門指南｜五分鐘挑選你的本命酒</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="blog-start-card" href="/blog/what-is-shochu/">
+          <img src="/assets/images/blog/id5封面.webp" alt="" width="96" height="64" loading="lazy" decoding="async">
+          <span>
+            <span class="blog-start-step" aria-hidden="true"></span>
+            <span class="blog-start-name">燒酎是什麼？和清酒有什麼不同？上伊那牡丹裡的微醺秘密</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="blog-start-card" href="/blog/choose-the-right-glass-for-better-taste/">
+          <img src="/assets/images/blog/id7封面.webp" alt="" width="96" height="64" loading="lazy" decoding="async">
+          <span>
+            <span class="blog-start-step" aria-hidden="true"></span>
+            <span class="blog-start-name">【微醺解密】選對杯子，酒更好喝？一杯到底，行不行？</span>
+          </span>
+        </a>
+      </li>
+      </ol>
     </section>
 
     <!-- 篩選列：有文章後取消隱藏 -->
@@ -242,11 +270,109 @@
     </div>
 
     <div class="blog-grid" id="blogGrid">
-        <!-- JS 動態生成內容 -->
+
+      <a class="card blog-card-link featured-card" href="/blog/what-is-tea-liqueur1/">
+        <div class="blog-cover card-media">
+          <div class="blog-badge badge-library">酉時圖書館</div>
+          <img src="/assets/images/blog/id10封面.webp" alt="茶酒是什麼？從茶香來認識茶酒｜東方美人・凍頂烏龍・紅烏龍・包種茶" width="800" height="540" loading="eager" fetchpriority="high" decoding="async">
+        </div>
+        <div class="blog-card-body">
+          <h2 class="blog-card-title">茶酒是什麼？從茶香來認識茶酒｜東方美人・凍頂烏龍・紅烏龍・包種茶</h2>
+          <p class="blog-card-excerpt">這篇介紹的茶酒，是把茶葉的香氣融入梅酒或柚子酒，讓您在同一杯裡喝到果香，也喝得到茶香</p>
+          <div class="blog-card-meta-bottom">
+            <span>by 酉時喝酒</span>
+            <span>2026/11/11</span>
+          </div>
+        </div>
+      </a>
+      <a class="card blog-card-link " href="/blog/how-to-drink-umeshu-5easy-mixes/">
+        <div class="blog-cover card-media">
+          <div class="blog-badge badge-library">酉時圖書館</div>
+          <img src="/assets/images/blog/id9封面.webp" alt="【微醺解密】梅酒怎麼喝？從氣泡水到咖啡，5種梅酒調飲比例與搭配指南" width="800" height="540" loading="lazy" decoding="async">
+        </div>
+        <div class="blog-card-body">
+          <h2 class="blog-card-title">【微醺解密】梅酒怎麼喝？從氣泡水到咖啡，5種梅酒調飲比例與搭配指南</h2>
+          <p class="blog-card-excerpt">在家也能輕鬆調！5種梅酒搭配，喝出新花樣</p>
+          <div class="blog-card-meta-bottom">
+            <span>by 酉時喝酒</span>
+            <span>2026/10/28</span>
+          </div>
+        </div>
+      </a>
+      <a class="card blog-card-link " href="/blog/autumn-sake-guide-akiagari-vs-hiyaoroshi/">
+        <div class="blog-cover card-media">
+          <div class="blog-badge badge-library">酉時圖書館</div>
+          <img src="/assets/images/blog/id8封面.webp" alt="【微醺秋日】當秋風吹起，來喝一杯季節限定的「秋酒」吧！秋上、冷卸到底差在哪？" width="800" height="540" loading="lazy" decoding="async">
+        </div>
+        <div class="blog-card-body">
+          <h2 class="blog-card-title">【微醺秋日】當秋風吹起，來喝一杯季節限定的「秋酒」吧！秋上、冷卸到底差在哪？</h2>
+          <p class="blog-card-excerpt">從秋上到冷卸，帶你認識秋酒的釀造特色、風味變化，以及最適合搭配的秋季料理。</p>
+          <div class="blog-card-meta-bottom">
+            <span>by 酉時喝酒</span>
+            <span>2026/10/14</span>
+          </div>
+        </div>
+      </a>
+      <a class="card blog-card-link " href="/blog/world-cup-viewing-buddy/">
+        <div class="blog-cover card-media">
+          <div class="blog-badge badge-library">酉時圖書館</div>
+          <img src="/assets/images/blog/id6封面.webp" alt="【球迷必看】世足熬夜觀賽新隊友——「氣泡清酒」！！" width="800" height="540" loading="lazy" decoding="async">
+        </div>
+        <div class="blog-card-body">
+          <h2 class="blog-card-title">【球迷必看】世足熬夜觀賽新隊友——「氣泡清酒」！！</h2>
+          <p class="blog-card-excerpt">想要輕鬆喝無負擔？來杯清爽「氣泡清酒」，你的觀戰好夥伴！</p>
+          <div class="blog-card-meta-bottom">
+            <span>by 酉時喝酒</span>
+            <span>2026/07/11</span>
+          </div>
+        </div>
+      </a>
+      <a class="card blog-card-link " href="/blog/2026-internationalalcoholcompetition/">
+        <div class="blog-cover card-media">
+          <div class="blog-badge badge-flash">酉時快訊</div>
+          <img src="/assets/images/blog/id4封面.webp" alt="五月微醺大季！直擊日本新酒鑑評會、IWSC、IWC 頂級得獎榜單" width="800" height="540" loading="lazy" decoding="async">
+        </div>
+        <div class="blog-card-body">
+          <h2 class="blog-card-title">五月微醺大季！直擊日本新酒鑑評會、IWSC、IWC 頂級得獎榜單</h2>
+          <p class="blog-card-excerpt">【台灣之光】梅侍蟬聯IWSC金牌，梅酒類唯一獲獎品牌！</p>
+          <div class="blog-card-meta-bottom">
+            <span>by 酉時喝酒</span>
+            <span>2026/05/29</span>
+          </div>
+        </div>
+      </a>
+      <a class="card blog-card-link " href="/blog/invited-to-share-by-tcyd/">
+        <div class="blog-cover card-media">
+          <div class="blog-badge badge-flash">酉時快訊</div>
+          <img src="/assets/images/blog/id3封面.webp" alt="受邀臺北市青年局分享：回首創業起點，用真實故事啟發更多追夢青年" width="800" height="540" loading="lazy" decoding="async">
+        </div>
+        <div class="blog-card-body">
+          <h2 class="blog-card-title">受邀臺北市青年局分享：回首創業起點，用真實故事啟發更多追夢青年</h2>
+          <p class="blog-card-excerpt">從酒與茶的知識起點出發，酉時喝酒如何將專業轉化為禁得起市場檢驗的商業實踐</p>
+          <div class="blog-card-meta-bottom">
+            <span>by 酉時喝酒</span>
+            <span>2026/05/18</span>
+          </div>
+        </div>
+      </a>
+      <a class="card blog-card-link " href="/blog/try-spring-sake/">
+        <div class="blog-cover card-media">
+          <div class="blog-badge badge-library">酉時圖書館</div>
+          <img src="/assets/images/blog/部落文封面.webp" alt="跟著季節呼吸｜清酒，品味四季最溫柔的載體" width="800" height="540" loading="lazy" decoding="async">
+        </div>
+        <div class="blog-card-body">
+          <h2 class="blog-card-title">跟著季節呼吸｜清酒，品味四季最溫柔的載體</h2>
+          <p class="blog-card-excerpt">一起尋覓屬於春季的風味：新酒．初榨．生霞酒！</p>
+          <div class="blog-card-meta-bottom">
+            <span>by 酉時喝酒</span>
+            <span>2026/04/27</span>
+          </div>
+        </div>
+      </a>
     </div>
 
     <!-- 敬請期待區塊：有文章後移除 -->
-    <div class="blog-coming-soon" id="blogComingSoon" style="text-align:center; padding:80px 20px 100px; color:#7c6a5b;">
+    <div class="blog-coming-soon" id="blogComingSoon" style="display:none; text-align:center; padding:80px 20px 100px; color:#7c6a5b;">
         <div style="font-size:28px; margin-bottom:16px;">🍶</div>
         <h2 style="font-size:20px; font-weight:600; margin-bottom:12px; color:#4a3c31;">文章準備中，敬請期待</h2>
         <p style="font-size:15px; line-height:1.8; color:#9a8d82; max-width:400px; margin:0 auto;">

@@ -50,13 +50,15 @@
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <!-- 首屏最大的圖＝本月精選輪盤中間那支，提早下載加速 LCP。href 由 node build.js 依輪盤第一支自動更新，請勿手改 -->
 <link rel="preload" as="image" data-reel-preload href="https://res.cloudinary.com/dcrn2oyxk/image/upload/w_400,h_500,c_limit/f_auto,q_auto/5抹茶梅酒1.webp" fetchpriority="high">
+<!-- 手機首屏 LCP＝促銷輪播第一張的手機版圖（桌機在首屏下方，不預載）。換第一張 banner 時要同步改這裡 -->
+<link rel="preload" as="image" data-hero-preload href="/assets/images/home/貓咪系列750.webp?v=2" media="(max-width:640px)" fetchpriority="high">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css?v=faa6cf4f">
-<link rel="stylesheet" href="/assets/css/home.css?v=87a543d6">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/home.css?v=308910c2">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap"></noscript>
 <!-- 標題明朝體：只載入本頁用到的字，href 由 node build.js 自動產生，請勿手改 -->
-<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=0123456789%E3%80%81%E3%80%82%E3%80%8C%E3%80%8D%E3%80%90%E3%80%91%E3%83%BB%E4%B8%80%E4%B8%8A%E4%B8%8B%E4%B8%AD%E4%BA%BA%E4%BB%80%E4%BB%8A%E4%BC%81%E4%BE%86%E4%BE%8B%E5%81%8F%E5%85%A8%E5%86%B7%E5%87%8D%E5%88%B0%E5%88%BB%E5%8B%95%E5%8C%85%E5%8D%80%E5%8D%97%E5%8D%B8%E5%8E%9A%E5%8F%A3%E5%90%A7%E5%90%B9%E5%91%B3%E5%92%96%E5%93%81%E5%93%AA%E5%95%A1%E5%96%9D%E5%96%AE%E5%9C%96%E5%9C%A8%E5%9D%87%E5%A4%9C%E5%A4%A9%E5%AD%A3%E5%AE%9A%E5%AE%B6%E5%AF%86%E5%AF%A6%E5%AF%A7%E5%B0%87%E5%B0%88%E5%B0%8F%E5%B7%AE%E5%B9%95%E5%BA%95%E5%BA%A6%E5%BC%B7%E5%BE%9E%E5%BE%AE%E6%80%8E%E6%83%B3%E6%84%9F%E6%85%A2%E6%89%BE%E6%8C%87%E6%8E%A7%E6%90%AD%E6%96%B9%E6%97%A5%E6%97%A8%E6%98%8E%E6%98%AF%E6%99%82%E6%99%9A%E6%9B%B8%E6%9C%88%E6%9C%AC%E6%9D%AF%E6%9D%B1%E6%9E%9C%E6%A2%85%E6%A5%AD%E6%AF%94%E6%B0%A3%E6%B0%B4%E6%B3%A1%E6%B4%BB%E6%B7%B1%E6%B8%85%E6%BA%AB%E6%BB%BF%E6%BF%83%E7%83%88%E7%83%8F%E7%88%BD%E7%94%98%E7%94%9C%E7%94%A8%E7%95%A5%E7%95%B6%E7%9A%84%E7%9B%88%E7%A7%8B%E7%A8%8B%E7%A8%AE%E7%AF%80%E7%B1%B3%E7%B2%BE%E7%B4%85%E7%BD%90%E7%BE%8E%E8%87%A8%E8%88%87%E8%8C%B6%E8%8F%AF%E8%90%84%E8%91%A1%E8%96%84%E8%A1%A1%E8%A7%A3%E8%AA%8D%E8%AA%BF%E8%AD%98%E8%B2%B7%E8%B5%B7%E8%BC%95%E8%BE%9B%E9%81%A9%E9%81%B8%E9%83%81%E9%85%89%E9%85%8D%E9%85%92%E9%85%B8%E9%86%BA%E9%99%90%E9%A0%82%E9%A2%A8%E9%A3%B2%E9%A3%BD%E9%A4%A8%E9%A6%99%E9%AB%94%E9%AE%AE%E9%BA%97%E9%BA%BC%E9%BE%8D%EF%BC%81%EF%BC%8C%EF%BC%9A%EF%BC%9F%EF%BD%9C">
+<link data-serif-font rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&amp;display=swap&amp;text=-0123456789IOSUY%E3%80%81%E3%80%82%E3%80%8C%E3%80%8D%E3%80%90%E3%80%91%E3%83%BB%E4%B8%80%E4%B8%8A%E4%B8%8B%E4%B8%AD%E4%BA%BA%E4%BB%80%E4%BB%8A%E4%BC%81%E4%BE%86%E4%BE%8B%E5%81%8F%E5%85%A8%E5%86%B7%E5%87%8D%E5%88%B0%E5%88%BB%E5%8B%95%E5%8C%85%E5%8D%80%E5%8D%97%E5%8D%B8%E5%8E%9A%E5%8F%A3%E5%90%A7%E5%90%B9%E5%91%B3%E5%92%96%E5%93%81%E5%93%AA%E5%95%A1%E5%96%9D%E5%96%AE%E5%9C%96%E5%9C%A8%E5%9D%87%E5%A4%9C%E5%A4%A9%E5%AD%A3%E5%AE%9A%E5%AE%B6%E5%AF%86%E5%AF%A6%E5%AF%A7%E5%B0%87%E5%B0%88%E5%B0%8F%E5%B7%AE%E5%B9%95%E5%BA%95%E5%BA%A6%E5%BC%B7%E5%BE%9E%E5%BE%AE%E6%80%8E%E6%83%B3%E6%84%9F%E6%85%A2%E6%89%BE%E6%8C%87%E6%8E%A7%E6%90%AD%E6%96%B9%E6%97%A5%E6%97%A8%E6%98%8E%E6%98%AF%E6%99%82%E6%99%9A%E6%9B%B8%E6%9C%88%E6%9C%AC%E6%9D%AF%E6%9D%B1%E6%9E%9C%E6%A2%85%E6%A5%AD%E6%AF%94%E6%B0%A3%E6%B0%B4%E6%B3%A1%E6%B4%BB%E6%B7%B1%E6%B8%85%E6%BA%AB%E6%BB%BF%E6%BF%83%E7%83%88%E7%83%8F%E7%88%BD%E7%94%98%E7%94%9C%E7%94%A8%E7%95%A5%E7%95%B6%E7%9A%84%E7%9B%88%E7%A7%8B%E7%A8%8B%E7%A8%AE%E7%AF%80%E7%B1%B3%E7%B2%BE%E7%B4%85%E7%BD%90%E7%BE%8E%E8%87%A8%E8%88%87%E8%8C%B6%E8%8F%AF%E8%90%84%E8%91%A1%E8%96%84%E8%A1%A1%E8%A7%A3%E8%AA%8D%E8%AA%BF%E8%AD%98%E8%B2%B7%E8%B5%B7%E8%BC%95%E8%BE%9B%E9%81%A9%E9%81%B8%E9%83%81%E9%85%89%E9%85%8D%E9%85%92%E9%85%B8%E9%86%BA%E9%99%90%E9%A0%82%E9%A2%A8%E9%A3%B2%E9%A3%BD%E9%A4%A8%E9%A6%99%E9%AB%94%E9%AE%AE%E9%BA%97%E9%BA%BC%E9%BE%8D%EF%BC%81%EF%BC%8C%EF%BC%9A%EF%BC%9F%EF%BD%9C">
 <script defer src="/assets/js/catalog.js?v=cca70a99"></script>
 
 
@@ -81,11 +83,11 @@
       "url": "https://www.yousi-drink.com/",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/酉時封面.webp",
-        "width": 512,
-        "height": 512
+        "url": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/%E9%85%89%E6%99%82%E5%B0%81%E9%9D%A2.webp",
+        "width": 800,
+        "height": 800
       },
-      "image": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/酉時封面.webp",
+      "image": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/%E9%85%89%E6%99%82%E5%B0%81%E9%9D%A2.webp",
       "description": "酉時喝酒 YOU-SI 是珍探吉國際股份有限公司旗下的日系酒款選品品牌，專營日本清酒（純米吟釀・大吟釀）、燒酎、果實酒、茶酒與葡萄酒。",
       "telephone": "+886-976-815-017",
       "email": "contact@yousi-drink.com",
@@ -115,7 +117,7 @@
       "name": "酉時喝酒 YOU-SI 線上選酒",
       "url": "https://www.yousi-drink.com/",
       "image": "https://res.cloudinary.com/dcrn2oyxk/image/upload/w_1200,h_630,c_fill,f_jpg,q_auto/%E9%85%89%E6%99%82%E5%B0%81%E9%9D%A2.jpg",
-      "logo": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/酉時封面.webp",
+      "logo": "https://res.cloudinary.com/dcrn2oyxk/image/upload/f_auto,q_auto/%E9%85%89%E6%99%82%E5%B0%81%E9%9D%A2.webp",
       "description": "日系酒款選品線上商店：日本清酒、燒酎、果實酒（梅酒・柚子酒）、茶酒、葡萄酒。全台灣宅配到府，新竹竹北可預約自取，透過 LINE 線上選購。",
       "parentOrganization": { "@id": "https://www.yousi-drink.com/#organization" },
       "areaServed": {
@@ -168,61 +170,170 @@
 }
 </script>
 
-<!-- ✅ 首頁精選商品 ItemList Schema（priority 5 全部收錄） -->
+<!-- ✅ 首頁本月精選 ItemList Schema（由 node build.js 依輪盤自動產生，請勿手改） -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "酉時喝酒 YOU-SI 精選推薦酒款",
+  "name": "酉時喝酒 YOU-SI 本月精選酒款",
   "url": "https://www.yousi-drink.com/",
+  "numberOfItems": 26,
   "itemListElement": [
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "北川本家 八橋肉桂梅酒",
-      "url": "https://www.yousi-drink.com/products/fruit-tea/北川本家-八橋肉桂梅酒/"
+      "name": "天吹 抹茶梅酒",
+      "url": "https://www.yousi-drink.com/products/fruit-tea/天吹-抹茶梅酒/"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "池亀 果凍梅酒",
-      "url": "https://www.yousi-drink.com/products/fruit-tea/池亀-果凍梅酒/"
+      "name": "天吹 伯爵紅茶梅酒",
+      "url": "https://www.yousi-drink.com/products/fruit-tea/天吹-伯爵紅茶梅酒/"
     },
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "萩之鶴 純米吟釀 生原酒 櫻花貓",
-      "url": "https://www.yousi-drink.com/products/sake/萩之鶴-純米吟釀-生原酒-櫻花貓/"
+      "name": "天吹 京都千年抹茶酒",
+      "url": "https://www.yousi-drink.com/products/fruit-tea/天吹-京都千年抹茶酒/"
     },
-        {
+    {
       "@type": "ListItem",
       "position": 4,
-      "name": "蓬萊泉 一念不動 特別純米 無濾過 しぼりたて",
-      "url": "https://www.yousi-drink.com/products/sake/蓬萊泉-一念不動-特別純米-無濾過-しぼりたて/"
+      "name": "萩之鶴 純米吟釀 生原酒 櫻花貓",
+      "url": "https://www.yousi-drink.com/products/sake/萩之鶴-純米吟釀-生原酒-櫻花貓/"
     },
     {
       "@type": "ListItem",
       "position": 5,
+      "name": "鳳凰美田 純米吟釀 冷卸 山田錦",
+      "url": "https://www.yousi-drink.com/products/sake/鳳凰美田-純米吟釀-冷卸-山田錦/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
       "name": "純米大吟釀 初花 金魚台輪",
       "url": "https://www.yousi-drink.com/products/sake/純米大吟釀-初花-金魚台輪/"
     },
     {
       "@type": "ListItem",
-      "position": 6,
+      "position": 7,
       "name": "奧野田 La Florette 粉紅酒",
       "url": "https://www.yousi-drink.com/products/wine/奧野田-La-Florette-粉紅酒/"
     },
     {
       "@type": "ListItem",
-      "position": 7,
-      "name": "我們的經典熱紅酒",
-      "url": "https://www.yousi-drink.com/products/wine/我們的經典熱紅酒/"
+      "position": 8,
+      "name": "梅侍 紅烏龍梅酒",
+      "url": "https://www.yousi-drink.com/products/fruit-tea/梅侍-紅烏龍梅酒/"
     },
     {
       "@type": "ListItem",
-      "position": 8,
-      "name": "我們的德國烤蘋果熱酒",
-      "url": "https://www.yousi-drink.com/products/wine/我們的德國烤蘋果熱酒/"
+      "position": 9,
+      "name": "蓬萊泉 徐耀良 東方美人茶梅酒",
+      "url": "https://www.yousi-drink.com/products/fruit-tea/蓬萊泉-徐耀良-東方美人茶梅酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "name": "蓬萊泉 烹雪韻 生普洱茶梅酒",
+      "url": "https://www.yousi-drink.com/products/fruit-tea/蓬萊泉-烹雪韻-生普洱茶梅酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "name": "六代目百合 芋燒酎",
+      "url": "https://www.yousi-drink.com/products/spirits/六代目百合-芋燒酎/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "name": "山櫻威士忌 PRECIOUS",
+      "url": "https://www.yousi-drink.com/products/spirits/山櫻威士忌-PRECIOUS/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "name": "聖母之乳 金凱勒精選優質白葡萄酒",
+      "url": "https://www.yousi-drink.com/products/wine/聖母之乳-金凱勒精選優質白葡萄酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "name": "巧克力鹿 精選混釀紅葡萄酒",
+      "url": "https://www.yousi-drink.com/products/wine/巧克力鹿-精選混釀紅葡萄酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "name": "雙魚 DUO 白葡萄酒",
+      "url": "https://www.yousi-drink.com/products/wine/雙魚-DUO-白葡萄酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "name": "日日 玉榮 2026",
+      "url": "https://www.yousi-drink.com/products/sake/日日-玉榮-2026/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "name": "渡邊 Infusion Spirits Hidama Green",
+      "url": "https://www.yousi-drink.com/products/spirits/渡邊-Infusion-Spirits-Hidama-Green/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "name": "蓬萊泉 乘興院 包種茶柚子酒",
+      "url": "https://www.yousi-drink.com/products/fruit-tea/蓬萊泉-乘興院-包種茶柚子酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "name": "初龜 純米吟釀 300ml",
+      "url": "https://www.yousi-drink.com/products/mini/初龜-純米吟釀-300ml/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "name": "喬治穆勒酒莊 麗絲玲白葡萄酒 2022",
+      "url": "https://www.yousi-drink.com/products/wine/喬治穆勒酒莊-麗絲玲白葡萄酒-2022/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 21,
+      "name": "林本店 原始衝動 純米大吟釀 無濾過生原酒",
+      "url": "https://www.yousi-drink.com/products/sake/林本店-原始衝動-純米大吟釀-無濾過生原酒/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 22,
+      "name": "鳳凰美田 純米吟釀 五百萬石 冷卸",
+      "url": "https://www.yousi-drink.com/products/sake/鳳凰美田-純米吟釀-五百萬石-冷卸/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 23,
+      "name": "谷川岳 純米酒 冷卸",
+      "url": "https://www.yousi-drink.com/products/sake/谷川岳-純米酒-冷卸/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 24,
+      "name": "［羊年酒預購］塔巴利特級卡本內蘇維翁2025（附紙袋）",
+      "url": "https://www.yousi-drink.com/products/wine/［羊年酒預購］塔巴利特級卡本內蘇維翁2025（附紙袋）/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 25,
+      "name": "［羊年酒預購］水芭蕉 羊年限定 純米大吟釀",
+      "url": "https://www.yousi-drink.com/products/sake/［羊年酒預購］水芭蕉-羊年限定-純米大吟釀/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 26,
+      "name": "［羊年酒預購］飛良泉 羊羊勢得｜純米大吟釀・純米吟釀 組合",
+      "url": "https://www.yousi-drink.com/products/sake/［羊年酒預購］飛良泉-羊羊勢得｜純米大吟釀・純米吟釀-組合/"
     }
   ]
 }
@@ -383,19 +494,20 @@
     ============================================================= */
     const SLIDES = [
     // 第一張放「有酒款畫面、長期有效」的活動，第一眼就看到商品；三大保證移到最後
+    // ⚠️ 換第一張時，請一併改 <head> 裡 data-hero-preload 那行的 href（手機版圖片路徑要完全相同，含 ?v=）
       {
         image:       "/assets/images/home/貓咪系列1920.webp?v=2",
         imageMobile: "/assets/images/home/貓咪系列750.webp?v=2",
         alt:   "萩之鶴 慵懶貓系列 純米吟釀：任選兩支 87 折（原價 3,000 元）",
         link:  "/promotions/"
       },
-      {
-        image:       "/assets/images/home/11月雙十一1920.webp",
-        imageMobile: "/assets/images/home/11月雙十一750.webp",
-        alt:   "雙11・茶酒選物祭 — 茶酒系列 2 件 92 折",
-        link:  "/promotions/",
-        endAt: "2026-11-12"
-      },
+      // {
+      //   image:       "/assets/images/home/11月雙十一1920.webp",
+      //   imageMobile: "/assets/images/home/11月雙十一750.webp",
+      //   alt:   "雙11・茶酒選物祭 — 茶酒系列 2 件 92 折",
+      //   link:  "/promotions/",
+      //   endAt: "2026-11-12"
+      // },
       {
         image:       "/assets/images/home/三大保證1920.webp?v=2",
         imageMobile: "/assets/images/home/三大保證750.webp?v=2",
@@ -452,7 +564,14 @@
           img.width = 1920;
           img.height = 550;
           img.decoding = 'async';
-          img.loading = 'lazy';
+          // 手機上這張 banner 一半落在首屏，是 LCP 元素 → 立即載入並提高優先權（head 也有對應的 preload）；
+          // 桌機在首屏下方，維持 lazy 不搶首屏頻寬
+          if (window.matchMedia('(max-width:640px)').matches) {
+            img.loading = 'eager';
+            img.fetchPriority = 'high';
+          } else {
+            img.loading = 'lazy';
+          }
           img.draggable = false;
           pic.appendChild(img);
           slide.appendChild(pic);
@@ -673,8 +792,13 @@
   </section>
 
   <!-- ✅ 怎麼買：與 /order/ 實際流程一致（轉帳付款、LINE 實名確認、自取或宅配） -->
-  <section class="home-band" aria-labelledby="homeHowTitle">
+  <section class="home-band" aria-labelledby="homeAboutTitle homeHowTitle">
     <div class="section home-block">
+      <!-- ✅ 品牌介紹：給人與 AI 搜尋都能直接引用的一段話。款數由 node build.js 自動寫入 data-home-total，請勿手改數字 -->
+      <div class="home-about">
+        <h2 class="home-title" id="homeAboutTitle">酉時喝酒 YOU-SI 是什麼？</h2>
+        <p class="home-lede"><strong>酉時喝酒 YOU-SI</strong> 是珍探吉國際股份有限公司經營的日系酒款選品品牌，目前有 <span data-home-total>119</span> 款日本清酒、果實酒與茶酒、葡萄酒、燒酎和威士忌，價格多在 NT$800 到 NT$3,000 之間。下單方式是官網選酒、LINE 專人確認、銀行轉帳；全台宅配，滿 NT$2,800 免運，也可以在新竹竹北預約自取（自取點不是門市，不開放現場選購）。</p>
+      </div>
       <ul class="home-promise" aria-label="酉時三大保證">
         <li><strong class="home-promise-title">專家選品</strong><span>每一支酒都由品鑑師試飲認可後才上架，只選我們願意長期飲用、真心推薦的酒。</span></li>
         <li><strong class="home-promise-title">全程控溫</strong><span>清酒全程冷鏈運送，其他酒類適溫存放，讓每一支酒到你手上都在最好的狀態。</span></li>
