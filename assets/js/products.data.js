@@ -3276,7 +3276,7 @@ const products = [
 
     info: {
       brand: "梅侍", 
-      origin: "台灣・南投縣青梅・台東鹿谷紅烏龍茶", 
+      origin: "台灣・南投縣青梅・台東鹿野紅烏龍茶", 
       rice: null, 
       yeast: null, 
       variety: null,
@@ -3933,7 +3933,7 @@ const products = [
 
     info: {
       brand: "梅侍", 
-      origin: "台灣・南投縣青梅・台東鹿谷紅烏龍茶", 
+      origin: "台灣・南投縣青梅・台東鹿野紅烏龍茶", 
       rice: null, 
       yeast: null, 
       variety: null,

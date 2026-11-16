@@ -43,6 +43,7 @@ PRODUCT.md
 效能優化修改計畫.md
 READE.txt
 .cursorrules
+*.md
 
 # 設計與 AI 工具的工作資料夾
 .impeccable/

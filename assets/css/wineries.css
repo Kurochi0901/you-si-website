@@ -1,114 +1,466 @@
-/* ===== Hero ===== */
-.winery-hero {
-  padding: 96px 20px 72px;
-  text-align: center;
-  background: #f6f3ee;
-}
+/* =========================================================
+   酒莊・酒造品牌（/wineries/ 總覽與 /wineries/<slug>/ 各頁）
+   頁面由 build.js（scripts/wineries-pages.js）產生；互動在 assets/js/wineries-page.js
+   .fd-*：總覽（風土地圖＋南北路線）　.kd-*：酒造頁
+   明朝體只載入該頁用到的字（build 時產生子集），粗細只有 600
+   ========================================================= */
+:root{--wy-serif:"Noto Serif TC","Songti TC",PMingLiU,serif}
 
-.winery-hero h1 {
-  font-size: 2.6rem;
-  margin-bottom: 14px;
-  letter-spacing: 0.08em;
-}
+/* ---------------- 總覽 ---------------- */
+/* ===== 風土地圖原型（只在 .impeccable/mocks 內，未接上正式頁） ===== */
+.fd{--tile-gap:3px;--paper-rule:rgba(201,168,122,.22);--route-line:var(--yousi-gold);
+  --r1:#efe0c3;--r2:#e3cda4;--r3:#cfae7d;--r4:#7a5a35;--r5:#5c4a32;
+  max-width:1200px;margin:0 auto;padding:0 18px 120px;color:var(--ink)}
+.fd ::selection{background:#e3cda4;color:#231a12}
+.fd a{color:inherit;text-decoration:none}
+.fd :focus-visible{outline:2px solid var(--jiaocha);outline-offset:3px;border-radius:6px}
 
-.winery-hero p {
-  max-width: 720px;
-  margin: 0 auto;
-  color: #5f564b;
-  line-height: 1.8;
-}
+/* ---------- 首屏：標題欄＋原稿用紙地圖 ---------- */
+.fd-hero{display:grid;grid-template-columns:minmax(300px,1fr) minmax(0,640px);gap:56px;align-items:start;padding:40px 0 72px}
+.fd-crumb{font-size:13px;color:var(--muted);margin-bottom:28px}
+.fd-crumb a:hover{color:var(--ink)}
+.fd-title{display:flex;gap:28px;align-items:flex-start}
+.fd-title h1{writing-mode:vertical-rl;font-family:var(--wy-serif);font-size:44px;font-weight:600;letter-spacing:.2em;line-height:1.25;margin:0;padding-left:24px;border-left:1px solid var(--yousi-gold)}
+.fd-intro{padding-top:6px;min-width:0}
+.fd-lede{font-size:16px;line-height:2;color:var(--ink-soft);max-width:22em;margin:0 0 22px}
+.fd-lede b{color:var(--ink);font-weight:700;white-space:nowrap}
+.fd-map--hero .fd-tile.has.long{letter-spacing:-.08em;font-size:clamp(10px,.95vw,13px)}
+.fd-legend{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--gold-text);margin:0 0 28px}
+.fd-ramp{display:flex;border-radius:4px;overflow:hidden}
+.fd-ramp i{width:22px;height:10px}
+.fd-start{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--jiaocha);padding:12px 22px;border-radius:999px;background:#fff;box-shadow:var(--soft-shadow-sm);transition:transform .25s var(--ease-soft),box-shadow .25s var(--ease-soft)}
+.fd-start:hover{transform:translateY(-1px);box-shadow:var(--soft-shadow)}
+.fd-start svg{width:14px;height:14px}
 
-/* ===== List ===== */
-.winery-list {
-  max-width: 1200px;
-  margin: 64px auto;
-  padding: 0 20px;
-  display: grid;
-  gap: 48px;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-}
+.fd-sheet{position:relative;background:var(--washi);border-radius:20px;padding:28px 56px 22px 28px;
+  box-shadow:var(--soft-shadow),inset 0 0 0 1px var(--yousi-gold),inset 0 0 0 4px var(--washi),inset 0 0 0 5px var(--yousi-gold-soft)}
+.fd-map{position:relative;display:grid;grid-template-columns:repeat(13,1fr);grid-template-rows:repeat(13,1fr);gap:var(--tile-gap);aspect-ratio:1/1;
+  background-image:linear-gradient(var(--paper-rule) 1px,transparent 1px),linear-gradient(90deg,var(--paper-rule) 1px,transparent 1px);
+  background-size:calc((100% + var(--tile-gap)) / 13) calc((100% + var(--tile-gap)) / 13);background-position:calc(var(--tile-gap) / -2) calc(var(--tile-gap) / -2)}
+.fd-tile{border-radius:6px;background:rgba(201,168,122,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;min-width:0}
+.fd-tile.has{font-family:var(--wy-serif);font-weight:600;color:#4a3826;cursor:pointer;
+  transition:transform .3s var(--ease-soft),box-shadow .3s var(--ease-soft)}
+.fd-tile.has small{font-family:"Noto Sans TC",sans-serif;font-weight:700;font-variant-numeric:tabular-nums;opacity:.82;margin-top:2px}
+.fd-tile.l1{background:var(--r1)}.fd-tile.l2{background:var(--r2)}.fd-tile.l3{background:var(--r3);color:#3e3227}
+.fd-tile.l4{background:var(--r4);color:var(--washi)}
+.fd-tile.l4 small,.fd-tile.l5 small{opacity:1}.fd-tile.l5{background:var(--r5);color:var(--washi)}
+.fd-tile.has:hover,.fd-tile.has.is-hot{transform:translateY(-2px) scale(1.06);box-shadow:0 8px 18px rgba(92,74,50,.22);z-index:2}
+.fd-map--hero .fd-tile.has{font-size:clamp(11px,1.15vw,15px)}
+.fd-map--hero .fd-tile.has small{font-size:clamp(9px,.8vw,11px)}
+.fd-lat{position:absolute;right:16px;top:28px;bottom:74px;width:28px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;font-size:11px;color:var(--gold-text);font-variant-numeric:tabular-nums}
+.fd-lat:before{content:"";position:absolute;top:22px;bottom:22px;left:50%;width:1px;background:var(--yousi-gold)}
+.fd-lat span{writing-mode:vertical-rl;background:var(--washi);position:relative;padding:4px 0;letter-spacing:.08em}
+.fd-sheet .fd-legend{margin:16px 0 14px}
+/* 左欄讀數：游標停在哪一縣，這裡就換成那一縣 */
+.fd-read{margin-top:40px;padding-top:18px;border-top:1px solid var(--yousi-gold-soft);min-height:250px}
+.fd-read-head{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.fd-read-head b{font-family:var(--wy-serif);font-size:28px;font-weight:600;letter-spacing:.08em}
+.fd-read-head span{font-size:13px;color:var(--gold-text);font-variant-numeric:tabular-nums}
+.fd-read ul{list-style:none;margin:0;padding:0}
+.fd-read li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink-soft)}
+.fd-read li b{font-family:var(--wy-serif);font-size:17px;color:var(--ink);margin-right:8px}
+.fd-read li em{font-style:normal;font-weight:700;color:var(--jiaocha);font-variant-numeric:tabular-nums;white-space:nowrap}
+.fd-read-note{font-size:13px;color:var(--muted);margin:12px 0 0}
+.fd-read.is-swap>*{animation:fd-swap .35s var(--ease-soft) both}
+@keyframes fd-swap{from{opacity:.35;transform:translateY(4px)}}
+/* 首屏的一次性動態：縣格由北往南依序上墨 */
+.fd-map--hero .fd-tile{animation:fd-ink .6s var(--ease-soft) both;animation-delay:calc(var(--row) * 55ms)}
+@keyframes fd-ink{from{opacity:.2;transform:translateY(-6px)}}
+.fd-abroad{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding-top:12px;border-top:1px solid var(--yousi-gold-soft);font-size:14px}
+.fd-abroad em{font-style:normal;font-family:var(--wy-serif);font-weight:600;margin-right:2px}
+.fd-abroad a{padding:2px 0;color:var(--ink-soft)}
+.fd-abroad a:hover{color:var(--jiaocha)}
+.fd-abroad a small{color:var(--gold-text);font-variant-numeric:tabular-nums;margin-left:3px}
 
-/* ===== Card ===== */
-.winery-card {
-  background: #fff;
-  border-radius: 14px;
-  overflow: hidden;
-  transition: transform .3s ease, box-shadow .3s ease;
-}
+/* ---------- 南北路線 ---------- */
+.fd-route{display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px}
+.fd-side{position:sticky;top:var(--fd-top,88px);align-self:start}
+.fd-map--mini{gap:2px;background-image:none}
+.fd-map--mini .fd-tile{border-radius:3px;font-size:0}
+.fd-map--mini .fd-tile.has{font-size:0}
+.fd-map--mini .fd-tile.is-here{background:var(--r5);box-shadow:0 0 0 2px var(--washi),0 0 0 3px var(--jiaocha)}
+.fd-now{margin-top:18px}
+.fd-now b{display:block;font-family:var(--wy-serif);font-size:24px;font-weight:600;letter-spacing:.06em}
+.fd-now span{font-size:13px;color:var(--gold-text);font-variant-numeric:tabular-nums}
+.fd-regions{list-style:none;margin:22px 0 0;padding:0;border-top:1px solid var(--yousi-gold-soft)}
+.fd-regions a{display:flex;justify-content:space-between;padding:7px 2px;font-size:14px;color:var(--muted);border-bottom:1px solid var(--line)}
+.fd-regions a small{font-variant-numeric:tabular-nums}
+.fd-regions a.is-here{color:var(--ink);font-weight:700}
 
-.winery-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(0,0,0,.12);
-}
+.fd-region{margin-bottom:24px}
+.fd-region-head{display:flex;align-items:baseline;gap:16px;padding:0 0 14px;margin-left:164px;border-bottom:1px solid var(--yousi-gold-soft);scroll-margin-top:100px}
+.fd-region-head h2{font-family:var(--wy-serif);font-size:30px;font-weight:600;letter-spacing:.12em;margin:0}
+.fd-region-head p{margin:0;font-size:13px;color:var(--gold-text);font-variant-numeric:tabular-nums}
 
-.winery-img img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
+.fd-st{display:grid;grid-template-columns:132px 32px minmax(0,1fr);scroll-margin-top:110px}
+.fd-st-name{text-align:right;padding:26px 0 0}
+.fd-st-name b{display:block;font-family:var(--wy-serif);font-size:22px;font-weight:600;letter-spacing:.08em}
+.fd-st-name span{font-size:12px;color:var(--gold-text);font-variant-numeric:tabular-nums}
+.fd-st-line{position:relative}
+.fd-st-line:before{content:"";position:absolute;left:15px;top:0;bottom:0;width:1.5px;background:var(--route-line)}
+.fd-st-line:after{content:"";position:absolute;left:8px;top:38px;width:16px;height:2px;background:var(--jiaocha);transition:width .35s var(--ease-soft),left .35s var(--ease-soft)}
+.fd-st.is-here .fd-st-line:after{left:4px;width:24px}
+.fd-st-body{padding:14px 0 14px 16px}
 
-/* ===== Body ===== */
-.winery-body {
-  padding: 22px 20px 26px;
-}
+.fd-kura{display:grid;grid-template-columns:210px minmax(0,1fr);gap:24px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.fd-kura:last-child{border-bottom:0}
+.fd-kura-name b{display:block;font-family:var(--wy-serif);font-size:21px;font-weight:600;letter-spacing:.06em;line-height:1.35}
+.fd-kura-name span{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.fd-kura-n{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--jiaocha);white-space:nowrap;text-underline-offset:4px}
+.fd-kura-n:hover{text-decoration:underline}
+/* 酒架：只裁出瓶身那一段，排起來像一排酒瓶 */
+.fd-shelf{display:flex;gap:10px;min-width:0}
+.fd-shelf a{width:70px;aspect-ratio:300/380;border-radius:10px;background:var(--washi);box-shadow:var(--soft-shadow-sm);overflow:hidden;flex:none;transition:transform .3s var(--ease-soft),box-shadow .3s var(--ease-soft)}
+.fd-shelf a:hover{transform:translateY(-3px);box-shadow:var(--soft-shadow)}
+.fd-shelf img{width:100%;height:100%;object-fit:cover;display:block}
+.fd-shelf .more{display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold-text);font-weight:700;box-shadow:inset 0 0 0 1px var(--yousi-gold-soft)}
 
-.winery-body h2 {
-  font-size: 1.4rem;
-  margin-bottom: 6px;
+/* ---------- 手機 ---------- */
+.fd-bar{display:none}
+@media (max-width:860px){
+  .fd-hero{grid-template-columns:minmax(0,1fr);gap:28px;padding:20px 0 40px}
+  .fd-hero>*{min-width:0}
+  .fd-crumb{margin-bottom:18px}
+  .fd-title{flex-direction:column;gap:12px}
+  .fd-title h1{writing-mode:horizontal-tb;font-size:28px;letter-spacing:.1em;padding:14px 0 0;border-left:0;position:relative}
+  .fd-title h1:before{content:"";position:absolute;left:0;top:0;width:32px;height:1.5px;background:var(--yousi-gold)}
+  .fd-map--hero .fd-tile.has.long{font-size:8.5px;letter-spacing:-.1em;white-space:nowrap}
+  .fd-lede{font-size:15px;margin-bottom:16px}
+  .fd-legend{margin-bottom:0}
+  .fd-start{display:none}
+  .fd-sheet{padding:14px}
+  .fd-lat{display:none}
+  .fd-map--hero .fd-tile.has{font-size:10px}
+  .fd-map--hero .fd-tile.has small{display:none}
+  .fd-route{display:block}
+  .fd-side{display:none}
+  .fd-bar{display:block;position:sticky;top:var(--fd-hd,61px);z-index:5;margin:0 -18px 8px;padding:10px 18px 0;background:var(--bg);box-shadow:0 6px 14px rgba(92,74,50,.06)}
+  .fd-bar-now{display:flex;align-items:baseline;gap:12px}
+  .fd-bar b{font-family:var(--wy-serif);font-size:18px}
+  .fd-bar-now span{font-size:12px;color:var(--gold-text);font-variant-numeric:tabular-nums}
+  .fd-bar-tabs{display:flex;flex-wrap:nowrap;gap:18px;overflow-x:auto;scrollbar-width:none;margin-top:4px}
+  .fd-bar-tabs::-webkit-scrollbar{display:none}
+  .fd-bar-tabs a{flex:none;white-space:nowrap;border-radius:0;font-size:14px;color:var(--muted);padding:8px 0 9px;border-bottom:2px solid transparent}
+  .fd-bar-tabs a.is-here{color:var(--ink);font-weight:700;border-bottom-color:var(--jiaocha)}
+  .fd-region-head{margin-left:0;padding-top:18px}
+  .fd-region-head h2{font-size:24px}
+  .fd-st{grid-template-columns:20px minmax(0,1fr)}
+  .fd-st-name{grid-column:2;grid-row:1;text-align:left;padding:18px 0 0 12px;display:flex;align-items:baseline;gap:10px}
+  .fd-st-name b{font-size:19px}
+  .fd-st-line{grid-column:1;grid-row:1/3}
+  .fd-st-line:before{left:9px}
+  .fd-st-line:after{left:3px;top:30px;width:14px}
+  .fd-st.is-here .fd-st-line:after{left:1px;width:18px}
+  .fd-st-body{grid-column:2;padding:2px 0 8px 12px}
+  .fd-read{display:none}
+  .fd-kura{grid-template-columns:minmax(0,1fr);gap:10px;padding:12px 0 16px}
+  .fd-kura-name{display:block}
+  .fd-kura-name b{font-size:18px;display:inline;margin-right:8px}
+  .fd-kura-name span{display:inline}
+  .fd-kura-n{display:block;margin-top:4px;width:max-content}
+  .fd-shelf{gap:8px;overflow-x:auto;scrollbar-width:none;margin-right:-18px;padding:2px 18px 6px 2px}
+  .fd-shelf::-webkit-scrollbar{display:none}
+  .fd-shelf a{width:60px}
 }
+@media (prefers-reduced-motion:reduce){.fd *{transition:none!important;animation:none!important}}
 
-.winery-loc {
-  font-size: 0.9rem;
-  color: #8a7f73;
-}
+/* ---------------- 酒造頁 ---------------- */
+/* ===== 酒造獨立頁原型（只在 .impeccable/mocks 內） =====
+   每家不一樣的三層：
+   1. 酒標色 tone：每家一組暖色（底、字、點綴），只鋪在首屏帶與點綴線
+   2. 看點模組：依這家的主要酒類換成不同的圖（精米步合尺、度數尺、葡萄品種、果實與茶）＋得獎紀錄
+   3. 版型隨支數變：1 支是單瓶專頁、2–3 支並排、4 支以上才出現口味分布 */
+.kd{--r1:#efe0c3;--r2:#e3cda4;--r3:#cfae7d;--r4:#7a5a35;--r5:#5c4a32;
+  --t-bg:#f3ece2;--t-ink:#231a12;--t-sub:#7a5a35;--t-acc:#c9a87a;--t-line:rgba(201,168,122,.55);
+  color:var(--ink)}
+.kd ::selection{background:#e3cda4;color:#231a12}
+.kd a{color:inherit;text-decoration:none}
+.kd :focus-visible{outline:2px solid var(--jiaocha);outline-offset:3px;border-radius:6px}
+.kd-wrap{max-width:1200px;margin:0 auto;padding:0 18px}
 
-.winery-desc {
-  margin: 14px 0 18px;
-  line-height: 1.7;
-  font-size: 0.95rem;
-  color: #4f463d;
-}
+/* ---------- 首屏帶：酒標色鋪滿 ---------- */
+.kd-band{background:var(--t-bg);color:var(--t-ink);position:relative;overflow:hidden}
+.kd-band:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--t-line)}
+.kd-crumb{font-size:13px;color:var(--t-sub);margin:0;padding:24px 0 0}
+.kd-crumb a:hover{color:var(--t-ink)}
+.kd-crumb span{margin:0 6px;opacity:.5}
+.kd-hero{display:grid;grid-template-columns:auto 300px minmax(0,1fr);gap:48px;align-items:start;padding:30px 0 56px}
+.kd-label{display:flex;gap:14px;align-items:flex-start;margin:0;padding:6px 24px 6px 0;border-right:1px solid var(--t-acc)}
+.kd-mei{writing-mode:vertical-rl;font-family:var(--wy-serif);font-size:72px;font-weight:600;letter-spacing:.14em;line-height:1}
+.kd-kura{writing-mode:vertical-rl;font-family:var(--wy-serif);font-size:17px;font-weight:600;letter-spacing:.32em;color:var(--t-sub);padding-top:8px}
+.kd-plate{margin:0;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:600/760;box-shadow:0 18px 40px rgba(35,26,18,.22);background:#fff}
+.kd-plate img{width:100%;height:100%;object-fit:cover;display:block}
+.kd-plate figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 10px;font-size:12px;color:#fff;background:linear-gradient(transparent,rgba(35,26,18,.78) 55%);text-shadow:0 1px 2px rgba(35,26,18,.6);letter-spacing:.04em}
+.kd-body{padding-top:2px;min-width:0}
+.kd-where{font-size:14px;color:var(--t-sub);font-variant-numeric:tabular-nums;margin:0 0 14px;letter-spacing:.04em}
+.kd-lede{color:var(--t-ink);font-family:var(--wy-serif);font-size:22px;font-weight:600;line-height:1.75;letter-spacing:.03em;margin:0 0 18px;max-width:24em}
+.kd-text{font-size:16px;line-height:2;color:var(--t-ink);opacity:.86;max-width:34em;margin:0 0 12px}
+.kd-facts{margin:22px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--t-line)}
+.kd-facts div{padding:14px 12px 0 0}
+.kd-facts dt{font-size:12px;color:var(--t-sub);margin-bottom:4px}
+.kd-facts dd{margin:0;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+.kd-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.kd-btn{display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 24px;border-radius:999px;font-size:15px;font-weight:700;letter-spacing:.04em;transition:transform .25s var(--ease-soft),box-shadow .25s var(--ease-soft),background .25s}
+.kd-btn--main{background:var(--jiaocha);color:var(--washi);box-shadow:var(--btn-shadow)}
+.kd-btn--main:hover{background:var(--ink);transform:translateY(-1px);box-shadow:var(--btn-shadow-hover)}
+.kd-btn--line{background:transparent;color:var(--t-ink);box-shadow:inset 0 0 0 1px var(--t-acc)}
+.kd-btn--line:hover{box-shadow:inset 0 0 0 1px var(--t-ink)}
+.kd-btn svg{width:14px;height:14px}
+/* 深色酒標（例如黑鳳凰）：主按鈕反成和紙色 */
+.kd.is-dark .kd-btn--main{background:var(--washi);color:var(--ink);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.kd.is-dark .kd-btn--main:hover{background:#fff}
 
-/* ===== Tags ===== */
-.winery-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+/* ---------- 區塊標題 ---------- */
+.kd-sec{padding:56px 0 0}
+.kd-sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px}
+.kd-sec-head h2{font-family:var(--wy-serif);font-size:24px;font-weight:600;letter-spacing:.06em;margin:0;position:relative;padding-top:14px}
+.kd-sec-head h2:before{content:"";position:absolute;left:0;top:0;width:32px;height:1.5px;background:var(--t-acc)}
+.kd-sec-head p{margin:0;font-size:13px;color:var(--gold-text)}
 
-.winery-tags span {
-  padding: 4px 10px;
-  font-size: 0.8rem;
-  border-radius: 999px;
-  background: #efe9df;
-  color: #5c5248;
-}
+/* ---------- 看點：尺規（精米步合／酒精度） ---------- */
+.kd-feat{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:48px;align-items:start}
+.kd-ruler{position:relative;background:var(--washi);border-radius:20px;padding:26px 28px 22px;box-shadow:var(--soft-shadow)}
+.kd-ruler-cap{display:flex;justify-content:space-between;font-size:12px;color:var(--gold-text);margin-bottom:12px}
+.kd-track{position:relative;height:var(--h,170px)}
+.kd-scale{position:absolute;left:0;right:0;bottom:24px;height:1.5px;background:var(--t-acc)}
+.kd-tick{position:absolute;bottom:14px;width:1px;height:10px;background:var(--gold-text);opacity:.6}
+.kd-tick span{position:absolute;top:14px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--gold-text);font-variant-numeric:tabular-nums;white-space:nowrap}
+.kd-mark{position:absolute;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column-reverse;align-items:center;gap:4px}
+.kd-mark b{width:2px;height:16px;background:var(--jiaocha);display:block}
+.kd-mark a{font-size:12px;line-height:1.3;white-space:nowrap;padding:3px 8px;border-radius:999px;background:#fff;box-shadow:var(--soft-shadow-sm);color:var(--ink-soft)}
+.kd-mark a:hover{color:var(--jiaocha)}
+.kd-mark em{font-style:normal;font-family:var(--wy-serif);font-size:20px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.kd-side h3{font-family:var(--wy-serif);font-size:18px;font-weight:600;margin:0 0 10px}
+.kd-side p{font-size:14px;line-height:1.9;color:var(--ink-soft);margin:0 0 14px}
+.kd-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.kd-list li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink-soft)}
+.kd-list li b{font-family:var(--wy-serif);font-size:17px;color:var(--ink)}
+.kd-list li span{color:var(--muted);font-size:13px;text-align:right}
+/* 看點：品種／原料卡 */
+.kd-pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.kd-pair{transition:transform .25s var(--ease-soft),box-shadow .25s var(--ease-soft);background:#fff;border-radius:16px;padding:18px 18px 16px;box-shadow:var(--soft-shadow-sm);display:flex;flex-direction:column;gap:6px}
+.kd-pair small{font-size:12px;color:var(--gold-text);letter-spacing:.06em}
+.kd-pair b{font-family:var(--wy-serif);font-size:21px;font-weight:600;line-height:1.35}
+.kd-pair b i{font-style:normal;color:var(--t-acc);margin:0 6px;font-weight:600}
+.kd-pair span{font-size:13px;color:var(--muted);line-height:1.6}
+.kd-pair:hover{transform:translateY(-2px);box-shadow:var(--soft-shadow)}
+/* 得獎紀錄 */
+.kd-awards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0 32px}
+.kd-awards li{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--ink-soft);line-height:1.6}
+.kd-awards li em{font-style:normal;font-family:var(--wy-serif);font-size:18px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.kd-awards li small{display:block;font-size:12px;color:var(--muted)}
 
-/* ===== 手機響應式 ===== */
-@media (max-width: 768px) {
-.winery-hero {
-  padding: 48px 16px 40px;
-}
+/* ---------- 口味分布（4 支以上） ---------- */
+.kd-flavor{display:grid;grid-template-columns:340px minmax(0,1fr);gap:48px;align-items:center}
+.kd-fmap{position:relative;padding:28px 34px 34px 34px;background:var(--washi);border-radius:20px;box-shadow:var(--soft-shadow)}
+.kd-fgrid{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);gap:4px;aspect-ratio:1/1}
+.kd-fcell{appearance:none;border:0;font:inherit;color:inherit;border-radius:8px;background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px var(--field-line);display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:4px;padding:4px}
+.kd-fcell.has{cursor:pointer;background:#fff}
+.kd-fcell.has:focus-visible{outline:2px solid var(--jiaocha);outline-offset:2px}
+.kd-fcell.has:hover,.kd-fcell.on{box-shadow:inset 0 0 0 1.5px var(--jiaocha)}
+.kd-fcell i{width:9px;height:9px;border-radius:50%;background:var(--jiaocha)}
+.kd-ax{position:absolute;font-size:12px;color:var(--gold-text)}
+.kd-ax--l{left:10px;top:50%;writing-mode:vertical-rl;transform:translateY(-50%);letter-spacing:.2em}
+.kd-ax--r{right:10px;top:50%;writing-mode:vertical-rl;transform:translateY(-50%);letter-spacing:.2em}
+.kd-ax--t{top:6px;left:50%;transform:translateX(-50%)}
+.kd-ax--b{bottom:8px;left:50%;transform:translateX(-50%)}
+.kd-fread b{display:block;font-family:var(--wy-serif);font-size:26px;font-weight:600;line-height:1.5;margin-bottom:10px}
+.kd-fread p{font-size:15px;line-height:1.9;color:var(--ink-soft);margin:0 0 16px}
+.kd-fread ul{max-width:34em}
+.kd-fread li a:hover,.kd-list li a:hover{color:var(--jiaocha);text-decoration:underline;text-underline-offset:3px}
 
-.winery-hero h1 {
-  font-size: 1.8rem;
-}
+/* ---------- 酒款 ---------- */
+@media (min-width:861px){.kd .grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin:0;width:auto}
+  .kd.is-few .grid{grid-template-columns:repeat(3,minmax(0,1fr));max-width:720px}}
+/* 單瓶專頁：一張卡＋這支的介紹 */
+.kd-solo{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;align-items:start}
+.kd-solo .grid{grid-template-columns:1fr!important;max-width:none!important}
+.kd-solo-note{font-size:16px;line-height:2;color:var(--ink-soft);max-width:34em;margin:0}
 
-.winery-list {
-  margin: 32px auto;
-  gap: 28px;
-  grid-template-columns: 1fr;
-}
+/* ---------- 地點與鄰站 ---------- */
+.kd-geo{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;align-items:center}
+.kd-map{position:relative;display:grid;grid-template-columns:repeat(13,1fr);grid-template-rows:repeat(13,1fr);gap:2px;aspect-ratio:1/1}
+.kd-map i{border-radius:3px;background:rgba(201,168,122,.16)}
+.kd-map i.has{background:var(--r2)}
+.kd-map i.here{background:var(--t-ink);position:relative;z-index:2;box-shadow:0 4px 10px rgba(92,74,50,.3)}
+.kd-cross{position:absolute;inset:0;pointer-events:none}
+.kd-cross:before,.kd-cross:after{content:"";position:absolute;background:var(--yousi-gold);opacity:.7}
+.kd-cross:before{left:0;right:0;height:1px;top:var(--cy)}
+.kd-cross:after{top:0;bottom:0;width:1px;left:var(--cx)}
+.kd-route{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.kd-nb{display:block;padding:20px 22px;border-radius:16px;transition:background .25s,box-shadow .25s}
+.kd-nb:hover{background:#fff;box-shadow:var(--soft-shadow-sm)}
+.kd-nb small{display:block;font-size:12px;color:var(--gold-text);letter-spacing:.08em;margin-bottom:4px}
+.kd-nb b{font-family:var(--wy-serif);font-size:22px;font-weight:600;letter-spacing:.06em}
+.kd-nb span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.kd-nb--s{text-align:right}
+.kd-here{position:relative;width:180px;height:2px;background:var(--yousi-gold)}
+.kd-here:before{content:"";position:absolute;left:50%;top:-11px;width:2px;height:24px;background:var(--t-ink);transform:translateX(-50%)}
+.kd-here span{position:absolute;left:50%;top:18px;transform:translateX(-50%);font-family:var(--wy-serif);font-size:15px;font-weight:600;white-space:nowrap}
+.kd-back{display:inline-block;margin-top:14px;font-size:13px;font-weight:700;color:var(--jiaocha)}
+.kd-back:hover{text-decoration:underline;text-underline-offset:4px}
+.kd-end{height:120px}
 
-.winery-img img {
-  height: 180px;
-}
+/* 深色酒標只鋪在首屏帶；下面的線條、標記回到墨色，免得在淺底上消失 */
+.kd.is-dark .kd-map i.here{background:var(--ink)}
+/* ---------- 一字主題 ---------- */
+.kd-one{padding:48px 0 8px}
+.kd-one-in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:center}
+.kd-one-c{font-family:var(--wy-serif);font-weight:600;font-size:200px;line-height:1;color:var(--t-ink);padding-right:40px;border-right:1px solid var(--t-acc)}
+.kd.is-dark .kd-one-c{color:var(--ink)}
+.kd-one-t h2{font-family:var(--wy-serif);font-size:26px;font-weight:600;letter-spacing:.06em;margin:0 0 12px}
+.kd-one-t h2 em{font-style:normal;font-weight:700;color:var(--t-acc)}
+.kd.is-dark .kd-one-t h2 em{color:var(--gold-text)}
+.kd-one-t p{font-size:17px;line-height:2;color:var(--ink-soft);max-width:30em;margin:0}
 
-.winery-body {
-  padding: 16px 16px 20px;
-}
+/* ---------- 關於酒造：長文＋小檔案 ---------- */
+.kd-about{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:56px;align-items:start}
+.kd-about-text p{font-size:17px;line-height:2.05;color:var(--ink-soft);max-width:36em;margin:0 0 18px}
+.kd-about-text p:first-child{font-family:var(--wy-serif);font-size:19px;color:var(--ink)}
+.kd-profile{margin:0;position:sticky;top:110px;background:var(--washi);border-radius:20px;padding:10px 24px;box-shadow:var(--soft-shadow)}
+.kd-profile div{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--field-line)}
+.kd-profile div:last-child{border-bottom:0}
+.kd-profile dt{font-size:13px;color:var(--gold-text);padding-top:2px}
+.kd-profile dd{margin:0;font-size:15px;line-height:1.6;color:var(--ink);font-weight:700}
 
-.winery-body h2 {
-  font-size: 1.2rem;
+/* ---------- 名字的由來：拆字 ---------- */
+.kd-name-lead{font-family:var(--wy-serif);font-size:19px;line-height:1.9;max-width:34em;margin:0 0 26px;color:var(--ink)}
+.kd-name{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.kd-name-p{flex:1 1 220px;padding:0 28px 0 0}
+.kd-name-p small{display:block;font-size:13px;color:var(--gold-text);letter-spacing:.12em;margin-bottom:6px}
+.kd-name-p b{display:block;font-family:var(--wy-serif);font-size:64px;font-weight:600;line-height:1.1;letter-spacing:.08em}
+.kd-name-p b.is-latin{font-size:40px;letter-spacing:.01em;line-height:1.2;overflow-wrap:anywhere}
+.kd-name-p p{font-size:15px;line-height:1.9;color:var(--ink-soft);margin:12px 0 0;max-width:22em}
+.kd-name-plus{width:1px;background:var(--t-acc);margin:0 28px 0 0;align-self:stretch}
+
+/* ---------- 年表：等寬一格，線上標相隔年數 ---------- */
+.kd-tl{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr))}
+.kd-tl li{position:relative;padding-right:18px;min-width:0}
+.kd-tl-y{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:6px;min-height:46px}
+.kd-tl-y em{font-style:normal;font-family:var(--wy-serif);font-size:28px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--ink)}
+.kd-tl-y em.is-text{font-size:18px;line-height:1.45;white-space:normal}
+.kd-tl-y small{font-size:12px;color:var(--gold-text)}
+.kd-tl-r{position:relative;height:28px;margin-right:-18px}
+.kd-tl-r:before{content:"";position:absolute;left:0;right:0;top:13px;height:2px;background:var(--t-acc)}
+.kd-tl li.is-long .kd-tl-r:before{background:repeating-linear-gradient(90deg,var(--t-acc) 0 7px,transparent 7px 13px)}
+.kd-tl-r i{position:absolute;left:0;top:3px;width:3px;height:22px;border-radius:2px;background:var(--ink)}
+.kd-tl-r span{position:absolute;left:50%;top:4px;transform:translateX(-50%);font-size:12px;line-height:18px;padding:0 9px;border-radius:999px;background:var(--bg);color:var(--gold-text);white-space:nowrap;font-variant-numeric:tabular-nums}
+.kd-tl-r b{position:absolute;right:0;top:-16px;font-size:12px;font-weight:400;color:var(--gold-text)}
+.kd-tl li.is-last .kd-tl-r:after{content:"";position:absolute;right:0;top:9px;width:2px;height:10px;background:var(--t-acc)}
+.kd-tl p{margin:12px 0 0;font-size:14px;line-height:1.75;color:var(--ink-soft)}
+.kd-tl-gap{display:none}
+
+/* ---------- 風土：一字一列 ---------- */
+.kd-place{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+.kd-place li{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.kd-place b{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--wy-serif);font-size:26px;font-weight:600;background:var(--t-bg);color:var(--t-ink)}
+.kd-place p{margin:0;font-size:15px;line-height:1.8;color:var(--ink-soft)}
+.kd-place strong{font-family:var(--wy-serif);color:var(--ink);margin-right:8px}
+
+/* ---------- 工法與一句話 ---------- */
+.kd-craft{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px;margin:0 0 8px}
+.kd-craft div{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.kd-craft dt{font-family:var(--wy-serif);font-size:17px;font-weight:600}
+.kd-craft dd{margin:0;font-size:15px;line-height:1.8;color:var(--ink-soft)}
+.kd-quote{margin:28px 0 0;padding:28px 32px;border-radius:20px;background:var(--t-bg);color:var(--t-ink)}
+.kd-quote blockquote{margin:0;font-family:var(--wy-serif);font-size:28px;font-weight:600;line-height:1.6;letter-spacing:.04em}
+.kd-quote p{margin:8px 0 0;font-size:14px;color:var(--t-sub)}
+.kd-quote figcaption{margin-top:14px;font-size:13px;color:var(--t-sub)}
+
+/* ---------- 循環圖 ---------- */
+.kd-cycle{position:relative;width:min(100%,600px);aspect-ratio:1;margin:0 auto}
+.kd-cycle-ring{position:absolute;inset:27%;border-radius:50%;border:1.5px solid var(--t-acc);display:flex;align-items:center;justify-content:center}
+.kd-cycle-ring span{font-family:var(--wy-serif);font-size:72px;font-weight:600;color:var(--t-ink)}
+.kd-cycle ol{list-style:none;margin:0;padding:0}
+.kd-cycle li{position:absolute;left:50%;top:50%;width:150px;margin:-30px 0 0 -75px;text-align:center;font-size:14px;line-height:1.5;color:var(--ink-soft);
+  transform:rotate(var(--a)) translate(min(34vw,215px)) rotate(calc(-1 * var(--a)))}
+.kd-cycle li em{display:flex;align-items:center;justify-content:center;width:30px;height:30px;margin:0 auto 6px;border-radius:50%;background:var(--t-ink);color:var(--t-bg);font-style:normal;font-weight:700;font-size:13px}
+
+/* ---------- 茶產地圖 ---------- */
+.kd-tea{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;align-items:center}
+.kd-tea-map{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(8,1fr);gap:4px;aspect-ratio:4/8}
+.kd-tea-map i{border-radius:8px;background:rgba(201,168,122,.18);font-style:normal;display:flex;align-items:center;justify-content:center;font-family:var(--wy-serif);font-size:13px;font-weight:600}
+.kd-tea-map i.is-tea{background:var(--t-acc);color:#fff}
+.kd-tea-map i.is-plum{background:var(--t-ink);color:var(--t-bg)}
+.kd-tea .kd-place{grid-template-columns:1fr}
+
+/* ---------- 酒藏與風土照片 ---------- */
+.kd-photos{display:grid;gap:16px;grid-template-columns:1.25fr 1fr;grid-auto-rows:minmax(0,auto)}
+.kd-photos.n3 figure:first-child{grid-row:span 2}
+.kd-photos.n2,.kd-photos.n1{grid-template-columns:repeat(2,minmax(0,1fr))}
+.kd-photos figure{margin:0;display:flex;flex-direction:column;min-width:0}
+.kd-ph{display:block;flex:1;min-height:200px;border-radius:16px;overflow:hidden;box-shadow:var(--soft-shadow);background:var(--washi)}
+.kd-photos.n3 figure:not(:first-child) .kd-ph{aspect-ratio:16/9;flex:none}
+.kd-photos.n2 .kd-ph{aspect-ratio:4/3;flex:none}
+.kd-ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease-soft)}
+.kd-ph:hover img{transform:scale(1.03)}
+.kd-photos figcaption{margin-top:10px}
+.kd-photos figcaption b{display:block;font-family:var(--wy-serif);font-size:16px;font-weight:600;color:var(--ink)}
+.kd-photos figcaption small{display:block;margin-top:2px;font-size:12px;color:var(--muted)}
+.kd-photos figcaption small a{text-decoration:underline!important;text-underline-offset:2px}
+
+/* ---------- 資料來源 ---------- */
+.kd-src ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 24px;font-size:13px}
+.kd-src a{color:var(--gold-text);text-decoration:underline!important;text-underline-offset:3px}
+
+/* ---------- 窄螢幕 ---------- */
+@media (max-width:1023px){
+  .kd-hero{grid-template-columns:auto 220px minmax(0,1fr);gap:32px}
+  .kd-mei{font-size:56px}
 }
+@media (max-width:860px){
+  .kd-crumb{padding-top:16px}
+  .kd-hero{grid-template-columns:auto minmax(0,1fr);gap:22px 20px;padding:20px 0 36px}
+  .kd-label{padding-right:14px;gap:8px}
+  .kd-mei{font-size:46px}
+  .kd-kura{font-size:13px}
+  .kd-plate{max-width:220px;justify-self:end;width:100%}
+  .kd-body{grid-column:1/-1}
+  .kd-lede{font-size:18px}
+  .kd-text{font-size:15px}
+  .kd-facts dd{font-size:14px}
+  .kd-cta .kd-btn{flex:1;justify-content:center;padding:0 16px}
+  .kd-feat,.kd-flavor,.kd-solo,.kd-geo{grid-template-columns:1fr;gap:24px}
+  .kd-fmap{max-width:340px;margin:0 auto;width:100%}
+  .kd-ruler{padding:20px 16px 18px;overflow-x:auto}
+  .kd-track{min-width:520px}
+  .kd-geo .kd-map{max-width:200px}
+  .kd-one{padding-top:32px}
+  .kd-one-in{grid-template-columns:auto minmax(0,1fr);gap:20px}
+  .kd-one-c{font-size:110px;padding-right:20px}
+  .kd-one-t h2{font-size:20px}
+  .kd-one-t p{font-size:15px}
+  .kd-about{grid-template-columns:1fr;gap:20px}
+  .kd-about-text p{font-size:16px}
+  .kd-about-text p:first-child{font-size:17px}
+  .kd-profile{position:static;padding:6px 18px}
+  .kd-name-p{flex-basis:100%;padding:0 0 18px}
+  .kd-name-p b{font-size:48px}
+  .kd-name-plus{display:none}
+  .kd-tl{grid-template-columns:1fr}
+  .kd-tl li{display:grid;grid-template-columns:30px minmax(0,1fr);padding:0 0 6px}
+  .kd-tl-y{grid-column:2;min-height:0}
+  .kd-tl-y em{font-size:22px}
+  .kd-tl-r{grid-column:1;grid-row:1/4;height:auto;margin:0}
+  .kd-tl-r:before{left:10px;right:auto;top:0;bottom:0;width:2px;height:auto}
+  .kd-tl li.is-long .kd-tl-r:before{background:repeating-linear-gradient(180deg,var(--t-acc) 0 7px,transparent 7px 13px)}
+  .kd-tl-r i{left:0;top:10px;width:22px;height:3px}
+  .kd-tl-r span,.kd-tl-r b,.kd-tl li.is-last .kd-tl-r:after{display:none}
+  .kd-tl p{grid-column:2;margin:4px 0 0}
+  .kd-tl-gap{display:block;grid-column:2;margin:8px 0 10px;font-size:12px;color:var(--gold-text)}
+  .kd-place,.kd-craft{grid-template-columns:1fr}
+  .kd-quote{padding:22px 20px}
+  .kd-quote blockquote{font-size:22px}
+  .kd-cycle li{width:110px;margin:-28px 0 0 -55px;font-size:12px;transform:rotate(var(--a)) translate(36vw) rotate(calc(-1 * var(--a)))}
+  .kd-cycle-ring span{font-size:48px}
+  .kd-tea{grid-template-columns:1fr;gap:20px}
+  .kd-tea-map{max-width:160px}
+  .kd-photos,.kd-photos.n2{grid-template-columns:1fr}
+  .kd-photos.n3 figure:first-child{grid-row:auto}
+  .kd-ph{aspect-ratio:4/3;flex:none;min-height:0}
+  .kd-route{grid-template-columns:1fr 1fr}
+  .kd-here{display:none}
+  .kd-nb{padding:14px 10px}
+  .kd-nb b{font-size:18px}
 }
+@media (prefers-reduced-motion:reduce){.kd *{transition:none!important}}
