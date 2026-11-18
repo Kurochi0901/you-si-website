@@ -206,7 +206,7 @@ const products = [
   },
 {
     id: 6,
-    priority: 5,
+    priority: 4,
     name: "天吹 伯爵紅茶梅酒",
     // 完售：品名不要改（網址由品名產生，改名會換網址）。soldOut: true → 卡片與商品頁顯示「完售」並停用加入購物車；
     // restockNote 選填，會接在「完售」後面。恢復供貨時把這兩行刪掉，再跑 node build.js
@@ -448,7 +448,7 @@ const products = [
   },
 {
     id: 12,
-    priority: 3,
+    priority: 5,
     name: "若鶴 梅酒威士忌 UMESKY",
     type: "果實酒",
     category: "fruit-tea",
@@ -875,7 +875,7 @@ const products = [
   },
 {
     id: 23,
-    priority: 3,
+    priority: 5,
     name: "北川本家 八橋肉桂梅酒",
     type: "果實酒",
     category: "fruit-tea",
@@ -1182,7 +1182,7 @@ const products = [
   },
 {
     id: 32,
-    priority: 5,
+    priority: 4,
     name: "萩之鶴 純米吟釀 生原酒 櫻花貓",
     type: "清酒",
     category: "sake",
@@ -1303,7 +1303,7 @@ const products = [
 */
 {
       id: 35,
-      priority: 3,
+      priority: 4,
       name: "谷川岳 純米大吟釀",
       type: "清酒",
       category: "sake",
@@ -1686,7 +1686,7 @@ const products = [
     },
 {
       id: 45,
-      priority: 5,
+      priority: 4,
       name: "純米大吟釀 初花 金魚台輪",
       type: "清酒",
       category: "sake",
@@ -2581,7 +2581,7 @@ const products = [
     },
     {
       id: 64,
-      priority: 5,
+      priority: 4,
       name: "奧野田 La Florette 粉紅酒",
       type: "葡萄酒",
       category: "wine",
@@ -2618,7 +2618,7 @@ const products = [
     },
 {
       id: 65,
-      priority: 4,
+      priority: 5,
       name: "奧野田 花水木 甲州白葡萄酒 2024",
       type: "葡萄酒",
       category: "wine",
@@ -3249,7 +3249,7 @@ const products = [
     },
 {
       id: 81,
-      priority: 5, 
+      priority: 4, 
       name: "梅侍 紅烏龍梅酒",
       type: "果實酒", 
       category: "fruit-tea", 
@@ -5058,7 +5058,7 @@ const products = [
 */
     {
       id: 127,
-      priority: 5, 
+      priority: 4, 
       name: "蓬萊泉 乘興院 包種茶柚子酒",
       type: "果實酒", 
       category: "fruit-tea", 
@@ -5152,7 +5152,7 @@ const products = [
     },
 {
       id: 96,
-      priority: 5, 
+      priority: 4, 
       name: "山櫻威士忌 PRECIOUS",
       type: "烈酒", 
       category: "spirits", 
@@ -5199,7 +5199,7 @@ const products = [
     },
 {
       id: 97,
-      priority: 5, 
+      priority: 4, 
       name: "聖母之乳 金凱勒精選優質白葡萄酒",
       type: "葡萄酒", 
       category: "wine", 
@@ -5252,7 +5252,7 @@ const products = [
     },
 {
       id: 98,
-      priority: 5, 
+      priority: 4, 
       name: "巧克力鹿 精選混釀紅葡萄酒",
       type: "葡萄酒", 
       category: "wine", 
@@ -5505,7 +5505,7 @@ const products = [
 */
 {
       id: 103,
-      priority: 5, 
+      priority: 4, 
       name: "日日 玉榮 2026",
       type: "清酒", 
       category: "sake", 
@@ -5887,7 +5887,7 @@ const products = [
 */
     {
       id: 135,
-      priority: 5, 
+      priority: 4, 
       name: "林本店 原始衝動 純米大吟釀 無濾過生原酒",
       type: "清酒", 
       category: "sake", 
@@ -6078,7 +6078,7 @@ const products = [
 */
     {
       id: 139,
-      priority: 5, 
+      priority: 4, 
       name: "谷川岳 純米酒 冷卸",
       type: "清酒", 
       category: "sake", 
@@ -6301,6 +6301,235 @@ const products = [
     
 
     wineryId: "hiraizumi"
+    },
+    {
+      id: 143,
+      priority: 5, 
+      name: "光榮菊 月光 天然乳酸菌仕込",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/143光榮菊月光1.webp`,
+      `${CDN}/143光榮菊月光2.webp`
+    ], 
+
+    price: 2000, 
+    originPrice: 2050,
+
+    spec: "冰溫熟成十個月，青蘋果清香與豐潤甘甜交織", 
+
+    note: {
+      oneLine: `光榮菊酒造以天然乳酸菌釀造，將生酒冰溫熟成約10個月，待風味充分成熟後再進行火入，保留細膩而豐富的熟成層次。
+	初聞散發青蘋果般的清新香氣，入口帶有彈珠汽水般的爽朗氣息，甘甜與豐潤旨味逐漸在口中舒展，呈現清新與醇厚兼具的風格。
+	剛開瓶時風味較為內斂，酒造建議開瓶後冷藏約4天，細細感受香氣與滋味隨時間綻放的迷人變化。適合搭配柚子醋白身魚、天婦羅、甜蝦、鹽烤/醬汁白肉、烤時蔬、清蒸海鮮。`, 
+    },
+
+    info: {
+      brand: "光榮菊", 
+      origin: "日本", 
+      rice: "山田錦", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "非公開",
+      alcohol: "13%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 4, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "koueigiku"
+    },
+    {
+      id: 144,
+      priority: 5, 
+      name: "光榮菊 月下無賴 神力",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/144光榮菊月下無賴神力1.webp`,
+      `${CDN}/144光榮菊月下無賴神力2.webp`
+    ], 
+
+    price: 1680, 
+    originPrice: 1850,
+
+    spec: "93%精米步合保留稀有酒米風味，濃醇米旨交織鮮明酸韻", 
+
+    note: {
+      oneLine: `光榮菊「月下無賴」選用稀有酒米「神力」，以93%精米步合及天然乳酸菌釀造，火入後冰溫熟成約半年。
+	散發哈密瓜與香蕉磅蛋糕般的甜美香氣，入口飽滿圓潤，濃厚米旨與甘甜逐漸展開，伴隨鮮明酸度、穀物香氣及細微澀感。
+	17%的酒精度打破光榮菊一貫輕盈清爽的印象，展現強勁而富有層次的濃醇風格。適合搭配炭燒、壽喜燒及味噌料理，亦具備熟成潛力，值得細細品味時間帶來的變化。`, 
+    },
+
+    info: {
+      brand: "光榮菊", 
+      origin: "日本", 
+      rice: "神力", 
+      yeast: "非公開", 
+      variety: null,
+      polish: "非公開",
+      alcohol: "17%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 4, 
+        sakeUmamiFruity: 3,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "koueigiku"
+    },
+    {
+      id: 145,
+      priority: 5, 
+      name: "林本店 九隱Secret Nine 純米大吟釀 無濾過生原酒",
+      type: "清酒", 
+      category: "sake", 
+    imgs: [`${CDN}/145林本店九隱1.webp`,
+      `${CDN}/145林本店九隱2.webp`
+    ], 
+
+    price: 1600, 
+    originPrice: 1530,
+
+    spec: "九尾狐藏匿釀造之秘，華麗果香與鮮潤米旨交織", 
+
+    note: {
+      oneLine: `林本店「九隱 Secret Nine 2026」以神秘九尾狐為象徵，將九道釀造工序融入酒款概念，刻意隱去過濾程序，以無濾過生原酒呈現鮮活酒質。
+	選用兵庫縣產山田錦，精米至50%，搭配M310酵母釀造，散發優雅果香與細緻吟釀香氣。入口甘潤飽滿，豐厚米旨與水潤質感相互交織，展現豐富而細膩的風味層次，尾韻清新輕快。結合獨特釀造概念與九尾狐酒標，宛如一杯藏著秘密的限定之酒。`, 
+    },
+
+    info: {
+      brand: "林本店", 
+      origin: "日本", 
+      rice: "兵庫縣產山田錦", 
+      yeast: "M310酵母", 
+      variety: null,
+      polish: "50%",
+      alcohol: "15%", 
+      volume: "720ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: 4, 
+        sakeUmamiFruity: 4,  
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: null,  
+        wineFreshFull: null  
+    },
+    
+
+    wineryId: "hayasihonten"
+    },
+    {
+      id: 146,
+      priority: 5, 
+      name: "火山微氣泡甜粉紅葡萄酒",
+      type: "葡萄酒", 
+      category: "wine", 
+    imgs: [`${CDN}/146西班牙火山粉紅酒1.webp`,
+      `${CDN}/146西班牙火山粉紅酒2.webp`
+    ], 
+
+    price: 1000, 
+    originPrice: 1000,
+
+    spec: "粉嫩酒色綻放馥郁果香，細緻氣泡酸甜清爽", 
+
+    note: {
+      oneLine: `來自西班牙賽維拉火山酒莊，透過發酵葡萄汁與低溫保存的葡萄汁調和，保留天然果實甜味，展現低酒精的清新魅力。
+	酒液呈現明亮粉嫩的玫瑰色，散發濃郁的核果、熱帶水果香氣，伴隨細緻的乳香甜韻。入口清新爽朗，活潑酸度與輕盈氣泡巧妙平衡甜味，口感甜美而不膩。
+	建議於3–6°C冰鎮飲用，適合搭配新鮮海鮮、壽司、雞鴨料理及清爽沙拉，亦適合午後小酌與朋友聚會分享。`, 
+    },
+
+    info: {
+      brand: "賽維拉火山酒莊", 
+      origin: "西班牙", 
+      rice: null, 
+      yeast: null, 
+      variety: "Syrah、Verdejo",
+      polish: null,
+      alcohol: "5.5%", 
+      volume: "750ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: 1,  
+        wineFreshFull: 1  
+    },
+    
+
+    wineryId: "encomienda-de-cervera"
+    },
+    {
+      id: 147,
+      priority: 5, 
+      name: "賽維拉火山酒莊風味橘酒",
+      type: "葡萄酒", 
+      category: "wine", 
+    imgs: [`${CDN}/147火山風味橘酒1.webp`,
+      `${CDN}/147火山風味橘酒2.webp`
+    ], 
+
+    price: 1300, 
+    originPrice: 1300,
+
+    spec: "火山風土孕育，蜜桃果香交織礦物鹹韻", 
+
+    note: {
+      oneLine: `選用西班牙Campo de Calatrava火山區、海拔850公尺種植的白蘇維翁（Sauvignon Blanc），採古法浸皮發酵50天，再於法國橡木桶中與酒泥共同熟成至少40天。
+	酒液呈現濃郁古金色澤，散發成熟核果、果醬、糖漬蜜桃與糕點香氣，伴隨細緻礦物氣息。入口豐潤圓滑，酸度適中，微妙鹹感與細緻單寧增添風味層次。
+	適合搭配香草等香料料理、鮭魚等魚類料理、堅果及熟成濃郁起司。`, 
+    },
+
+    info: {
+      brand: "賽維拉火山酒莊", 
+      origin: "西班牙", 
+      rice: null, 
+      yeast: null, 
+      variety: "Sauvignon Blanc",
+      polish: null,
+      alcohol: "13%", 
+      volume: "750ml" 
+    },
+
+    scale: {   
+        sakeDrySweet: null, 
+        sakeUmamiFruity: null,
+      
+        ftAcidSweet: null, 
+        ftFreshRich: null,  
+      
+        wineTannin: 2,  
+        wineFreshFull: 2  
+    },
+    
+
+    wineryId: "encomienda-de-cervera"
     }
 ]
 if (typeof window !== 'undefined') { window.products = products; }
